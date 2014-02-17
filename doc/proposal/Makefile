@@ -1,0 +1,52 @@
+.SUFFIXES: .eps .fig .pic .tex .ps .dvi .pdf .dot
+
+MAIN = proposal
+
+# Does not automatically rebuild the figures, tables or charts
+ART=
+
+BIBS = proposal.bib
+
+PARTS =	overview.tex \
+		motivation.tex \
+		architecture.tex \
+		algorithm.tex \
+		hw.tex \
+		milestones.tex
+
+all: $(MAIN).pdf
+#all: $(MAIN).ps
+#pdf: $(MAIN).pdf
+
+#4$(FILE).ps: $(FILE).ps
+#	psnup -r -n 4 <$(FILE).ps >4$(FILE).ps
+#
+
+$(MAIN).ps:	$(MAIN).dvi $(ART)
+
+$(MAIN).dvi: $(MAIN).tex $(PARTS) $(ART) $(BIBS)
+
+.pic.tex:
+	tpic -t  $? >$*.tex || (rm -f $*.tex; exit 1)
+
+.fig.eps:
+	fig2dev -L ps -p portrait $? >$@
+
+.dot.eps:
+	dot -Tps $< >$@ || (rm -f @; false)
+
+.dvi.ps:
+	dvips -t letter -P pdf -G0 $<
+
+.tex.dvi: $(ART)
+	latex $(MAIN)
+	bibtex $(MAIN)
+	latex $(MAIN)
+	latex $(MAIN)
+	latex $(MAIN)
+
+.ps.pdf:
+	ps2pdf -dMaxSubsetPct=100 -dCompatibilityLevel=1.4 -dSubsetFonts=true -dEmbedAllFonts=true $?
+
+clean:
+	rm -f $(MAIN).ps $(MAIN).out $(MAIN).brf $(MAIN).pdf $(MAIN).log $(MAIN).dvi $(MAIN).aux $(MAIN).bbl $(MAIN).blg $(ART)

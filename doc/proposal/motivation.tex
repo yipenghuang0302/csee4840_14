@@ -1,0 +1,18 @@
+Motivation:
+A robot can be thought of as a system of sensors, computers, and actuators. The onboard computer supports the software needs for sensing and actuation, but the hardware resources of of mobile robots have consistently been a bottleneck for building robots that operate in real time. Specialty hardware such as GPUs can support hard-hitting sensing algorithms, especially those that involve image processing. In terms of other hot robotics algorithms, planning has yet to receive significant hardware support. In general, planning algorithms belong to either mobility or manipulator planning. Mobility concerns the decisions that have to made in rolling on a mobile base, and involve memory-intensive tree search algorithms such such as
+ 		collision detection	
+			nearest neighbor search
+			point cloud library
+			iterative closest point (found to be heavy)
+			k-d tree
+		depth sorting
+		occupancy
+Manipulators require IK, which are a distinct workload because the algorithms combine the characteristics of graph traversal and sparse matrix.
+
+full system robot profiling
+anecdotal evidence from robotics researchers
+Berkeley dwarfs identified to be distinct workloads, yet to be covered in commercial benchmarks
+computer architecture research methods such as instrumentation and profiling
+
+live measurements show 33-66 percent dedicated to embedded computer on robot,
+15-29 % to the microcontrollers

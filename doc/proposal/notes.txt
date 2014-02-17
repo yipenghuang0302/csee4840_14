@@ -1,9 +1,0 @@
-You'll perform a design-it-yourself project in the second half of the class. There are five deliverables for the project:
-A short project proposal describing in broad terms what you plan to build and how you plan to build it
-A detailed project design describing in detail the architecture of your project, both hardware and software. This should include block diagrams, memory maps, lists of registers: everything someone else would need to understand your design. You should have done some preliminary implementation work by this point to validate your design.
-Your design document should also a plan of what you intend to complete by each of the three milestones.
-Three milestones that you set for yourself: think of 25%, 50%, and 75% completion
-A presentation on your project to the class
-A final project report
-Project groups should be three students or more.
-
