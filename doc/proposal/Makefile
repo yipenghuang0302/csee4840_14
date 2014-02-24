@@ -1,48 +1,173 @@
-.SUFFIXES: .eps .fig .pic .tex .ps .dvi .pdf .dot
+# Makefile for LaTeX files
 
-MAIN = proposal
+# Original Makefile from http://www.math.psu.edu/elkin/math/497a/Makefile
 
-# Does not automatically rebuild the figures, tables or charts
-ART=
+# Please check http://www.acoustics.hut.fi/u/mairas/UltimateLatexMakefile
+# for new versions.
 
-BIBS = proposal.bib
+# Copyright (c) 2005,2006 (in order of appearance):
+#	Matti Airas <Matti.Airas@hut.fi>
+# 	Rainer Jung
+#	Antoine Chambert-Loir
+#	Timo Kiravuo
 
-PARTS =	overview.tex \
-		motivation.tex \
-		architecture.tex \
-		algorithm.tex \
-		hw.tex \
-		milestones.tex
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions: 
 
-all: $(MAIN).pdf
-#all: $(MAIN).ps
-#pdf: $(MAIN).pdf
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software. 
 
-#4$(FILE).ps: $(FILE).ps
-#	psnup -r -n 4 <$(FILE).ps >4$(FILE).ps
-#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
 
-$(MAIN).ps:	$(MAIN).dvi $(ART)
+# $Id: Makefile,v 1.18 2006-06-19 10:58:11 mairas Exp $
 
-$(MAIN).dvi: $(MAIN).tex $(PARTS) $(ART) $(BIBS)
+LATEX	= latex
+BIBTEX	= bibtex
+MAKEINDEX = makeindex
+XDVI	= xdvi -gamma 4
+DVIPS	= dvips
+DVIPDF  = dvipdft
+L2H	= latex2html
+GH	= gv
 
-.pic.tex:
-	tpic -t  $? >$*.tex || (rm -f $*.tex; exit 1)
+RERUN = "(There were undefined references|Rerun to get (cross-references|the bars) right)"
+RERUNBIB = "No file.*\.bbl|Citation.*undefined"
+MAKEIDX = "^[^%]*\\makeindex"
+MPRINT = "^[^%]*print"
+USETHUMBS = "^[^%]*thumbpdf"
 
-.fig.eps:
-	fig2dev -L ps -p portrait $? >$@
+DATE=$(shell date +%Y-%m-%d)
 
-.dot.eps:
-	dot -Tps $< >$@ || (rm -f @; false)
+COPY = if test -r $(<:%.tex=%.toc); then cp $(<:%.tex=%.toc) $(<:%.tex=%.toc.bak); fi 
+RM = rm -f
+OUTDATED = echo "EPS-file is out-of-date!" && false
 
-.dvi.ps:
-	dvips -t letter -P pdf -G0 $<
+# These are OK
 
-.tex.dvi: $(ART)
-	latex $(MAIN)
+SRC	:= $(shell egrep -l '^[^%]*\\begin\{document\}' *.tex)
+TRG	= $(SRC:%.tex=%.dvi)
+PSF	= $(SRC:%.tex=%.ps)
+PDF	= $(SRC:%.tex=%.pdf)
 
-.ps.pdf:
-	ps2pdf -dMaxSubsetPct=100 -dCompatibilityLevel=1.4 -dSubsetFonts=true -dEmbedAllFonts=true $?
+# These are not
 
-clean:
-	rm -f $(MAIN).ps $(MAIN).out $(MAIN).brf $(MAIN).pdf $(MAIN).log $(MAIN).dvi $(MAIN).aux $(MAIN).bbl $(MAIN).blg $(ART)
+#BIBFILE := $(shell perl -ne '($$_)=/^[^%]*\\bibliography\{(.*?)\}/;@_=split /,/;foreach $$b (@_) {print "$$b.bib "}' $(SRC))
+#DEP     := $(shell perl -ne '($$_)=/^[^%]*\\include\{(.*?)\}/;@_=split /,/;foreach $$t (@_) {print "$$t.tex "}' $(SRC))
+#EPSPICS := $(shell perl -ne '@foo=/^[^%]*\\(includegraphics|psfig)(\[.*?\])?\{(.*?)\}/g;if (defined($$foo[2])) { if ($$foo[2] =~ /.eps$$/) { print "$$foo[2] "; } else { print "$$foo[2].eps "; }}' $(SRC) $(DEP))
+
+
+define run-latex
+	$(COPY);$(LATEX) $<
+	egrep $(MAKEIDX) $< && ($(MAKEINDEX) $(<:%.tex=%);$(COPY);$(LATEX) $<) >/dev/null; true
+	egrep -c $(RERUNBIB) $(<:%.tex=%.log) && ($(BIBTEX) $(<:%.tex=%);$(COPY);$(LATEX) $<) ; true
+	egrep $(RERUN) $(<:%.tex=%.log) && ($(COPY);$(LATEX) $<) >/dev/null; true
+	egrep $(RERUN) $(<:%.tex=%.log) && ($(COPY);$(LATEX) $<) >/dev/null; true
+	if cmp -s $(<:%.tex=%.toc) $(<:%.tex=%.toc.bak); then true ;else $(LATEX) $< ; fi
+	$(RM) $(<:%.tex=%.toc.bak)
+	# Display relevant warnings
+	egrep -i "(Reference|Citation).*undefined" $(<:%.tex=%.log) ; true
+endef
+
+define run-pdflatex
+	LATEX=pdflatex
+	@$(run-latex)
+endef
+
+define get_dependencies
+	deps=`perl -ne '($$_)=/^[^%]*\\\(?:include|input)\{(.*?)\}/;@_=split /,/;foreach $$t (@_) {print "$$t.tex "}' $<`
+endef
+
+define getbibs
+	bibs=`perl -ne '($$_)=/^[^%]*\\\bibliography\{(.*?)\}/;@_=split /,/;foreach $$b (@_) {print "$$b.bib "}' $< $$deps`
+endef
+
+define geteps
+	epses=`perl -ne '@foo=/^[^%]*\\\(includegraphics|psfig)(\[.*?\])?\{(.*?)\}/g;if (defined($$foo[2])) { if ($$foo[2] =~ /.eps$$/) { print "$$foo[2] "; } else { print "$$foo[2].eps "; }}' $< $$deps`
+endef
+
+define manconf
+	mandeps=`if test -r $(basename $@).cnf ; then cat $(basename $@).cnf |tr -d '\n\r' ; fi`
+endef
+
+all 	: $(TRG)
+
+.PHONY	: all show clean ps pdf showps veryclean
+
+clean	:
+	  -rm -f $(TRG) $(PSF) $(PDF) $(TRG:%.dvi=%.aux) $(TRG:%.dvi=%.bbl) $(TRG:%.dvi=%.blg) $(TRG:%.dvi=%.log) $(TRG:%.dvi=%.out) $(TRG:%.dvi=%.idx) $(TRG:%.dvi=%.ilg) $(TRG:%.dvi=%.ind) $(TRG:%.dvi=%.toc) $(TRG:%.dvi=%.d) *.mx1
+
+veryclean	: clean
+	  -rm -f *.log *.aux *.dvi *.bbl *.blg *.ilg *.toc *.lof *.lot *.idx *.ind *.ps  *~ *.mx1
+
+# This is a rule to generate a file of prerequisites for a given .tex file
+%.d	: %.tex
+	$(get_dependencies) ; echo $$deps ; \
+	$(getbibs) ; echo $$bibs ; \
+	$(geteps) ; echo $$epses ; \
+	$(manconf) ; echo  $$mandeps  ;\
+	echo "$*.dvi $@ : $< $$deps $$bibs $$epses $$mandeps" > $@ 
+
+
+include $(SRC:.tex=.d)
+
+# $(DEP) $(EPSPICS) $(BIBFILE)
+$(TRG)	: %.dvi : %.tex
+	  @$(run-latex)
+
+$(PSF)	: %.ps : %.dvi
+	  @$(DVIPS) $< -o $@
+
+$(PDF)  : %.pdf : %.dvi
+	  @$(DVIPDF) -o $@ $<
+# To use pdflatex, comment the two lines above and uncomment the lines below
+#$(PDF) : %.pdf : %.tex
+#	@$(run-pdflatex)
+
+
+show	: $(TRG)
+	  @for i in $(TRG) ; do $(XDVI) $$i & done
+
+showps	: $(PSF)
+	  @for i in $(PSF) ; do $(GH) $$i & done
+
+ps	: $(PSF) 
+
+pdf	: $(PDF) 
+
+# TODO: This probably needs fixing
+html	: @$(DEP) $(EPSPICS)
+	  @$(L2H) $(SRC)
+
+
+
+######################################################################
+# Define rules for EPS source files.
+
+# These rules probably just cause unnecessary confusion, so commenting
+# them away for the time being. -- mairas 2005-01-12
+
+#%.eps: %.sxd
+#	$(OUTDATED)
+#%.eps: %.sda
+#	$(OUTDATED)
+#%.eps: %.png
+#	$(OUTDATED)
+#%.eps: %.sxc
+#	$(OUTDATED)
+#%.eps: %.xcf
+#	$(OUTDATED)
+#%.eps: %.zargo
+#	$(OUTDATED)
+#%.eps: %.m
+#	@egrep -q $(MPRINT) $< && ($(OUTDATED))
