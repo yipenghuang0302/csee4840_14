@@ -1,14 +1,20 @@
+\subsection*{Inverse Kinematics Algorithms}
 The general inverse kinematics algorithm relies on the following concepts, which we present in order:
 
-Homogeneous Transformations: Kinematics operates on frames, which are as set of axes and coordinates that describe space. Frames can be global or local. A local frame would be useful in describing to x, y, z positions of an object in space, along with the orientation (direction it is pointing) in space. One can transform from one frame to the next using homogeneous transforms, which are described as 4 by 4 matrices. For background information on homogeneous transforms refer to \cite{frames}
+\subsubsection*{Homogeneous Transformations}
+Forward and inverse kinematics operates on frames, which are as set of axes and coordinates that describe space. Frames can be global or local. A local frame would be useful in describing to x, y, z positions of an object in space, along with the orientation (direction it is pointing) in space. One can transform from one frame to the next using homogeneous transforms, which are described as 4 by 4 matrices. For background information on homogeneous transforms refer to \cite{frames}.
 
-Kinematic Chain:
+\subsubsection*{Kinematic Chain}
 Each joint of a robot has a coordinate frame; by convention without exception, revolute joints are represented as a rotation about axis Z, and prismatic joints are translations along axis Z. A collection of joints on an actuator form a kinematic chain.
 
-Denavit-Hartenberg Parameters:
+\subsubsection*{Denavit-Hartenberg Parameters}
 The standard notation for describing an actuator is to first describe the rotation about the Z axis by a joint angle, translate along by the Z axis by the link offset, translate along the X axis by the link length, and rotate by the X axis by link twist.
 
-fully acuated
-Figure 12–1. ALTFP_ATAN Ports
+\subsubsection*{Jacobian}
+The matrix that relates the differential motion of joints to differential motion in cartesian space is called the Jacobian matrix. This matrix describes the velocity relationship between joints and the end of the actuator.\cite{jacobian}
 
+\subsubsection*{Inverse Kinematics}
+The inverse kinematics solution for any robot would be perfectly solved if the inverse of the Jacobian is available. This is because the inverse Jacobian describes the requisite joint motions to get any velocity in cartesian space.\cite{jacobian}
 
+\subsubsection*{Jacobian Transpose and Jacobian Pseudoinverse Algorithms}
+In reality, the inverting a matrix is a costly operation, so the transpose or the pseudoinverse of the Jacobian matrix are often used in inverse kinematics solvers.\cite{ik_intro}
