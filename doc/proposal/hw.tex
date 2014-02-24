@@ -1,10 +1,16 @@
+\textbf{Hardware}\\
+
 The FPGA design will consist mostly of floating point arithmetic. Working 
-with floating point numbers will be our biggest challenge. Alter has 
-mega functions for modules for floating point arithmetic including 
-trigonometric functions. The mega functions we are planning on using 
-are ALTFP_ATAN and ALTFP_SINCOS. As to be expected these functions take 
-time to compute results. For example the ALTFP_ATAN takes 34 cycles to 
-compute the tangent function. 
+with floating point numbers will be our biggest challenge. Altera has 
+mega functions built in to Quartus II which will have the tools build 
+already working and tested modules for trigonometric functions. Without 
+these functions we most likely would not have been able to do this project. 
+The mega functions we are planning on using 
+are ALTFP\_ATAN and ALTFPSINCOS. As to be expected these functions take 
+time to compute results. For example the ALTFP\_ATAN takes 34 cycles to 
+compute the tangent function. While working on the design we might find 
+that other floating point arithmetic mega functions will need to be used 
+like addition and subtration. 
 
 %sine and cosine on FPGA
 %Trigonometric Functions
