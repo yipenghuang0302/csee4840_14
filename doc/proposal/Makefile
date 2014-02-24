@@ -40,10 +40,6 @@ $(MAIN).dvi: $(MAIN).tex $(PARTS) $(ART) $(BIBS)
 
 .tex.dvi: $(ART)
 	latex $(MAIN)
-	bibtex $(MAIN)
-	latex $(MAIN)
-	latex $(MAIN)
-	latex $(MAIN)
 
 .ps.pdf:
 	ps2pdf -dMaxSubsetPct=100 -dCompatibilityLevel=1.4 -dSubsetFonts=true -dEmbedAllFonts=true $?
