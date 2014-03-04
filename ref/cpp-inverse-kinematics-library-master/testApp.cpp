@@ -7,14 +7,18 @@
 #include "CAlgoFactory.h"
 #include <iostream>
 
-#define _TEST1
+/*#define _TEST1*/
+/*#define _TEST2*/
+/*#define _TESTJACIBIANTRANSPOSE*/
+#define _TESTJACIBIANPSEUDO
+/*#define _TESTDLS*/
 
 int main()
 {
 
 #ifdef _TEST1
 
-    std::string str = "robot.xml";
+    std::string str = "Example/robot.xml";
     CConfigLoader cfg(str);
     if(!cfg.LoadXml()) return 1;
     //Set origin at O_zero
@@ -58,7 +62,7 @@ int main()
 
 #ifdef _TESTJACIBIANTRANSPOSE
 
-    std::string str = "robot.xml";
+    std::string str = "Example/robot.xml";
     CConfigLoader cfg(str);
     if(!cfg.LoadXml()) return 1;
     //Set origin at O_zero
@@ -78,7 +82,7 @@ int main()
 
 #ifdef _TESTJACIBIANPSEUDO
 
-    std::string str = "robot.xml";
+    std::string str = "Example/robot.xml";
     CConfigLoader cfg(str);
     if(!cfg.LoadXml()) return 1;
     //Set origin at O_zero
@@ -97,7 +101,7 @@ int main()
 
 #ifdef _TESTDLS
 
-    std::string str = "robot.xml";
+    std::string str = "Example/robot.xml";
     CConfigLoader cfg(str);
     if(!cfg.LoadXml()) return 1;
     //Set origin at O_zero
