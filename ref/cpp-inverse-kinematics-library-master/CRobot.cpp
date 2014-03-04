@@ -31,7 +31,7 @@ bool CRobot::LoadConfig( const dh_table & tbl )
     return true;            
 }
 
-CRobot::CRobot( Vector3f & vec ) : zero_origin(vec) , matrix_algo(CMatrixFactory::GetInstance()) , number_of_var_parameters(0)
+CRobot::CRobot( Vector3f vec ) : zero_origin(vec) , matrix_algo(CMatrixFactory::GetInstance()) , number_of_var_parameters(0)
 {}
 
 void CRobot::SetOrigin( Vector3f & newOrigin )

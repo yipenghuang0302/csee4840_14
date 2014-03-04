@@ -30,7 +30,7 @@ class CRobot
 /************************************************************************/
     CMatrixFactory * matrix_algo;
 public:
-    CRobot(Vector3f & vec);
+    CRobot(Vector3f vec);
     bool LoadConfig(IN const dh_table & tbl);
     void SetOrigin(IN Vector3f & newOrigin);
 

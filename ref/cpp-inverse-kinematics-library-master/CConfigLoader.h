@@ -1,7 +1,7 @@
 #ifndef __CCONFIGLOADER__
 #define __CCONFIGLOADER__
 
-#include "src\pugixml.hpp"
+#include "src/pugixml.hpp"
 #include "SharedTypes.h"
 #include <string>
 

@@ -7,7 +7,7 @@
 #include "CAlgoFactory.h"
 #include <iostream>
 
-#define _TESTDLS
+#define _TEST1
 
 int main()
 {
