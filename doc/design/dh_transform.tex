@@ -1,0 +1,34 @@
+\section{D-H Parameter Homogeneous Transformation Block}
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/dh_transform_equation.eps,
+width=0.6\columnwidth}
+\caption{The transformation between two frames linked by a joint, using D-H parameter variables.}
+\label{fig:dh_transform_equation}
+\end{figure}
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/dh_transform_matrix.eps,
+width=0.4\columnwidth}
+\caption{The full matrix describing the transformation between two frames linked by a joint.}
+\label{fig:dh_transform_matrix}
+\end{figure}
+
+A moving joint results in a change in reference frames between the two links preceding and following the joint. If we use the standard D-H parameters to describe the joint, this change in frames is a homogeneous transformation shown in Figure \ref{Fig:dh_transform_equation}, which when multiplied out in full is the matrix shown in Fig \ref{Fig:dh_transformation_matrix}.
+
+Recall that revolute joints are represented as a rotation of joint angle $\alpha$ about the $Z$ axis, and prismatic joints are translations by link offset $a$ along the $Z$ axis. To align the two coordinates frames, we translate along the X axis by the link length $d$, and rotate by the X axis by the link twist $\theta$.
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/dh_transform_block.eps,
+width=0.4\columnwidth}
+\caption{The dataflow diagram for a hardware block that calculates the elements in a homogenous transform matrix.}
+\label{fig:dh_transform_block}
+\end{figure}
+
+We can calculate this homogenous transformation using a dedicated pipeline in the FPGA. Figure \ref{Fig:dh_transformation_block} is the dataflow diagram for a hardware block that calculates all the elements in the transformation matrix.
