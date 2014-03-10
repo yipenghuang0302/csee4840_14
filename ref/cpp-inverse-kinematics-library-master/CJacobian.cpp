@@ -159,6 +159,10 @@ void CJacobian::CalculateColumnOfJacobian_New( IN HomMatrixHolder & hom_matrix_h
         _jacobian(4,ind) = zi(1);
         _jacobian(5,ind) = zi(2);
         break;
+    case CONSTANTJOINT:
+        break;
+    case NOTSET:
+        break;
     }
 
 #ifdef JACOBIANDEBUGOUTPUT

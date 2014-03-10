@@ -65,6 +65,8 @@ bool CConfigLoader::LoadXml()
             temp_struct.d = (float)strtod(out_temp_string.c_str(), 0);
             temp_struct.z_joint_type = PRISMATIC;
             break;
+        case SPACE:
+        case END:
         case ERROR:
             std::cout<<"Error. Cannot convert :"<< temp_string<<std::endl;
             return false;
@@ -92,6 +94,8 @@ bool CConfigLoader::LoadXml()
 
             temp_struct.z_joint_type = REVOLUTE;
             break;
+        case SPACE:
+        case END:
         case ERROR:
             std::cout<<"Error. Cannot convert :"<< temp_string<<std::endl;            
             return false;

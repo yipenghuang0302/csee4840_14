@@ -90,7 +90,7 @@ int main()
     robot.LoadConfig(cfg.GetTable());
     CAlgoFactory factory;
     VectorXf des(6);
-    float speccfc = 0.001f;
+/*    float speccfc = 0.001f;*/
     des << 200.0f , 200.0f , 0.0f , 0.0f , 0.0f , 0.0f ;
 
     CAlgoAbstract * pJpt = factory.GiveMeSolver(JACOBIANPSEVDOINVERSE,des,robot);

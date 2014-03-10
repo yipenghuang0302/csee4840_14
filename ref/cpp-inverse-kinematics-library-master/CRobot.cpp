@@ -114,7 +114,7 @@ bool CRobot::CaclulateFullTransormationMatrix()
     //For beginning we have identity matrix
     from_i_1_to_i = Matrix4f::Identity();
    
-    unsigned int j = hmtx.size() - 1;
+    //unsigned int j = hmtx.size() - 1;
     //TODO
     //i should add equation representation here
     //for more clearance
@@ -207,6 +207,9 @@ void CRobot::PrintConfiguration()
             case REVOLUTE:
                 std::cout<<"Revolute, VAR = ";
                 break;
+            case CONSTANTJOINT:
+            case NOTSET:
+			;
         }
 
         std::cout<<jvar<<std::endl;
