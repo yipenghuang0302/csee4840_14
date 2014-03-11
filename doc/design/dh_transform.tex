@@ -32,3 +32,5 @@ width=0.4\columnwidth}
 \end{figure}
 
 We can calculate this homogenous transformation using a dedicated pipeline in the FPGA. Figure \ref{Fig:dh_transformation_block} is the dataflow diagram for a hardware block that calculates all the elements in the transformation matrix.
+
+The D-H transformation block would require four sine or cosine pipelines and six multipliers. These blocks require 28 DSP blocks, 10986 lookup tables, 18834 registers.
