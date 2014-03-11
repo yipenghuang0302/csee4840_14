@@ -1,0 +1,20 @@
+\section{Architecture}
+For our project we will be using the FPGA as an accelerator for
+inverse kinetic computations. Software running on the Linux ARM processor 
+on the SoCKit board will be driving the FPGA and will display its outputs on 
+a monitor. The FPGA will be configured for specific robot with given joint 
+parameters. The software will supply current and target Cartesian coordinates 
+to the IK accelerator which will return updated joint configurations to 
+move towards the given target coordinates. The software will use the 
+joint configuration to update an image on the monitor. The resulting 
+image should result in an animation of a appendage moving towards a target 
+position.
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/toolchain.eps,
+width=0.6\columnwidth}
+\caption{The set of software and hardware tools we will use for this design.}
+\label{fig:toolchain}
+\end{figure}

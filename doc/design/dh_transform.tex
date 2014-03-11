@@ -1,5 +1,7 @@
 \section{D-H Parameter Homogeneous Transformation Block}
 
+A moving joint results in a change in reference frames between the two links preceding and following the joint. If we use the standard D-H parameters to describe the joint, this change in frames is a homogeneous transformation shown in Figure \ref{fig:dh_transform_equation}, which when multiplied out in full is the matrix shown in Figure \ref{fig:dh_transformation_matrix}.
+
 % Figure
 \begin{figure}[ht]
 \center
@@ -18,9 +20,9 @@ width=0.4\columnwidth}
 \label{fig:dh_transform_matrix}
 \end{figure}
 
-A moving joint results in a change in reference frames between the two links preceding and following the joint. If we use the standard D-H parameters to describe the joint, this change in frames is a homogeneous transformation shown in Figure \ref{Fig:dh_transform_equation}, which when multiplied out in full is the matrix shown in Fig \ref{Fig:dh_transformation_matrix}.
-
 Recall that revolute joints are represented as a rotation of joint angle $\alpha$ about the $Z$ axis, and prismatic joints are translations by link offset $a$ along the $Z$ axis. To align the two coordinates frames, we translate along the X axis by the link length $d$, and rotate by the X axis by the link twist $\theta$.
+
+We can calculate this homogenous transformation using a dedicated pipeline in the FPGA. Figure \ref{fig:dh_transformation_block} is the dataflow diagram for a hardware block that calculates all the elements in the transformation matrix.
 
 % Figure
 \begin{figure}[ht]
@@ -31,6 +33,13 @@ width=0.4\columnwidth}
 \label{fig:dh_transform_block}
 \end{figure}
 
-We can calculate this homogenous transformation using a dedicated pipeline in the FPGA. Figure \ref{Fig:dh_transformation_block} is the dataflow diagram for a hardware block that calculates all the elements in the transformation matrix.
-
 The D-H transformation block would require four sine or cosine pipelines and six multipliers. These blocks require 28 DSP blocks, 10986 lookup tables, 18834 registers.
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/dh_transform_pipeline.eps,
+width=0.6\columnwidth}
+\caption{The homogenous transform matrix blocks are chained together to calculate the full transformation matrix of the joint chain.}
+\label{fig:dh_transform_block}
+\end{figure}
