@@ -1,0 +1,16 @@
+\section{Hardware}
+
+The FPGA design will consist mostly of floating point arithmetic. Working 
+with floating point numbers will be our biggest challenge. Altera has 
+Megafunctions built in to Quartus II which create IP blocks for solving trigonometric and matrix functions.
+
+In the following subsections, we describe the submodules of the accelerator.
+%sine and cosine on FPGA
+%Trigonometric Functions
+%ALTFP_ATAN: Arctangent 34 cycle delay
+%ALTFP_SINCOS: Trigonometric Sine/Cosine 36, 35 cycle delay
+
+\input{dh_transform}
+\input{full_matrix}
+\input{jacobian}
+\input{transpose}
