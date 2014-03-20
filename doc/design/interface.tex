@@ -21,5 +21,5 @@ struct joint_dev{
 \end{verbatim}
 
 The array in the given struct will be used to read and write magnitudes for various D-H parameters in the given configuration. For example,
-the magnitude of the third joint's theta parameter would be stored at \texttt{dh\_params[2 * THETA]}.
+the magnitude of the third joint's theta parameter would be stored at \texttt{dh\_params[2*4 + THETA]}.
 
