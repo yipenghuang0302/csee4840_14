@@ -29,7 +29,8 @@ Return $J$
 \end{algorithm}
 \vspace{2cm}
 
-The following algorithm describes the Jacobian Transpose method of solving the inverse kinematics problem. As input we are given a set of D-H parameters that fully define
+The following algorithm describes the Jacobian Damped Least-Squares method of solving the inverse kinematics problem. 
+As input we are given a set of D-H parameters that fully define
 the initial positions of the joints of our robot appendage, as well as a three-dimensional target position for our end effector. 
 Formally, for each joint $i = 1 \ldots n$ we have D-H parameters $\theta_i, d_i, a_i, \alpha_i$, and
 we call our target vector $t$. The final output of our algorithm is a set of updated D-H parameters that fully define
@@ -51,9 +52,10 @@ Let $e = t - s$ be the desired change in the position of our end effector\;
 Let $J = JACOBIAN(T^0_1, T^1_2, \ldots, T^{n-1}_n, s)$ be the Jacobian matrix for the current system configuration\;
 \While{the $l^2$ norm of $e$ is greater than $\epsilon$}{
 	Let $J^T$ be the transpose of $J$\;
-	Let $u = JJ^T e$\;
-	Let $\lambda = \frac{u \cdot e}{u \cdot u}$\; 
-	Let $\Delta \theta = \lambda J^T e$ be a vector whose $i$th component is a change in joint $i$'s angle. Note that
+	Let $\lambda$ be a small positive constant\; 
+	Let $I$ be the identity matrix\;
+	Use row operations to determine the vector $f$ that satisfies the equation $(JJ^T+\lambda^2I)f = e$\;
+	Let $\Delta \theta = J^T f$ be a vector whose $i$th component is a change in joint $i$'s angle. Note that
 		if joint $i$ is translational along the unit vector $v_i$, then the joint ``angle" measures the distance
 			moved in the direction $v_i$ and the $i$th component in $\Delta \theta$ will be a change in $d_i$\; 
 	\For{$i = 1$ to $n$}{
