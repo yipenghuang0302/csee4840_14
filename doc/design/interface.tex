@@ -3,11 +3,13 @@
 We will design a ``joint" peripheral through which the software and hardware components of our system will interact. 
 The driver for the joint peripheral will provide an ioctl that copies a struct to and from the user with the following components:
 \begin{verbatim}
+unsigned char joint_type; /* the ith bit is 1 if the ith joint is rotational, 0 for translational */
 unsigned char joint; /* 0,1,...,JOINT_DOF-1 */
 unsigned char parameter;  /* THETA,L_OFFSET,L_DISTANCE,ALPHA */ 
 unsigned short magnitude; 
 \end{verbatim}
-The \texttt{joint} field represents which joint we're referring to (we have a total of \texttt{JOINT\_DOF} joints), the parameter field
+The \texttt{joint} field represents which joint we're referring to (we have a total of \texttt{JOINT\_DOF} joints), the \texttt{joint\_type}
+field keeps track of the type of every joint in system, the \texttt{parameter} field
 is a constant signifying which D-H parameter we're reading or writing, and the magnitude field holds the value of that D-H parameter.
 
 The registers used by the device driver are represented with the following struct, following the example given in lab 3:
