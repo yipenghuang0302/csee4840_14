@@ -1,1 +1,38 @@
-\section{Software Protoype}
+\section{Software Prototype}
+Our software prototyping has two goals. The first goal is to verify we 
+understand and can translate the algorithm to hardware. The second 
+purpose of our prototype is a way of verifying results from our hardware.
+We found an open source C++ project on github.com which computes the 
+incremental angle movements for a given robot to reach a target position 
+given a beginning position using three different algorithms 
+\cite{ik_cpp_library}. The algorithms being used in the open source project 
+were all ones we had been exploring to implement in hardware. The code was 
+organized and very clean. It was perfect for us to grasp how the Jacobian 
+Transpose, Jacobian Pseudo Inverse, and Damped Least Squares algorithms 
+worked in practice since our only source had been higher level papers. This 
+project also covers our second need, for a way to verify results from our 
+hardware. The fact that the project wasn't implemented by us gives it 
+credibility; it would be easy to implement the algorithm incorrectly in 
+software and then in hardware and not realize the original software was 
+wrong. 
+
+Along with using this open source project we are implementing a smaller 
+prototype that will reflect the structures in our hardware and will only 
+use the one algorithm we plan to use. By creating this second software 
+project we will be able to play around with structures we might need to 
+change. For example, it would be easier to edit a project created by 
+ourselves if we wanted to try and see how fixed point or integer math 
+would work instead of floating point. Another example of ways we might use 
+the self implemented project in testing is by testing different 
+computational methods for sin and cos. It is important to test how the 
+accuracy of our algorithm changes if we change computational methods like 
+the ones mentioned above. Editing will be a lot easier to do in software 
+than hardware and less time consuming. It would be pointless wasting time 
+designing hardware that doesn't compute the algorithm accurately enough. 
+
+After our software prototype has been implemented along with hardware 
+we will have 3 different programs attempting to compute the same 
+information. This will give us confidence in our end result if all three 
+methods match. As an extra measure we are planning, for at least our 
+software, to connect to software that will draw a robot arm to verify 
+visually that it works. 
