@@ -36,3 +36,13 @@ information. This will give us confidence in our end result if all three
 methods match. As an extra measure we are planning, for at least our 
 software, to connect to software that will draw a robot arm to verify 
 visually that it works. 
+
+Since parsing XML documents in software isn't really an important part of 
+learning how to write embedded systems we have decided to use part of the 
+open source C++ project to parse the XML robot configuration files to 
+retrieve the original joint positions and the joint types. The software 
+from the cpp-inverse-kinematics-library will parse a given XML file then 
+give the resulting joint information to sofware we have created. Our 
+software will then obtain a target position from the user and with the 
+target information and the joint configurations it will start computing the 
+next angle positions using the FPGA hardware component we will build. 
