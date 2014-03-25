@@ -1,14 +1,16 @@
 \section{Inverse Kinematics Algorithm}
 We first present an algorithm that takes as input $n$ homogenous transformation matrices $T^{i-1}_i$ for $i=1$ to $n$, and
-the current position of our end effector in three-dimensional space, which is represneted as the vector $s$. 
-The output of the algorithm is the Jacobian matrix for the current system configuration.\\
+the current position of our end effector in three-dimensional space, which is represented as the vector $s$. 
+The output of the algorithm is the Jacobian matrix for the current system configuration. Given matrices $A$ and $B$, we use the notation
+$AB$ for matrix multiplaction and $A \times B$ for the cross-product in the following pseudocode.\\
 
 \begin{center}
 \line(1,0){450}
 \end{center}
 \begin{algorithm}[H]
 \DontPrintSemicolon
-Let $J$ be a 1 x $n$ matrix, where each column is a vector in $\mathbb{R}^6$\;
+Let $J$ be a 6 x $n$ matrix, where each column corresponds to a joint. The top three scalars of a column represent the
+position of the joint in 3-space, while the bottom three represent the oritentation of the joint in 3-space.\;
 Let $z$ be the z-axis of the coordinate frame at the base of our robot appendage\;
 \For{$i=1$ to $n$}{
 	Let $R_i$ be the 3x3 rotation block derived from $T^0_i$\;
