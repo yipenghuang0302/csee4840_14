@@ -10,7 +10,7 @@ If we use the standard D-H parameters to describe the joint, this change in fram
 \begin{figure}[ht]
 \center
 \epsfig{figure=../figures/dh_transform_equation.eps,
-width=0.4\columnwidth}
+width=0.5\columnwidth}
 \caption{The transformation between two frames linked by a joint, using D-H parameter variables.}
 \label{fig:dh_transform_equation}
 \end{figure}
@@ -26,7 +26,7 @@ width=0.4\columnwidth}
 \label{fig:dh_transform_matrix}
 \end{figure}
 
-We can calculate this homogenous transformation using a dedicated hardware block in the FPGA. Figure \ref{fig:dh_transform_block} is the dataflow diagram for a hardware block that calculates all the elements in the transformation matrix.
+We can calculate this homogenous transformation using a dedicated hardware block in the FPGA. Figure \ref{fig:dh_transform_block} is the dataflow diagram for a hardware block that calculates all the elements in the transformation matrix. This submodule uses two instances of the sine cosine functional unit, which we describe later.
 
 % Figure
 \begin{figure}[ht]
