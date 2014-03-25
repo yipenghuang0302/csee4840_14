@@ -1,8 +1,9 @@
-LFLAGS=-lGL -lGLU -lglut -lglm -lpng -ljpeg -lopenal -lalut
+LFLAGS=-lGL -lGLU -lglut -lpng -ljpeg
+# -lglm -lopenal -lalut
 LLFLAGS = -lGL -lGLU -lglut -lpng -ljpeg
 CC=g++
 CFLAGS=-w #-g
-#INCLUDE=-I/usr/local/src/glm-0.3.1/glm/
+# INCLUDE=-I/usr/local/src/glm-0.3.1/glm/
 
 all: robot_arm
 
