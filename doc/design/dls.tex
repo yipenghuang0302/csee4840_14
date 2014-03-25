@@ -1,0 +1,20 @@
+\subsection{Damped Least Squares Block}
+
+The Jacobian matrix describes the velocity of the manipulator end point as a function of joint velocities. The inverse kinematics problem is solved if we can find the matrix inverse of the Jacobian matrix, which would describe the requisite joint velocities to obtain desired velocity of the manipulator.
+
+Finding the inverse Jacobian matrix is not possible in practice. A robot that has fewer than six degrees of freedom (six joints) would not have full control of translation and orientation of its hand, resulting in a non-square, and therefore non-invertible, Jacobian matrix. A robot that is at extreme points in its range of motion may also have a Jacobian matrix that does not have full row rank, and therefore have no inverse Jacobian matrix.
+
+Instead, we will find the Jacobian matrix inverse in the least squared sense by solving the normalized matrix equation. We do this by multiplying both sides of the matrix equation with the Jacobian matrix transpose.
+
+Furthermore, a square matrix may not be invertible when two or more rows cancel out, leading to a matrix that does not have full row rank. Running any matrix inversion algorithm on such a matrix would result in a divide by zero exception. We eliminate this possibility by adding a small constant along the diagonal of the Jacobian matrix, preventing the matrix from losing a row.
+
+The pipeline for the damped least squares inverse kinematics algorithm is shown in Figure \ref{fig:damped_least_squares}.
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/damped_least_squares.eps,
+width=0.4\columnwidth}
+\caption{The pipeline for calculating joint movements using the damped least squares algorithm.}
+\label{fig:damped_least_squares}
+\end{figure}
