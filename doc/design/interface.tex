@@ -2,15 +2,24 @@
 
 We will design a ``joint" peripheral through which the software and hardware components of our system will interact. 
 The driver for the joint peripheral will provide an ioctl that copies a struct to and from the user with the following components:
-\begin{verbatim}
-unsigned char target[3]; /* The x,y,z, coordinates of the 
-														target position for our end-effector */
-unsigned char joint_type; /* the ith bit is 1 if the ith joint is 
-														 rotational, 0 for translational */
-unsigned char joint; /* 0,1,...,JOINT_DOF-1 */
-unsigned char parameter;  /* THETA,L_OFFSET,L_DISTANCE,ALPHA */ 
-unsigned short magnitude; 
-\end{verbatim}
+
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		Field & Comments \\
+		\hline
+		\texttt{unsigned char target[3]} &  The x,y,z, coordinates of the target position for our end-effector \\
+			\hline
+		\texttt{unsigned char joint} &  0,1,...,JOINT\_DOF-1 \\
+			\hline
+		\texttt{unsigned char joint\_type} & The $i$th bit is 1 if the $i$th joint is rotational, 0 for translational \\
+			\hline
+		\texttt{unsigned char parameter} & THETA,L\_OFFSET,L\_DISTANCE,ALPHA \\
+			\hline
+		\texttt{unsigned short magnitude} & ~\\
+		\hline
+	\end{tabular}
+\end{center}
 The \texttt{joint} field represents which joint we're referring to (we have a total of \texttt{JOINT\_DOF} joints), the \texttt{joint\_type}
 field keeps track of the type of every joint in system, the \texttt{parameter} field
 is a constant signifying which D-H parameter we're reading or writing, and the magnitude field holds the value of that D-H parameter.
