@@ -2,6 +2,7 @@
 #define __TH__
 
 #include "IK_types.h"
+#include "Matrix.h"
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
