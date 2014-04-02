@@ -1,5 +1,7 @@
 \section{Hardware/Software Interface}
 
+\subsection{Software Driver}
+
 We will design a ``joint" peripheral through which the software and hardware components of our system will interact. 
 The driver for the joint peripheral will provide an ioctl that copies a struct to and from the user with the following components:
 
@@ -24,6 +26,8 @@ The \texttt{joint} field represents which joint we're referring to (we have a to
 field keeps track of the type of every joint in system, the \texttt{parameter} field
 is a constant signifying which D-H parameter we're reading or writing, and the magnitude field holds the value of that D-H parameter.
 
+\subsection{Hardware Register Set}
+
 The registers used by the device driver are represented with the following struct, following the example given in lab 3:
 
 \begin{verbatim}
@@ -42,3 +46,30 @@ given configuration. For example, the magnitude of the third joint's theta param
 since the only parameters that our algorithm modifies are $\theta_i$ and $d_i$ for joint $i$, these are the only components of our struct that
 will be modified after the start of our algorithm.
 
+\subsection{Top-Level Hardware Interface}
+
+\begin{verbatim}
+module ikswift_top (
+	input logic clk, rst, en;
+	input logic [5:0] joint_type;
+	input logic target_0 [15:0];
+	input logic target_1 [15:0];
+	input logic target_2 [15:0];
+	input logic target_3 [15:0];
+	input logic target_4 [15:0];
+	input logic target_5 [15:0];
+	input logic dh_param_0 [3:0] [15:0];
+	input logic dh_param_1 [3:0] [15:0];
+	input logic dh_param_2 [3:0] [15:0];
+	input logic dh_param_3 [3:0] [15:0];
+	input logic dh_param_4 [3:0] [15:0];
+	input logic dh_param_5 [3:0] [15:0];
+	output logic done;
+	output logic output_0 [15:0];
+	output logic output_1 [15:0];
+	output logic output_2 [15:0];
+	output logic output_3 [15:0];
+	output logic output_4 [15:0];
+	output logic output_5 [15:0];
+);
+\end{verbatim}
