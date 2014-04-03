@@ -5,7 +5,16 @@ Matrix_16 new_matrix_16(){
 	return malloc(sizeof(float)*16);
 }
 
+Matrix_36 new_matrix_36(){
+	return malloc(sizeof(float)*36);
+}
+
+
 void destroy_matrix_16(Matrix_16 m){
+	free(m);
+}
+
+void destroy_matrix_36(Matrix_36 m){
 	free(m);
 }
 
@@ -16,7 +25,15 @@ float dot_product(Matrix_16 first, Matrix_16 second, int f, int s){
                  first[f+3]*second[s+12];
 	return answer;
 }
-
+float dot_product_6_by_6(Matrix_36 first, Matrix_36 second, int f, int s){
+	float answer = first[f]*second[s] + 
+                 first[f+1]*second[s+6] +
+                 first[f+2]*second[s+12] +
+                 first[f+3]*second[s+18] + 
+								 first[f+4]*second[s+24] + 
+								 first[f+5]*second[s+30];
+	return answer;
+}
 void print_matrix(Matrix_16 mat){
 	int i;
 	int j;
@@ -45,6 +62,64 @@ Matrix_16 matrix_mult(Matrix_16 first, Matrix_16 second){
 	return answer;
 }
 
+Matrix_36 matrix_mult_6_by_6(Matrix_36 first, Matrix_36 second){
+	Matrix_36 answer = new_matrix_36(); 
+	int count = 0;
+	int i;
+	for(i = 0; i < 6; i++){
+		int j;
+		for(j = 0; j < 6; j++){ 
+			answer[count] = dot_product_6_by_6(first, second, i*6, j);
+			count++;
+		}
+	}
+	
+	return answer;
+}
+float dot_product_vector(Matrix_16 first, float* second, int f){
+	float answer = first[f]*second[0] + 
+                 first[f+1]*second[1] +
+                 first[f+2]*second[2] +
+                 first[f+3]*second[3] +
+								 first[f+4]*second[4] + 
+								 first[f+5]*second[5];
+	return answer;
+}
+float* matrix_vector_mult(Matrix_36 matrix, float* vector){
+	float* answer = malloc(sizeof(float)*6); 
+	int count = 0;
+	int i;
+	for(i = 0; i < 6; i++){
+		answer[count] = dot_product_vector(matrix, vector, i*6);
+		count++;
+	}
+	
+	return answer;
+}
+
+Matrix_36 matrix_transpose(Matrix_36 m){
+	Matrix_35 answer = new_matrix_36();
+	int i;
+	for(i = 0;i < 6; i++){
+		int j;
+		for(j = 0; j < 6; j++){
+			answer[i*6+j] = m[j*6+i];
+		}
+	}
+	return answer;
+}
+
+Matrix_36 matrix_adder(Matrix_36 f, Matrix_36 s){
+	Matrix_36 answer = new_matrix_36();
+	int i;
+	for(i = 0; i < 6; i++){
+		int j;
+		for(j = 0; j < 6; j++){
+			answer[i*6+j] = f[i*6+j] + s[i*6+j];
+		}
+	}
+	return answer;
+}
 
 // test matrix mult
 /*int main(int argc, char* argv[]){

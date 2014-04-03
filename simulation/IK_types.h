@@ -1,7 +1,7 @@
 #ifndef __IK_TYPESH__
 #define __IK_TYPESH__
 typedef float* Matrix_16;
-
+typedef float* Matrix_36;
 struct joint_data{
 	/* the ith bit is 1 if the ith joint is rotational, 0 for translational*/
 	unsigned char joint_type; 
