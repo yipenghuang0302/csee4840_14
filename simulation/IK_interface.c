@@ -67,8 +67,7 @@ void configure_IK(joint_config* new_data){
 				destory_matrix_36(lambda_sq);
 				destroy_matrix_36(jjt_lambda2);
 				destroy_matrix_36(inverse);
-				// matrix vector multiplier
-				// thetas X jt_inverse -> new_thetas
+				float* new_thetas = matrix_vector_mult(jt_inverse, thetas);
 				// copy new_thetas back to dh_params
     }else{
         // set parameters

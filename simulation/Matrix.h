@@ -19,4 +19,5 @@ float dot_product_6_by_6(Matrix_36 first, Matrix_36 second);
 Matrix_36 matrix_mult_6_by_6(Matrix_36 first, Matrix_36 second);
 Matrix_36 matrix_transpose(Matrix_36 m);
 Matrix_36 matrix_adder(Matrix_36 f, Matrix_36 s);
+float* matrix_vector_mult(Matrix_36 matrix, float* vector);
 #endif

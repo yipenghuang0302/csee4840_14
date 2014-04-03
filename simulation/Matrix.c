@@ -76,6 +76,26 @@ Matrix_36 matrix_mult_6_by_6(Matrix_36 first, Matrix_36 second){
 	
 	return answer;
 }
+float dot_product_vector(Matrix_16 first, float* second, int f){
+	float answer = first[f]*second[0] + 
+                 first[f+1]*second[1] +
+                 first[f+2]*second[2] +
+                 first[f+3]*second[3] +
+								 first[f+4]*second[4] + 
+								 first[f+5]*second[5];
+	return answer;
+}
+float* matrix_vector_mult(Matrix_36 matrix, float* vector){
+	float* answer = malloc(sizeof(float)*6); 
+	int count = 0;
+	int i;
+	for(i = 0; i < 6; i++){
+		answer[count] = dot_product_vector(matrix, vector, i*6);
+		count++;
+	}
+	
+	return answer;
+}
 
 Matrix_36 matrix_transpose(Matrix_36 m){
 	Matrix_35 answer = new_matrix_36();
