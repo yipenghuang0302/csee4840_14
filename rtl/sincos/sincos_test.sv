@@ -1,43 +1,44 @@
 // golden model class
-class t_response_test;
+class sincos_test;
 
-	bit model_ctr_exp;
-	bit [0:17] model_miso_response;
-	bit [0:1] exec_done_response;
+	// logic [26:0] angle;
+	shortreal model_sin;
+	shortreal model_cos;
 
-	function void update_t_response (
-		bit exec_done,
-		bit [0:15] data_tile,
-		bit ctr_exp,
-		bit [0:7] exp_tile
+	function void update_sincos (
+		shortreal angle
 	);
 
-		model_ctr_exp = ctr_exp;
-		exec_done_response = exec_done ? 2'b01 : 2'b00;
-		model_miso_response = ctr_exp ? {exp_tile, {10'b0}} : {exec_done_response, data_tile};
+		model_sin = $sin(angle);
+		model_cos = $cos(angle);
+		assert (model_sin^2+model_cos^2==1);
 
 	endfunction
 
-	function bit [0:17] get_miso_response();
-		return model_miso_response;
-	endfunction
-
-	function void check_t_response (
-		bit [0:17] miso_response,
-		bit verbose
+	function void check_sincos (
+		logic [26:0] dut_sin,
+		logic [26:0] dut_cos
 	);
+		shortreal unfixed_sin = dut_sin>>8;
+		shortreal unfixed_cos = dut_cos>>8;
+		shortreal sin_error = unfixed_sin-model_sin;
+		shortreal cos_error = unfixed_cos-model_cos;
+		bit passed;
 
-		bit passed = (
-			miso_response==model_miso_response
+		sin_error = (sin_error<0) ? -sin_error : sin_error;
+		cos_error = (cos_error<0) ? -cos_error : cos_error;
+		
+		passed = (
+			sin_error <= 0.010459237 &&
+			cos_error <= 0.010459237
 		);
 
 		if (passed) begin
-			if (verbose) begin
-				$display("%t : pass \n", $realtime);
-			end
+			$display("%t : pass \n", $realtime);
 		end else begin
-			$write("%t : fail t_response\n", $realtime);
-			$write("bench_miso_response=%b; dut_miso_response=%b.\n", model_miso_response, miso_response);
+			$write("%t : fail sincos\n", $realtime);
+			$write("model_sin=%f; dut_sin=%f.\n", model_sin, unfixed_sin);
+			$write("model_cos=%f; dut_cos=%f.\n", model_cos, unfixed_cos);
 			$exit();
 		end
 	endfunction

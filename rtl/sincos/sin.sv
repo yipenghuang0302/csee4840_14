@@ -3,6 +3,16 @@
  * Columbia University
  */
 
+`include "sim_models/lpm_mult.v"
+`include "sim_models/altsquare.v"
+`include "sim_models/mult_block.v"
+`include "sim_models/addsub_block.v"
+`include "sim_models/pipeline_internal_fv.v"
+`include "mult_27_square/mult_27_square.v"
+`include "mult_27_coeff_104/mult_27_coeff_104.v"
+`include "mult_27_coeff_326/mult_27_coeff_326.v"
+`include "mult_27_coeff_58/mult_27_coeff_58.v"
+
 module sin (
 	input logic clk, en,
 	input logic [26:0] angle,

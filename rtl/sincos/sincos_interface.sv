@@ -23,6 +23,7 @@ modport sincos_tb (clocking cb);
 
 // restrict directions
 modport sincos (
+	input clk,
 	input en,
 	input angle,
 	output sin,
