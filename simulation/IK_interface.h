@@ -3,6 +3,7 @@
 #include "T.h"
 #include "Jacobian.h"
 #include "IK_types.h"
+#include "cholesky_inv.h"
 
 #define THETA 0
 #define OFFSET 1
@@ -21,6 +22,7 @@ struct joint_config {
 };
 
 struct joint_dev{
+		/* big endian or little endian? */
     u8 joint_type; 
     u16 target[3];
     u16 dh_params[JOINT_DOF * 4];
