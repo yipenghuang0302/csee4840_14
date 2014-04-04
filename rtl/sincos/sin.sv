@@ -4,10 +4,11 @@
  */
 
 `include "sim_models/lpm_mult.v"
-`include "sim_models/altsquare.v"
 `include "sim_models/mult_block.v"
 `include "sim_models/addsub_block.v"
 `include "sim_models/pipeline_internal_fv.v"
+`include "sim_models/dffep.v"
+`include "sim_models/altera_mf.v"
 `include "mult_27_square/mult_27_square.v"
 `include "mult_27_coeff_104/mult_27_coeff_104.v"
 `include "mult_27_coeff_326/mult_27_coeff_326.v"
@@ -43,7 +44,7 @@ module sin (
 
 	// 1.27323954 * x
 	logic [34:0] angle_1_273_result;
-	logic [34:0] angle_1_273_trunc;
+	logic [26:0] angle_1_273_trunc;
 	mult_27_coeff_326 angle_1_273 (
 		.clken ( en ),
 		.clock ( clk ),
@@ -66,14 +67,14 @@ module sin (
 	logic [34:0] est_2_result;
 	logic [26:0] est_2_trunc;
 	logic [26:0] est_2_norm;
-	mult_27_square	est_2 (
+	mult_27_square est_2 (
 		.clock ( clk ),
 		.dataa ( est ),
 		.ena ( en ),
 		.result ( est_2_result )
 	);
 	assign est_2_trunc = est_2_result[34:8];
-	assign est_2_norm = est<0? 0-est_2_trunc : est_2_trunc;
+	assign est_2_norm = est<0? -est_2_trunc : est_2_trunc;
 
 	// sin = .225 * (est_2_norm - est) + est;
 	logic [26:0] est_2_norm_minus_est;

@@ -11,7 +11,7 @@ class sincos_test;
 
 		model_sin = $sin(angle);
 		model_cos = $cos(angle);
-		assert (model_sin^2+model_cos^2==1);
+		$display("model_sincos error = %f", model_sin*model_sin+model_cos*model_cos-1);
 
 	endfunction
 
