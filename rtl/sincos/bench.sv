@@ -29,7 +29,7 @@ program sincos_tb (ifc_sincos.sincos_tb ds);
 		$display("angle = %f", angle);
 
 		// passing data to design under test happens here
-		ds.cb.en <= 1'b0;
+		ds.cb.en <= 1'b1;
 		ds.cb.angle <= angle*256;
 
 		@(ds.cb);
