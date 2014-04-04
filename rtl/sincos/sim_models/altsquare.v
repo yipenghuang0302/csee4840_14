@@ -31,7 +31,6 @@ module altsquare(
 	parameter	lpm_type = "altsquare";
 	parameter	pipeline = 1;
 	parameter	representation = "UNSIGNED";
-	parameter	result_alignment = "MSB";
 	parameter	result_width = 1;
 `ifdef POST_FIT
 	parameter _unassoc_inputs_width_ = 1;
