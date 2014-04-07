@@ -1,16 +1,14 @@
 `timescale 1ns/1ps
 
-`include "sincos_test.sv"
-
-class sincos_transaction;
-	rand bit [15:0] increment;
-endclass
-
-class sincos_env;
-	int max_transactions = 10000;
-endclass
-
 program sincos_tb (ifc_sincos.sincos_tb ds);
+
+	class sincos_transaction;
+		rand bit [15:0] increment;
+	endclass
+
+	class sincos_env;
+		int max_transactions = 10000;
+	endclass
 
 	shortreal fraction,angle;
 	sincos_transaction trans;
