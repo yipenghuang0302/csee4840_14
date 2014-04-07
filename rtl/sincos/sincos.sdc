@@ -15,4 +15,4 @@ set_input_delay -clock clk -min 2 [all_inputs]
 
 # Constrain the output I/O path
 
-set_output_delay -clock clk 2 [all_outputs] 2
+set_output_delay -clock clk 2 [all_outputs]

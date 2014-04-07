@@ -4,21 +4,25 @@
  */
 
  module sincos (
-	ifc_sincos.sincos i
+	input logic clk,
+	input logic en,
+	input logic [26:0] angle,
+	output logic [26:0] sin,
+	output logic [26:0] cos
 );
 
-	sin sin (
-		.clk ( i.clk ),
-		.en ( i.en ),
-		.angle ( i.angle ),
-		.sin ( i.sin )
+	sin sin_block (
+		.clk ( clk ),
+		.en ( en ),
+		.angle ( angle ),
+		.sin ( sin )
 	);
 
-	cos cos (
-		.clk ( i.clk ),
-		.en ( i.en ),
-		.angle ( i.angle ),
-		.cos ( i.cos )
+	cos cos_block (
+		.clk ( clk ),
+		.en ( en ),
+		.angle ( angle ),
+		.cos ( cos )
 	);
 
 endmodule
