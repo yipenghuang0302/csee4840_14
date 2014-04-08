@@ -31,9 +31,9 @@ if {[is_project_open]} {
 } else {
 	# Only open if not already open
 	if {[project_exists sincos]} {
-		project_open -revision SoCKit_Top sincos
+		project_open -revision sincos sincos
 	} else {
-		project_new -revision SoCKit_Top sincos
+		project_new -revision sincos sincos
 	}
 	set need_to_close_project 1
 }
@@ -70,12 +70,12 @@ if {$make_assignments} {
 	set_global_assignment -name SYSTEMVERILOG_FILE sincos_interface.sv
 	set_global_assignment -name SYSTEMVERILOG_FILE top.sv
 	set_global_assignment -name SOURCE_FILE sincos.qpf
-	set_global_assignment -name SOURCE_FILE SoCKit_Top.qsf
+	set_global_assignment -name SOURCE_FILE sincos.qsf
 	set_global_assignment -name SOURCE_FILE sin.sv.bak
-	set_global_assignment -name TEXT_FORMAT_REPORT_FILE SoCKit_Top.flow.rpt
-	set_global_assignment -name TEXT_FORMAT_REPORT_FILE SoCKit_Top.map.rpt
-	set_global_assignment -name SOURCE_FILE SoCKit_Top.map.smsg
-	set_global_assignment -name TEXT_FORMAT_REPORT_FILE SoCKit_Top.map.summary
+	set_global_assignment -name TEXT_FORMAT_REPORT_FILE sincos.flow.rpt
+	set_global_assignment -name TEXT_FORMAT_REPORT_FILE sincos.map.rpt
+	set_global_assignment -name SOURCE_FILE sincos.map.smsg
+	set_global_assignment -name TEXT_FORMAT_REPORT_FILE sincos.map.summary
 	set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 	set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 	set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

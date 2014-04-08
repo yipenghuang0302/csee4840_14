@@ -6,14 +6,14 @@
 module sincos_tb;
 
 	logic clk, en = 1'b1, reset;
-	logic [26:0] angle = 26'b0;
+	logic [26:0] angle = 26'd251;
 	logic [26:0] sin;
 	logic [26:0] cos;
 
 	initial begin
 		clk = 0;
 		repeat (1000)
-			#20ns clk = ~clk;
+			#100ns clk = ~clk;
 	end
 
 	initial begin // Reset
