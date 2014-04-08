@@ -10,6 +10,8 @@ module sincos_tb;
 	logic [26:0] sin;
 	logic [26:0] cos;
 
+	sincos sincos (.*);
+
 	initial begin
 		clk = 0;
 		repeat (1000)
@@ -27,6 +29,5 @@ module sincos_tb;
 	  end
 
 //	ifc_sincos ifc_sincos (clk);
-	sincos sincos (.*);
 
 endmodule
