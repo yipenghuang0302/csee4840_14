@@ -3,7 +3,7 @@
  * Columbia University
  */
 
- module sincos (
+module sincos (
 	input logic clk,
 	input logic en,
 	input logic [26:0] angle,

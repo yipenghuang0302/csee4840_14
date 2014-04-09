@@ -3,14 +3,15 @@
 
 `timescale 1ns/1ps
 
-module sincos_tb;
+module sincos_tb (
+	output logic [26:0] sin,
+	output logic [26:0] cos	
+);
 
 	logic clk, en = 1'b1, reset;
 	logic [26:0] angle = 26'd251;
-	logic [26:0] sin;
-	logic [26:0] cos;
-
-	sincos sincos (.*);
+	// logic [26:0] sin;
+	// logic [26:0] cos;
 
 	initial begin
 		clk = 0;
@@ -29,5 +30,6 @@ module sincos_tb;
 	  end
 
 //	ifc_sincos ifc_sincos (clk);
+	sincos sincos (.*);
 
 endmodule
