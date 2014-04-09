@@ -1,7 +1,7 @@
 // golden model class
 class sincos_test;
 
-	// logic [26:0] angle;
+	logic [26:0] angle;
 	shortreal model_sin;
 	shortreal model_cos;
 

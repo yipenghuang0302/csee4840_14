@@ -3,30 +3,31 @@
 
 `timescale 1ns/1ps
 
-module sincos_tb ();
+`include "sincos_interface.sv"
+`include "sincos.sv"
+`include "bench.sv"
 
-	logic clk, en = 1'b1, reset;
-	logic [26:0] angle = 26'd251;
-	logic [26:0] sin;
-	logic [26:0] cos;
+module sincos_top ();
 
-	initial begin
-		clk = 0;
-		repeat (1000)
-			#100ns clk = ~clk;
-	end
+	logic clk = 1'b0;
+	always #1 clk = ~clk;
 
-	initial begin // Reset
-		reset = 0;
-		repeat (2)
-			@(posedge clk);
-			reset = 1;
-		repeat (2)
-			@(posedge clk);
-			reset = 0;
-	  end
+	// logic en = 1'b1;
+	// logic [26:0] angle = 26'd251;
+	// logic [26:0] angle;
+	// logic [26:0] sin;
+	// logic [26:0] cos;
 
-//	ifc_sincos ifc_sincos (clk);
-	sincos sincos (.*);
+	// initial begin
+	// 	clk = 0;
+	// 	repeat (1000)
+	// 		#100ns clk = ~clk;
+	// end
+
+	initial $vcdpluson;
+
+	ifc_sincos ifc_sincos (clk);
+	sincos_tb sincos_tb (ifc_sincos.sincos_tb);
+	sincos sincos (ifc_sincos.sincos);
 
 endmodule
