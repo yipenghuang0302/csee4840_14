@@ -1,4 +1,4 @@
-mul_27	mul_27_inst (
+mult_27	mult_27_inst (
 	.clken ( clken_sig ),
 	.clock ( clock_sig ),
 	.dataa ( dataa_sig ),

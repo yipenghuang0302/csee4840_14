@@ -1,10 +1,10 @@
-// megafunction wizard: %LPM_MULT%VBB%
+// megafunction wizard: %LPM_MULT%
 // GENERATION: STANDARD
 // VERSION: WM1.0
 // MODULE: lpm_mult 
 
 // ============================================================
-// File Name: mul_27.v
+// File Name: mult_27.v
 // Megafunction Name(s):
 // 			lpm_mult
 //
@@ -16,6 +16,7 @@
 //
 // 13.1.3 Build 178 02/12/2014 SJ Web Edition
 // ************************************************************
+
 
 //Copyright (C) 1991-2014 Altera Corporation
 //Your use of Altera Corporation's design tools, logic functions 
@@ -31,7 +32,11 @@
 //Altera or its authorized distributors.  Please refer to the 
 //applicable agreement for further details.
 
-module mul_27 (
+
+// synopsys translate_off
+`timescale 1 ps / 1 ps
+// synopsys translate_on
+module mult_27 (
 	clken,
 	clock,
 	dataa,
@@ -43,6 +48,27 @@ module mul_27 (
 	input	[26:0]  dataa;
 	input	[26:0]  datab;
 	output	[34:0]  result;
+
+	wire [34:0] sub_wire0;
+	wire [34:0] result = sub_wire0[34:0];
+
+	lpm_mult	lpm_mult_component (
+				.clock (clock),
+				.datab (datab),
+				.clken (clken),
+				.dataa (dataa),
+				.result (sub_wire0),
+				.aclr (1'b0),
+				.sum (1'b0));
+	defparam
+		lpm_mult_component.lpm_hint = "DEDICATED_MULTIPLIER_CIRCUITRY=YES,MAXIMIZE_SPEED=1",
+		lpm_mult_component.lpm_pipeline = 3,
+		lpm_mult_component.lpm_representation = "SIGNED",
+		lpm_mult_component.lpm_type = "LPM_MULT",
+		lpm_mult_component.lpm_widtha = 27,
+		lpm_mult_component.lpm_widthb = 27,
+		lpm_mult_component.lpm_widthp = 35;
+
 
 endmodule
 
@@ -84,11 +110,11 @@ endmodule
 // Retrieval info: CONNECT: @dataa 0 0 27 0 dataa 0 0 27 0
 // Retrieval info: CONNECT: @datab 0 0 27 0 datab 0 0 27 0
 // Retrieval info: CONNECT: result 0 0 35 0 @result 0 0 35 0
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27.inc TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27.cmp TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27.bsf TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27_inst.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27_bb.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27_syn.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27.inc TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27.cmp TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27.bsf TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_inst.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_bb.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_syn.v TRUE
 // Retrieval info: LIB_FILE: lpm

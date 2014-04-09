@@ -21,7 +21,7 @@ applicable agreement for further details.
 (header "symbol" (version "1.2"))
 (symbol
 	(rect 0 0 168 128)
-	(text "mul_27" (rect 62 0 113 16)(font "Arial" (font_size 10)))
+	(text "mult_27" (rect 62 0 113 16)(font "Arial" (font_size 10)))
 	(text "inst" (rect 8 113 25 124)(font "Arial" ))
 	(port
 		(pt 0 32)

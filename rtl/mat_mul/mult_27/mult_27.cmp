@@ -13,7 +13,7 @@
 --applicable agreement for further details.
 
 
-component mul_27
+component mult_27
 	PORT
 	(
 		clken		: IN STD_LOGIC ;

@@ -13,7 +13,7 @@
 --applicable agreement for further details.
 
 
-FUNCTION mul_27 
+FUNCTION mult_27 
 (
 	clken,
 	clock,

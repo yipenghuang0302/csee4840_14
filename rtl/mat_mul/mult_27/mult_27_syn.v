@@ -4,7 +4,7 @@
 // MODULE: lpm_mult 
 
 // ============================================================
-// File Name: mul_27.v
+// File Name: mult_27.v
 // Megafunction Name(s):
 // 			lpm_mult
 //
@@ -33,15 +33,89 @@
 //applicable agreement for further details.
 
 
-// synopsys translate_off
+//lpm_mult DEDICATED_MULTIPLIER_CIRCUITRY="YES" DEVICE_FAMILY="Cyclone V" LPM_PIPELINE=3 LPM_REPRESENTATION="SIGNED" LPM_WIDTHA=27 LPM_WIDTHB=27 LPM_WIDTHP=35 MAXIMIZE_SPEED=1 clken clock dataa datab result
+//VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_lpm_mult 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_padd 2014:02:12:20:59:46:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ cbx_util_mgl 2014:02:12:20:59:46:SJ  VERSION_END
+// synthesis VERILOG_INPUT_VERSION VERILOG_2001
+// altera message_off 10463
+
+
+//synthesis_resources = 
+//synopsys translate_off
 `timescale 1 ps / 1 ps
-// synopsys translate_on
-module mul_27 (
+//synopsys translate_on
+module  mult_27_mult
+	( 
 	clken,
 	clock,
 	dataa,
 	datab,
-	result);
+	result) /* synthesis synthesis_clearbox=1 */;
+	input   clken;
+	input   clock;
+	input   [26:0]  dataa;
+	input   [26:0]  datab;
+	output   [34:0]  result;
+`ifndef ALTERA_RESERVED_QIS
+// synopsys translate_off
+`endif
+	tri1   clken;
+	tri0   clock;
+`ifndef ALTERA_RESERVED_QIS
+// synopsys translate_on
+`endif
+
+	reg	[26:0]	dataa_input_reg;
+	reg	[26:0]	datab_input_reg;
+	reg	[34:0]	result_output_reg;
+	reg	[34:0]	result_extra0_reg;
+	wire	signed	[26:0]	dataa_wire;
+	wire	signed	[26:0]	datab_wire;
+	wire	signed	[53:0]	result_wire;
+
+
+	// synopsys translate_off
+	initial
+		dataa_input_reg = 0;
+	// synopsys translate_on
+	always @(posedge clock)
+		 if (clken == 1'b1)	dataa_input_reg <= dataa;
+	// synopsys translate_off
+	initial
+		datab_input_reg = 0;
+	// synopsys translate_on
+	always @(posedge clock)
+		 if (clken == 1'b1)	datab_input_reg <= datab;
+	// synopsys translate_off
+	initial
+		result_output_reg = 0;
+	// synopsys translate_on
+	always @(posedge clock)
+		 if (clken == 1'b1)	result_output_reg <= result_extra0_reg;
+	// synopsys translate_off
+	initial
+		result_extra0_reg = 0;
+	// synopsys translate_on
+	always @(posedge clock)
+		 if (clken == 1'b1)	result_extra0_reg <= result_wire[53:19];
+
+	assign dataa_wire = dataa_input_reg;
+	assign datab_wire = datab_input_reg;
+	assign result_wire = dataa_wire * datab_wire;
+	assign result = ({result_output_reg});
+
+endmodule //mult_27_mult
+//VALID FILE
+
+
+// synopsys translate_off
+`timescale 1 ps / 1 ps
+// synopsys translate_on
+module mult_27 (
+	clken,
+	clock,
+	dataa,
+	datab,
+	result)/* synthesis synthesis_clearbox = 1 */;
 
 	input	  clken;
 	input	  clock;
@@ -52,23 +126,12 @@ module mul_27 (
 	wire [34:0] sub_wire0;
 	wire [34:0] result = sub_wire0[34:0];
 
-	lpm_mult	lpm_mult_component (
+	mult_27_mult	mult_27_mult_component (
 				.clock (clock),
 				.datab (datab),
 				.clken (clken),
 				.dataa (dataa),
-				.result (sub_wire0),
-				.aclr (1'b0),
-				.sum (1'b0));
-	defparam
-		lpm_mult_component.lpm_hint = "DEDICATED_MULTIPLIER_CIRCUITRY=YES,MAXIMIZE_SPEED=1",
-		lpm_mult_component.lpm_pipeline = 3,
-		lpm_mult_component.lpm_representation = "SIGNED",
-		lpm_mult_component.lpm_type = "LPM_MULT",
-		lpm_mult_component.lpm_widtha = 27,
-		lpm_mult_component.lpm_widthb = 27,
-		lpm_mult_component.lpm_widthp = 35;
-
+				.result (sub_wire0));
 
 endmodule
 
@@ -110,11 +173,11 @@ endmodule
 // Retrieval info: CONNECT: @dataa 0 0 27 0 dataa 0 0 27 0
 // Retrieval info: CONNECT: @datab 0 0 27 0 datab 0 0 27 0
 // Retrieval info: CONNECT: result 0 0 35 0 @result 0 0 35 0
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27.inc TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27.cmp TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27.bsf TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27_inst.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27_bb.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mul_27_syn.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27.inc TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27.cmp TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27.bsf TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_inst.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_bb.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_syn.v TRUE
 // Retrieval info: LIB_FILE: lpm
