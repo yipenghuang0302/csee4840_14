@@ -40,7 +40,7 @@ module mult_27_coeff_104 (
 	input	  clken;
 	input	  clock;
 	input	[26:0]  dataa;
-	output	[34:0]  result;
+	output	[53:0]  result;
 
 endmodule
 
@@ -59,7 +59,7 @@ endmodule
 // Retrieval info: PRIVATE: ValidConstant NUMERIC "1"
 // Retrieval info: PRIVATE: WidthA NUMERIC "27"
 // Retrieval info: PRIVATE: WidthB NUMERIC "27"
-// Retrieval info: PRIVATE: WidthP NUMERIC "35"
+// Retrieval info: PRIVATE: WidthP NUMERIC "54"
 // Retrieval info: PRIVATE: aclr NUMERIC "0"
 // Retrieval info: PRIVATE: clken NUMERIC "1"
 // Retrieval info: PRIVATE: new_diagram STRING "1"
@@ -71,16 +71,16 @@ endmodule
 // Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_MULT"
 // Retrieval info: CONSTANT: LPM_WIDTHA NUMERIC "27"
 // Retrieval info: CONSTANT: LPM_WIDTHB NUMERIC "27"
-// Retrieval info: CONSTANT: LPM_WIDTHP NUMERIC "35"
+// Retrieval info: CONSTANT: LPM_WIDTHP NUMERIC "54"
 // Retrieval info: USED_PORT: clken 0 0 0 0 INPUT NODEFVAL "clken"
 // Retrieval info: USED_PORT: clock 0 0 0 0 INPUT NODEFVAL "clock"
 // Retrieval info: USED_PORT: dataa 0 0 27 0 INPUT NODEFVAL "dataa[26..0]"
-// Retrieval info: USED_PORT: result 0 0 35 0 OUTPUT NODEFVAL "result[34..0]"
+// Retrieval info: USED_PORT: result 0 0 54 0 OUTPUT NODEFVAL "result[53..0]"
 // Retrieval info: CONNECT: @clken 0 0 0 0 clken 0 0 0 0
 // Retrieval info: CONNECT: @clock 0 0 0 0 clock 0 0 0 0
 // Retrieval info: CONNECT: @dataa 0 0 27 0 dataa 0 0 27 0
 // Retrieval info: CONNECT: @datab 0 0 27 0 104 0 0 27 0
-// Retrieval info: CONNECT: result 0 0 35 0 @result 0 0 35 0
+// Retrieval info: CONNECT: result 0 0 54 0 @result 0 0 54 0
 // Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_coeff_104.v TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_coeff_104.inc TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_coeff_104.cmp TRUE

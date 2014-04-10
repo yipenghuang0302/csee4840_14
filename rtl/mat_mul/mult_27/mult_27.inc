@@ -22,5 +22,5 @@ FUNCTION mult_27
 )
 
 RETURNS (
-	result[34..0]
+	result[53..0]
 );

@@ -45,10 +45,10 @@ module mult_27_square (
 	input	  clock;
 	input	[26:0]  dataa;
 	input	  ena;
-	output	[34:0]  result;
+	output	[53:0]  result;
 
-	wire [34:0] sub_wire0;
-	wire [34:0] result = sub_wire0[34:0];
+	wire [53:0] sub_wire0;
+	wire [53:0] result = sub_wire0[53:0];
 
 	altsquare	altsquare_component (
 				.clock (clock),
@@ -62,7 +62,7 @@ module mult_27_square (
 		altsquare_component.pipeline = 3,
 		altsquare_component.representation = "SIGNED",
 		altsquare_component.result_alignment = "MSB",
-		altsquare_component.result_width = 35;
+		altsquare_component.result_width = 54;
 
 
 endmodule
@@ -82,7 +82,7 @@ endmodule
 // Retrieval info: PRIVATE: ValidConstant NUMERIC "0"
 // Retrieval info: PRIVATE: WidthA NUMERIC "27"
 // Retrieval info: PRIVATE: WidthB NUMERIC "8"
-// Retrieval info: PRIVATE: WidthP NUMERIC "35"
+// Retrieval info: PRIVATE: WidthP NUMERIC "54"
 // Retrieval info: PRIVATE: aclr NUMERIC "0"
 // Retrieval info: PRIVATE: clken NUMERIC "1"
 // Retrieval info: PRIVATE: new_diagram STRING "1"
@@ -93,15 +93,15 @@ endmodule
 // Retrieval info: CONSTANT: PIPELINE NUMERIC "3"
 // Retrieval info: CONSTANT: REPRESENTATION STRING "SIGNED"
 // Retrieval info: CONSTANT: RESULT_ALIGNMENT STRING "MSB"
-// Retrieval info: CONSTANT: RESULT_WIDTH NUMERIC "35"
+// Retrieval info: CONSTANT: RESULT_WIDTH NUMERIC "54"
 // Retrieval info: USED_PORT: clock 0 0 0 0 INPUT NODEFVAL "clock"
 // Retrieval info: USED_PORT: dataa 0 0 27 0 INPUT NODEFVAL "dataa[26..0]"
 // Retrieval info: USED_PORT: ena 0 0 0 0 INPUT NODEFVAL "ena"
-// Retrieval info: USED_PORT: result 0 0 35 0 OUTPUT NODEFVAL "result[34..0]"
+// Retrieval info: USED_PORT: result 0 0 54 0 OUTPUT NODEFVAL "result[53..0]"
 // Retrieval info: CONNECT: @clock 0 0 0 0 clock 0 0 0 0
 // Retrieval info: CONNECT: @data 0 0 27 0 dataa 0 0 27 0
 // Retrieval info: CONNECT: @ena 0 0 0 0 ena 0 0 0 0
-// Retrieval info: CONNECT: result 0 0 35 0 @result 0 0 35 0
+// Retrieval info: CONNECT: result 0 0 54 0 @result 0 0 54 0
 // Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_square.v TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_square.inc TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_square.cmp TRUE

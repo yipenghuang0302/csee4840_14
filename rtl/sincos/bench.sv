@@ -6,7 +6,7 @@ class sincos_transaction;
 endclass
 
 class sincos_env;
-	int max_transactions = 10000;
+	int max_transactions = 1000000;
 endclass
 
 program sincos_tb (ifc_sincos.sincos_tb ds);
@@ -22,10 +22,10 @@ program sincos_tb (ifc_sincos.sincos_tb ds);
 
 		//always wrap input angle to -PI..PI
 		fraction = real'(trans.increment) / 65536;
-		$display("fraction = %f", fraction);
+		// $display("fraction = %f", fraction);
 		
 		angle = -3.141592653589793238462643383279502884197 + fraction * 2 * 3.141592653589793238462643383279502884197;
-		$display("angle = %f", angle);
+		// $display("angle = %f", angle);
 
 		// passing data to design under test happens here
 		ds.cb.en <= 1'b1;
@@ -46,7 +46,7 @@ program sincos_tb (ifc_sincos.sincos_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (20) begin
+			repeat (13) begin
 				@(ds.cb);
 			end
 			test.check_sincos (

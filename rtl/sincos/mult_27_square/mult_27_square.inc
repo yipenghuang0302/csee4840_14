@@ -21,5 +21,5 @@ FUNCTION mult_27_square
 )
 
 RETURNS (
-	result[34..0]
+	result[53..0]
 );

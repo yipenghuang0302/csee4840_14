@@ -16,7 +16,7 @@ module cos (
 
 	logic [26:0] new_angle;
 	// if (angle>3.14159265) angle-=6.28318531;
-	assign new_angle = plus_half_pi>27'd804 ? plus_half_pi-27'd1608 : plus_half_pi;
+	assign new_angle = plus_half_pi>27'd804 && plus_half_pi[26]==1'b0 ? plus_half_pi-27'd1608 : plus_half_pi; // also check for positivity
 
 	sin sin (
 		.clk ( clk ),

@@ -45,11 +45,11 @@ module mult_27_coeff_326 (
 	input	  clken;
 	input	  clock;
 	input	[26:0]  dataa;
-	output	[34:0]  result;
+	output	[53:0]  result;
 
-	wire [34:0] sub_wire0;
+	wire [53:0] sub_wire0;
 	wire [26:0] sub_wire1 = 27'h0000146;
-	wire [34:0] result = sub_wire0[34:0];
+	wire [53:0] result = sub_wire0[53:0];
 
 	lpm_mult	lpm_mult_component (
 				.clock (clock),
@@ -66,7 +66,7 @@ module mult_27_coeff_326 (
 		lpm_mult_component.lpm_type = "LPM_MULT",
 		lpm_mult_component.lpm_widtha = 27,
 		lpm_mult_component.lpm_widthb = 27,
-		lpm_mult_component.lpm_widthp = 35;
+		lpm_mult_component.lpm_widthp = 54;
 
 
 endmodule
@@ -86,7 +86,7 @@ endmodule
 // Retrieval info: PRIVATE: ValidConstant NUMERIC "1"
 // Retrieval info: PRIVATE: WidthA NUMERIC "27"
 // Retrieval info: PRIVATE: WidthB NUMERIC "27"
-// Retrieval info: PRIVATE: WidthP NUMERIC "35"
+// Retrieval info: PRIVATE: WidthP NUMERIC "54"
 // Retrieval info: PRIVATE: aclr NUMERIC "0"
 // Retrieval info: PRIVATE: clken NUMERIC "1"
 // Retrieval info: PRIVATE: new_diagram STRING "1"
@@ -98,16 +98,16 @@ endmodule
 // Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_MULT"
 // Retrieval info: CONSTANT: LPM_WIDTHA NUMERIC "27"
 // Retrieval info: CONSTANT: LPM_WIDTHB NUMERIC "27"
-// Retrieval info: CONSTANT: LPM_WIDTHP NUMERIC "35"
+// Retrieval info: CONSTANT: LPM_WIDTHP NUMERIC "54"
 // Retrieval info: USED_PORT: clken 0 0 0 0 INPUT NODEFVAL "clken"
 // Retrieval info: USED_PORT: clock 0 0 0 0 INPUT NODEFVAL "clock"
 // Retrieval info: USED_PORT: dataa 0 0 27 0 INPUT NODEFVAL "dataa[26..0]"
-// Retrieval info: USED_PORT: result 0 0 35 0 OUTPUT NODEFVAL "result[34..0]"
+// Retrieval info: USED_PORT: result 0 0 54 0 OUTPUT NODEFVAL "result[53..0]"
 // Retrieval info: CONNECT: @clken 0 0 0 0 clken 0 0 0 0
 // Retrieval info: CONNECT: @clock 0 0 0 0 clock 0 0 0 0
 // Retrieval info: CONNECT: @dataa 0 0 27 0 dataa 0 0 27 0
 // Retrieval info: CONNECT: @datab 0 0 27 0 326 0 0 27 0
-// Retrieval info: CONNECT: result 0 0 35 0 @result 0 0 35 0
+// Retrieval info: CONNECT: result 0 0 54 0 @result 0 0 54 0
 // Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_coeff_326.v TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_coeff_326.inc TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL mult_27_coeff_326.cmp TRUE
