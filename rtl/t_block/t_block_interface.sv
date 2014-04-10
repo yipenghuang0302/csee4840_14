@@ -65,7 +65,9 @@ modport t_block_tb (clocking cb);
 
 // restrict directions
 modport t_block (
+	input clk,
 	input en,
+
 	input a,
 	input d,
 	input alpha,

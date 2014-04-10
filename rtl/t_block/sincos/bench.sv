@@ -2,7 +2,7 @@
 `include "sincos_test.sv"
 
 class sincos_transaction;
-	rand bit [15:0] increment;
+	rand logic [30:0] increment;
 endclass
 
 class sincos_env;
@@ -11,7 +11,7 @@ endclass
 
 program sincos_tb (ifc_sincos.sincos_tb ds);
 
-	shortreal fraction,angle;
+	real fraction, angle;
 	sincos_transaction trans;
 	sincos_env env;
 	sincos_test test;
@@ -21,7 +21,7 @@ program sincos_tb (ifc_sincos.sincos_tb ds);
 		trans.randomize();
 
 		//always wrap input angle to -PI..PI
-		fraction = real'(trans.increment) / 65536;
+		fraction = real'(trans.increment) / 2147483648.0;
 		// $display("fraction = %f", fraction);
 		
 		angle = -3.141592653589793238462643383279502884197 + fraction * 2 * 3.141592653589793238462643383279502884197;
@@ -29,7 +29,7 @@ program sincos_tb (ifc_sincos.sincos_tb ds);
 
 		// passing data to design under test happens here
 		ds.cb.en <= 1'b1;
-		ds.cb.angle <= angle*256;
+		ds.cb.angle <= int'(angle * 256.0);
 
 		@(ds.cb);
 		test.update_sincos (

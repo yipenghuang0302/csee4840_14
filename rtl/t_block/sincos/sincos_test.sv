@@ -1,12 +1,12 @@
 // golden model class
 class sincos_test;
 
-	shortreal model_angle;
-	shortreal model_sin;
-	shortreal model_cos;
+	real model_angle;
+	real model_sin;
+	real model_cos;
 
 	function void update_sincos (
-		shortreal angle
+		real angle
 	);
 
 		model_angle = angle;
@@ -22,18 +22,18 @@ class sincos_test;
 	);
 		int int_sin = int'({{5{dut_sin[26]}}, dut_sin});
 		int int_cos = int'({{5{dut_cos[26]}}, dut_cos});
-		shortreal real_sin = real'(int_sin)/256.0;
-		shortreal real_cos = real'(int_cos)/256.0;
-		shortreal sin_error = real_sin-model_sin;
-		shortreal cos_error = real_cos-model_cos;
+		real real_sin = real'(int_sin)/256.0;
+		real real_cos = real'(int_cos)/256.0;
+		real sin_error = real_sin-model_sin;
+		real cos_error = real_cos-model_cos;
 		bit passed;
 
 		sin_error = (sin_error<0) ? -sin_error : sin_error;
 		cos_error = (cos_error<0) ? -cos_error : cos_error;
 
 		passed = (
-			sin_error <= 0.016
-			&& cos_error <= 0.016
+			sin_error <= 0.015
+			&& cos_error <= 0.015
 		);
 
 		if (passed) begin
