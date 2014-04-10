@@ -43,19 +43,8 @@ set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "21:21:35  FEBRUARY 18, 2014"
 set_global_assignment -name LAST_QUARTUS_VERSION 13.1
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
-set_global_assignment -name VERILOG_FILE sincos.sv
-set_global_assignment -name QIP_FILE lab3/synthesis/lab3.qip
-set_global_assignment -name SYSTEMVERILOG_FILE sin.sv
-set_global_assignment -name SYSTEMVERILOG_FILE cos.sv
-set_global_assignment -name SOURCE_FILE sincos.qpf
-set_global_assignment -name SOURCE_FILE sincos.qsf
-set_global_assignment -name SDC_FILE sincos.sdc
-set_global_assignment -name SYSTEMVERILOG_FILE sincos.sv
-set_global_assignment -name TCL_SCRIPT_FILE sincos.tcl
-set_global_assignment -name SYSTEMVERILOG_FILE top.sv
 set_global_assignment -name SMART_RECOMPILE ON
 set_global_assignment -name FLOW_ENABLE_RTL_VIEWER ON
-set_global_assignment -name SOURCE_FILE db/sincos.cmp.rdb
 
 # Pin & Location Assignments
 # ==========================
@@ -668,4 +657,12 @@ set_instance_assignment -name GLOBAL_SIGNAL OFF -to u0|hps_0|hps_io|border|hps_s
 set_instance_assignment -name GLOBAL_SIGNAL OFF -to u0|hps_0|hps_io|border|hps_sdram_inst|p0|umemphy|uread_datapath|reset_n_fifo_wraddress[3] -tag __hps_sdram_p0
 set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION_FOR_NON_GLOBAL_CLOCKS ON -to u0|hps_0|hps_io|border|hps_sdram_inst -tag __hps_sdram_p0
 set_instance_assignment -name PLL_COMPENSATION_MODE DIRECT -to u0|hps_0|hps_io|border|hps_sdram_inst|pll0|fbout -tag __hps_sdram_p0
+set_global_assignment -name SYSTEMVERILOG_FILE sincos.sv
+set_global_assignment -name QIP_FILE lab3/synthesis/lab3.qip
+set_global_assignment -name SOURCE_FILE sincos.qpf
+set_global_assignment -name SOURCE_FILE sincos.qsf
+set_global_assignment -name SDC_FILE sincos.sdc
+set_global_assignment -name TCL_SCRIPT_FILE sincos.tcl
+set_global_assignment -name SOURCE_FILE db/sincos.cmp.rdb
+set_global_assignment -name SYSTEMVERILOG_FILE sincos_interface.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
