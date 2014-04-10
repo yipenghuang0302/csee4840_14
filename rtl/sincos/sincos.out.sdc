@@ -1,4 +1,4 @@
-## Generated SDC file "sincos.sdc"
+## Generated SDC file "sincos.out.sdc"
 
 ## Copyright (C) 1991-2014 Altera Corporation
 ## Your use of Altera Corporation's design tools, logic functions 
@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 13.1.3 Build 178 02/12/2014 SJ Web Edition"
 
-## DATE    "Thu Apr 10 13:12:48 2014"
+## DATE    "Thu Apr 10 13:11:50 2014"
 
 ##
 ## DEVICE  "5CSXFC6D6F31C8ES"
