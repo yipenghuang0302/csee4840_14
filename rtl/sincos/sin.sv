@@ -3,12 +3,12 @@
  * Columbia University
  */
 
-//`include "../sim_models/lpm_mult.v"
-//`include "../sim_models/mult_block.v"
-//`include "../sim_models/addsub_block.v"
-//`include "../sim_models/pipeline_internal_fv.v"
-//`include "../sim_models/dffep.v"
-//`include "../sim_models/altera_mf.v"
+// `include "../sim_models/lpm_mult.v"
+// `include "../sim_models/mult_block.v"
+// `include "../sim_models/addsub_block.v"
+// `include "../sim_models/pipeline_internal_fv.v"
+// `include "../sim_models/dffep.v"
+// `include "../sim_models/altera_mf.v"
 `include "mult_27_square/mult_27_square.v"
 `include "mult_27_coeff_104/mult_27_coeff_104.v"
 `include "mult_27_coeff_326/mult_27_coeff_326.v"
@@ -58,7 +58,9 @@ module sin (
 	// else
 	// 	est = 1.27323954 * x - 0.405284735 * x * x;
 	logic [26:0] est;
-	assign est = angle[26]==1'b1 ? angle_1_273_trunc+angle_2_405_trunc : angle_1_273_trunc-angle_2_405_trunc; // ask if negative number
+	always_ff  @(posedge clk) begin
+		est <= angle[26]==1'b1 ? angle_1_273_trunc+angle_2_405_trunc : angle_1_273_trunc-angle_2_405_trunc; // ask if negative number
+	end
 
 	// if (est < 0)
 	// est_norm = sin*-sin
@@ -74,11 +76,15 @@ module sin (
 		.result ( est_2_result )
 	);
 	assign est_2_trunc = est_2_result[34:8];
-	assign est_2_norm = est[26]==1'b1 ? -est_2_trunc : est_2_trunc; // ask if negative number
+	always_ff @(posedge clk) begin
+		est_2_norm <= est[26]==1'b1 ? -est_2_trunc : est_2_trunc; // ask if negative number
+	end
 
 	// sin = .225 * (est_2_norm - est) + est;
 	logic [26:0] est_2_norm_minus_est;
-	assign est_2_norm_minus_est = est_2_norm - est;
+	always_ff @(posedge clk) begin
+		est_2_norm_minus_est <= est_2_norm - est;
+	end
 
 	logic [53:0] est_225_result;
 	logic [26:0] est_225_trunc;
@@ -90,6 +96,8 @@ module sin (
 	);
 	assign est_225_trunc = est_225_result[34:8];
 
-	assign sin = est_225_trunc + est;
+	always_ff @(posedge clk) begin
+		sin <= est_225_trunc + est;
+	end
 
 endmodule

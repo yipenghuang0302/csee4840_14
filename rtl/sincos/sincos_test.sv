@@ -32,8 +32,8 @@ class sincos_test;
 		cos_error = (cos_error<0) ? -cos_error : cos_error;
 
 		passed = (
-			sin_error <= 0.0155
-			&& cos_error <= 0.0155
+			sin_error <= 0.016
+			&& cos_error <= 0.016
 		);
 
 		if (passed) begin

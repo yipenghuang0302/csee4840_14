@@ -46,7 +46,7 @@ program sincos_tb (ifc_sincos.sincos_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (13) begin
+			repeat (19) begin
 				@(ds.cb);
 			end
 			test.check_sincos (
