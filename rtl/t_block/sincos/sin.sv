@@ -76,9 +76,7 @@ module sin (
 		.result ( est_2_result )
 	);
 	assign est_2_round = est_2_result[7] ? est_2_result[34:8] + 1'b1 : est_2_result[34:8];
-	always_ff @(posedge clk) begin
-		est_2_norm <= est[26]==1'b1 ? -est_2_round : est_2_round; // ask if negative number
-	end
+	assign est_2_norm = est[26]==1'b1 ? -est_2_round : est_2_round; // ask if negative number
 
 	// sin = .225 * (est_2_norm - est) + est;
 	logic [26:0] est_2_norm_minus_est;

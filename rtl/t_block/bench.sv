@@ -71,7 +71,7 @@ program t_block_tb (ifc_t_block.t_block_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (23) begin
+			repeat (21) begin
 				@(ds.cb);
 			end
 			test.check_t_block (

@@ -8,7 +8,7 @@
 `include "../sim_models/addsub_block.v"
 `include "../sim_models/pipeline_internal_fv.v"
 `include "../sim_models/dffep.v"
-`include "mult_27/mult_27.v"
+`include "../mult_27/mult_27.v"
 
 module mult_array (
 	input clk, en,
@@ -24,7 +24,7 @@ module mult_array (
 	input logic [n*n-1:0] [26:0] datab,
 	output logic [n*n-1:0] [26:0] result
 
-	logic [n*n-1:0] [34:0] mult_result;
+	logic [n*n-1:0] [53:0] mult_result;
 	logic [n*n-1:0] [26:0] mult_round;
 
 	genvar i;

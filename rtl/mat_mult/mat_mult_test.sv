@@ -1,74 +1,25 @@
 // golden model class
 class mat_mult_test;
 
-	real m_a;
-	real m_d;
-	real m_alpha;
-	real m_theta;
-
-	real m_sin_alpha;
-	real m_cos_alpha;
-
-	real m_sin_theta;
-	real m_cos_theta;
-
-	real m_mat_00;
-	real m_mat_01;
-	real m_mat_02;
-	real m_mat_03;
-
-	real m_mat_10;
-	real m_mat_11;
-	real m_mat_12;
-	real m_mat_13;
-
-	real m_mat_20;
-	real m_mat_21;
-	real m_mat_22;
-	real m_mat_23;
-
-	real m_mat_30;
-	real m_mat_31;
-	real m_mat_32;
-	real m_mat_33;
+	real model_result[6][6];
 
 	function real abs (real num); 
 	   abs = (num<0) ? -num : num; 
 	endfunction
 
 	function void update_mat_mult (
-		real a, d, alpha, theta
+		real dataa[6][6],
+		real datab[6][6]
 	);
 
-		m_a = a;
-		m_d = d;
-		m_alpha = alpha;
-		m_theta = theta;
-
-		m_sin_alpha = $sin(alpha);
-		m_cos_alpha = $cos(alpha);
-		m_sin_theta = $sin(theta);
-		m_cos_theta = $cos(theta);
-
-		m_mat_00 =  m_cos_theta;
-		m_mat_01 = -m_sin_theta * m_cos_alpha;
-		m_mat_02 =  m_sin_theta * m_sin_alpha;
-		m_mat_03 =  m_cos_theta * a;
-
-		m_mat_10 =  m_sin_theta;
-		m_mat_11 =  m_cos_theta * m_cos_alpha;
-		m_mat_12 = -m_cos_theta * m_sin_alpha;
-		m_mat_13 =  m_sin_theta * a;
-
-		m_mat_20 = 0.0;
-		m_mat_21 = m_sin_alpha;
-		m_mat_22 = m_cos_alpha;
-		m_mat_23 = d;
-
-		m_mat_30 = 0.0;
-		m_mat_31 = 0.0;
-		m_mat_32 = 0.0;
-		m_mat_33 = 1.0;
+		for (int i=0; i<6; i++) begin // product row
+			for (int j=0; j<6; j++) begin // product column
+				model_result[i][j] = 0.0;
+				for (int k=0; k<6; k++) begin // inner term
+					model_result[i][j] += dataa[i][k] * datab[k][j];
+				end
+			end
+		end
 
 	endfunction
 

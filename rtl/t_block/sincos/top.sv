@@ -12,18 +12,6 @@ module sincos_top ();
 	logic clk = 1'b0;
 	always #1 clk = ~clk;
 
-	// logic en = 1'b1;
-	// logic [26:0] angle = 26'd251;
-	// logic [26:0] angle;
-	// logic [26:0] sin;
-	// logic [26:0] cos;
-
-	// initial begin
-	// 	clk = 0;
-	// 	repeat (1000)
-	// 		#100ns clk = ~clk;
-	// end
-
 	initial $vcdpluson;
 
 	ifc_sincos ifc_sincos (clk);

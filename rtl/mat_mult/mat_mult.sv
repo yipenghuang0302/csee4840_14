@@ -73,7 +73,39 @@ module mat_mult (
 			result[0] <= result[0] + mult_array_result[0];
 			result[1] <= result[1] + mult_array_result[1];
 			result[2] <= result[2] + mult_array_result[2];
-			...
+			result[3] <= result[3] + mult_array_result[3];
+			result[4] <= result[4] + mult_array_result[4];
+			result[5] <= result[5] + mult_array_result[5];
+			result[6] <= result[6] + mult_array_result[6];
+			result[7] <= result[7] + mult_array_result[7];
+			result[8] <= result[8] + mult_array_result[8];
+			result[9] <= result[9] + mult_array_result[9];
+			result[10] <= result[10] + mult_array_result[10];
+			result[11] <= result[11] + mult_array_result[11];
+			result[12] <= result[12] + mult_array_result[12];
+			result[13] <= result[13] + mult_array_result[13];
+			result[14] <= result[14] + mult_array_result[14];
+			result[15] <= result[15] + mult_array_result[15];
+			result[16] <= result[16] + mult_array_result[16];
+			result[17] <= result[17] + mult_array_result[17];
+			result[18] <= result[18] + mult_array_result[18];
+			result[19] <= result[19] + mult_array_result[19];
+			result[20] <= result[20] + mult_array_result[20];
+			result[21] <= result[21] + mult_array_result[21];
+			result[22] <= result[22] + mult_array_result[22];
+			result[23] <= result[23] + mult_array_result[23];
+			result[24] <= result[24] + mult_array_result[24];
+			result[25] <= result[25] + mult_array_result[25];
+			result[26] <= result[26] + mult_array_result[26];
+			result[27] <= result[27] + mult_array_result[27];
+			result[28] <= result[28] + mult_array_result[28];
+			result[29] <= result[29] + mult_array_result[29];
+			result[30] <= result[30] + mult_array_result[30];
+			result[31] <= result[31] + mult_array_result[31];
+			result[32] <= result[32] + mult_array_result[32];
+			result[33] <= result[33] + mult_array_result[33];
+			result[34] <= result[34] + mult_array_result[34];
+			result[35] <= result[35] + mult_array_result[35];
 		end
 	end
 
