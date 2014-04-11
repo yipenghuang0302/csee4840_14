@@ -7,58 +7,20 @@ interface ifc_mat_mult (
 	input logic clk
 );
 
-logic en;
-logic [26:0] a;
-logic [26:0] d;
-logic [26:0] alpha;
-logic [26:0] theta;
+parameter n = 6;
 
-logic [26:0] t_matrix_00;
-logic [26:0] t_matrix_01;
-logic [26:0] t_matrix_02;
-logic [26:0] t_matrix_03;
-
-logic [26:0] t_matrix_10;
-logic [26:0] t_matrix_11;
-logic [26:0] t_matrix_12;
-logic [26:0] t_matrix_13;
-
-logic [26:0] t_matrix_20;
-logic [26:0] t_matrix_21;
-logic [26:0] t_matrix_22;
-logic [26:0] t_matrix_23;
-
-logic [26:0] t_matrix_30;
-logic [26:0] t_matrix_31;
-logic [26:0] t_matrix_32;
-logic [26:0] t_matrix_33;
+logic en, rst;
+logic [n*n-1:0] [26:0] dataa;
+logic [n*n-1:0] [26:0] datab;
+logic [n*n-1:0] [26:0] result;
 
 clocking cb @(posedge clk);
 	output en;
-	output a;
-	output d;
-	output alpha;
-	output theta;
+	output rst;
+	output dataa;
+	output datab;
 
-	input t_matrix_00;
-	input t_matrix_01;
-	input t_matrix_02;
-	input t_matrix_03;
-
-	input t_matrix_10;
-	input t_matrix_11;
-	input t_matrix_12;
-	input t_matrix_13;
-
-	input t_matrix_20;
-	input t_matrix_21;
-	input t_matrix_22;
-	input t_matrix_23;
-
-	input t_matrix_30;
-	input t_matrix_31;
-	input t_matrix_32;
-	input t_matrix_33;
+	input result;
 endclocking
 
 modport mat_mult_tb (clocking cb);
@@ -67,31 +29,12 @@ modport mat_mult_tb (clocking cb);
 modport mat_mult (
 	input clk,
 	input en,
+	input rst,
 
-	input a,
-	input d,
-	input alpha,
-	input theta,
+	input dataa,
+	input datab,
 
-	output t_matrix_00,
-	output t_matrix_01,
-	output t_matrix_02,
-	output t_matrix_03,
-
-	output t_matrix_10,
-	output t_matrix_11,
-	output t_matrix_12,
-	output t_matrix_13,
-
-	output t_matrix_20,
-	output t_matrix_21,
-	output t_matrix_22,
-	output t_matrix_23,
-
-	output t_matrix_30,
-	output t_matrix_31,
-	output t_matrix_32,
-	output t_matrix_33
+	output result
 );
 
 endinterface

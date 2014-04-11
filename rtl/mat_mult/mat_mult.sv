@@ -1,34 +1,34 @@
+/*
+ * Yipeng Huang, Richard Townsend, Lianne Lairmore
+ * Columbia University
+ */
+
+`include "mult_array.sv"
+
 module mat_mult (
-	input clk, en, rst,
-	input dataa,
-	input datab,
-	output result
+	ifc_mat_mult.mat_mult i
 );
 
 	parameter n = 6;
-	parameter MAX = 6;
-
-	input logic clk, en;
-	input logic [n*n-1:0] [26:0] dataa;
-	input logic [n*n-1:0] [26:0] datab;
-	output logic [n*n-1:0] [26:0] result;
+	parameter MAX = 10;
 
 	logic [n*n-1:0] [26:0] mult_array_dataa;
 	logic [n*n-1:0] [26:0] mult_array_datab;
+	logic [n*n-1:0] [26:0] mult_array_result;
 
 	mult_array #(n) mult_array (
-		.clk(clk),
-		.en(en),
+		.clk(i.clk),
+		.en(i.en),
 		.dataa(mult_array_dataa),
 		.datab(mult_array_datab),
 		.result(mult_array_result)
 	);
 
-	logic [2:0] count;
-	always_ff @(posedge clk) begin
-		if ( rst ) begin
+	logic [4:0] count;
+	always_ff @(posedge i.clk) begin
+		if ( i.rst ) begin
 			count <= 0;
-		end else if ( en ) begin
+		end else if ( i.en ) begin
 			if ( count==MAX-1'b1 ) begin
 				count <= 0;
 			end else begin
@@ -39,74 +39,44 @@ module mat_mult (
 
 	always_comb begin
 		case(count)
-			3'd0: begin
-				mult_array_dataa = {6{dataa[0]}, 6{dataa[6]}, 6{dataa[12]}, 6{dataa[18]}, 6{dataa[24]}, 6{dataa[30]}};
-				mult_array_datab = {6{datab[0], datab[1], datab[2], datab[3], datab[4], datab[5]}};
+			5'd0: begin
+				mult_array_dataa = {{6{i.dataa[35-0]}}, {6{i.dataa[35-6]}}, {6{i.dataa[35-12]}}, {6{i.dataa[35-18]}}, {6{i.dataa[35-24]}}, {6{i.dataa[35-30]}}};
+				mult_array_datab = {6{i.datab[35-0], i.datab[35-1], i.datab[35-2], i.datab[35-3], i.datab[35-4], i.datab[35-5]}};
 			end
-			3'd1: begin
-				mult_array_dataa = {6{dataa[1]}, 6{dataa[7]}, 6{dataa[13]}, 6{dataa[19]}, 6{dataa[25]}, 6{dataa[31]}};
-				mult_array_datab = {6{datab[6], datab[7], datab[8], datab[9], datab[10], datab[11]}};
+			5'd1: begin
+				mult_array_dataa = {{6{i.dataa[35-1]}}, {6{i.dataa[35-7]}}, {6{i.dataa[35-13]}}, {6{i.dataa[35-19]}}, {6{i.dataa[35-25]}}, {6{i.dataa[35-31]}}};
+				mult_array_datab = {6{i.datab[35-6], i.datab[35-7], i.datab[35-8], i.datab[35-9], i.datab[35-10], i.datab[35-11]}};
 			end
-			3'd2: begin
-				mult_array_dataa = {6{dataa[2]}, 6{dataa[8]}, 6{dataa[14]}, 6{dataa[20]}, 6{dataa[26]}, 6{dataa[32]}};
-				mult_array_datab = {6{datab[12], datab[13], datab[14], datab[15], datab[16], datab[17]}};
+			5'd2: begin
+				mult_array_dataa = {{6{i.dataa[35-2]}}, {6{i.dataa[35-8]}}, {6{i.dataa[35-14]}}, {6{i.dataa[35-20]}}, {6{i.dataa[35-26]}}, {6{i.dataa[35-32]}}};
+				mult_array_datab = {6{i.datab[35-12], i.datab[35-13], i.datab[35-14], i.datab[35-15], i.datab[35-16], i.datab[35-17]}};
 			end
-			3'd3: begin
-				mult_array_dataa = {6{dataa[3]}, 6{dataa[9]}, 6{dataa[15]}, 6{dataa[21]}, 6{dataa[27]}, 6{dataa[33]}};
-				mult_array_datab = {6{datab[18], datab[19], datab[20], datab[21], datab[22], datab[23]}};
+			5'd3: begin
+				mult_array_dataa = {{6{i.dataa[35-3]}}, {6{i.dataa[35-9]}}, {6{i.dataa[35-15]}}, {6{i.dataa[35-21]}}, {6{i.dataa[35-27]}}, {6{i.dataa[35-33]}}};
+				mult_array_datab = {6{i.datab[35-18], i.datab[35-19], i.datab[35-20], i.datab[35-21], i.datab[35-22], i.datab[35-23]}};
 			end
-			3'd4: begin
-				mult_array_dataa = {6{dataa[4]}, 6{dataa[10]}, 6{dataa[16]}, 6{dataa[22]}, 6{dataa[28]}, 6{dataa[34]}};
-				mult_array_datab = {6{datab[24], datab[25], datab[26], datab[27], datab[28], datab[29]}};
+			5'd4: begin
+				mult_array_dataa = {{6{i.dataa[35-4]}}, {6{i.dataa[35-10]}}, {6{i.dataa[35-16]}}, {6{i.dataa[35-22]}}, {6{i.dataa[35-28]}}, {6{i.dataa[35-34]}}};
+				mult_array_datab = {6{i.datab[35-24], i.datab[35-25], i.datab[35-26], i.datab[35-27], i.datab[35-28], i.datab[35-29]}};
 			end
-			3'd5: begin
-				mult_array_dataa = {6{dataa[5]}, 6{dataa[11]}, 6{dataa[17]}, 6{dataa[23]}, 6{dataa[29]}, 6{dataa[35]}};
-				mult_array_datab = {6{datab[30], datab[31], datab[32], datab[33], datab[34], datab[35]}};
+			5'd5: begin
+				mult_array_dataa = {{6{i.dataa[35-5]}}, {6{i.dataa[35-11]}}, {6{i.dataa[35-17]}}, {6{i.dataa[35-23]}}, {6{i.dataa[35-29]}}, {6{i.dataa[35-35]}}};
+				mult_array_datab = {6{i.datab[35-30], i.datab[35-31], i.datab[35-32], i.datab[35-33], i.datab[35-34], i.datab[35-35]}};
 			end
 		endcase
 	end
 
-	always_ff @(posedge clk) begin
-		if ( rst ) begin
-			result <= 'd0;
-		end else if ( en ) begin
-			result[0] <= result[0] + mult_array_result[0];
-			result[1] <= result[1] + mult_array_result[1];
-			result[2] <= result[2] + mult_array_result[2];
-			result[3] <= result[3] + mult_array_result[3];
-			result[4] <= result[4] + mult_array_result[4];
-			result[5] <= result[5] + mult_array_result[5];
-			result[6] <= result[6] + mult_array_result[6];
-			result[7] <= result[7] + mult_array_result[7];
-			result[8] <= result[8] + mult_array_result[8];
-			result[9] <= result[9] + mult_array_result[9];
-			result[10] <= result[10] + mult_array_result[10];
-			result[11] <= result[11] + mult_array_result[11];
-			result[12] <= result[12] + mult_array_result[12];
-			result[13] <= result[13] + mult_array_result[13];
-			result[14] <= result[14] + mult_array_result[14];
-			result[15] <= result[15] + mult_array_result[15];
-			result[16] <= result[16] + mult_array_result[16];
-			result[17] <= result[17] + mult_array_result[17];
-			result[18] <= result[18] + mult_array_result[18];
-			result[19] <= result[19] + mult_array_result[19];
-			result[20] <= result[20] + mult_array_result[20];
-			result[21] <= result[21] + mult_array_result[21];
-			result[22] <= result[22] + mult_array_result[22];
-			result[23] <= result[23] + mult_array_result[23];
-			result[24] <= result[24] + mult_array_result[24];
-			result[25] <= result[25] + mult_array_result[25];
-			result[26] <= result[26] + mult_array_result[26];
-			result[27] <= result[27] + mult_array_result[27];
-			result[28] <= result[28] + mult_array_result[28];
-			result[29] <= result[29] + mult_array_result[29];
-			result[30] <= result[30] + mult_array_result[30];
-			result[31] <= result[31] + mult_array_result[31];
-			result[32] <= result[32] + mult_array_result[32];
-			result[33] <= result[33] + mult_array_result[33];
-			result[34] <= result[34] + mult_array_result[34];
-			result[35] <= result[35] + mult_array_result[35];
+	genvar index;
+	generate
+		for ( index=n*n-1 ; index>=0 ; index-- ) begin: adder_array
+			always_ff @(posedge i.clk) begin
+				if ( i.rst ) begin
+					i.result[index] <= 27'b0;
+				end else if ( i.en && (count==5'd3 || count==5'd4 || count==5'd5 || count==5'd6 || count==5'd7 || count==5'd8) ) begin
+					i.result[index] <= i.result[index] + mult_array_result[index];
+				end
+			end
 		end
-	end
+	endgenerate
 
 endmodule
