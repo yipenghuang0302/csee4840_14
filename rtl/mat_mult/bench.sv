@@ -1,18 +1,18 @@
 `timescale 1ns/1ps
-`include "t_block_test.sv"
+`include "mat_mult_test.sv"
 
-class t_block_transaction;
+class mat_mult_transaction;
 	rand logic [30:0] increment_a;
 	rand logic [30:0] increment_d;
 	rand logic [30:0] increment_alpha;
 	rand logic [30:0] increment_theta;
 endclass
 
-class t_block_env;
+class mat_mult_env;
 	int max_transactions = 1000000;
 endclass
 
-program t_block_tb (ifc_t_block.t_block_tb ds);
+program mat_mult_tb (ifc_mat_mult.mat_mult_tb ds);
 
 	real fraction_a;
 	real fraction_d;
@@ -24,9 +24,9 @@ program t_block_tb (ifc_t_block.t_block_tb ds);
 	real alpha;
 	real theta;
 
-	t_block_transaction trans;
-	t_block_env env;
-	t_block_test test;
+	mat_mult_transaction trans;
+	mat_mult_env env;
+	mat_mult_test test;
 
 	task do_cycle;
 
@@ -57,7 +57,7 @@ program t_block_tb (ifc_t_block.t_block_tb ds);
 		ds.cb.theta <= int'(theta * 256.0);
 
 		@(ds.cb);
-		test.update_t_block (
+		test.update_mat_mult (
 			a, d, alpha, theta
 		);
 
@@ -74,7 +74,7 @@ program t_block_tb (ifc_t_block.t_block_tb ds);
 			repeat (22) begin
 				@(ds.cb);
 			end
-			test.check_t_block (
+			test.check_mat_mult (
 				ds.cb.t_matrix_00,
 				ds.cb.t_matrix_01,
 				ds.cb.t_matrix_02,

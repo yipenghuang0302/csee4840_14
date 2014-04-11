@@ -1,5 +1,5 @@
 // golden model class
-class t_block_test;
+class mat_mult_test;
 
 	real m_a;
 	real m_d;
@@ -36,7 +36,7 @@ class t_block_test;
 	   abs = (num<0) ? -num : num; 
 	endfunction
 
-	function void update_t_block (
+	function void update_mat_mult (
 		real a, d, alpha, theta
 	);
 
@@ -72,7 +72,7 @@ class t_block_test;
 
 	endfunction
 
-	function void check_t_block (
+	function void check_mat_mult (
 		logic [26:0] dut_t_mat_00,
 		logic [26:0] dut_t_mat_01,
 		logic [26:0] dut_t_mat_02,
@@ -184,7 +184,7 @@ class t_block_test;
 		if (passed) begin
 			// $display("%t : pass \n", $realtime);
 		end else begin
-			$write("%t : fail t_block\n", $realtime);
+			$write("%t : fail mat_mult\n", $realtime);
 			$write("m_a=%f\n", m_a);
 			$write("m_d=%f\n", m_d);
 			$write("m_alpha=%f\n", m_alpha);
