@@ -147,67 +147,36 @@ module jacobian (
 				p_52 <= i.t_matrix_23;
 			end
 			3'd5: begin
-				p_60 <= i.t_matrix_03;
-				p_61 <= i.t_matrix_13;
-				p_62 <= i.t_matrix_23;
+				//Do all subtractions here?
+
+				p_10 <= i.s_0 - p_10;
+				p_11 <= i.s_1 - p_11;
+				p_12 <= i.s_2 - p_12;
+
+				p_20 <= i.s_0 - p_20;
+				p_21 <= i.s_1 - p_21;
+				p_22 <= i.s_2 - p_22;
+				
+				p_30 <= i.s_0 - p_30;
+				p_31 <= i.s_1 - p_31;
+				p_32 <= i.s_2 - p_32;
+
+				p_40 <= i.s_0 - p_40;
+				p_41 <= i.s_1 - p_41;
+				p_42 <= i.s_2 - p_42;
+
+				p_50 <= i.s_0 - p_50;
+				p_51 <= i.s_1 - p_51;
+				p_52 <= i.s_2 - p_52;
+
+				p_60 <= i.s_0 - i.t_matrix_03;
+				p_61 <= i.s_1 - i.t_matrix_13;
+				p_62 <= i.s_2 - i.t_matrix_23;
+
+
+				//Then do cross mult? or do this in different clock cycle?
 			end
 		endcase
 	end
-
-	//Do all the subtractions at once
-	always_ff @(posedge i.clk) begin
-		if (joint == 3'd5) begin
-			p_10 <= i.s_0 - p_10;
-			p_11 <= i.s_1 - p_11;
-			p_12 <= i.s_2 - p_12;
-
-			p_20 <= i.s_0 - p_20;
-			p_21 <= i.s_1 - p_21;
-			p_22 <= i.s_2 - p_22;
-			
-			p_30 <= i.s_0 - p_30;
-			p_31 <= i.s_1 - p_31;
-			p_32 <= i.s_2 - p_32;
-
-			p_40 <= i.s_0 - p_40;
-			p_41 <= i.s_1 - p_41;
-			p_42 <= i.s_2 - p_42;
-
-			p_50 <= i.s_0 - p_50;
-			p_51 <= i.s_1 - p_51;
-			p_52 <= i.s_2 - p_52;
-
-			p_60 <= i.s_0 - p_60;
-			p_61 <= i.s_1 - p_61;
-			p_62 <= i.s_2 - p_62;
-		end else begin
-			//If we don't have s yet, just keep everything the same
-			p_10 <= p_10;
-			p_11 <= p_11;
-			p_12 <= p_12;
-
-			p_20 <= p_20;
-			p_21 <= p_21;
-			p_22 <= p_22;
-			
-			p_30 <= p_30;
-			p_31 <= p_31;
-			p_32 <= p_32;
-
-			p_40 <= p_40;
-			p_41 <= p_41;
-			p_42 <= p_42;
-
-			p_50 <= p_50;
-			p_51 <= p_51;
-			p_52 <= p_52;
-
-			p_60 <= p_60;
-			p_61 <= p_61;
-			p_62 <= p_62;
-		end
-
-	end
-
 
 endmodule
