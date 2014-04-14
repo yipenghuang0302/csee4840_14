@@ -7,7 +7,8 @@ interface ifc_jacobian (
 	input logic clk
 );
 
-logic en;
+//Global clock cycle counter
+logic [8:0] count;
 
 //Which joint we're on
 logic [2:0] joint;
@@ -85,6 +86,13 @@ logic [26:0] j_matrix_52;
 logic [26:0] j_matrix_53;
 logic [26:0] j_matrix_54;
 logic [26:0] j_matrix_55;
+
+//Output to multipliers
+logic [5:0] [5:0] [26:0] dataa;
+logic [5:0] [5:0] [26:0] datab;
+
+//Input from multipliers
+logic [5:0] [5:0] [26:0] result;
 
 // restrict directions
 modport jacobian (

@@ -22,6 +22,8 @@ module jacobian (
 	ifc_jacobian.jacobian i
 );
 
+	logic step;
+
 	//Rotation block
 	logic [26:0] rot_block_00;	
 	logic [26:0] rot_block_01;	
@@ -111,10 +113,16 @@ module jacobian (
 	assign mult_array_rot_block = {rot_block_00, rot_block_01, rot_block_02, 3{28'd0},
 																 rot_block_10, rot_block_11, rot_block_12, 3{28'd0},
 																 rot_block_20, rot_block_21, rot_block_22, 3{28'd0},
-																 6{28'd0}, 6{28'd0}, 6{28'd0}};
+																 6{28'd0},
+																 6{28'd0}, 
+																 6{28'd0}};
 
-	assign mult_array_datab = {z_0, 5{28'd0}, z_1, 5{28'd0}, z_2, 5{28'd0},
-														 6{28'd0}, 6{28'd0}, 6{28'd0}};
+	assign mult_array_datab = {z_0, 5{28'd0},
+													   z_1, 5{28'd0},
+														 z_2, 5{28'd0},
+														 6{28'd0}, 
+														 6{28'd0},
+														 6{28'd0}};
 
 	//Get position and axis of rotation/translation of each joint
 	always_ff @(posedge i.clk) begin
@@ -125,6 +133,7 @@ module jacobian (
 				p_11 <= i.t_matrix_13;
 				p_12 <= i.t_matrix_23;
 				//get axis (once matrix mult stuff is working)
+				if (count == ?
 			end
 			3'd1: begin
 				p_20 <= i.t_matrix_03;
@@ -149,6 +158,7 @@ module jacobian (
 			3'd5: begin
 				//Do all subtractions here?
 
+				if (step == "subtraction") begin
 				p_10 <= i.s_0 - p_10;
 				p_11 <= i.s_1 - p_11;
 				p_12 <= i.s_2 - p_12;
@@ -172,6 +182,9 @@ module jacobian (
 				p_60 <= i.s_0 - i.t_matrix_03;
 				p_61 <= i.s_1 - i.t_matrix_13;
 				p_62 <= i.s_2 - i.t_matrix_23;
+				end else if (step == "corss-multpily") begin
+					if step2 == "first cycle"
+				end
 
 
 				//Then do cross mult? or do this in different clock cycle?
