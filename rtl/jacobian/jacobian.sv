@@ -22,104 +22,73 @@ module jacobian (
 	ifc_jacobian.jacobian i
 );
 
-	logic step;
+	//used for synchronization
+	logic [3:0] local_count;
 
 	//Rotation block
-	logic [26:0] rot_block_00;	
-	logic [26:0] rot_block_01;	
-	logic [26:0] rot_block_02;	
-
-	logic [26:0] rot_block_10;	
-	logic [26:0] rot_block_11;	
-	logic [26:0] rot_block_12;	
-
-	logic [26:0] rot_block_20;	
-	logic [26:0] rot_block_21;	
-	logic [26:0] rot_block_22;	
+	logic [2:0] [2:0] [26:0] rot_block;	
 
 	//Axis of rotation/translation for joints 1...6
-	logic [26:0] v_10;
-	logic [26:0] v_11;
-	logic [26:0] v_12;
-
-	logic [26:0] v_20;
-	logic [26:0] v_21;
-	logic [26:0] v_22;
-
-	logic [26:0] v_30;
-	logic [26:0] v_31;
-	logic [26:0] v_32;
-
-	logic [26:0] v_40;
-	logic [26:0] v_41;
-	logic [26:0] v_42;
-
-	logic [26:0] v_50;
-	logic [26:0] v_51;
-	logic [26:0] v_52;
-
-	logic [26:0] v_60;
-	logic [26:0] v_61;
-	logic [26:0] v_62;
+	logic [2:0] [26:0] v_1;
+	logic [2:0] [26:0] v_2;
+	logic [2:0] [26:0] v_3;
+	logic [2:0] [26:0] v_4;
+	logic [2:0] [26:0] v_5;
+	logic [2:0] [26:0] v_6;
 
 	//Location of joints 1...6
-	logic [26:0] p_10;
-	logic [26:0] p_11;
-	logic [26:0] p_12;
+	logic [2:0] [26:0] p_1;
+	logic [2:0] [26:0] p_2;
+	logic [2:0] [26:0] p_3;
+	logic [2:0] [26:0] p_4;
+	logic [2:0] [26:0] p_5;
+	logic [2:0] [26:0] p_6;
 
-	logic [26:0] p_20;
-	logic [26:0] p_21;
-	logic [26:0] p_22;
-
-	logic [26:0] p_30;
-	logic [26:0] p_31;
-	logic [26:0] p_32;
-
-	logic [26:0] p_40;
-	logic [26:0] p_41;
-	logic [26:0] p_42;
-
-	logic [26:0] p_50;
-	logic [26:0] p_51;
-	logic [26:0] p_52;
-
-	logic [26:0] p_60;
-	logic [26:0] p_61;
-	logic [26:0] p_62;
-
+	//Used to transfer rotation block and z vector to matrix multiplier
 	logic [8:0] [26:0] mult_array_rot_block;
 	logic [2:0] [26:0] mult_array_z;
 	
-	//Need to instantiate Matrix Multiply once Yipeng has figured it out
-
+	//Deal with local count
+	always_ff @(posedge i.clk) begin
+		if ( i.count == 9'd44 || i.count == 9'd64 || i.count == 9'd84 || i.count == 9'd104 || i.count == 9'd124 || i.count == 9'd144 ) begin
+			local_count <= 0;
+		end else begin
+			if ( local_count==4'd15 ) begin
+				count <= 0;
+			end else begin
+				count <= count + 1'b1;
+			end
+		end
+	end
 
 	//Get rotation block
 	always_comb begin
-	 rot_block_00 = i.t_matrix_00;
-	 rot_block_01 = i.t_matrix_01;
-	 rot_block_02 = i.t_matrix_02;
+	 rot_block[0][0] = i.t_matrix[0][0]
+	 rot_block[0][1] = i.t_matrix[0][1]
+	 rot_block[0][2] = i.t_matrix[0][2]
 
-	 rot_block_10 = i.t_matrix_10;
-	 rot_block_11 = i.t_matrix_11;
-	 rot_block_12 = i.t_matrix_12;
+	 rot_block[1][0] = i.t_matrix[1][0]
+	 rot_block[1][1] = i.t_matrix[1][1]
+	 rot_block[1][2] = i.t_matrix[1][2]
 
-	 rot_block_20 = i.t_matrix_20;
-	 rot_block_21 = i.t_matrix_21;
-	 rot_block_22 = i.t_matrix_22;
+	 rot_block[2][0] = i.t_matrix[2][0]
+	 rot_block[2][1] = i.t_matrix[2][1]
+	 rot_block[2][2] = i.t_matrix[2][2]
+
+	 mult_array_rot_block = {rot_block[0], 3{28'd0},
+													 rot_block[1], 3{28'd0},
+													 rot_block[2], 3{28'd0},
+													 6{28'd0},
+													 6{28'd0}, 
+													 6{28'd0}};
 	end
 
-	//Get this joint's position
 
-	assign mult_array_rot_block = {rot_block_00, rot_block_01, rot_block_02, 3{28'd0},
-																 rot_block_10, rot_block_11, rot_block_12, 3{28'd0},
-																 rot_block_20, rot_block_21, rot_block_22, 3{28'd0},
-																 6{28'd0},
-																 6{28'd0}, 
-																 6{28'd0}};
 
-	assign mult_array_datab = {z_0, 5{28'd0},
-													   z_1, 5{28'd0},
-														 z_2, 5{28'd0},
+	//Set up z vector for matrix multiplication
+	assign mult_array_z = {i.z[0], 5{28'd0},
+												i.z[1], 5{28'd0},
+											  i.z[2], 5{28'd0},
 														 6{28'd0}, 
 														 6{28'd0},
 														 6{28'd0}};
@@ -129,65 +98,249 @@ module jacobian (
 		case(joint)
 			3'd0: begin
 				//get position
-				p_10 <= i.t_matrix_03;
-				p_11 <= i.t_matrix_13;
-				p_12 <= i.t_matrix_23;
-				//get axis (once matrix mult stuff is working)
-				if (count == ?
+				p_1[0] <= i.t_matrix[0][3];
+				p_1[1] <= i.t_matrix[1][3];
+				p_1[2] <= i.t_matrix[2][3];
+				//get axis 
+				case(local_count)
+					4'd0: begin
+						i.dataa <= mult_array_rot_block;
+						i.datab <= mult_array_z;
+					end
+					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					4'd3: begin
+						v_1[0] <= i.result[0][0];
+						v_1[1] <= i.result[1][0];
+						v_1[2] <= i.result[2][0];
+					end
+				endcase
 			end
 			3'd1: begin
-				p_20 <= i.t_matrix_03;
-				p_21 <= i.t_matrix_13;
-				p_22 <= i.t_matrix_23;
+				//get position
+				p_2[0] <= i.t_matrix[0][3];
+				p_2[1] <= i.t_matrix[1][3];
+				p_2[2] <= i.t_matrix[2][3];
+				//get axis 
+				case(local_count)
+					4'd0: begin
+						i.dataa <= mult_array_rot_block;
+						i.datab <= mult_array_z;
+					end
+					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					4'd3: begin
+						v_2[0] <= i.result[0][0];
+						v_2[1] <= i.result[1][0];
+						v_2[2] <= i.result[2][0];
+					end
+				endcase
 			end
 			3'd2: begin
-				p_30 <= i.t_matrix_03;
-				p_31 <= i.t_matrix_13;
-				p_32 <= i.t_matrix_23;
+				//get position
+				p_3[0] <= i.t_matrix[0][3];
+				p_3[1] <= i.t_matrix[1][3];
+				p_3[2] <= i.t_matrix[2][3];
+				//get axis 
+				case(local_count)
+					4'd0: begin
+						i.dataa <= mult_array_rot_block;
+						i.datab <= mult_array_z;
+					end
+					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					4'd3: begin
+						v_3[0] <= i.result[0][0];
+						v_3[1] <= i.result[1][0];
+						v_3[2] <= i.result[2][0];
+					end
+				endcase
 			end
 			3'd3: begin
-				p_40 <= i.t_matrix_03;
-				p_41 <= i.t_matrix_13;
-				p_42 <= i.t_matrix_23;
+				//get position
+				p_4[0] <= i.t_matrix[0][3];
+				p_4[1] <= i.t_matrix[1][3];
+				p_4[2] <= i.t_matrix[2][3];
+				//get axis 
+				case(local_count)
+					4'd0: begin
+						i.dataa <= mult_array_rot_block;
+						i.datab <= mult_array_z;
+					end
+					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					4'd3: begin
+						v_4[0] <= i.result[0][0];
+						v_4[1] <= i.result[1][0];
+						v_4[2] <= i.result[2][0];
+					end
+				endcase
 			end
 			3'd4: begin
-				p_50 <= i.t_matrix_03;
-				p_51 <= i.t_matrix_13;
-				p_52 <= i.t_matrix_23;
+				//get position
+				p_5[0] <= i.t_matrix[0][3];
+				p_5[1] <= i.t_matrix[1][3];
+				p_5[2] <= i.t_matrix[2][3];
+				//get axis 
+				case(local_count)
+					4'd0: begin
+						i.dataa <= mult_array_rot_block;
+						i.datab <= mult_array_z;
+					end
+					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					4'd3: begin
+						v_5[0] <= i.result[0][0];
+						v_5[1] <= i.result[1][0];
+						v_5[2] <= i.result[2][0];
+					end
+				endcase
 			end
 			3'd5: begin
-				//Do all subtractions here?
+				case(local_count)
+					//Do all subtractions in parallel (2 cycles?)
+					4'd0: begin
+									p_1[0] <= i.s_0 - p_1[0];
+									p_1[1] <= i.s_1 - p_1[1];
+									p_1[2] <= i.s_2 - p_1[2];
 
-				if (step == "subtraction") begin
-				p_10 <= i.s_0 - p_10;
-				p_11 <= i.s_1 - p_11;
-				p_12 <= i.s_2 - p_12;
+									p_2[0] <= i.s_0 - p_2[0];
+									p_2[1] <= i.s_1 - p_2[1];
+									p_2[2] <= i.s_2 - p_2[2];
+									
+									p_3[0] <= i.s_0 - p_3[0];
+									p_3[1] <= i.s_1 - p_3[1];
+									p_3[2] <= i.s_2 - p_3[2];
 
-				p_20 <= i.s_0 - p_20;
-				p_21 <= i.s_1 - p_21;
-				p_22 <= i.s_2 - p_22;
-				
-				p_30 <= i.s_0 - p_30;
-				p_31 <= i.s_1 - p_31;
-				p_32 <= i.s_2 - p_32;
+									p_4[0] <= i.s_0 - p_4[0];
+									p_4[1] <= i.s_1 - p_4[1];
+									p_4[2] <= i.s_2 - p_4[2];
 
-				p_40 <= i.s_0 - p_40;
-				p_41 <= i.s_1 - p_41;
-				p_42 <= i.s_2 - p_42;
+									p_5[0] <= i.s_0 - p_5[0];
+									p_5[1] <= i.s_1 - p_5[1];
+									p_5[2] <= i.s_2 - p_5[2];
 
-				p_50 <= i.s_0 - p_50;
-				p_51 <= i.s_1 - p_51;
-				p_52 <= i.s_2 - p_52;
-
-				p_60 <= i.s_0 - i.t_matrix_03;
-				p_61 <= i.s_1 - i.t_matrix_13;
-				p_62 <= i.s_2 - i.t_matrix_23;
-				end else if (step == "corss-multpily") begin
-					if step2 == "first cycle"
-				end
-
-
-				//Then do cross mult? or do this in different clock cycle?
+									p_6[0] <= i.s_0 - i.t_matrix[0][3];
+									p_6[1] <= i.s_1 - i.t_matrix[1][3];
+									p_6[2] <= i.s_2 - i.t_matrix[2][3];
+					end
+					//Then do all cross-multiplies in a pipeline
+					4'd2: begin
+						i.dataa <= {v_1[1],v_1[2],4{27'd0},v_1[2],v_1[0],4{27'd0},v_1[0],v_1[1]}
+						i.datab <= {p_1[2],p_1[1],4{27'd0},p_1[0],v_1[2],4{27'd0},p_1[1],p_1[0]}
+					end
+					4'd3: begin
+						i.dataa <= {v_2[1],v_2[2],4{27'd0},v_2[2],v_2[0],4{27'd0},v_2[0],v_2[1]}
+						i.datab <= {p_2[2],p_2[1],4{27'd0},p_2[0],v_2[2],4{27'd0},p_2[1],p_2[0]}
+					end
+					4'd4: begin
+						i.dataa <= {v_3[1],v_3[2],4{27'd0},v_3[2],v_3[0],4{27'd0},v_3[0],v_3[1]}
+						i.datab <= {p_3[2],p_3[1],4{27'd0},p_3[0],v_3[2],4{27'd0},p_3[1],p_3[0]}
+					end
+					4'd5: begin
+						i.dataa <= {v_4[1],v_4[2],4{27'd0},v_4[2],v_4[0],4{27'd0},v_4[0],v_4[1]}
+						i.datab <= {p_4[2],p_4[1],4{27'd0},p_4[0],v_4[2],4{27'd0},p_4[1],p_4[0]}
+						if (joint_type[0] == 1'b1) begin//rotational
+							jacobian_matrix[0][0] <= i.result[0][0] - i.result[0][1];
+							jacobian_matrix[1][0] <= i.result[1][0] - i.result[1][1];
+							jacobian_matrix[2][0] <= i.result[2][0] - i.result[2][1];
+							jacobian_matrix[3][0] <= v_1[0];
+							jacobian_matrix[4][0] <= v_1[1];
+							jacobian_matrix[5][0] <= v_1[2];
+						end else if (joint_type[0] == 1'b0) begin//translational
+							jacobian_matrix[0][0] <= v_1[0];
+							jacobian_matrix[1][0] <= v_1[1];
+							jacobian_matrix[2][0] <= v_1[2];
+							jacobian_matrix[3][0] <= 27'b0 ;
+							jacobian_matrix[4][0] <= 27'b0;
+							jacobian_matrix[5][0] <= 27'b0;
+						end
+					end
+					4'd6: begin
+						i.dataa <= {v_5[1],v_5[2],4{27'd0},v_5[2],v_5[0],4{27'd0},v_5[0],v_5[1]}
+						i.datab <= {p_5[2],p_5[1],4{27'd0},p_5[0],v_5[2],4{27'd0},p_5[1],p_5[0]}
+						if (joint_type[1] == 1'b1) begin//rotational
+							jacobian_matrix[0][1] <= i.result[0][0] - i.result[0][1];
+							jacobian_matrix[1][1] <= i.result[1][0] - i.result[1][1];
+							jacobian_matrix[2][1] <= i.result[2][0] - i.result[2][1];
+							jacobian_matrix[3][1] <= v_2[0];
+							jacobian_matrix[4][1] <= v_2[1];
+							jacobian_matrix[5][1] <= v_2[2];
+						end else if (joint_type[1] == 1'b0) begin//translational
+							jacobian_matrix[0][1] <= v_2[0];
+							jacobian_matrix[1][1] <= v_2[1];
+							jacobian_matrix[2][1] <= v_2[2];
+							jacobian_matrix[3][1] <= 27'b0 ;
+							jacobian_matrix[4][1] <= 27'b0;
+							jacobian_matrix[5][1] <= 27'b0;
+						end
+					end
+					4'd7: begin
+						i.dataa <= {v_6[1],v_6[2],4{27'd0},v_6[2],v_6[0],4{27'd0},v_6[0],v_6[1]}
+						i.datab <= {p_6[2],p_6[1],4{27'd0},p_6[0],v_6[2],4{27'd0},p_6[1],p_6[0]}
+						if (joint_type[2] == 1'b1) begin//rotational
+							jacobian_matrix[0][2] <= i.result[0][0] - i.result[0][1];
+							jacobian_matrix[1][2] <= i.result[1][0] - i.result[1][1];
+							jacobian_matrix[2][2] <= i.result[2][0] - i.result[2][1];
+							jacobian_matrix[3][2] <= v_3[0];
+							jacobian_matrix[4][2] <= v_3[1];
+							jacobian_matrix[5][2] <= v_3[2];
+						end else if (joint_type[2] == 1'b0) begin//translational
+							jacobian_matrix[0][2] <= v_3[0];
+							jacobian_matrix[1][2] <= v_3[1];
+							jacobian_matrix[2][2] <= v_3[2];
+							jacobian_matrix[3][2] <= 27'b0 ;
+							jacobian_matrix[4][2] <= 27'b0;
+							jacobian_matrix[5][2] <= 27'b0;
+						end
+					end
+					4'd8: begin
+						if (joint_type[3] == 1'b1) begin//rotational
+							jacobian_matrix[0][3] <= i.result[0][0] - i.result[0][1];
+							jacobian_matrix[1][3] <= i.result[1][0] - i.result[1][1];
+							jacobian_matrix[2][3] <= i.result[2][0] - i.result[2][1];
+							jacobian_matrix[3][3] <= v_4[0];
+							jacobian_matrix[4][3] <= v_4[1];
+							jacobian_matrix[5][3] <= v_4[2];
+						end else if (joint_type[3] == 1'b0) begin//translational
+							jacobian_matrix[0][3] <= v_4[0];
+							jacobian_matrix[1][3] <= v_4[1];
+							jacobian_matrix[2][3] <= v_4[2];
+							jacobian_matrix[3][3] <= 27'b0 ;
+							jacobian_matrix[4][3] <= 27'b0;
+							jacobian_matrix[5][3] <= 27'b0;
+						end
+					end
+					4'd9: begin
+						if (joint_type[4] == 1'b1) begin//rotational
+							jacobian_matrix[0][4] <= i.result[0][0] - i.result[0][1];
+							jacobian_matrix[1][4] <= i.result[1][0] - i.result[1][1];
+							jacobian_matrix[2][4] <= i.result[2][0] - i.result[2][1];
+							jacobian_matrix[3][4] <= v_5[0];
+							jacobian_matrix[4][4] <= v_5[1];
+							jacobian_matrix[5][4] <= v_5[2];
+						end else if (joint_type[4] == 1'b0) begin//translational
+							jacobian_matrix[0][4] <= v_5[0];
+							jacobian_matrix[1][4] <= v_5[1];
+							jacobian_matrix[2][4] <= v_5[2];
+							jacobian_matrix[3][4] <= 27'b0 ;
+							jacobian_matrix[4][4] <= 27'b0;
+							jacobian_matrix[5][4] <= 27'b0;
+						end
+					end
+					4'd10: begin
+						if (joint_type[5] == 1'b1) begin//rotational
+							jacobian_matrix[0][5] <= i.result[0][0] - i.result[0][1];
+							jacobian_matrix[1][5] <= i.result[1][0] - i.result[1][1];
+							jacobian_matrix[2][5] <= i.result[2][0] - i.result[2][1];
+							jacobian_matrix[3][5] <= v_6[0];
+							jacobian_matrix[4][5] <= v_6[1];
+							jacobian_matrix[5][5] <= v_6[2];
+						end else if (joint_type[5] == 1'b0) begin//translational
+							jacobian_matrix[0][5] <= v_6[0];
+							jacobian_matrix[1][5] <= v_6[1];
+							jacobian_matrix[2][5] <= v_6[2];
+							jacobian_matrix[3][5] <= 27'b0 ;
+							jacobian_matrix[4][5] <= 27'b0;
+							jacobian_matrix[5][5] <= 27'b0;
+						end
+					end
+				endcase
 			end
 		endcase
 	end
