@@ -29,6 +29,7 @@ program sincos_tb (ifc_sincos.sincos_tb ds);
 
 		// passing data to design under test happens here
 		ds.cb.en <= 1'b1;
+		ds.cb.rst <= 1'b0;
 		ds.cb.angle <= int'(angle * 256.0);
 
 		@(ds.cb);
@@ -43,10 +44,14 @@ program sincos_tb (ifc_sincos.sincos_tb ds);
 		test = new();
 		env = new();
 
+		@(ds.cb);
+		ds.cb.rst <= 1'b1;
+		@(ds.cb);
+
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (19) begin
+			repeat (22) begin
 				@(ds.cb);
 			end
 			test.check_sincos (

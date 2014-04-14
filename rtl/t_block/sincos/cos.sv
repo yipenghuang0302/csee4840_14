@@ -4,7 +4,7 @@
  */
 
 module cos (
-	input logic clk, en,
+	input logic clk, en, rst,
 	input logic [26:0] angle,
 	output logic [26:0] cos
 );
@@ -18,11 +18,14 @@ module cos (
 
 	logic [26:0] new_angle;
 	// if (angle>3.14159265) angle-=6.28318531;
-	assign new_angle = plus_half_pi>27'd804 && plus_half_pi[26]==1'b0 ? plus_half_pi-27'd1608 : plus_half_pi; // also check for positivity
+	always_ff @(posedge clk) begin
+		new_angle <= plus_half_pi>27'd804 && plus_half_pi[26]==1'b0 ? plus_half_pi-27'd1608 : plus_half_pi; // also check for positivity
+	end
 
 	sin sin (
 		.clk ( clk ),
 		.en ( en ),
+		.rst ( rst ),
 		.angle ( new_angle ),
 		.sin ( cos )
 	);

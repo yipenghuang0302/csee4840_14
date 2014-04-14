@@ -36,7 +36,6 @@ module t_block (
 	assign i_theta.en = i.en;
 	sincos sincos_theta (i_theta.sincos);
 
-
 	logic [53:0] mult_01_result;
 	mult_27 mult_01 (
 		.clken ( i.en ),
