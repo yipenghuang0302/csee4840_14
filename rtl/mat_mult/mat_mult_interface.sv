@@ -7,12 +7,12 @@ interface ifc_mat_mult (
 	input logic clk
 );
 
-parameter n = 6;
+parameter n = 2;
 
 logic en, rst;
-logic [n*n-1:0] [26:0] dataa;
-logic [n*n-1:0] [26:0] datab;
-logic [n*n-1:0] [26:0] result;
+logic [n-1:0] [n-1:0] [26:0] dataa;
+logic [n-1:0] [n-1:0] [26:0] datab;
+logic [n-1:0] [n-1:0] [26:0] result;
 
 clocking cb @(posedge clk);
 	output en;
