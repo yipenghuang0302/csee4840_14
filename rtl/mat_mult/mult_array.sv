@@ -17,27 +17,29 @@ module mult_array (
 	result
 );
 
-	parameter n = 6;
+	parameter n = 2;
 
 	input clk, en;
-	input [n*n-1:0] [26:0] dataa;
-	input [n*n-1:0] [26:0] datab;
-	output [n*n-1:0] [26:0] result;
+	input [n-1:0] [n-1:0] [26:0] dataa;
+	input [n-1:0] [n-1:0] [26:0] datab;
+	output [n-1:0] [n-1:0] [26:0] result;
 
-	logic [n*n-1:0] [53:0] mult_result;
-	logic [n*n-1:0] [26:0] mult_round;
+	logic [n-1:0] [n-1:0] [53:0] mult_result;
+	logic [n-1:0] [n-1:0] [26:0] mult_round;
 
-	genvar i;
+	genvar i, j;
 	generate
-		for ( i=n*n-1 ; i>=0 ; i-- ) begin: mult_27_array
-			mult_27 mult_27_inst (
-				.clken(en),
-				.clock(clk),
-				.dataa(dataa[i]),
-				.datab(datab[i]),
-				.result(mult_result[i])
-			);
-			assign mult_round[i] = mult_result[i][7] ? mult_result[i][34:8] + 1'b1 : mult_result[i][34:8];
+		for ( i=n-1 ; i>=0 ; i-- ) begin: mult_27_row
+			for ( j=n-1 ; j>=0 ; j-- ) begin: mult_27_col
+				mult_27 mult_27_inst (
+					.clken(en),
+					.clock(clk),
+					.dataa(dataa[i][j]),
+					.datab(datab[i][j]),
+					.result(mult_result[i][j])
+				);
+				assign mult_round[i][j] = mult_result[i][j][7] ? mult_result[i][j][34:8] + 1'b1 : mult_result[i][j][34:8];
+			end
 		end
 	endgenerate
 
