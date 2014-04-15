@@ -9,6 +9,7 @@ class t_block_transaction;
 endclass
 
 class t_block_env;
+	int warmup = 30;
 	int max_transactions = 1000000;
 endclass
 
@@ -68,32 +69,15 @@ program t_block_tb (ifc_t_block.t_block_tb ds);
 		test = new();
 		env = new();
 
+		repeat (env.warmup) begin
+			do_cycle();
+		end
+
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (21) begin
-				@(ds.cb);
-			end
 			test.check_t_block (
-				ds.cb.t_matrix_00,
-				ds.cb.t_matrix_01,
-				ds.cb.t_matrix_02,
-				ds.cb.t_matrix_03,
-
-				ds.cb.t_matrix_10,
-				ds.cb.t_matrix_11,
-				ds.cb.t_matrix_12,
-				ds.cb.t_matrix_13,
-
-				ds.cb.t_matrix_20,
-				ds.cb.t_matrix_21,
-				ds.cb.t_matrix_22,
-				ds.cb.t_matrix_23,
-
-				ds.cb.t_matrix_30,
-				ds.cb.t_matrix_31,
-				ds.cb.t_matrix_32,
-				ds.cb.t_matrix_33
+				ds.cb.t_matrix
 			);
 		end
 	end

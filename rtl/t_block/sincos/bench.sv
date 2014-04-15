@@ -51,9 +51,6 @@ program sincos_tb (ifc_sincos.sincos_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (22) begin
-				@(ds.cb);
-			end
 			test.check_sincos (
 				ds.cb.sin,
 				ds.cb.cos
