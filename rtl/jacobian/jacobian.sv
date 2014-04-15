@@ -244,6 +244,9 @@ module jacobian (
 												p_5[2],p_5[1],p_5[0],p_5[2],p_5[1],p_5[0],
 												p_6[2],p_6[1],p_6[0],p_6[2],p_6[1],p_6[0]}
 					end
+					//TODO: Take this part out of this always_ff block, put it in a
+					//different always_ff block inside a generate block so we can do a for loop and avoid
+					//excess coding.
 					4'd9: begin
 						if (joint_type[0] == 1'b1) begin//rotational
 							jacobian_matrix[0][0] <= i.result[0][0] - i.result[0][1];
