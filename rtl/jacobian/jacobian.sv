@@ -28,6 +28,9 @@ module jacobian (
 	//Rotation block
 	logic [2:0] [2:0] [26:0] rot_block;	
 
+	//Matrix to hold results of multiplying rot_block components and z components
+	logic [2:0] [2:0] [26:0] mult_result_rot_z;
+
 	//Axis of rotation/translation for joints 1...6
 	logic [2:0] [26:0] v_1;
 	logic [2:0] [26:0] v_2;
@@ -45,7 +48,7 @@ module jacobian (
 	logic [2:0] [26:0] p_6;
 
 	//Used to transfer rotation block and z vector to matrix multiplier
-	logic [8:0] [26:0] mult_array_rot_block;
+	logic [5:0] [5:0] [26:0] mult_array_rot_block;
 	logic [2:0] [26:0] mult_array_z;
 	
 	//Deal with local count
@@ -75,9 +78,9 @@ module jacobian (
 	 rot_block[2][1] = i.t_matrix[2][1]
 	 rot_block[2][2] = i.t_matrix[2][2]
 
-	 mult_array_rot_block = {rot_block[0], 3{28'd0},
-													 rot_block[1], 3{28'd0},
-													 rot_block[2], 3{28'd0},
+	 mult_array_rot_block = {rot_block[0], 5{27'd0},
+													 rot_block[1], 5{27'd0},
+													 rot_block[2], 5{27'd0},
 													 6{28'd0},
 													 6{28'd0}, 
 													 6{28'd0}};
@@ -103,15 +106,29 @@ module jacobian (
 				p_1[2] <= i.t_matrix[2][3];
 				//get axis 
 				case(local_count)
+					//Do all multiplications
 					4'd0: begin
-						i.dataa <= mult_array_rot_block;
-						i.datab <= mult_array_z;
+						mult_result_rot_z[0][0] <= rot_block[0][0] * i.z[0];
+						mult_result_rot_z[0][1] <= rot_block[0][1] * i.z[1];
+						mult_result_rot_z[0][2] <= rot_block[0][2] * i.z[2];
+						mult_result_rot_z[1][0] <= rot_block[1][0] * i.z[0];
+						mult_result_rot_z[1][1] <= rot_block[1][1] * i.z[1];
+						mult_result_rot_z[1][2] <= rot_block[1][2] * i.z[2];
+						mult_result_rot_z[2][0] <= rot_block[2][0] * i.z[0];
+						mult_result_rot_z[2][1] <= rot_block[2][1] * i.z[1];
+						mult_result_rot_z[2][2] <= rot_block[2][2] * i.z[2];
 					end
-					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					//Do first addition
 					4'd3: begin
-						v_1[0] <= i.result[0][0];
-						v_1[1] <= i.result[1][0];
-						v_1[2] <= i.result[2][0];
+						v_1[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
+						v_1[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
+						v_1[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
+					end
+					//Do second addition
+					4'd4: begin
+						v_1[0] <= v_1[0] + mult_result_rot_z[0][2];
+						v_1[1] <= v_1[1] + mult_result_rot_z[1][2];
+						v_1[2] <= v_1[2] + mult_result_rot_z[2][2];
 					end
 				endcase
 			end
@@ -122,15 +139,29 @@ module jacobian (
 				p_2[2] <= i.t_matrix[2][3];
 				//get axis 
 				case(local_count)
+					//Do all multiplications
 					4'd0: begin
-						i.dataa <= mult_array_rot_block;
-						i.datab <= mult_array_z;
+						mult_result_rot_z[0][0] <= rot_block[0][0] * i.z[0];
+						mult_result_rot_z[0][1] <= rot_block[0][1] * i.z[1];
+						mult_result_rot_z[0][2] <= rot_block[0][2] * i.z[2];
+						mult_result_rot_z[1][0] <= rot_block[1][0] * i.z[0];
+						mult_result_rot_z[1][1] <= rot_block[1][1] * i.z[1];
+						mult_result_rot_z[1][2] <= rot_block[1][2] * i.z[2];
+						mult_result_rot_z[2][0] <= rot_block[2][0] * i.z[0];
+						mult_result_rot_z[2][1] <= rot_block[2][1] * i.z[1];
+						mult_result_rot_z[2][2] <= rot_block[2][2] * i.z[2];
 					end
-					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					//Do first addition
 					4'd3: begin
-						v_2[0] <= i.result[0][0];
-						v_2[1] <= i.result[1][0];
-						v_2[2] <= i.result[2][0];
+						v_2[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
+						v_2[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
+						v_2[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
+					end
+					//Do second addition
+					4'd4: begin
+						v_2[0] <= v_2[0] + mult_result_rot_z[0][2];
+						v_2[1] <= v_2[1] + mult_result_rot_z[1][2];
+						v_2[2] <= v_2[2] + mult_result_rot_z[2][2];
 					end
 				endcase
 			end
@@ -141,15 +172,29 @@ module jacobian (
 				p_3[2] <= i.t_matrix[2][3];
 				//get axis 
 				case(local_count)
+					//Do all multiplications
 					4'd0: begin
-						i.dataa <= mult_array_rot_block;
-						i.datab <= mult_array_z;
+						mult_result_rot_z[0][0] <= rot_block[0][0] * i.z[0];
+						mult_result_rot_z[0][1] <= rot_block[0][1] * i.z[1];
+						mult_result_rot_z[0][2] <= rot_block[0][2] * i.z[2];
+						mult_result_rot_z[1][0] <= rot_block[1][0] * i.z[0];
+						mult_result_rot_z[1][1] <= rot_block[1][1] * i.z[1];
+						mult_result_rot_z[1][2] <= rot_block[1][2] * i.z[2];
+						mult_result_rot_z[2][0] <= rot_block[2][0] * i.z[0];
+						mult_result_rot_z[2][1] <= rot_block[2][1] * i.z[1];
+						mult_result_rot_z[2][2] <= rot_block[2][2] * i.z[2];
 					end
-					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					//Do first addition
 					4'd3: begin
-						v_3[0] <= i.result[0][0];
-						v_3[1] <= i.result[1][0];
-						v_3[2] <= i.result[2][0];
+						v_3[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
+						v_3[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
+						v_3[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
+					end
+					//Do second addition
+					4'd4: begin
+						v_3[0] <= v_3[0] + mult_result_rot_z[0][2];
+						v_3[1] <= v_3[1] + mult_result_rot_z[1][2];
+						v_3[2] <= v_3[2] + mult_result_rot_z[2][2];
 					end
 				endcase
 			end
@@ -160,15 +205,29 @@ module jacobian (
 				p_4[2] <= i.t_matrix[2][3];
 				//get axis 
 				case(local_count)
+					//Do all multiplications
 					4'd0: begin
-						i.dataa <= mult_array_rot_block;
-						i.datab <= mult_array_z;
+						mult_result_rot_z[0][0] <= rot_block[0][0] * i.z[0];
+						mult_result_rot_z[0][1] <= rot_block[0][1] * i.z[1];
+						mult_result_rot_z[0][2] <= rot_block[0][2] * i.z[2];
+						mult_result_rot_z[1][0] <= rot_block[1][0] * i.z[0];
+						mult_result_rot_z[1][1] <= rot_block[1][1] * i.z[1];
+						mult_result_rot_z[1][2] <= rot_block[1][2] * i.z[2];
+						mult_result_rot_z[2][0] <= rot_block[2][0] * i.z[0];
+						mult_result_rot_z[2][1] <= rot_block[2][1] * i.z[1];
+						mult_result_rot_z[2][2] <= rot_block[2][2] * i.z[2];
 					end
-					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					//Do first addition
 					4'd3: begin
-						v_4[0] <= i.result[0][0];
-						v_4[1] <= i.result[1][0];
-						v_4[2] <= i.result[2][0];
+						v_4[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
+						v_4[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
+						v_4[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
+					end
+					//Do second addition
+					4'd4: begin
+						v_4[0] <= v_1[0] + mult_result_rot_z[0][2];
+						v_4[1] <= v_1[1] + mult_result_rot_z[1][2];
+						v_4[2] <= v_1[2] + mult_result_rot_z[2][2];
 					end
 				endcase
 			end
@@ -179,15 +238,29 @@ module jacobian (
 				p_5[2] <= i.t_matrix[2][3];
 				//get axis 
 				case(local_count)
+					//Do all multiplications
 					4'd0: begin
-						i.dataa <= mult_array_rot_block;
-						i.datab <= mult_array_z;
+						mult_result_rot_z[0][0] <= rot_block[0][0] * i.z[0];
+						mult_result_rot_z[0][1] <= rot_block[0][1] * i.z[1];
+						mult_result_rot_z[0][2] <= rot_block[0][2] * i.z[2];
+						mult_result_rot_z[1][0] <= rot_block[1][0] * i.z[0];
+						mult_result_rot_z[1][1] <= rot_block[1][1] * i.z[1];
+						mult_result_rot_z[1][2] <= rot_block[1][2] * i.z[2];
+						mult_result_rot_z[2][0] <= rot_block[2][0] * i.z[0];
+						mult_result_rot_z[2][1] <= rot_block[2][1] * i.z[1];
+						mult_result_rot_z[2][2] <= rot_block[2][2] * i.z[2];
 					end
-					//Should this be 5 cycles later b/c of 3 cycles for multiplication and 2 for accumulation?
+					//Do first addition
 					4'd3: begin
-						v_5[0] <= i.result[0][0];
-						v_5[1] <= i.result[1][0];
-						v_5[2] <= i.result[2][0];
+						v_5[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
+						v_5[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
+						v_5[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
+					end
+					//Do second addition
+					4'd4: begin
+						v_5[0] <= v_1[0] + mult_result_rot_z[0][2];
+						v_5[1] <= v_1[1] + mult_result_rot_z[1][2];
+						v_5[2] <= v_1[2] + mult_result_rot_z[2][2];
 					end
 				endcase
 			end
@@ -220,9 +293,9 @@ module jacobian (
 									p_6[2] <= i.s_2 - i.t_matrix[2][3];
 					end
 					//Then do all cross-multiplies in a pipeline
-					4'd2: begin
+					4'd1: begin
 						i.dataa <= {v_1[1],v_1[2],4{27'd0},v_1[2],v_1[0],4{27'd0},v_1[0],v_1[1]}
-						i.datab <= {p_1[2],p_1[1],4{27'd0},p_1[0],v_1[2],4{27'd0},p_1[1],p_1[0]}
+						i.datab <= {p_1[2],p_1[1],4{27'd0},p_1[0],p_1[2],4{27'd0},p_1[1],p_1[0]}
 					end
 					4'd3: begin
 						i.dataa <= {v_2[1],v_2[2],4{27'd0},v_2[2],v_2[0],4{27'd0},v_2[0],v_2[1]}

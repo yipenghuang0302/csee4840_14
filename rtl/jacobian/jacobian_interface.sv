@@ -14,10 +14,10 @@ logic [8:0] count;
 logic [2:0] joint;
 
 //Base joint's axis of rotation/translation
-logic [3:0] [26:0] z;
+logic [2:0] [26:0] z;
 
 //Current position of end effector
-logic [3:0] [26:0] s;
+logic [2:0] [26:0] s;
 
 //T block
 logic [3:0] [3:0] [26:0] t_matrix;
