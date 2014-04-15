@@ -7,12 +7,6 @@
  * Yipeng Huang
  * Lianne Lairmore
  *
- * 
- * 
- * 
- * 
- * 
- *
  * "make" to build
  * insmod ik_driver.ko
  *
@@ -45,20 +39,31 @@ struct joint_dev {
 	resource_size_t size;
 	void __iomem *virtbase; /* Where registers can be accessed in memory */
 	u8 joint_type; // ith bit is 1 if joint is rotational; 0 for translational
-	u16 target[3]; // Target position
+	u8 target[3]; // Target position
 	u16 dh_params[JOINT_DOF * 4] // Every joint has 4 parameters 
 } dev;
 
 /*
- * Write coordinates of the center of the ball 
- * Assumes coordinates are in range and the device information has been set up
+ * Write target position of the end effector and the bit vector for the joint types 
+ * Assumes target position is in range and the device information has been set up
  */
-static void write_coordinate(u16 x, u16 y)
+static void write_target(u8 target[3], u8 joint_t)
 {
-	iowrite16(x, dev.virtbase);
-	iowrite16(y, dev.virtbase+2);
-	dev.x = x;
-	dev.y = y;
+	for (int i = 0; i < 3; i++){
+		iowrite8(target[i], dev.virtbase+i);
+		dev.target[i] = target[i];
+	}
+	iowrite8(joint_t, dev.virtbase+3);
+	dev.joint_type = joint_t;
+}
+
+/*
+ * Write parameter for a given joint 
+ * Assumes joint and parameter is in range and the device information has been set up
+ */
+static void write_parameter(u8 joint, u8 parameter, u16 magnitude){
+	iowrite16(magnitude, dev.virtbase+4+(8 * joint-1)+(parameter*2));
+	dev.dh_params[(joint-1) * 4 + parameter] = magnitude;
 }
 
 /*
@@ -75,17 +80,27 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		if (copy_from_user(&vla, (ik_driver_arg_t *) arg,
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
-		if (vla.y > 640 || vla.x > 480 || vla.x < 0 || vla.y < 0)
+		if (vla.joint < -2 || vla.joint > MAX_JOINT || 
+				(vla.joint == -1 && /*Check that all target values are in acceptable range */) ||
+				(vla.joint != -1 && 
+				 ((vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_DISTANCE) ||
+					(/* Check that magnitude is in acceptable range*/))))
 			return -EINVAL;
-		write_coordinate(vla.x, vla.y);
+		if (vla.joint == -1)
+			write_target(vla.target, vla.joint_type);
+		else
+			write_parameter(vla.joint, vla.parameter, vla.magnitude);
 		break;
 
-	case VGA_BALL_READ_COORD:
+	case IK_DRIVER_READ_PARAM:
 		if (copy_from_user(&vla, (ik_driver_arg_t *) arg,
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
-		vla.x = dev.x;
-		vla.y = dev.y;
+		if (vla.joint < -2 || vla.joint > MAX_JOINT || 
+				(vla.joint != -1 && 
+				 (vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_DISTANCE))) 
+			return -EINVAL;
+		vla.magnitude = dev.dh_params[(vla.joint-1)*4 + vla.parameter];
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))
 			return -EACCES;
@@ -203,5 +218,5 @@ module_init(ik_driver_init);
 module_exit(ik_driver_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Richard Townsend, Yipeng Huang");
-MODULE_DESCRIPTION("VGA Ball Emulator");
+MODULE_AUTHOR("Richard Townsend, Yipeng Huang, Lianne Lairmore");
+MODULE_DESCRIPTION("IK Swift Interface");

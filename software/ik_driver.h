@@ -3,6 +3,9 @@
 
 #include <linux/ioctl.h>
 
+//How many joints we have
+#define MAX_JOINT 6
+
 /* Directions the ball can go */
 #define THETA 0
 #define L_OFFSET 1
@@ -10,8 +13,8 @@
 #define ALPHA 3
 
 typedef struct {
+	unsigned char joint; /* Indicate which joint we're getting/setting; -1 indicates that we're setting the target */
 	unsigned char target[3]; /* (x,y,z) coordinates of target position */
-	unsigned char joint; /* Indicate which joint we're getting/setting */
 	unsigned char joint_type; /* The ith bit is 1 if ith joint is rotational; translational otherwise */
 	unsigned char parameter; /* Which DH param we're getting/setting */
 	unsigned short magnitude; 
