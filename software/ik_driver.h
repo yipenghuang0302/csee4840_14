@@ -6,6 +6,9 @@
 //How many joints we have
 #define MAX_JOINT 6
 
+//PI
+#define M_PI 3.14159265358979323846264338327
+
 /* Directions the ball can go */
 #define THETA 0
 #define L_OFFSET 1

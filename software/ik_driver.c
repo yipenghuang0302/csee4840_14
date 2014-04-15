@@ -49,6 +49,7 @@ struct joint_dev {
  */
 static void write_target(u8 target[3], u8 joint_t)
 {
+	//TODO: Convert target values to fixed-point
 	for (int i = 0; i < 3; i++){
 		iowrite8(target[i], dev.virtbase+i);
 		dev.target[i] = target[i];
@@ -62,6 +63,7 @@ static void write_target(u8 target[3], u8 joint_t)
  * Assumes joint and parameter is in range and the device information has been set up
  */
 static void write_parameter(u8 joint, u8 parameter, u16 magnitude){
+	//TODO: Convert magnitude to fixed-point
 	iowrite16(magnitude, dev.virtbase+4+(8 * joint-1)+(parameter*2));
 	dev.dh_params[(joint-1) * 4 + parameter] = magnitude;
 }
@@ -80,11 +82,15 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		if (copy_from_user(&vla, (ik_driver_arg_t *) arg,
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
-		if (vla.joint < -2 || vla.joint > MAX_JOINT || 
-				(vla.joint == -1 && /*Check that all target values are in acceptable range */) ||
-				(vla.joint != -1 && 
-				 ((vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_DISTANCE) ||
-					(/* Check that magnitude is in acceptable range*/))))
+		if (vla.joint < -2 || vla.joint > MAX_JOINT) 
+			return -EINVAL;
+		if (vla.joint == -1 && ((vla.target[0] < -64 || vla.target[0] > 64) ||
+												   (vla.target[1] < -64 || vla.target[1] > 64) ||
+													 (vla.target[2] < -64 || vla.target[2] > 64)))
+			return -EINVAL;
+		if (vla.joint != -1 && vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_DISTANCE)
+			return -EINVAL;
+		if (vla.joint != -1 && (vla.magnitude > M_PI/2 || vla.magnitude < -M_PI/2))
 			return -EINVAL;
 		if (vla.joint == -1)
 			write_target(vla.target, vla.joint_type);
@@ -100,6 +106,7 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 				(vla.joint != -1 && 
 				 (vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_DISTANCE))) 
 			return -EINVAL;
+		//TODO: Convert from fixed-point to floating point
 		vla.magnitude = dev.dh_params[(vla.joint-1)*4 + vla.parameter];
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))
