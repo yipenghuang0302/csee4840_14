@@ -3,11 +3,11 @@
  * Columbia University
  */
 
-//`include "../sim_models/lpm_mult.v"
-//`include "../sim_models/mult_block.v"
-//`include "../sim_models/addsub_block.v"
-//`include "../sim_models/pipeline_internal_fv.v"
-//`include "../sim_models/dffep.v"
+`include "../sim_models/lpm_mult.v"
+`include "../sim_models/mult_block.v"
+`include "../sim_models/addsub_block.v"
+`include "../sim_models/pipeline_internal_fv.v"
+`include "../sim_models/dffep.v"
 `include "../mult_27/mult_27.v"
 
 module mult_array (
@@ -38,7 +38,9 @@ module mult_array (
 					.datab(datab[i][j]),
 					.result(mult_result[i][j])
 				);
-				assign mult_round[i][j] = mult_result[i][j][7] ? mult_result[i][j][34:8] + 1'b1 : mult_result[i][j][34:8];
+				always_ff @(posedge clk) begin
+					mult_round[i][j] <= mult_result[i][j][7] ? mult_result[i][j][34:8] + 1'b1 : mult_result[i][j][34:8];
+				end
 			end
 		end
 	endgenerate

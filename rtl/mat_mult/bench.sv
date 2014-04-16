@@ -2,6 +2,7 @@
 `include "mat_mult_test.sv"
 
 class mat_mult_transaction;
+	bit mat_mode = 1'b1;
 	rand logic [2][2][30:0] increment_a;
 	rand logic [2][2][30:0] increment_b;
 endclass
@@ -49,9 +50,11 @@ program mat_mult_tb (ifc_mat_mult.mat_mult_tb ds);
 
 		ds.cb.en <= 1'b1;
 		ds.cb.rst <= 1'b0;
+		ds.cb.mat_mode <= trans.mat_mode;
 
 		@(ds.cb);
 		test.update_mat_mult (
+			trans.mat_mode,
 			dataa, datab
 		);
 
@@ -62,14 +65,19 @@ program mat_mult_tb (ifc_mat_mult.mat_mult_tb ds);
 		test = new();
 		env = new();
 
+		@(ds.cb);
+		ds.cb.rst <= 1'b1;
+		@(ds.cb);
+
 		// testing
 		repeat (env.max_transactions) begin
-			@(ds.cb);
-			ds.cb.rst <= 1'b1;
-			@(ds.cb);
 			do_cycle();
-			repeat (9) begin
+			if (trans.mat_mode) begin
 				@(ds.cb);
+				// @(ds.cb);
+				// @(ds.cb);
+				// @(ds.cb);
+				// @(ds.cb);
 			end
 			test.check_mat_mult (
 				ds.cb.result

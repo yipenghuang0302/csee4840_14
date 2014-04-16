@@ -88,8 +88,8 @@ class t_block_test;
 				passed = error[i][j] <= abs_tol || percent[i][j] <= rel_tol;
 
 				if (passed) begin
-					// $write("%t : pass t_block i=%d j=%d\n", $realtime, i, j);
-					// $write("m_mat[0][i][j]=%f; dut_mat[i][j]=%f; mat_error[i][j]=%f.\n", m_mat[0][i][j], real_t_mat[i][j], error[i][j]);
+					$write("%t : pass t_block i=%d j=%d\n", $realtime, i, j);
+					$write("m_mat[0][i][j]=%f; dut_mat[i][j]=%f; mat_error[i][j]=%f.\n", m_mat[0][i][j], real_t_mat[i][j], error[i][j]);
 				end else begin
 					$write("%t : fail t_block i=%d j=%d\n", $realtime, i, j);
 					$write("m_a=%f\n", m_a[0]);
