@@ -2,9 +2,9 @@
 `include "mat_mult_test.sv"
 
 class mat_mult_transaction;
-	bit mat_mode = 1'b1;
-	rand logic [2][2][30:0] increment_a;
-	rand logic [2][2][30:0] increment_b;
+	bit mat_mode = 1'b0;
+	rand logic [6][6][30:0] increment_a;
+	rand logic [6][6][30:0] increment_b;
 endclass
 
 class mat_mult_env;
@@ -13,13 +13,13 @@ endclass
 
 program mat_mult_tb (ifc_mat_mult.mat_mult_tb ds);
 
-	int n = 2;
+	int n = 6;
 
-	real fraction_a[2][2];
-	real fraction_b[2][2];
+	real fraction_a[6][6];
+	real fraction_b[6][6];
 
-	real dataa[2][2];
-	real datab[2][2];
+	real dataa[6][6];
+	real datab[6][6];
 
 	mat_mult_transaction trans;
 	mat_mult_env env;
@@ -74,10 +74,10 @@ program mat_mult_tb (ifc_mat_mult.mat_mult_tb ds);
 			do_cycle();
 			if (trans.mat_mode) begin
 				@(ds.cb);
-				// @(ds.cb);
-				// @(ds.cb);
-				// @(ds.cb);
-				// @(ds.cb);
+				@(ds.cb);
+				@(ds.cb);
+				@(ds.cb);
+				@(ds.cb);
 			end
 			test.check_mat_mult (
 				ds.cb.result

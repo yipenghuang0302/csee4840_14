@@ -3,11 +3,11 @@
  * Columbia University
  */
 
-//`include "../sim_models/lpm_mult.v"
-//`include "../sim_models/mult_block.v"
-//`include "../sim_models/addsub_block.v"
-//`include "../sim_models/pipeline_internal_fv.v"
-//`include "../sim_models/dffep.v"
+`include "../sim_models/lpm_mult.v"
+`include "../sim_models/mult_block.v"
+`include "../sim_models/addsub_block.v"
+`include "../sim_models/pipeline_internal_fv.v"
+`include "../sim_models/dffep.v"
 `include "../mult_27/mult_27.v"
 
 module mult_array (
@@ -17,7 +17,7 @@ module mult_array (
 	result
 );
 
-	parameter n = 2;
+	parameter n = 6;
 
 	input clk, en;
 	input [n-1:0] [n-1:0] [26:0] dataa;

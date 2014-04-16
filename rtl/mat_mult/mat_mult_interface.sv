@@ -7,24 +7,24 @@ interface ifc_mat_mult (
 	input logic clk
 );
 
-parameter n = 2;
+parameter n = 6;
 
 logic en, rst, mat_mode;
 logic [n-1:0] [n-1:0] [26:0] dataa;
 logic [n-1:0] [n-1:0] [26:0] datab;
 logic [n-1:0] [n-1:0] [26:0] result;
 
-//clocking cb @(posedge clk);
-//	output en;
-//	output rst;
-//	output mat_mode;
-//	output dataa;
-//	output datab;
-//
-//	input result;
-//endclocking
-//
-//modport mat_mult_tb (clocking cb);
+clocking cb @(posedge clk);
+	output en;
+	output rst;
+	output mat_mode;
+	output dataa;
+	output datab;
+
+	input result;
+endclocking
+
+modport mat_mult_tb (clocking cb);
 
 // restrict directions
 modport mat_mult (
