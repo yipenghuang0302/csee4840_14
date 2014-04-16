@@ -1,15 +1,15 @@
 // golden model class
 class mat_mult_test;
 
-	int n = 2;
+	int n = 6;
 
 	// if testing in parallel multiplier mode
-	// int pipeline_depth = 7;
-	// real model_result[7][2][2];
+	int pipeline_depth = 7;
+	real model_result[7][6][6];
 
 	// if testing in matrix multiplier mode
-	int pipeline_depth = 4;
-	real model_result[4][2][2];
+	// int pipeline_depth = 2;
+	// real model_result[2][6][6];
 
 	function real abs (real num); 
 	   abs = (num<0) ? -num : num; 
@@ -17,8 +17,8 @@ class mat_mult_test;
 
 	function void update_mat_mult (
 		bit mat_mode,
-		real dataa[2][2],
-		real datab[2][2]
+		real dataa[6][6],
+		real datab[6][6]
 	);
 
 		for ( int i=0 ; i<pipeline_depth-1 ; i++ ) begin // advance the pipeline
@@ -41,14 +41,14 @@ class mat_mult_test;
 	endfunction
 
 	function void check_mat_mult (
-		logic [1:0] [1:0] [26:0] dut_result
+		logic [5:0] [5:0] [26:0] dut_result
 	);
 
 		real abs_tol = 0.50;
 		real rel_tol = 0.03;
-		real real_result[2][2];
-		real error[2][2];
-		real percent[2][2];
+		real real_result[6][6];
+		real error[6][6];
+		real percent[6][6];
 		bit passed = 1'b1;
 
 		for (int i=0; i<n; i++) begin // product row
