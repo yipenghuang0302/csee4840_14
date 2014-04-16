@@ -7,6 +7,8 @@ interface ifc_jacobian (
 	input logic clk
 );
 
+parameter MAX = 6;
+
 //Global clock cycle counter
 logic [8:0] count;
 
@@ -31,6 +33,20 @@ logic [5:0] [5:0] [26:0] datab;
 
 //Input from multipliers
 logic [5:0] [5:0] [26:0] result;
+
+clocking cb @(posedge clk);
+	output en;
+	output z;
+	output s;
+	output t_matrix;
+	output result;
+
+	input jacobian_matrix;
+	input dataa;
+	input datab;
+endclocking
+
+modport jacobian_tb (clocking cb);
 
 // restrict directions
 modport jacobian (

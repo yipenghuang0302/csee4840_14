@@ -22,7 +22,6 @@ module jacobian (
 	ifc_jacobian.jacobian i
 );
 
-	parameter MAX = 6;
 
 	//used for synchronization
 	logic [3:0] local_count;
@@ -55,7 +54,9 @@ module jacobian (
 	
 	//Deal with local count
 	always_ff @(posedge i.clk) begin
-		if ( i.count == 9'd44 || i.count == 9'd64 || i.count == 9'd84 || i.count == 9'd104 || i.count == 9'd124 || i.count == 9'd144 ) begin
+		//Reset our clock whenever we get to start using multipliers for the next joint
+		if ( i.count == 9'd34 || i.count == 9'd40 || i.count == 9'd46 ||
+				 i.count == 9'd52 || i.count == 9'd58 || i.count == 9'd64 ) begin
 			local_count <= 0;
 		end else begin
 			if ( local_count==4'd15 ) begin
@@ -93,7 +94,7 @@ module jacobian (
 			mult_result_rot_z[2][0] <= rot_block[2][0] * i.z[0];
 			mult_result_rot_z[2][1] <= rot_block[2][1] * i.z[1];
 			mult_result_rot_z[2][2] <= rot_block[2][2] * i.z[2];
-		end else if (local_count == 4'd3) begin
+		end else if (local_count == 4'd4) begin
 			case(joint)
 				3'd0: begin
 					v_1[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
@@ -126,7 +127,7 @@ module jacobian (
 					v_6[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
 				end
 			endcase
-		end else if (local_count == 4'd4) begin
+		end else if (local_count == 4'd5) begin
 			case(joint)
 				3'd0: begin
 					v_1[0] <= v_1[0] + mult_result_rot_z[0][2];
@@ -196,7 +197,7 @@ module jacobian (
 				p_5[2] <= i.t_matrix[2][3];
 			end
 			3'd5: begin
-				if (local_count == 4'd5) begin
+				if (local_count == 4'd6) begin
 					//Do all subtractions at once
 					p_1[0] <= i.s_0 - p_1[0];
 					p_1[1] <= i.s_1 - p_1[1];
@@ -228,7 +229,7 @@ module jacobian (
 
 	//LOGIC GOVERNING dataa/datab (multiplications for cross-products)
 	always_ff @(posedge i.clk) begin
-		if (local_count == 4'd6) begin
+		if (local_count == 4'd7) begin
 			i.dataa <= {v_1[1],v_1[2],v_1[2],v_1[0],v_1[0],v_1[1],
 									v_2[1],v_2[2],v_2[2],v_2[0],v_2[0],v_2[1],
 									v_3[1],v_3[2],v_3[2],v_3[0],v_3[0],v_3[1],
@@ -251,7 +252,7 @@ module jacobian (
 		for ( column=0 ; column<MAX ; column++ ) begin: jacobian_col
 			for ( row=0 ; row<MAX ; row++ ) begin: jacobian_row
 				always_ff @(posedge i.clk) begin
-					if ( local_count != 4'd9 ) begin
+					if ( local_count <= 4'd13 ) begin
 						//Not ready to calculate Jacobian yet
 						i.result[row][column] <= 27'b0;
 					end else begin
