@@ -1,6 +1,11 @@
 `timescale 1ns/1ps
 `include "full_mat_test.sv"
 
+parameter THETA = 0;
+parameter L_OFFSET = 1;
+parameter L_DISTANCE = 2;
+parameter ALPHA = 3;
+
 class full_mat_transaction;
 	rand logic [6][4][30:0] dh_increment;
 	real dh_fraction [6][4];
@@ -12,11 +17,6 @@ class full_mat_env;
 endclass
 
 program full_mat_tb (ifc_full_mat.full_mat_tb ds);
-
-	parameter THETA = 0;
-	parameter L_OFFSET = 1;
-	parameter L_DISTANCE = 2;
-	parameter ALPHA = 3;
 
 	full_mat_transaction trans;
 	full_mat_env env;
@@ -73,8 +73,9 @@ program full_mat_tb (ifc_full_mat.full_mat_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
+			repeat (89) @(ds.cb);
 			test.check_full_mat (
-				ds.cb.full_mat
+				ds.cb.full_matrix
 			);
 		end
 	end

@@ -3,21 +3,21 @@
  * Columbia University
  */
 
-`include "../sim_models/lpm_mult.v"
-`include "../sim_models/mult_block.v"
-`include "../sim_models/addsub_block.v"
-`include "../sim_models/pipeline_internal_fv.v"
-`include "../sim_models/dffep.v"
+// `include "../sim_models/lpm_mult.v"
+// `include "../sim_models/mult_block.v"
+// `include "../sim_models/addsub_block.v"
+// `include "../sim_models/pipeline_internal_fv.v"
+// `include "../sim_models/dffep.v"
 
-`include "sincos/sincos_interface.sv"
-`include "sincos/sincos.sv"
-`include "sincos/sin.sv"
-`include "sincos/cos.sv"
+// `include "sincos/sincos_interface.sv"
+// `include "sincos/sincos.sv"
+// `include "sincos/sin.sv"
+// `include "sincos/cos.sv"
 
-`include "../mult_27/mult_27.v"
-`include "sincos/mult_27_coeff_104/mult_27_coeff_104.v"
-`include "sincos/mult_27_coeff_326/mult_27_coeff_326.v"
-`include "sincos/mult_27_coeff_58/mult_27_coeff_58.v"
+// `include "../mult_27/mult_27.v"
+// `include "sincos/mult_27_coeff_104/mult_27_coeff_104.v"
+// `include "sincos/mult_27_coeff_326/mult_27_coeff_326.v"
+// `include "sincos/mult_27_coeff_58/mult_27_coeff_58.v"
 
 module t_block (
 	ifc_t_block.t_block i

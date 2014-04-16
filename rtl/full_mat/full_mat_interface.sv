@@ -9,7 +9,7 @@ interface ifc_full_mat (
 
 logic en, rst;
 logic [5:0] [3:0] [26:0] dh_param;
-logic [3:0] [3:0] [26:0] full_mat;
+logic [3:0] [3:0] [26:0] full_matrix;
 
 
 clocking cb @(posedge clk);
@@ -17,7 +17,7 @@ clocking cb @(posedge clk);
 	output rst;
 	output dh_param;
 
-	input full_mat;
+	input full_matrix;
 endclocking
 
 modport full_mat_tb (clocking cb);
@@ -29,7 +29,7 @@ modport full_mat (
 	input rst,
 	input dh_param,
 
-	output full_mat
+	output full_matrix
 );
 
 endinterface

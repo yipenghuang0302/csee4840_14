@@ -3,109 +3,209 @@
  * Columbia University
  */
 
-`include "mult_array.sv"
+`include "../mat_mult/mat_mult_interface.sv"
+`include "../mat_mult/mat_mult.sv"
+`include "../mat_mult/mult_array.sv"
+
+`include "../t_block/t_block_interface.sv"
+`include "../t_block/t_block.sv"
+
+`include "../t_block/sincos/sincos_interface.sv"
+`include "../t_block/sincos/sincos.sv"
+`include "../t_block/sincos/sin.sv"
+`include "../t_block/sincos/cos.sv"
+`include "../t_block/sincos/mult_27_coeff_104/mult_27_coeff_104.v"
+`include "../t_block/sincos/mult_27_coeff_326/mult_27_coeff_326.v"
+`include "../t_block/sincos/mult_27_coeff_58/mult_27_coeff_58.v"
+
 
 module full_mat (
 	ifc_full_mat.full_mat i
 );
 
-	parameter n = 6;
+	parameter THETA = 0;
+	parameter L_OFFSET = 1;
+	parameter L_DISTANCE = 2;
+	parameter ALPHA = 3;
+	parameter MAX = 88;
 
-	logic [n-1:0] [n-1:0] [26:0] mult_array_dataa;
-	logic [n-1:0] [n-1:0] [26:0] mult_array_datab;
-	logic [n-1:0] [n-1:0] [26:0] mult_array_result;
+	// each transformation matrix
+	logic [5:0] [3:0] [3:0] [26:0] t_matrix_array;
 
-	mult_array #(n) mult_array (
-		.clk(i.clk),
-		.en(i.en),
-		.dataa(mult_array_dataa),
-		.datab(mult_array_datab),
-		.result(mult_array_result)
-	);
+	// multiplied results of transformation matrices
+	logic [5:0] [3:0] [3:0] [26:0] t_matrix_mult;
+
+	// instantiate t_block
+	ifc_t_block ifc_t_block (i.clk);
+	assign ifc_t_block.en = i.en;
+	t_block t_block (ifc_t_block.t_block);
+
+	// instantiate t_block
+	ifc_mat_mult ifc_mat_mult (i.clk);
+	assign ifc_mat_mult.en = i.en;
+	assign ifc_mat_mult.rst = i.rst;
+	assign ifc_mat_mult.mat_mode = 1'b1;
+	mat_mult mat_mult (ifc_mat_mult.mat_mult);
 
 	// LOGIC GOVERNING COUNT
-	logic [3:0] count;
+	logic [6:0] count;
 	always_ff @(posedge i.clk) begin
-		if ( i.rst || !i.mat_mode ) begin // if parallel multiplier mode, clear counter
-			count <= 0;
-		end else if ( i.en && i.mat_mode ) begin
-			if ( count==n-1'b1 ) begin
-				count <= 0;
+		if ( i.rst ) begin // if parallel multiplier mode, clear counter
+			count <= 6'b0;
+		end else if ( i.en ) begin
+			if ( count==MAX-1'b1 ) begin
+				count <= 6'b0;
 			end else begin
 				count <= count + 1'b1;
 			end
 		end
 	end
 
-	// LOGIC GOVERNING MULT_ARRAY_DATAA/B
+	// LOGIC GOVERNING T_BLOCK INPUTS
 	always_ff @(posedge i.clk) begin
-		case(i.mat_mode)
-			1'b0: begin // parallel multiplier mode
-				mult_array_dataa <= i.dataa;
-				mult_array_datab <= i.datab;
+		if ( 7'd0 <= count && count < 7'd6 ) begin
+			ifc_t_block.a <= i.dh_param[count][L_OFFSET];
+			ifc_t_block.d <= i.dh_param[count][L_DISTANCE];
+			ifc_t_block.alpha <= i.dh_param[count][ALPHA];
+			ifc_t_block.theta <= i.dh_param[count][THETA];
+		end else begin
+			ifc_t_block.a <= 27'b0;
+			ifc_t_block.d <= 27'b0;
+			ifc_t_block.alpha <= 27'b0;
+			ifc_t_block.theta <= 27'b0;
+		end
+	end
+
+	// LOGIC GOVERNING T_BLOCK OUTPUTS
+	always_ff @(posedge i.clk) begin
+		if ( 7'd26 <= count && count < 7'd32 ) begin
+			t_matrix_array[count-7'd26] <= ifc_t_block.t_matrix;
+		end else begin
+			// do nothing
+		end
+	end
+
+	// LOGIC GOVERNING MAT_MULT INPUTS
+	always_ff @(posedge i.clk) begin
+		case(count)
+			7'd27: begin // t_02
+				ifc_mat_mult.dataa <=
+				{
+					{6{27'b0}},
+					{27'b0,t_matrix_array[0][3],27'b0},
+					{27'b0,t_matrix_array[0][2],27'b0},
+					{27'b0,t_matrix_array[0][1],27'b0},
+					{27'b0,t_matrix_array[0][0],27'b0},
+					{6{27'b0}}
+				};
+				ifc_mat_mult.datab <= // FAST FORWARD
+				{
+					{6{27'b0}},
+					{27'b0,ifc_t_block.t_matrix[3],27'b0},
+					{27'b0,ifc_t_block.t_matrix[2],27'b0},
+					{27'b0,ifc_t_block.t_matrix[1],27'b0},
+					{27'b0,ifc_t_block.t_matrix[0],27'b0},
+					{6{27'b0}}
+				};
 			end
-			1'b1: begin // matrix multiplier mode
-				case(count)
-					4'd0: begin
-						mult_array_dataa <= {{6{i.dataa[5][5]}}, {6{i.dataa[4][5]}}, {6{i.dataa[3][5]}}, {6{i.dataa[2][5]}}, {6{i.dataa[1][5]}}, {6{i.dataa[0][5]}}};
-						mult_array_datab <= {6{i.datab[5][5], i.datab[5][4], i.datab[5][3], i.datab[5][2], i.datab[5][1], i.datab[5][0]}};
-					end
-					4'd1: begin
-						mult_array_dataa <= {{6{i.dataa[5][4]}}, {6{i.dataa[4][4]}}, {6{i.dataa[3][4]}}, {6{i.dataa[2][4]}}, {6{i.dataa[1][4]}}, {6{i.dataa[0][4]}}};
-						mult_array_datab <= {6{i.datab[4][5], i.datab[4][4], i.datab[4][3], i.datab[4][2], i.datab[4][1], i.datab[4][0]}};
-					end
-					4'd2: begin
-						mult_array_dataa <= {{6{i.dataa[5][3]}}, {6{i.dataa[4][3]}}, {6{i.dataa[3][3]}}, {6{i.dataa[2][3]}}, {6{i.dataa[1][3]}}, {6{i.dataa[0][3]}}};
-						mult_array_datab <= {6{i.datab[3][5], i.datab[3][4], i.datab[3][3], i.datab[3][2], i.datab[3][1], i.datab[3][0]}};
-					end
-					4'd3: begin
-						mult_array_dataa <= {{6{i.dataa[5][2]}}, {6{i.dataa[4][2]}}, {6{i.dataa[3][2]}}, {6{i.dataa[2][2]}}, {6{i.dataa[1][2]}}, {6{i.dataa[0][2]}}};
-						mult_array_datab <= {6{i.datab[2][5], i.datab[2][4], i.datab[2][3], i.datab[2][2], i.datab[2][1], i.datab[2][0]}};
-					end
-					4'd4: begin
-						mult_array_dataa <= {{6{i.dataa[5][1]}}, {6{i.dataa[4][1]}}, {6{i.dataa[3][1]}}, {6{i.dataa[2][1]}}, {6{i.dataa[1][1]}}, {6{i.dataa[0][1]}}};
-						mult_array_datab <= {6{i.datab[1][5], i.datab[1][4], i.datab[1][3], i.datab[1][2], i.datab[1][1], i.datab[1][0]}};
-					end
-					4'd5: begin
-						mult_array_dataa <= {{6{i.dataa[5][0]}}, {6{i.dataa[4][0]}}, {6{i.dataa[3][0]}}, {6{i.dataa[2][0]}}, {6{i.dataa[1][0]}}, {6{i.dataa[0][0]}}};
-						mult_array_datab <= {6{i.datab[0][5], i.datab[0][4], i.datab[0][3], i.datab[0][2], i.datab[0][1], i.datab[0][0]}};
-					end
-					default: begin
-						mult_array_dataa <= {36{27'b0}};
-						mult_array_datab <= {36{27'b0}};
-					end
-				endcase
+			7'd39: begin // t_03
+				ifc_mat_mult.dataa <= ifc_mat_mult.result;
+				ifc_mat_mult.datab <=
+				{
+					{6{27'b0}},
+					{27'b0,t_matrix_array[2][3],27'b0},
+					{27'b0,t_matrix_array[2][2],27'b0},
+					{27'b0,t_matrix_array[2][1],27'b0},
+					{27'b0,t_matrix_array[2][0],27'b0},
+					{6{27'b0}}
+				};
+			end
+			7'd51: begin // t_04
+				ifc_mat_mult.dataa <= ifc_mat_mult.result;
+				ifc_mat_mult.datab <=
+				{
+					{6{27'b0}},
+					{27'b0,t_matrix_array[3][3],27'b0},
+					{27'b0,t_matrix_array[3][2],27'b0},
+					{27'b0,t_matrix_array[3][1],27'b0},
+					{27'b0,t_matrix_array[3][0],27'b0},
+					{6{27'b0}}
+				};
+			end
+			7'd63: begin // t_05
+				ifc_mat_mult.dataa <= ifc_mat_mult.result;
+				ifc_mat_mult.datab <=
+				{
+					{6{27'b0}},
+					{27'b0,t_matrix_array[4][3],27'b0},
+					{27'b0,t_matrix_array[4][2],27'b0},
+					{27'b0,t_matrix_array[4][1],27'b0},
+					{27'b0,t_matrix_array[4][0],27'b0},
+					{6{27'b0}}
+				};
+			end
+			7'd75: begin // t_06
+				ifc_mat_mult.dataa <= ifc_mat_mult.result;
+				ifc_mat_mult.datab <=
+				{
+					{6{27'b0}},
+					{27'b0,t_matrix_array[5][3],27'b0},
+					{27'b0,t_matrix_array[5][2],27'b0},
+					{27'b0,t_matrix_array[5][1],27'b0},
+					{27'b0,t_matrix_array[5][0],27'b0},
+					{6{27'b0}}
+				};
 			end
 			default: begin
-				mult_array_dataa <= {36{27'b0}};
-				mult_array_datab <= {36{27'b0}};
+				ifc_mat_mult.dataa <= {36{27'b0}};
+				ifc_mat_mult.datab <= {36{27'b0}};
 			end
 		endcase
 	end
 
-	// LOGIC GOVERNING RESULT
-	genvar index, jndex;
-	generate
-		for ( index=n-1 ; index>=0 ; index-- ) begin: adder_row
-			for ( jndex=n-1 ; jndex>=0 ; jndex-- ) begin: adder_col
-				always_ff @(posedge i.clk) begin
-					if ( i.rst ) begin
-						i.result[index][jndex] <= 27'b0;
-					end else begin
-						if ( i.mat_mode ) begin // matrix multiplier mode
-							if ( i.en && (count==4'd5) ) begin
-								i.result[index][jndex] <= mult_array_result[index][jndex];
-							end
-							if ( i.en && (count==4'd0 || count==4'd1 || count==4'd2 || count==4'd3 || count==4'd4) ) begin
-								i.result[index][jndex] <= i.result[index][jndex] + mult_array_result[index][jndex]; // accumulate
-							end
-						end else begin // parallel multiplier mode
-							i.result[index][jndex] <= mult_array_result[index][jndex];
-						end // end parallel multiplier mode
-					end // end not reset
-				end // end always_ff
-			end // end col loop
-		end // end row loop
-	endgenerate
+	// LOGIC GOVERNING MAT_MULT OUTPUTS
+	always_ff @(posedge i.clk) begin
+		case(count)
+			7'd26: begin // t_01
+				t_matrix_mult[0] <= ifc_t_block.t_matrix;
+			end
+			7'd39: begin // t_02
+				t_matrix_mult[1][3] <= ifc_mat_mult.result[4][4:1];
+				t_matrix_mult[1][2] <= ifc_mat_mult.result[3][4:1];
+				t_matrix_mult[1][1] <= ifc_mat_mult.result[2][4:1];
+				t_matrix_mult[1][0] <= ifc_mat_mult.result[1][4:1];
+			end
+			7'd51: begin // t_03
+				t_matrix_mult[2][3] <= ifc_mat_mult.result[4][4:1];
+				t_matrix_mult[2][2] <= ifc_mat_mult.result[3][4:1];
+				t_matrix_mult[2][1] <= ifc_mat_mult.result[2][4:1];
+				t_matrix_mult[2][0] <= ifc_mat_mult.result[1][4:1];
+			end
+			7'd63: begin // t_04
+				t_matrix_mult[3][3] <= ifc_mat_mult.result[4][4:1];
+				t_matrix_mult[3][2] <= ifc_mat_mult.result[3][4:1];
+				t_matrix_mult[3][1] <= ifc_mat_mult.result[2][4:1];
+				t_matrix_mult[3][0] <= ifc_mat_mult.result[1][4:1];
+			end
+			7'd75: begin // t_05
+				t_matrix_mult[4][3] <= ifc_mat_mult.result[4][4:1];
+				t_matrix_mult[4][2] <= ifc_mat_mult.result[3][4:1];
+				t_matrix_mult[4][1] <= ifc_mat_mult.result[2][4:1];
+				t_matrix_mult[4][0] <= ifc_mat_mult.result[1][4:1];
+			end
+			7'd87: begin // t_06
+				t_matrix_mult[5][3] <= ifc_mat_mult.result[4][4:1];
+				t_matrix_mult[5][2] <= ifc_mat_mult.result[3][4:1];
+				t_matrix_mult[5][1] <= ifc_mat_mult.result[2][4:1];
+				t_matrix_mult[5][0] <= ifc_mat_mult.result[1][4:1];
+			end
+			default: begin
+				// do nothing
+			end
+		endcase
+	end
+
+	// OUTPUT
+	assign i.full_matrix = t_matrix_mult[5];
 
 endmodule

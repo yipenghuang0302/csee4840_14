@@ -22,8 +22,10 @@ class full_mat_test;
 		// iterate over joint index
 		for ( int joint=0 ; joint<6 ; joint++ ) begin
 
-			// generate local transformation matrix
 			real t_matrix [4][4];
+			real copy_matrix [4][4];
+
+			// generate local transformation matrix
 			t_matrix[0][0] =  $cos(dh_param[joint][THETA]);
 			t_matrix[0][1] = -$sin(dh_param[joint][THETA]) * $cos(dh_param[joint][ALPHA]);
 			t_matrix[0][2] =  $sin(dh_param[joint][THETA]) * $sin(dh_param[joint][ALPHA]);
@@ -42,7 +44,6 @@ class full_mat_test;
 			t_matrix[3][3] = 1.0;
 
 			// obtain copy of full matrix
-			real copy_matrix [4][4];
 			for ( int i=0 ; i<4 ; i++ ) begin // row
 				for ( int j=0 ; j<4 ; j++ ) begin // col
 					copy_matrix[i][j] = model_full_matrix[i][j];
@@ -53,7 +54,7 @@ class full_mat_test;
 			for ( int i=0 ; i<4 ; i++ ) begin // product row
 				for ( int j=0 ; j<4 ; j++ ) begin // product column
 					real element = 0.0;
-					for ( int k=0 ; k<n ; k++ ) begin // inner term
+					for ( int k=0 ; k<4 ; k++ ) begin // inner term
 						element += copy_matrix[i][k] * t_matrix[k][j];
 					end
 					model_full_matrix[i][j] = element;
