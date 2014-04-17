@@ -3,22 +3,6 @@
  * Columbia University
  */
 
-`include "../mat_mult/mat_mult_interface.sv"
-`include "../mat_mult/mat_mult.sv"
-`include "../mat_mult/mult_array.sv"
-
-`include "../t_block/t_block_interface.sv"
-`include "../t_block/t_block.sv"
-
-`include "../t_block/sincos/sincos_interface.sv"
-`include "../t_block/sincos/sincos.sv"
-`include "../t_block/sincos/sin.sv"
-`include "../t_block/sincos/cos.sv"
-`include "../t_block/sincos/mult_27_coeff_104/mult_27_coeff_104.v"
-`include "../t_block/sincos/mult_27_coeff_326/mult_27_coeff_326.v"
-`include "../t_block/sincos/mult_27_coeff_58/mult_27_coeff_58.v"
-
-
 module full_mat (
 	ifc_full_mat.full_mat i
 );
@@ -39,27 +23,10 @@ module full_mat (
 	ifc_t_block ifc_t_block (i.clk);
 	assign ifc_t_block.en = i.en;
 	assign ifc_t_block.rst = i.rst;
+	assign ifc_t_block.array_mult_result = i.array_mult_result;
 	t_block t_block (ifc_t_block.t_block);
-
-	// instantiate mat_mult
-	ifc_mat_mult ifc_mat_mult (i.clk);
-	assign ifc_mat_mult.en = i.en;
-	// delay rst for mat_mult by five
-	logic rst_delay_1;
-	logic rst_delay_2;
-	logic rst_delay_3;
-	logic rst_delay_4;
-	logic rst_delay_5;
-	always_ff @(posedge i.clk) begin
-		rst_delay_1 <= i.rst;
-		rst_delay_2 <= rst_delay_1;
-		rst_delay_3 <= rst_delay_2;
-		rst_delay_4 <= rst_delay_3;
-		rst_delay_5 <= rst_delay_4;
-	end
-	assign ifc_mat_mult.rst = rst_delay_5;
-	assign ifc_mat_mult.mat_mode = 1'b1;
-	mat_mult mat_mult (ifc_mat_mult.mat_mult);
+	assign i.array_mult_dataa = ifc_t_block.array_mult_dataa;
+	assign i.array_mult_datab = ifc_t_block.array_mult_datab;
 
 	// LOGIC GOVERNING COUNT
 	logic [6:0] count;
@@ -103,7 +70,7 @@ module full_mat (
 	always_ff @(posedge i.clk) begin
 		case(count)
 			7'd28: begin // t_02
-				ifc_mat_mult.dataa <=
+				i.mat_mult_dataa <=
 				{
 					{6{27'b0}},
 					{27'b0,t_matrix_array[0][3],27'b0},
@@ -112,7 +79,7 @@ module full_mat (
 					{27'b0,t_matrix_array[0][0],27'b0},
 					{6{27'b0}}
 				};
-				ifc_mat_mult.datab <= // FAST FORWARD
+				i.mat_mult_datab <= // FAST FORWARD
 				{
 					{6{27'b0}},
 					{27'b0,ifc_t_block.t_matrix[3],27'b0},
@@ -123,8 +90,8 @@ module full_mat (
 				};
 			end
 			7'd40: begin // t_03
-				ifc_mat_mult.dataa <= ifc_mat_mult.result;
-				ifc_mat_mult.datab <=
+				i.mat_mult_dataa <= i.mat_mult_result;
+				i.mat_mult_datab <=
 				{
 					{6{27'b0}},
 					{27'b0,t_matrix_array[2][3],27'b0},
@@ -135,8 +102,8 @@ module full_mat (
 				};
 			end
 			7'd52: begin // t_04
-				ifc_mat_mult.dataa <= ifc_mat_mult.result;
-				ifc_mat_mult.datab <=
+				i.mat_mult_dataa <= i.mat_mult_result;
+				i.mat_mult_datab <=
 				{
 					{6{27'b0}},
 					{27'b0,t_matrix_array[3][3],27'b0},
@@ -147,8 +114,8 @@ module full_mat (
 				};
 			end
 			7'd64: begin // t_05
-				ifc_mat_mult.dataa <= ifc_mat_mult.result;
-				ifc_mat_mult.datab <=
+				i.mat_mult_dataa <= i.mat_mult_result;
+				i.mat_mult_datab <=
 				{
 					{6{27'b0}},
 					{27'b0,t_matrix_array[4][3],27'b0},
@@ -159,8 +126,8 @@ module full_mat (
 				};
 			end
 			7'd76: begin // t_06
-				ifc_mat_mult.dataa <= ifc_mat_mult.result;
-				ifc_mat_mult.datab <=
+				i.mat_mult_dataa <= i.mat_mult_result;
+				i.mat_mult_datab <=
 				{
 					{6{27'b0}},
 					{27'b0,t_matrix_array[5][3],27'b0},
@@ -171,8 +138,8 @@ module full_mat (
 				};
 			end
 			default: begin
-				ifc_mat_mult.dataa <= ifc_mat_mult.dataa;
-				ifc_mat_mult.datab <= ifc_mat_mult.datab;
+				i.mat_mult_dataa <= i.mat_mult_dataa;
+				i.mat_mult_datab <= i.mat_mult_datab;
 			end
 		endcase
 	end
@@ -184,34 +151,34 @@ module full_mat (
 				t_matrix_mult[0] <= ifc_t_block.t_matrix;
 			end
 			7'd40: begin // t_02
-				t_matrix_mult[1][3] <= ifc_mat_mult.result[4][4:1];
-				t_matrix_mult[1][2] <= ifc_mat_mult.result[3][4:1];
-				t_matrix_mult[1][1] <= ifc_mat_mult.result[2][4:1];
-				t_matrix_mult[1][0] <= ifc_mat_mult.result[1][4:1];
+				t_matrix_mult[1][3] <= i.mat_mult_result[4][4:1];
+				t_matrix_mult[1][2] <= i.mat_mult_result[3][4:1];
+				t_matrix_mult[1][1] <= i.mat_mult_result[2][4:1];
+				t_matrix_mult[1][0] <= i.mat_mult_result[1][4:1];
 			end
 			7'd52: begin // t_03
-				t_matrix_mult[2][3] <= ifc_mat_mult.result[4][4:1];
-				t_matrix_mult[2][2] <= ifc_mat_mult.result[3][4:1];
-				t_matrix_mult[2][1] <= ifc_mat_mult.result[2][4:1];
-				t_matrix_mult[2][0] <= ifc_mat_mult.result[1][4:1];
+				t_matrix_mult[2][3] <= i.mat_mult_result[4][4:1];
+				t_matrix_mult[2][2] <= i.mat_mult_result[3][4:1];
+				t_matrix_mult[2][1] <= i.mat_mult_result[2][4:1];
+				t_matrix_mult[2][0] <= i.mat_mult_result[1][4:1];
 			end
 			7'd64: begin // t_04
-				t_matrix_mult[3][3] <= ifc_mat_mult.result[4][4:1];
-				t_matrix_mult[3][2] <= ifc_mat_mult.result[3][4:1];
-				t_matrix_mult[3][1] <= ifc_mat_mult.result[2][4:1];
-				t_matrix_mult[3][0] <= ifc_mat_mult.result[1][4:1];
+				t_matrix_mult[3][3] <= i.mat_mult_result[4][4:1];
+				t_matrix_mult[3][2] <= i.mat_mult_result[3][4:1];
+				t_matrix_mult[3][1] <= i.mat_mult_result[2][4:1];
+				t_matrix_mult[3][0] <= i.mat_mult_result[1][4:1];
 			end
 			7'd76: begin // t_05
-				t_matrix_mult[4][3] <= ifc_mat_mult.result[4][4:1];
-				t_matrix_mult[4][2] <= ifc_mat_mult.result[3][4:1];
-				t_matrix_mult[4][1] <= ifc_mat_mult.result[2][4:1];
-				t_matrix_mult[4][0] <= ifc_mat_mult.result[1][4:1];
+				t_matrix_mult[4][3] <= i.mat_mult_result[4][4:1];
+				t_matrix_mult[4][2] <= i.mat_mult_result[3][4:1];
+				t_matrix_mult[4][1] <= i.mat_mult_result[2][4:1];
+				t_matrix_mult[4][0] <= i.mat_mult_result[1][4:1];
 			end
 			7'd88: begin // t_06
-				t_matrix_mult[5][3] <= ifc_mat_mult.result[4][4:1];
-				t_matrix_mult[5][2] <= ifc_mat_mult.result[3][4:1];
-				t_matrix_mult[5][1] <= ifc_mat_mult.result[2][4:1];
-				t_matrix_mult[5][0] <= ifc_mat_mult.result[1][4:1];
+				t_matrix_mult[5][3] <= i.mat_mult_result[4][4:1];
+				t_matrix_mult[5][2] <= i.mat_mult_result[3][4:1];
+				t_matrix_mult[5][1] <= i.mat_mult_result[2][4:1];
+				t_matrix_mult[5][0] <= i.mat_mult_result[1][4:1];
 			end
 			default: begin
 				// do nothing

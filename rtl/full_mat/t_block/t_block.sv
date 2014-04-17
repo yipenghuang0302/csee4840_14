@@ -3,22 +3,6 @@
  * Columbia University
  */
 
-// `include "../sim_models/lpm_mult.v"
-// `include "../sim_models/mult_block.v"
-// `include "../sim_models/addsub_block.v"
-// `include "../sim_models/pipeline_internal_fv.v"
-// `include "../sim_models/dffep.v"
-
-// `include "sincos/sincos_interface.sv"
-// `include "sincos/sincos.sv"
-// `include "sincos/sin.sv"
-// `include "sincos/cos.sv"
-
-// `include "../mult_27/mult_27.v"
-// `include "sincos/mult_27_coeff_104/mult_27_coeff_104.v"
-// `include "sincos/mult_27_coeff_326/mult_27_coeff_326.v"
-// `include "sincos/mult_27_coeff_58/mult_27_coeff_58.v"
-
 module t_block (
 	ifc_t_block.t_block i
 );
@@ -139,59 +123,71 @@ module t_block (
 		d_delay_26 <= d_delay_25;
 	end
 
-	logic [53:0] mult_01_result;
-	mult_27 mult_01 (
-		.clken ( i.en ),
-		.clock ( i.clk ),
-		.dataa ( -i_theta.sin ),
-		.datab ( i_alpha.cos ),
-		.result ( mult_01_result )
-	);
+	// logic [53:0] mult_01_result;
+	// mult_27 mult_01 (
+	// 	.clken ( i.en ),
+	// 	.clock ( i.clk ),
+	// 	.dataa ( -i_theta.sin ),
+	// 	.datab ( i_alpha.cos ),
+	// 	.result ( mult_01_result )
+	// );
+	assign i.array_mult_dataa[0] = -i_theta.sin;
+	assign i.array_mult_datab[0] = i_alpha.cos;
 
-	logic [53:0] mult_02_result;
-	mult_27 mult_02 (
-		.clken ( i.en ),
-		.clock ( i.clk ),
-		.dataa ( i_theta.sin ),
-		.datab ( i_alpha.sin ),
-		.result ( mult_02_result )
-	);
+	// logic [53:0] mult_02_result;
+	// mult_27 mult_02 (
+	// 	.clken ( i.en ),
+	// 	.clock ( i.clk ),
+	// 	.dataa ( i_theta.sin ),
+	// 	.datab ( i_alpha.sin ),
+	// 	.result ( mult_02_result )
+	// );
+	assign i.array_mult_dataa[1] = i_theta.sin;
+	assign i.array_mult_datab[1] = i_alpha.sin;
 
-	logic [53:0] mult_03_result;
-	mult_27 mult_03 (
-		.clken ( i.en ),
-		.clock ( i.clk ),
-		.dataa ( a_delay_22 ),
-		.datab ( i_theta.cos ),
-		.result ( mult_03_result )
-	);
+	// logic [53:0] mult_03_result;
+	// mult_27 mult_03 (
+	// 	.clken ( i.en ),
+	// 	.clock ( i.clk ),
+	// 	.dataa ( a_delay_22 ),
+	// 	.datab ( i_theta.cos ),
+	// 	.result ( mult_03_result )
+	// );
+	assign i.array_mult_dataa[2] = a_delay_22;
+	assign i.array_mult_datab[2] = i_theta.cos;
 
-	logic [53:0] mult_11_result;
-	mult_27 mult_11 (
-		.clken ( i.en ),
-		.clock ( i.clk ),
-		.dataa ( i_theta.cos ),
-		.datab ( i_alpha.cos ),
-		.result ( mult_11_result )
-	);
+	// logic [53:0] mult_11_result;
+	// mult_27 mult_11 (
+	// 	.clken ( i.en ),
+	// 	.clock ( i.clk ),
+	// 	.dataa ( i_theta.cos ),
+	// 	.datab ( i_alpha.cos ),
+	// 	.result ( mult_11_result )
+	// );
+	assign i.array_mult_dataa[3] = i_theta.cos;
+	assign i.array_mult_datab[3] = i_alpha.cos;
 
-	logic [53:0] mult_12_result;
-	mult_27 mult_12 (
-		.clken ( i.en ),
-		.clock ( i.clk ),
-		.dataa ( i_theta.cos ),
-		.datab ( -i_alpha.sin ),
-		.result ( mult_12_result )
-	);
+	// logic [53:0] mult_12_result;
+	// mult_27 mult_12 (
+	// 	.clken ( i.en ),
+	// 	.clock ( i.clk ),
+	// 	.dataa ( i_theta.cos ),
+	// 	.datab ( -i_alpha.sin ),
+	// 	.result ( mult_12_result )
+	// );
+	assign i.array_mult_dataa[4] = i_theta.cos;
+	assign i.array_mult_datab[4] = -i_alpha.sin;
 
-	logic [53:0] mult_13_result;
-	mult_27 mult_13 (
-		.clken ( i.en ),
-		.clock ( i.clk ),
-		.dataa ( a_delay_22 ),
-		.datab ( i_theta.sin ),
-		.result ( mult_13_result )
-	);
+	// logic [53:0] mult_13_result;
+	// mult_27 mult_13 (
+	// 	.clken ( i.en ),
+	// 	.clock ( i.clk ),
+	// 	.dataa ( a_delay_22 ),
+	// 	.datab ( i_theta.sin ),
+	// 	.result ( mult_13_result )
+	// );
+	assign i.array_mult_dataa[5] = a_delay_22;
+	assign i.array_mult_datab[5] = i_theta.sin;
 
 	// delay cos(theta) by 4
 	logic [26:0] cos_theta_delay_1;
@@ -242,18 +238,24 @@ module t_block (
 	end
 
 	assign i.t_matrix[0][0] = cos_theta_delay_4;
-	always_ff @(posedge i.clk) begin
-		i.t_matrix[0][1] <= mult_01_result[7] ? mult_01_result[34:8] + 1'b1 : mult_01_result[34:8];
-		i.t_matrix[0][2] <= mult_02_result[7] ? mult_02_result[34:8] + 1'b1 : mult_02_result[34:8];
-		i.t_matrix[0][3] <= mult_03_result[7] ? mult_03_result[34:8] + 1'b1 : mult_03_result[34:8];
-	end
+	assign i.t_matrix[0][1] = i.array_mult_result[0];
+	assign i.t_matrix[0][2] = i.array_mult_result[1];
+	assign i.t_matrix[0][3] = i.array_mult_result[2];
+	// always_ff @(posedge i.clk) begin
+	// 	i.t_matrix[0][1] <= mult_01_result[7] ? mult_01_result[34:8] + 1'b1 : mult_01_result[34:8];
+	// 	i.t_matrix[0][2] <= mult_02_result[7] ? mult_02_result[34:8] + 1'b1 : mult_02_result[34:8];
+	// 	i.t_matrix[0][3] <= mult_03_result[7] ? mult_03_result[34:8] + 1'b1 : mult_03_result[34:8];
+	// end
 
 	assign i.t_matrix[1][0] = sin_theta_delay_4;
-	always_ff @(posedge i.clk) begin
-		i.t_matrix[1][1] <= mult_11_result[7] ? mult_11_result[34:8] + 1'b1 : mult_11_result[34:8];
-		i.t_matrix[1][2] <= mult_12_result[7] ? mult_12_result[34:8] + 1'b1 : mult_12_result[34:8];
-		i.t_matrix[1][3] <= mult_13_result[7] ? mult_13_result[34:8] + 1'b1 : mult_13_result[34:8];
-	end
+	assign i.t_matrix[1][1] = i.array_mult_result[3];
+	assign i.t_matrix[1][2] = i.array_mult_result[4];
+	assign i.t_matrix[1][3] = i.array_mult_result[5];
+	// always_ff @(posedge i.clk) begin
+	// 	i.t_matrix[1][1] <= mult_11_result[7] ? mult_11_result[34:8] + 1'b1 : mult_11_result[34:8];
+	// 	i.t_matrix[1][2] <= mult_12_result[7] ? mult_12_result[34:8] + 1'b1 : mult_12_result[34:8];
+	// 	i.t_matrix[1][3] <= mult_13_result[7] ? mult_13_result[34:8] + 1'b1 : mult_13_result[34:8];
+	// end
 
 	assign i.t_matrix[2][0] = 27'd0;
 	assign i.t_matrix[2][1] = sin_alpha_delay_4;

@@ -3,8 +3,6 @@
  * Columbia University
  */
 
-// `include "mult_array.sv"
-
 module mat_mult (
 	ifc_mat_mult.mat_mult i
 );

@@ -9,17 +9,28 @@ interface ifc_full_mat (
 
 logic en, rst;
 logic [5:0] [3:0] [26:0] dh_param;
+
+// shared multipliers
+logic [5:0] [26:0] array_mult_result;
+logic [5:0] [5:0] [26:0] mat_mult_result;
+
+// shared multipliers
+logic [5:0] [26:0] array_mult_dataa;
+logic [5:0] [26:0] array_mult_datab;
+logic [5:0] [5:0] [26:0] mat_mult_dataa;
+logic [5:0] [5:0] [26:0] mat_mult_datab;
+
 logic [3:0] [3:0] [26:0] full_matrix;
 
-//clocking cb @(posedge clk);
-//	output en;
-//	output rst;
-//	output dh_param;
-//
-//	input full_matrix;
-//endclocking
-//
-//modport full_mat_tb (clocking cb);
+clocking cb @(posedge clk);
+	output en;
+	output rst;
+	output dh_param;
+
+	input full_matrix;
+endclocking
+
+modport full_mat_tb (clocking cb);
 
 // restrict directions
 modport full_mat (
@@ -27,6 +38,14 @@ modport full_mat (
 	input en,
 	input rst,
 	input dh_param,
+
+	input array_mult_result,
+	input mat_mult_result,
+
+	output array_mult_dataa,
+	output array_mult_datab,
+	output mat_mult_dataa,
+	output mat_mult_datab,
 
 	output full_matrix
 );

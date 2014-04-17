@@ -3,13 +3,6 @@
  * Columbia University
  */
 
-//`include "../sim_models/lpm_mult.v"
-//`include "../sim_models/mult_block.v"
-//`include "../sim_models/addsub_block.v"
-//`include "../sim_models/pipeline_internal_fv.v"
-//`include "../sim_models/dffep.v"
-`include "../mult_27/mult_27.v"
-
 module mult_array (
 	clk, en,
 	dataa,

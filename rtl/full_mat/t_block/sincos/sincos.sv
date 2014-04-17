@@ -3,9 +3,6 @@
  * Columbia University
  */
 
-// `include "sin.sv"
-// `include "cos.sv"
-
 module sincos (
 	ifc_sincos.sincos i
 );

@@ -8,10 +8,15 @@ interface ifc_t_block (
 );
 
 logic en, rst;
+
 logic [26:0] a;
 logic [26:0] d;
 logic [26:0] alpha;
 logic [26:0] theta;
+
+logic [5:0] [26:0] array_mult_result;
+logic [5:0] [26:0] array_mult_dataa;
+logic [5:0] [26:0] array_mult_datab;
 
 logic [3:0] [3:0] [26:0] t_matrix;
 
@@ -38,6 +43,10 @@ modport t_block (
 	input d,
 	input alpha,
 	input theta,
+
+	input array_mult_result,
+	output array_mult_dataa,
+	output array_mult_datab,
 
 	output t_matrix
 );
