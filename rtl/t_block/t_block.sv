@@ -26,11 +26,13 @@ module t_block (
 	ifc_sincos i_alpha (i.clk);
 	assign i_alpha.angle = i.alpha;
 	assign i_alpha.en = i.en;
+	assign i_alpha.rst = i.rst;
 	sincos sincos_alpha (i_alpha.sincos);
 
 	ifc_sincos i_theta (i.clk);
 	assign i_theta.angle = i.theta;
 	assign i_theta.en = i.en;
+	assign i_theta.rst = i.rst;
 	sincos sincos_theta (i_theta.sincos);
 
 	// delay a by 22

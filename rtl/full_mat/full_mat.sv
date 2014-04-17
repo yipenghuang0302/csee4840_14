@@ -38,6 +38,7 @@ module full_mat (
 	// instantiate t_block
 	ifc_t_block ifc_t_block (i.clk);
 	assign ifc_t_block.en = i.en;
+	assign ifc_t_block.rst = i.rst;
 	t_block t_block (ifc_t_block.t_block);
 
 	// instantiate mat_mult
