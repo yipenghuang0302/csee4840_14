@@ -39,22 +39,22 @@ struct joint_dev {
 	resource_size_t size;
 	void __iomem *virtbase; /* Where registers can be accessed in memory */
 	u8 joint_type; // ith bit is 1 if joint is rotational; 0 for translational
-	u8 target[3]; // Target position
-	u16 dh_params[JOINT_DOF * 4] // Every joint has 4 parameters 
+	u32 target[3]; // Target position
+	u32 dh_params[JOINT_DOF * 4] // Every joint has 4 parameters 
 } dev;
 
 /*
  * Write target position of the end effector and the bit vector for the joint types 
  * Assumes target position is in range and the device information has been set up
  */
-static void write_target(u8 target[3], u8 joint_t)
+static void write_target(u32 target[3], u8 joint_t)
 {
 	//TODO: Convert target values to fixed-point
 	for (int i = 0; i < 3; i++){
-		iowrite8(target[i], dev.virtbase+i);
+		iowrite32(target[i], dev.virtbase+i*4);
 		dev.target[i] = target[i];
 	}
-	iowrite8(joint_t, dev.virtbase+3);
+	iowrite8(joint_t, dev.virtbase+12);
 	dev.joint_type = joint_t;
 }
 
@@ -62,9 +62,9 @@ static void write_target(u8 target[3], u8 joint_t)
  * Write parameter for a given joint 
  * Assumes joint and parameter is in range and the device information has been set up
  */
-static void write_parameter(u8 joint, u8 parameter, u16 magnitude){
+static void write_parameter(u8 joint, u8 parameter, u32 magnitude){
 	//TODO: Convert magnitude to fixed-point
-	iowrite16(magnitude, dev.virtbase+4+(8 * joint-1)+(parameter*2));
+	iowrite32(magnitude, dev.virtbase+13+(8 * joint-1)+(parameter*4));
 	dev.dh_params[(joint-1) * 4 + parameter] = magnitude;
 }
 
