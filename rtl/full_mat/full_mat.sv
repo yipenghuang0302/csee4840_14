@@ -40,7 +40,7 @@ module full_mat (
 	assign ifc_t_block.en = i.en;
 	t_block t_block (ifc_t_block.t_block);
 
-	// instantiate t_block
+	// instantiate mat_mult
 	ifc_mat_mult ifc_mat_mult (i.clk);
 	assign ifc_mat_mult.en = i.en;
 	// delay rst for mat_mult by five

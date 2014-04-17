@@ -11,7 +11,6 @@ logic en, rst;
 logic [5:0] [3:0] [26:0] dh_param;
 logic [3:0] [3:0] [26:0] full_matrix;
 
-
 clocking cb @(posedge clk);
 	output en;
 	output rst;
