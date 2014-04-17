@@ -27,7 +27,7 @@ module full_mat (
 	parameter L_OFFSET = 1;
 	parameter L_DISTANCE = 2;
 	parameter ALPHA = 3;
-	parameter MAX = 88;
+	parameter MAX = 90;
 
 	// each transformation matrix
 	logic [5:0] [3:0] [3:0] [26:0] t_matrix_array;
@@ -43,7 +43,20 @@ module full_mat (
 	// instantiate t_block
 	ifc_mat_mult ifc_mat_mult (i.clk);
 	assign ifc_mat_mult.en = i.en;
-	assign ifc_mat_mult.rst = i.rst;
+	// delay rst for mat_mult by five
+	logic rst_delay_1;
+	logic rst_delay_2;
+	logic rst_delay_3;
+	logic rst_delay_4;
+	logic rst_delay_5;
+	always_ff @(posedge i.clk) begin
+		rst_delay_1 <= i.rst;
+		rst_delay_2 <= rst_delay_1;
+		rst_delay_3 <= rst_delay_2;
+		rst_delay_4 <= rst_delay_3;
+		rst_delay_5 <= rst_delay_4;
+	end
+	assign ifc_mat_mult.rst = rst_delay_5;
 	assign ifc_mat_mult.mat_mode = 1'b1;
 	mat_mult mat_mult (ifc_mat_mult.mat_mult);
 
@@ -78,8 +91,8 @@ module full_mat (
 
 	// LOGIC GOVERNING T_BLOCK OUTPUTS
 	always_ff @(posedge i.clk) begin
-		if ( 7'd26 <= count && count < 7'd32 ) begin
-			t_matrix_array[count-7'd26] <= ifc_t_block.t_matrix;
+		if ( 7'd27 <= count && count < 7'd33 ) begin
+			t_matrix_array[count-7'd27] <= ifc_t_block.t_matrix;
 		end else begin
 			// do nothing
 		end
@@ -88,7 +101,7 @@ module full_mat (
 	// LOGIC GOVERNING MAT_MULT INPUTS
 	always_ff @(posedge i.clk) begin
 		case(count)
-			7'd27: begin // t_02
+			7'd28: begin // t_02
 				ifc_mat_mult.dataa <=
 				{
 					{6{27'b0}},
@@ -108,7 +121,7 @@ module full_mat (
 					{6{27'b0}}
 				};
 			end
-			7'd39: begin // t_03
+			7'd40: begin // t_03
 				ifc_mat_mult.dataa <= ifc_mat_mult.result;
 				ifc_mat_mult.datab <=
 				{
@@ -120,7 +133,7 @@ module full_mat (
 					{6{27'b0}}
 				};
 			end
-			7'd51: begin // t_04
+			7'd52: begin // t_04
 				ifc_mat_mult.dataa <= ifc_mat_mult.result;
 				ifc_mat_mult.datab <=
 				{
@@ -132,7 +145,7 @@ module full_mat (
 					{6{27'b0}}
 				};
 			end
-			7'd63: begin // t_05
+			7'd64: begin // t_05
 				ifc_mat_mult.dataa <= ifc_mat_mult.result;
 				ifc_mat_mult.datab <=
 				{
@@ -144,7 +157,7 @@ module full_mat (
 					{6{27'b0}}
 				};
 			end
-			7'd75: begin // t_06
+			7'd76: begin // t_06
 				ifc_mat_mult.dataa <= ifc_mat_mult.result;
 				ifc_mat_mult.datab <=
 				{
@@ -157,8 +170,8 @@ module full_mat (
 				};
 			end
 			default: begin
-				ifc_mat_mult.dataa <= {36{27'b0}};
-				ifc_mat_mult.datab <= {36{27'b0}};
+				ifc_mat_mult.dataa <= ifc_mat_mult.dataa;
+				ifc_mat_mult.datab <= ifc_mat_mult.datab;
 			end
 		endcase
 	end
@@ -166,34 +179,34 @@ module full_mat (
 	// LOGIC GOVERNING MAT_MULT OUTPUTS
 	always_ff @(posedge i.clk) begin
 		case(count)
-			7'd26: begin // t_01
+			7'd27: begin // t_01
 				t_matrix_mult[0] <= ifc_t_block.t_matrix;
 			end
-			7'd39: begin // t_02
+			7'd40: begin // t_02
 				t_matrix_mult[1][3] <= ifc_mat_mult.result[4][4:1];
 				t_matrix_mult[1][2] <= ifc_mat_mult.result[3][4:1];
 				t_matrix_mult[1][1] <= ifc_mat_mult.result[2][4:1];
 				t_matrix_mult[1][0] <= ifc_mat_mult.result[1][4:1];
 			end
-			7'd51: begin // t_03
+			7'd52: begin // t_03
 				t_matrix_mult[2][3] <= ifc_mat_mult.result[4][4:1];
 				t_matrix_mult[2][2] <= ifc_mat_mult.result[3][4:1];
 				t_matrix_mult[2][1] <= ifc_mat_mult.result[2][4:1];
 				t_matrix_mult[2][0] <= ifc_mat_mult.result[1][4:1];
 			end
-			7'd63: begin // t_04
+			7'd64: begin // t_04
 				t_matrix_mult[3][3] <= ifc_mat_mult.result[4][4:1];
 				t_matrix_mult[3][2] <= ifc_mat_mult.result[3][4:1];
 				t_matrix_mult[3][1] <= ifc_mat_mult.result[2][4:1];
 				t_matrix_mult[3][0] <= ifc_mat_mult.result[1][4:1];
 			end
-			7'd75: begin // t_05
+			7'd76: begin // t_05
 				t_matrix_mult[4][3] <= ifc_mat_mult.result[4][4:1];
 				t_matrix_mult[4][2] <= ifc_mat_mult.result[3][4:1];
 				t_matrix_mult[4][1] <= ifc_mat_mult.result[2][4:1];
 				t_matrix_mult[4][0] <= ifc_mat_mult.result[1][4:1];
 			end
-			7'd87: begin // t_06
+			7'd88: begin // t_06
 				t_matrix_mult[5][3] <= ifc_mat_mult.result[4][4:1];
 				t_matrix_mult[5][2] <= ifc_mat_mult.result[3][4:1];
 				t_matrix_mult[5][1] <= ifc_mat_mult.result[2][4:1];
