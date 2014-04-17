@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 13.1.3 Build 178 02/12/2014 SJ Web Edition"
 
-## DATE    "Wed Apr 16 10:00:39 2014"
+## DATE    "Thu Apr 17 16:48:03 2014"
 
 ##
 ## DEVICE  "5CGXFC7D6F31C7ES"
@@ -38,7 +38,8 @@ set_time_format -unit ns -decimal_places 3
 # Create Clock
 #**************************************************************
 
-create_clock -name {clk} -period 10.000 -waveform { 0.000 5.000 } [get_ports { clk }]
+create_clock -name {clk} -period 5.000 -waveform { 0.000 2.500 } [get_ports { clk }]
+
 
 #**************************************************************
 # Create Generated Clock
@@ -65,19 +66,68 @@ set_clock_uncertainty -fall_from [get_clocks {clk}] -rise_to [get_clocks {clk}] 
 set_clock_uncertainty -fall_from [get_clocks {clk}] -fall_to [get_clocks {clk}] -setup 0.100  
 set_clock_uncertainty -fall_from [get_clocks {clk}] -fall_to [get_clocks {clk}] -hold 0.060  
 
+
 #**************************************************************
 # Set Input Delay
 #**************************************************************
 
-set_input_delay -clock clk -max 1 [all_inputs]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {address[0]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {address[1]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {address[2]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {address[3]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {address[4]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {address[5]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {address[6]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {chipselect}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {clk}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {col_select[0]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {col_select[1]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {reset}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {row_select[0]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {row_select[1]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {write}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {writedata[0]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {writedata[1]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {writedata[2]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {writedata[3]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {writedata[4]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {writedata[5]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {writedata[6]}]
+set_input_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {writedata[7]}]
 
-set_input_delay -clock clk -min 1 [all_inputs]
 
 #**************************************************************
 # Set Output Delay
 #**************************************************************
 
-set_output_delay -clock clk 1 [all_outputs]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[0]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[1]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[2]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[3]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[4]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[5]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[6]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[7]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[8]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[9]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[10]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[11]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[12]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[13]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[14]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[15]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[16]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[17]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[18]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[19]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[20]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[21]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[22]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[23]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[24]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[25]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[26]}]
+
 
 #**************************************************************
 # Set Clock Groups

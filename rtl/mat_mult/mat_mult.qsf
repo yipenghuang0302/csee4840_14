@@ -64,7 +64,7 @@ set_global_assignment -name VERILOG_SHOW_LMF_MAPPING_MESSAGES OFF
 
 # Fitter Assignments
 # ==================
-set_global_assignment -name DEVICE 5CGXFC7D6F31C7ES
+set_global_assignment -name DEVICE 5CSXFC6D6F31C6
 set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT EXTRA

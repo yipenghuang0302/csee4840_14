@@ -170,16 +170,16 @@ module ik_swift_interface (
 		end
 	end
 
-	// LOGIC GOVERNING OUTPUT
-	always_ff @(posedge clk) begin
-	 	data <= ifc_full_mat.full_matrix[row_select][col_select];
-	end
-
 	// INSTANTIATE IK_FAST TOP MODULE
 	ifc_full_mat ifc_full_mat (clk);
 	assign ifc_full_mat.en = 1'b1;
 	assign ifc_full_mat.rst = reset;
 	assign ifc_full_mat.dh_param = dh_param;
 	full_mat full_mat (ifc_full_mat.full_mat);
+
+	// LOGIC GOVERNING OUTPUT
+	always_ff @(posedge clk) begin
+	 	data <= ifc_full_mat.full_matrix[row_select][col_select];
+	end
 
 endmodule
