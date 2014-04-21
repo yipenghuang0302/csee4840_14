@@ -26,7 +26,6 @@
 `include "sincos/mult_27_coeff_326/mult_27_coeff_326.v"
 `include "sincos/mult_27_coeff_58/mult_27_coeff_58.v"
 
-
 module t_block_top ();
 
 	logic clk = 1'b0;

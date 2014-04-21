@@ -100,28 +100,23 @@ module sin (
 	);
 
 	// pipeline delay registers for est_2_norm
-	logic [26:0] est_delay_1;
-	logic [26:0] est_delay_2;
-	logic [26:0] est_delay_3;
-	logic [26:0] est_delay_4;
-
+	// pipeline delay registers for est_2_norm_minus_est
+	// pipeline delay registers for sin
+	logic [10:0] [26:0] est_delay;
+	assign est_delay[0] = est;
 	always_ff  @(posedge clk) begin
-		est_delay_1 <= est;
-		est_delay_2 <= est_delay_1;
-		est_delay_3 <= est_delay_2;
-		est_delay_4 <= est_delay_3;
-		est_2_round <= est_2_result[7] ? est_2_result[34:8] + 1'b1 : est_2_result[34:8];
-		est_2_norm <= est_delay_4[26]==1'b1 ? -est_2_round : est_2_round; // ask if negative number
+		est_delay[10:1] <= est_delay[9:0];
 	end
 
-	// pipeline delay registers for est_2_norm_minus_est
-	logic [26:0] est_delay_5;
+	always_ff  @(posedge clk) begin
+		est_2_round <= est_2_result[7] ? est_2_result[34:8] + 1'b1 : est_2_result[34:8];
+		est_2_norm <= est_delay[4][26]==1'b1 ? -est_2_round : est_2_round; // ask if negative number
+	end
 
 	// sin = .225 * (est_2_norm - est) + est;
 	logic [26:0] est_2_norm_minus_est;
 	always_ff @(posedge clk) begin
-		est_delay_5 <= est_delay_4;
-		est_2_norm_minus_est <= est_2_norm - est_delay_5;
+		est_2_norm_minus_est <= est_2_norm - est_delay[5];
 	end
 
 	logic [53:0] est_225_result;
@@ -136,20 +131,8 @@ module sin (
 		est_225_round <= est_225_result[7] ? est_225_result[34:8] + 1'b1 : est_225_result[34:8];
 	end
 
-	// pipeline delay registers for sin
-	logic [26:0] est_delay_6;
-	logic [26:0] est_delay_7;
-	logic [26:0] est_delay_8;
-	logic [26:0] est_delay_9;
-	logic [26:0] est_delay_10;
-
 	always_ff @(posedge clk) begin
-		est_delay_6 <= est_delay_5;
-		est_delay_7 <= est_delay_6;
-		est_delay_8 <= est_delay_7;
-		est_delay_9 <= est_delay_8;
-		est_delay_10 <= est_delay_9;
-		sin <= est_225_round + est_delay_10;
+		sin <= est_225_round + est_delay[10];
 	end
 
 endmodule
