@@ -6,9 +6,6 @@
 
 `timescale 1ns/1ps
 
-`include "../full_mat/full_mat_interface.sv"
-`include "../full_mat/full_mat.sv"
-
 parameter THETA = 0;
 parameter L_OFFSET = 1;
 parameter L_DISTANCE = 2;

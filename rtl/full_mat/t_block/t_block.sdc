@@ -297,7 +297,7 @@ set_input_delay -add_delay -min -clock [get_clocks {i.clk}]  2.000 [get_ports {i
 # Set Output Delay
 #**************************************************************
 
-set_output_delay -clock clk 1 [all_outputs]
+set_output_delay -clock i.clk 1 [all_outputs]
 
 #**************************************************************
 # Set Clock Groups
