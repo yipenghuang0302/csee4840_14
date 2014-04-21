@@ -16,7 +16,6 @@ class t_block_test;
 	real m_sin_theta;
 	real m_cos_theta;
 
-
 	function real abs (real num); 
 	   abs = (num<0) ? -num : num; 
 	endfunction
