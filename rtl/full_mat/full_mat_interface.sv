@@ -20,7 +20,8 @@ logic [5:0] [26:0] array_mult_datab;
 logic [5:0] [5:0] [26:0] mat_mult_dataa;
 logic [5:0] [5:0] [26:0] mat_mult_datab;
 
-logic [3:0] [3:0] [26:0] full_matrix;
+// multiplied results of transformation matrices
+logic [5:0] [3:0] [3:0] [26:0] full_matrix;
 
 clocking cb @(posedge clk);
 	output en;

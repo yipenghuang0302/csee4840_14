@@ -16,9 +16,6 @@ module full_mat (
 	// each transformation matrix
 	logic [5:0] [3:0] [3:0] [26:0] t_matrix_array;
 
-	// multiplied results of transformation matrices
-	logic [5:0] [3:0] [3:0] [26:0] t_matrix_mult;
-
 	// instantiate t_block
 	ifc_t_block ifc_t_block (i.clk);
 	assign ifc_t_block.en = i.en;
@@ -148,45 +145,42 @@ module full_mat (
 	always_ff @(posedge i.clk) begin
 		case(count)
 			7'd27: begin // t_01
-				t_matrix_mult[0] <= ifc_t_block.t_matrix;
+				i.full_matrix[0] <= ifc_t_block.t_matrix;
 			end
 			7'd40: begin // t_02
-				t_matrix_mult[1][3] <= i.mat_mult_result[4][4:1];
-				t_matrix_mult[1][2] <= i.mat_mult_result[3][4:1];
-				t_matrix_mult[1][1] <= i.mat_mult_result[2][4:1];
-				t_matrix_mult[1][0] <= i.mat_mult_result[1][4:1];
+				i.full_matrix[1][3] <= i.mat_mult_result[4][4:1];
+				i.full_matrix[1][2] <= i.mat_mult_result[3][4:1];
+				i.full_matrix[1][1] <= i.mat_mult_result[2][4:1];
+				i.full_matrix[1][0] <= i.mat_mult_result[1][4:1];
 			end
 			7'd52: begin // t_03
-				t_matrix_mult[2][3] <= i.mat_mult_result[4][4:1];
-				t_matrix_mult[2][2] <= i.mat_mult_result[3][4:1];
-				t_matrix_mult[2][1] <= i.mat_mult_result[2][4:1];
-				t_matrix_mult[2][0] <= i.mat_mult_result[1][4:1];
+				i.full_matrix[2][3] <= i.mat_mult_result[4][4:1];
+				i.full_matrix[2][2] <= i.mat_mult_result[3][4:1];
+				i.full_matrix[2][1] <= i.mat_mult_result[2][4:1];
+				i.full_matrix[2][0] <= i.mat_mult_result[1][4:1];
 			end
 			7'd64: begin // t_04
-				t_matrix_mult[3][3] <= i.mat_mult_result[4][4:1];
-				t_matrix_mult[3][2] <= i.mat_mult_result[3][4:1];
-				t_matrix_mult[3][1] <= i.mat_mult_result[2][4:1];
-				t_matrix_mult[3][0] <= i.mat_mult_result[1][4:1];
+				i.full_matrix[3][3] <= i.mat_mult_result[4][4:1];
+				i.full_matrix[3][2] <= i.mat_mult_result[3][4:1];
+				i.full_matrix[3][1] <= i.mat_mult_result[2][4:1];
+				i.full_matrix[3][0] <= i.mat_mult_result[1][4:1];
 			end
 			7'd76: begin // t_05
-				t_matrix_mult[4][3] <= i.mat_mult_result[4][4:1];
-				t_matrix_mult[4][2] <= i.mat_mult_result[3][4:1];
-				t_matrix_mult[4][1] <= i.mat_mult_result[2][4:1];
-				t_matrix_mult[4][0] <= i.mat_mult_result[1][4:1];
+				i.full_matrix[4][3] <= i.mat_mult_result[4][4:1];
+				i.full_matrix[4][2] <= i.mat_mult_result[3][4:1];
+				i.full_matrix[4][1] <= i.mat_mult_result[2][4:1];
+				i.full_matrix[4][0] <= i.mat_mult_result[1][4:1];
 			end
 			7'd88: begin // t_06
-				t_matrix_mult[5][3] <= i.mat_mult_result[4][4:1];
-				t_matrix_mult[5][2] <= i.mat_mult_result[3][4:1];
-				t_matrix_mult[5][1] <= i.mat_mult_result[2][4:1];
-				t_matrix_mult[5][0] <= i.mat_mult_result[1][4:1];
+				i.full_matrix[5][3] <= i.mat_mult_result[4][4:1];
+				i.full_matrix[5][2] <= i.mat_mult_result[3][4:1];
+				i.full_matrix[5][1] <= i.mat_mult_result[2][4:1];
+				i.full_matrix[5][0] <= i.mat_mult_result[1][4:1];
 			end
 			default: begin
 				// do nothing
 			end
 		endcase
 	end
-
-	// OUTPUT
-	assign i.full_matrix = t_matrix_mult[5];
 
 endmodule
