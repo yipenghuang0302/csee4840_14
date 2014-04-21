@@ -26,6 +26,7 @@ module ik_swift_interface (
 	input logic [7:0] writedata,
 
 	// outputs
+	input logic [2:0] joint_select,
 	input logic [1:0] row_select,
 	input logic [1:0] col_select,
 	output logic [26:0] data
@@ -179,7 +180,7 @@ module ik_swift_interface (
 
 	// LOGIC GOVERNING OUTPUT
 	always_ff @(posedge clk) begin
-	 	data <= ifc_full_mat.full_matrix[row_select][col_select];
+	 	data <= ifc_full_mat.full_matrix[joint_select][row_select][col_select];
 	end
 
 endmodule
