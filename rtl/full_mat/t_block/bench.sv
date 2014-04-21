@@ -53,6 +53,7 @@ program t_block_tb (ifc_t_block.t_block_tb ds);
 		// passing data to design under test happens here
 		ds.cb.en <= 1'b1;
 		ds.cb.rst <= 1'b0;
+		ds.cb.count <= 8'd24;
 		ds.cb.a <= int'(a * 256.0);
 		ds.cb.d <= int'(d * 256.0);
 		ds.cb.alpha <= int'(alpha * 256.0);

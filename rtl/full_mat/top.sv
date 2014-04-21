@@ -43,23 +43,27 @@ module full_mat_top ();
 	full_mat_tb full_mat_tb (ifc_full_mat.full_mat_tb);
 	full_mat full_mat (ifc_full_mat.full_mat);
 
+	// LOGIC GOVERNING COUNT
+	parameter MAX = 91;
+	always_ff @(posedge ifc_full_mat.clk) begin
+		if ( ifc_full_mat.rst ) begin // if parallel multiplier mode, clear counter
+			ifc_full_mat.count <= 8'b0;
+		end else if ( ifc_full_mat.en ) begin
+			if ( ifc_full_mat.count==MAX-1'b1 ) begin
+				ifc_full_mat.count <= 8'b0;
+			end else begin
+				ifc_full_mat.count <= ifc_full_mat.count + 1'b1;
+			end
+		end
+	end
+
 	// instantiate mat_mult
 	ifc_mat_mult ifc_mat_mult (clk);
 	assign ifc_mat_mult.en = ifc_full_mat.en;
 	// delay rst for mat_mult by five
-	logic rst_delay_1;
-	logic rst_delay_2;
-	logic rst_delay_3;
-	logic rst_delay_4;
-	logic rst_delay_5;
 	always_ff @(posedge clk) begin
-		rst_delay_1 <= ifc_full_mat.rst;
-		rst_delay_2 <= rst_delay_1;
-		rst_delay_3 <= rst_delay_2;
-		rst_delay_4 <= rst_delay_3;
-		rst_delay_5 <= rst_delay_4;
+		ifc_mat_mult.rst <= ifc_full_mat.count == 8'd4;
 	end
-	assign ifc_mat_mult.rst = rst_delay_5;
 	assign ifc_mat_mult.mat_mode = 1'b1;
 	assign ifc_mat_mult.dataa = ifc_full_mat.mat_mult_dataa;
 	assign ifc_mat_mult.datab = ifc_full_mat.mat_mult_datab;

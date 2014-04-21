@@ -9,6 +9,8 @@ interface ifc_t_block (
 
 logic en, rst;
 
+logic [7:0] count;
+
 logic [26:0] a;
 logic [26:0] d;
 logic [26:0] alpha;
@@ -23,6 +25,7 @@ logic [3:0] [3:0] [26:0] t_matrix;
 clocking cb @(posedge clk);
 	output en;
 	output rst;
+	output count;
 	output a;
 	output d;
 	output alpha;
@@ -38,6 +41,7 @@ modport t_block (
 	input clk,
 	input en,
 	input rst,
+	input count,
 
 	input a,
 	input d,

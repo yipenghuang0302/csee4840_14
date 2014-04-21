@@ -1,14 +1,14 @@
 // golden model class
 class t_block_test;
 
-	int pipeline_depth = 27;
+	int pipeline_depth = 28;
 
 	// pipeline variables
-	real m_a[27];
-	real m_d[27];
-	real m_alpha[27];
-	real m_theta[27];
-	real m_mat[27][4][4];
+	real m_a[28];
+	real m_d[28];
+	real m_alpha[28];
+	real m_theta[28];
+	real m_mat[28][4][4];
 
 	// temporary model variables
 	real m_sin_alpha;

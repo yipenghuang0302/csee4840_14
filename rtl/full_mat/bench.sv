@@ -73,7 +73,7 @@ program full_mat_tb (ifc_full_mat.full_mat_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (89) @(ds.cb);
+			repeat (90) @(ds.cb);
 			test.check_full_mat (
 				ds.cb.full_matrix
 			);
