@@ -43,16 +43,37 @@ struct joint_dev {
 	u32 dh_params[JOINT_DOF * 4] // Every joint has 4 parameters 
 } dev;
 
+
+/*
+ * Convert a floating point number to our fixed-point representation
+ */
+
+static u32 float_to_fixed(float num){
+	char *strnum = (char *)malloc(sizeof(char) * 100);
+	sprintf(strnum, "%f", num);
+	u32 decimal = (u32)(num << PRECISION); //Decimal part of number
+	u32 fraction;
+	strnum = strchr(strnum, '.');
+	sprintf(strnum, "%f", (1 << PRECISION) * atof(strnum));//Fractional part of number
+	//Check if we need to round up 
+	if (*(strchr(strnum, '.') + 1) >= '5' && *(strchr(strnum, '.') + 1) <= '9')
+		fraction = (u32)(atof(strnum) + 1);
+	else
+		fraction = (u32)(atof(strnum));
+	return decimal + fraction;
+}
+
 /*
  * Write target position of the end effector and the bit vector for the joint types 
  * Assumes target position is in range and the device information has been set up
  */
 static void write_target(u32 target[3], u8 joint_t)
 {
-	//TODO: Convert target values to fixed-point
+	u32 curtarget;
 	for (int i = 0; i < 3; i++){
-		iowrite32(target[i], dev.virtbase+i*4);
-		dev.target[i] = target[i];
+		curtarget = float_to_fixed(target[i]);
+		iowrite32(curtarget, dev.virtbase+i*4);
+		dev.target[i] = curtarget;
 	}
 	iowrite8(joint_t, dev.virtbase+12);
 	dev.joint_type = joint_t;
@@ -63,9 +84,9 @@ static void write_target(u32 target[3], u8 joint_t)
  * Assumes joint and parameter is in range and the device information has been set up
  */
 static void write_parameter(u8 joint, u8 parameter, u32 magnitude){
-	//TODO: Convert magnitude to fixed-point
-	iowrite32(magnitude, dev.virtbase+13+(8 * joint-1)+(parameter*4));
-	dev.dh_params[(joint-1) * 4 + parameter] = magnitude;
+	u32 mag = float_to_fixed(magnitude);
+	iowrite32(mag, dev.virtbase+13+(8 * joint-1)+(parameter*4));
+	dev.dh_params[(joint-1) * 4 + parameter] = mag;
 }
 
 /*
