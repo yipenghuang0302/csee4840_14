@@ -3,326 +3,151 @@
  * Columbia University
  */
 
-module jacobian_yipeng (
-	ifc_jacobian_yipeng.jacobian_yipeng i
+module jacobian (
+	ifc_jacobian.jacobian i
 );
 
-	//used for synchronization
-	logic [3:0] local_count;
+	// Axis of rotation / translation for joints 1...6
+	// logic [5:0] [2:0] [26:0] i.axis;
+	
+	// Location of joints 1...6
+	// logic [5:0] [2:0] [26:0] i.dist_to_end;
+
+	// LOGIC GOVERNING JOINT COUNT FOR AXIS
 	//Which joint we're on
 	logic [2:0] joint;
-
-
-	//Rotation block
-	logic [2:0] [2:0] [26:0] rot_block;	
-
-	//Matrix to hold results of multiplying rot_block components and z components
-	logic [2:0] [2:0] [26:0] mult_result_rot_z;
-
-	//Axis of rotation/translation for joints 1...6
-	logic [2:0] [26:0] v_1;
-	logic [2:0] [26:0] v_2;
-	logic [2:0] [26:0] v_3;
-	logic [2:0] [26:0] v_4;
-	logic [2:0] [26:0] v_5;
-	logic [2:0] [26:0] v_6;
-
-	//Location of joints 1...6
-	logic [2:0] [26:0] p_1;
-	logic [2:0] [26:0] p_2;
-	logic [2:0] [26:0] p_3;
-	logic [2:0] [26:0] p_4;
-	logic [2:0] [26:0] p_5;
-	logic [2:0] [26:0] p_6;
-
-	//Used to transfer rotation block and z vector to matrix multiplier
-	logic [5:0] [5:0] [26:0] mult_array_rot_block;
-	logic [2:0] [26:0] mult_array_z;
-	
-	//Deal with local count
 	always_ff @(posedge i.clk) begin
-		//Reset our clock whenever we get to start using multipliers for the next joint
-		if ( i.count == 9'd34 || i.count == 9'd40 || i.count == 9'd46 ||
-				 i.count == 9'd52 || i.count == 9'd58 || i.count == 9'd64 ) begin
-			local_count <= 0;
-		end else begin
-			if ( local_count==4'd15 ) begin
-				local_count <= 0;
-			end else begin
-				local_count <= local_count + 1'b1;
-			end
-		end
-	end
-
-	//LOGIC GOVERNING ROT_BLOCK
-	always_comb begin
-	 rot_block[0][0] = i.t_matrix[0][0];
-	 rot_block[0][1] = i.t_matrix[0][1];
-	 rot_block[0][2] = i.t_matrix[0][2];
-
-	 rot_block[1][0] = i.t_matrix[1][0];
-	 rot_block[1][1] = i.t_matrix[1][1];
-	 rot_block[1][2] = i.t_matrix[1][2];
-
-	 rot_block[2][0] = i.t_matrix[2][0];
-	 rot_block[2][1] = i.t_matrix[2][1];
-	 rot_block[2][2] = i.t_matrix[2][2];
-	end
-
-	//LOGIC GOVERNING v_1/2/3/4/5/6 (axis of rotation/translation)
-	always_ff @(posedge i.clk) begin
-		if (local_count == 4'd0) begin
-			mult_result_rot_z[0][0] <= rot_block[0][0] * i.z[0];
-			mult_result_rot_z[0][1] <= rot_block[0][1] * i.z[1];
-			mult_result_rot_z[0][2] <= rot_block[0][2] * i.z[2];
-			mult_result_rot_z[1][0] <= rot_block[1][0] * i.z[0];
-			mult_result_rot_z[1][1] <= rot_block[1][1] * i.z[1];
-			mult_result_rot_z[1][2] <= rot_block[1][2] * i.z[2];
-			mult_result_rot_z[2][0] <= rot_block[2][0] * i.z[0];
-			mult_result_rot_z[2][1] <= rot_block[2][1] * i.z[1];
-			mult_result_rot_z[2][2] <= rot_block[2][2] * i.z[2];
-		end else if (local_count == 4'd4) begin
-			case(i.joint)
-				3'd0: begin
-					v_1[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
-					v_1[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
-					v_1[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
-				end
-				3'd1: begin
-					v_2[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
-					v_2[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
-					v_2[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
-				end
-				3'd2: begin
-					v_3[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
-					v_3[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
-					v_3[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
-				end
-				3'd3: begin
-					v_4[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
-					v_4[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
-					v_4[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
-				end
-				3'd4: begin
-					v_5[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
-					v_5[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
-					v_5[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
-				end
-				3'd5: begin
-					v_6[0] <= mult_result_rot_z[0][0] + mult_result_rot_z[0][1];
-					v_6[1] <= mult_result_rot_z[1][0] + mult_result_rot_z[1][1];
-					v_6[2] <= mult_result_rot_z[2][0] + mult_result_rot_z[2][1];
-				end
-			endcase
-		end else if (local_count == 4'd5) begin
-			case(i.joint)
-				3'd0: begin
-					v_1[0] <= v_1[0] + mult_result_rot_z[0][2];
-					v_1[1] <= v_1[1] + mult_result_rot_z[1][2];
-					v_1[2] <= v_1[2] + mult_result_rot_z[2][2];
-				end
-				3'd1: begin
-					v_2[0] <= v_2[0] + mult_result_rot_z[0][2];
-					v_2[1] <= v_2[1] + mult_result_rot_z[1][2];
-					v_2[2] <= v_2[2] + mult_result_rot_z[2][2];
-				end
-				3'd2: begin
-					v_3[0] <= v_3[0] + mult_result_rot_z[0][2];
-					v_3[1] <= v_3[1] + mult_result_rot_z[1][2];
-					v_3[2] <= v_3[2] + mult_result_rot_z[2][2];
-				end
-				3'd3: begin
-					v_4[0] <= v_4[0] + mult_result_rot_z[0][2];
-					v_4[1] <= v_4[1] + mult_result_rot_z[1][2];
-					v_4[2] <= v_4[2] + mult_result_rot_z[2][2];
-				end
-				3'd4: begin
-					v_5[0] <= v_5[0] + mult_result_rot_z[0][2];
-					v_5[1] <= v_5[1] + mult_result_rot_z[1][2];
-					v_5[2] <= v_5[2] + mult_result_rot_z[2][2];
-				end
-				3'd5: begin
-					v_6[0] <= v_6[0] + mult_result_rot_z[0][2];
-					v_6[1] <= v_6[1] + mult_result_rot_z[1][2];
-					v_6[2] <= v_6[2] + mult_result_rot_z[2][2];
-				end
-			endcase
-		end
-	end
-
-	//LOGIC GOVERNING p_1/2/3/4/5/6 (position of joint)
-	always_ff @(posedge i.clk) begin
-		case(i.joint)
-			3'd0: begin
-				//get position
-				p_1[0] <= i.t_matrix[0][3];
-				p_1[1] <= i.t_matrix[1][3];
-				p_1[2] <= i.t_matrix[2][3];
-			end
-			3'd1: begin
-				//get position
-				p_2[0] <= i.t_matrix[0][3];
-				p_2[1] <= i.t_matrix[1][3];
-				p_2[2] <= i.t_matrix[2][3];
-			end
-			3'd2: begin
-				//get position
-				p_3[0] <= i.t_matrix[0][3];
-				p_3[1] <= i.t_matrix[1][3];
-				p_3[2] <= i.t_matrix[2][3];
-			end
-			3'd3: begin
-				//get position
-				p_4[0] <= i.t_matrix[0][3];
-				p_4[1] <= i.t_matrix[1][3];
-				p_4[2] <= i.t_matrix[2][3];
-			end
-			3'd4: begin
-				//get position
-				p_5[0] <= i.t_matrix[0][3];
-				p_5[1] <= i.t_matrix[1][3];
-				p_5[2] <= i.t_matrix[2][3];
-			end
-			3'd5: begin
-				if (local_count == 4'd6) begin
-					//Do all subtractions at once
-					p_1[0] <= i.s[0] - p_1[0];
-					p_1[1] <= i.s[1] - p_1[1];
-					p_1[2] <= i.s[2] - p_1[2];
-
-					p_2[0] <= i.s[0] - p_2[0];
-					p_2[1] <= i.s[1] - p_2[1];
-					p_2[2] <= i.s[2] - p_2[2];
-					
-					p_3[0] <= i.s[0] - p_3[0];
-					p_3[1] <= i.s[1] - p_3[1];
-					p_3[2] <= i.s[2] - p_3[2];
-
-					p_4[0] <= i.s[0] - p_4[0];
-					p_4[1] <= i.s[1] - p_4[1];
-					p_4[2] <= i.s[2] - p_4[2];
-
-					p_5[0] <= i.s[0] - p_5[0];
-					p_5[1] <= i.s[1] - p_5[1];
-					p_5[2] <= i.s[2] - p_5[2];
-
-					p_6[0] <= i.s[0] - i.t_matrix[0][3];
-					p_6[1] <= i.s[1] - i.t_matrix[1][3];
-					p_6[2] <= i.s[2] - i.t_matrix[2][3];
-				end
-			end
+		case (i.count)
+			8'd28: joint <= 3'd0;
+			8'd41: joint <= 3'd1;
+			8'd53: joint <= 3'd2;
+			8'd65: joint <= 3'd3;
+			8'd77: joint <= 3'd4;
+			8'd89: joint <= 3'd5;
+			default: joint <= joint;
 		endcase
 	end
 
-	//LOGIC GOVERNING dataa/datab (multiplications for cross-products)
+	// LOGIC GOVERNING ARRAY MULT INPUT
 	always_ff @(posedge i.clk) begin
-		if (local_count == 4'd7) begin
-			i.dataa <= {v_1[1],v_1[2],v_1[2],v_1[0],v_1[0],v_1[1],
-									v_2[1],v_2[2],v_2[2],v_2[0],v_2[0],v_2[1],
-									v_3[1],v_3[2],v_3[2],v_3[0],v_3[0],v_3[1],
-									v_4[1],v_4[2],v_4[2],v_4[0],v_4[0],v_4[1],
-									v_5[1],v_5[2],v_5[2],v_5[0],v_5[0],v_5[1],
-									v_6[1],v_6[2],v_6[2],v_6[0],v_6[0],v_6[1]};
-			i.datab <= {p_1[2],p_1[1],p_1[0],p_1[2],p_1[1],p_1[0],
-									p_2[2],p_2[1],p_2[0],p_2[2],p_2[1],p_2[0],
-									p_3[2],p_3[1],p_3[0],p_3[2],p_3[1],p_3[0],
-									p_4[2],p_4[1],p_4[0],p_4[2],p_4[1],p_4[0],
-									p_5[2],p_5[1],p_5[0],p_5[2],p_5[1],p_5[0],
-									p_6[2],p_6[1],p_6[0],p_6[2],p_6[1],p_6[0]};
+		if (
+			i.count==8'd29 || i.count==8'd30 ||
+			i.count==8'd42 || i.count==8'd43 ||
+			i.count==8'd54 || i.count==8'd55 ||
+			i.count==8'd66 || i.count==8'd67 ||
+			i.count==8'd78 || i.count==8'd79 ) begin 
+			// || i.count==8'd90 
+			i.array_mult_dataa[0] <= i.full_matrix[joint][0][0];
+			i.array_mult_dataa[1] <= i.full_matrix[joint][0][1];
+			i.array_mult_dataa[2] <= i.full_matrix[joint][0][2];
+			i.array_mult_dataa[3] <= i.full_matrix[joint][1][0];
+			i.array_mult_dataa[4] <= i.full_matrix[joint][1][1];
+			i.array_mult_dataa[5] <= i.full_matrix[joint][1][2];
+			i.array_mult_dataa[6] <= i.full_matrix[joint][2][0];
+			i.array_mult_dataa[7] <= i.full_matrix[joint][2][1];
+			i.array_mult_dataa[8] <= i.full_matrix[joint][2][2];
+
+			i.array_mult_datab[0] <= i.z[0];
+			i.array_mult_datab[1] <= i.z[1];
+			i.array_mult_datab[2] <= i.z[2];
+			i.array_mult_datab[3] <= i.z[0];
+			i.array_mult_datab[4] <= i.z[1];
+			i.array_mult_datab[5] <= i.z[2];
+			i.array_mult_datab[6] <= i.z[0];
+			i.array_mult_datab[7] <= i.z[1];
+			i.array_mult_datab[8] <= i.z[2];
+		end else begin
+			i.array_mult_dataa <= {9{27'b0}};
+			i.array_mult_datab <= {9{27'b0}};
+		end
+	end
+
+	// LOGIC GOVERNING ARRAY MULT OUTPUT
+	// axis[5:0] (axis of rotation/translation)
+	always_ff @(posedge i.clk) begin
+		if ( i.count==8'd34 || i.count==8'd47 || i.count==8'd59 || i.count==8'd71 || i.count==8'd83 ) begin 
+			// || i.count==8'd95 
+			i.axis[joint+1][0] <= i.array_mult_result[0] + i.array_mult_result[1];
+			i.axis[joint+1][1] <= i.array_mult_result[3] + i.array_mult_result[4];
+			i.axis[joint+1][2] <= i.array_mult_result[6] + i.array_mult_result[7];
+		end else if ( i.count==8'd35 || i.count==8'd48 || i.count==8'd60 || i.count==8'd72 || i.count==8'd84 ) begin 
+			// || i.count==8'd96 
+			i.axis[joint+1][0] <= i.axis[joint+1][0] + i.array_mult_result[2];
+			i.axis[joint+1][1] <= i.axis[joint+1][1] + i.array_mult_result[5];
+			i.axis[joint+1][2] <= i.axis[joint+1][2] + i.array_mult_result[8];
+		end
+		i.axis[0] <= i.z;
+	end
+
+	// LOGIC GOVERNING dist_to_end[0]/2/3/4/5/6 (dist_to_end of joint)
+	always_ff @(posedge i.clk) begin
+		if ( i.count==8'd90 ) begin
+			i.dist_to_end[1][0] <= i.full_matrix[5][0][3] - i.full_matrix[0][0][3];
+			i.dist_to_end[1][1] <= i.full_matrix[5][1][3] - i.full_matrix[0][1][3];
+			i.dist_to_end[1][2] <= i.full_matrix[5][2][3] - i.full_matrix[0][2][3];
+			i.dist_to_end[2][0] <= i.full_matrix[5][0][3] - i.full_matrix[1][0][3];
+			i.dist_to_end[2][1] <= i.full_matrix[5][1][3] - i.full_matrix[1][1][3];
+			i.dist_to_end[2][2] <= i.full_matrix[5][2][3] - i.full_matrix[1][2][3];
+			i.dist_to_end[3][0] <= i.full_matrix[5][0][3] - i.full_matrix[2][0][3];
+			i.dist_to_end[3][1] <= i.full_matrix[5][1][3] - i.full_matrix[2][1][3];
+			i.dist_to_end[3][2] <= i.full_matrix[5][2][3] - i.full_matrix[2][2][3];
+			i.dist_to_end[4][0] <= i.full_matrix[5][0][3] - i.full_matrix[3][0][3];
+			i.dist_to_end[4][1] <= i.full_matrix[5][1][3] - i.full_matrix[3][1][3];
+			i.dist_to_end[4][2] <= i.full_matrix[5][2][3] - i.full_matrix[3][2][3];
+			i.dist_to_end[5][0] <= i.full_matrix[5][0][3] - i.full_matrix[4][0][3];
+			i.dist_to_end[5][1] <= i.full_matrix[5][1][3] - i.full_matrix[4][1][3];
+			i.dist_to_end[5][2] <= i.full_matrix[5][2][3] - i.full_matrix[4][2][3];
+		end
+	end
+	assign i.dist_to_end[0] = {27'd0, 27'd0, 27'd0};
+
+	// LOGIC GOVERNING MAT MULT INPUT
+	// LOGIC GOVERNING dataa/datab (multiplications for cross-products)
+	always_ff @(posedge i.clk) begin
+		if ( i.count==8'd91 ) begin
+			i.mat_mult_dataa <= {
+				i.axis[0][1],i.axis[0][2],i.axis[0][2],i.axis[0][0],i.axis[0][0],i.axis[0][1],
+				i.axis[1][1],i.axis[1][2],i.axis[1][2],i.axis[1][0],i.axis[1][0],i.axis[1][1],
+				i.axis[2][1],i.axis[2][2],i.axis[2][2],i.axis[2][0],i.axis[2][0],i.axis[2][1],
+				i.axis[3][1],i.axis[3][2],i.axis[3][2],i.axis[3][0],i.axis[3][0],i.axis[3][1],
+				i.axis[4][1],i.axis[4][2],i.axis[4][2],i.axis[4][0],i.axis[4][0],i.axis[4][1],
+				i.axis[5][1],i.axis[5][2],i.axis[5][2],i.axis[5][0],i.axis[5][0],i.axis[5][1]
+			};
+			i.mat_mult_datab <= {
+				i.dist_to_end[0][2],i.dist_to_end[0][1],i.dist_to_end[0][0],i.dist_to_end[0][2],i.dist_to_end[0][1],i.dist_to_end[0][0],
+				i.dist_to_end[1][2],i.dist_to_end[1][1],i.dist_to_end[1][0],i.dist_to_end[1][2],i.dist_to_end[1][1],i.dist_to_end[1][0],
+				i.dist_to_end[2][2],i.dist_to_end[2][1],i.dist_to_end[2][0],i.dist_to_end[2][2],i.dist_to_end[2][1],i.dist_to_end[2][0],
+				i.dist_to_end[3][2],i.dist_to_end[3][1],i.dist_to_end[3][0],i.dist_to_end[3][2],i.dist_to_end[3][1],i.dist_to_end[3][0],
+				i.dist_to_end[4][2],i.dist_to_end[4][1],i.dist_to_end[4][0],i.dist_to_end[4][2],i.dist_to_end[4][1],i.dist_to_end[4][0],
+				i.dist_to_end[5][2],i.dist_to_end[5][1],i.dist_to_end[5][0],i.dist_to_end[5][2],i.dist_to_end[5][1],i.dist_to_end[5][0]
+			};
 		end
 	end
 
 	// LOGIC GOVERNING RESULT (Jacobian matrix)
 	parameter MAX = 6;
-	genvar column, row;
+	genvar col;
 	generate
-		for ( column=0 ; column<MAX ; column++ ) begin: jacobian_col
-			for ( row=0 ; row<MAX ; row++ ) begin: jacobian_row
-				always_ff @(posedge i.clk) begin
-					if ( local_count <= 4'd13 ) begin
-						//Not ready to calculate Jacobian yet
-						i.jacobian_matrix[row][column] <= 27'b0;
-					end else begin
-						if (i.joint_type[column] ==1'b1) begin	
-							case(row)
-								0: i.jacobian_matrix[row][column] <= i.result[column][0] - i.result[column][1];
-								1: i.jacobian_matrix[row][column] <= i.result[column][2] - i.result[column][3];
-								2: i.jacobian_matrix[row][column] <= i.result[column][4] - i.result[column][5];
-							endcase
-						end else if (i.joint_type[column] == 1'b0 && row > 2) begin
-							i.jacobian_matrix[row][column] <= 27'b0;
-						end
-						case(column)
-							0: begin
-								if (i.joint_type[column] == 1'b1) begin //rotational joint
-									case(row)
-										3: i.jacobian_matrix[row][column] <= v_1[0];
-										4: i.jacobian_matrix[row][column] <= v_1[1];
-										5: i.jacobian_matrix[row][column] <= v_1[2];
-									endcase
-								end else if (i.joint_type[column] == 1'b0 && row <= 2) begin //translational joint
-									i.jacobian_matrix[row][column] <= v_1[row];
-								end
-							end
-							1: begin
-								if (i.joint_type[column] == 1'b1) begin //rotational joint
-									case(row)
-										3: i.jacobian_matrix[row][column] <= v_2[0];
-										4: i.jacobian_matrix[row][column] <= v_2[1];
-										5: i.jacobian_matrix[row][column] <= v_2[2];
-									endcase
-								end else if (i.joint_type[column] == 1'b0 && row <= 2) begin //translational joint
-									i.jacobian_matrix[row][column] <= v_2[row];
-								end
-							end
-							2: begin
-								if (i.joint_type[column] == 1'b1) begin //rotational joint
-									case(row)
-										3: i.jacobian_matrix[row][column] <= v_3[0];
-										4: i.jacobian_matrix[row][column] <= v_3[1];
-										5: i.jacobian_matrix[row][column] <= v_3[2];
-									endcase
-								end else if (i.joint_type[column] == 1'b0 && row <= 2) begin //translational joint
-									i.jacobian_matrix[row][column] <= v_3[row];
-								end
-							end
-							3: begin
-								if (i.joint_type[column] == 1'b1) begin //rotational joint
-									case(row)
-										3: i.jacobian_matrix[row][column] <= v_4[0];
-										4: i.jacobian_matrix[row][column] <= v_4[1];
-										5: i.jacobian_matrix[row][column] <= v_4[2];
-									endcase
-								end else if (i.joint_type[column] == 1'b0 && row <= 2) begin //translational joint
-									i.jacobian_matrix[row][column] <= v_4[row];
-								end
-							end
-							4: begin
-								if (i.joint_type[column] == 1'b1) begin //rotational joint
-									case(row)
-										3: i.jacobian_matrix[row][column] <= v_5[0];
-										4: i.jacobian_matrix[row][column] <= v_5[1];
-										5: i.jacobian_matrix[row][column] <= v_5[2];
-									endcase
-								end else if (i.joint_type[column] == 1'b0 && row <= 2) begin //translational joint
-									i.jacobian_matrix[row][column] <= v_5[row];
-								end
-							end
-							5: begin
-								if (i.joint_type[column] == 1'b1) begin //rotational joint
-									case(row)
-										3: i.jacobian_matrix[row][column] <= v_6[0];
-										4: i.jacobian_matrix[row][column] <= v_6[1];
-										5: i.jacobian_matrix[row][column] <= v_6[2];
-									endcase
-								end else if (i.joint_type[column] == 1'b0 && row <= 2) begin //translational joint
-									i.jacobian_matrix[row][column] <= v_6[row];
-								end
-							end
-						endcase
-					end // end local_count
-				end // end always_ff
-			end // end row loop
+		for ( col=0 ; col<MAX ; col++ ) begin: jacobian_col
+			always_ff @(posedge i.clk) begin
+				if ( i.count==8'd98 ) begin
+					if ( i.joint_type[col]==1'b1 ) begin // rotational
+						i.jacobian_matrix[0][col] <= i.mat_mult_result[5-col][5] - i.mat_mult_result[5-col][4];
+						i.jacobian_matrix[1][col] <= i.mat_mult_result[5-col][3] - i.mat_mult_result[5-col][2];
+						i.jacobian_matrix[2][col] <= i.mat_mult_result[5-col][1] - i.mat_mult_result[5-col][0];
+						i.jacobian_matrix[3][col] <= i.axis[col][0];
+						i.jacobian_matrix[4][col] <= i.axis[col][1];
+						i.jacobian_matrix[5][col] <= i.axis[col][2];
+					end else if ( i.joint_type[col]==1'b0 ) begin
+						i.jacobian_matrix[0][col] <= i.axis[col][0];
+						i.jacobian_matrix[1][col] <= i.axis[col][1];
+						i.jacobian_matrix[2][col] <= i.axis[col][2];
+						i.jacobian_matrix[3][col] <= 27'b0;
+						i.jacobian_matrix[4][col] <= 27'b0;
+						i.jacobian_matrix[5][col] <= 27'b0;
+					end
+				end // end i.count
+			end // end always_ff
 		end // end col loop
 	endgenerate
 endmodule
