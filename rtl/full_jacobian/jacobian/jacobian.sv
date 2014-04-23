@@ -104,27 +104,38 @@ module jacobian (
 	// LOGIC GOVERNING MAT MULT INPUT
 	// LOGIC GOVERNING dataa/datab (multiplications for cross-products)
 	always_ff @(posedge i.clk) begin
-		if ( i.count==8'd0 ) begin
-			i.mat_mult_dataa <= {36{27'b0}};
-			i.mat_mult_datab <= {36{27'b0}};
-		end else if ( i.count==8'd91 ) begin
-			i.mat_mult_dataa <= {
-				i.axis[0][1],i.axis[0][2],i.axis[0][2],i.axis[0][0],i.axis[0][0],i.axis[0][1],
-				i.axis[1][1],i.axis[1][2],i.axis[1][2],i.axis[1][0],i.axis[1][0],i.axis[1][1],
-				i.axis[2][1],i.axis[2][2],i.axis[2][2],i.axis[2][0],i.axis[2][0],i.axis[2][1],
-				i.axis[3][1],i.axis[3][2],i.axis[3][2],i.axis[3][0],i.axis[3][0],i.axis[3][1],
-				i.axis[4][1],i.axis[4][2],i.axis[4][2],i.axis[4][0],i.axis[4][0],i.axis[4][1],
-				i.axis[5][1],i.axis[5][2],i.axis[5][2],i.axis[5][0],i.axis[5][0],i.axis[5][1]
-			};
-			i.mat_mult_datab <= {
-				i.dist_to_end[0][2],i.dist_to_end[0][1],i.dist_to_end[0][0],i.dist_to_end[0][2],i.dist_to_end[0][1],i.dist_to_end[0][0],
-				i.dist_to_end[1][2],i.dist_to_end[1][1],i.dist_to_end[1][0],i.dist_to_end[1][2],i.dist_to_end[1][1],i.dist_to_end[1][0],
-				i.dist_to_end[2][2],i.dist_to_end[2][1],i.dist_to_end[2][0],i.dist_to_end[2][2],i.dist_to_end[2][1],i.dist_to_end[2][0],
-				i.dist_to_end[3][2],i.dist_to_end[3][1],i.dist_to_end[3][0],i.dist_to_end[3][2],i.dist_to_end[3][1],i.dist_to_end[3][0],
-				i.dist_to_end[4][2],i.dist_to_end[4][1],i.dist_to_end[4][0],i.dist_to_end[4][2],i.dist_to_end[4][1],i.dist_to_end[4][0],
-				i.dist_to_end[5][2],i.dist_to_end[5][1],i.dist_to_end[5][0],i.dist_to_end[5][2],i.dist_to_end[5][1],i.dist_to_end[5][0]
-			};
-		end
+		case (i.count)
+			8'd0: begin
+				i.mat_mult_dataa <= {36{27'b0}};
+				i.mat_mult_datab <= {36{27'b0}};
+			end
+			8'd91: begin
+				i.mat_mult_dataa <= {
+					i.axis[0][1],i.axis[0][2],i.axis[0][2],i.axis[0][0],i.axis[0][0],i.axis[0][1],
+					i.axis[1][1],i.axis[1][2],i.axis[1][2],i.axis[1][0],i.axis[1][0],i.axis[1][1],
+					i.axis[2][1],i.axis[2][2],i.axis[2][2],i.axis[2][0],i.axis[2][0],i.axis[2][1],
+					i.axis[3][1],i.axis[3][2],i.axis[3][2],i.axis[3][0],i.axis[3][0],i.axis[3][1],
+					i.axis[4][1],i.axis[4][2],i.axis[4][2],i.axis[4][0],i.axis[4][0],i.axis[4][1],
+					i.axis[5][1],i.axis[5][2],i.axis[5][2],i.axis[5][0],i.axis[5][0],i.axis[5][1]
+				};
+				i.mat_mult_datab <= {
+					i.dist_to_end[0][2],i.dist_to_end[0][1],i.dist_to_end[0][0],i.dist_to_end[0][2],i.dist_to_end[0][1],i.dist_to_end[0][0],
+					i.dist_to_end[1][2],i.dist_to_end[1][1],i.dist_to_end[1][0],i.dist_to_end[1][2],i.dist_to_end[1][1],i.dist_to_end[1][0],
+					i.dist_to_end[2][2],i.dist_to_end[2][1],i.dist_to_end[2][0],i.dist_to_end[2][2],i.dist_to_end[2][1],i.dist_to_end[2][0],
+					i.dist_to_end[3][2],i.dist_to_end[3][1],i.dist_to_end[3][0],i.dist_to_end[3][2],i.dist_to_end[3][1],i.dist_to_end[3][0],
+					i.dist_to_end[4][2],i.dist_to_end[4][1],i.dist_to_end[4][0],i.dist_to_end[4][2],i.dist_to_end[4][1],i.dist_to_end[4][0],
+					i.dist_to_end[5][2],i.dist_to_end[5][1],i.dist_to_end[5][0],i.dist_to_end[5][2],i.dist_to_end[5][1],i.dist_to_end[5][0]
+				};
+			end
+			8'd98: begin // clear
+				i.mat_mult_dataa <= {36'b0};
+				i.mat_mult_datab <= {36'b0};
+			end
+			default: begin
+				i.mat_mult_dataa <= i.mat_mult_dataa;
+				i.mat_mult_datab <= i.mat_mult_datab;
+			end
+		endcase
 	end
 
 	// LOGIC GOVERNING RESULT (Jacobian matrix)

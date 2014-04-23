@@ -36,13 +36,52 @@ module full_jacobian (
 	assign ifc_jacobian.mat_mult_result = i.mat_mult_result;
 	jacobian jacobian (ifc_jacobian.jacobian);
 	// outputs
-	// timing design prevents module outputs to shared multipliers colliding
-	assign i.array_mult_dataa = {3'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;
-	assign i.array_mult_datab = {3'b0,ifc_full_mat.array_mult_datab} | ifc_jacobian.array_mult_datab;
-	assign i.mat_mult_dataa = ifc_full_mat.mat_mult_dataa | ifc_jacobian.mat_mult_dataa;
-	assign i.mat_mult_datab = ifc_full_mat.mat_mult_datab | ifc_jacobian.mat_mult_datab;
 	assign i.axis = ifc_jacobian.axis;
 	assign i.dist_to_end = ifc_jacobian.dist_to_end;
 	assign i.jacobian_matrix = ifc_jacobian.jacobian_matrix;
+
+	// MATRIX MULTIPLY FOR JJT JACOBIAN * JACOBIAN TRANSPOSE
+	logic [5:0] [5:0] [26:0] jjt_dataa;
+	logic [5:0] [5:0] [26:0] jjt_datab;
+
+	// MAT_MULT INPUTS
+	always_ff @(posedge i.clk) begin
+		case (i.count)
+			8'd0: begin
+				jjt_dataa <= {36{27'b0}};
+				jjt_datab <= {36{27'b0}};
+			end
+			8'd99: begin
+				jjt_dataa <= i.jacobian_matrix;
+				jjt_datab <= {
+					{ i.jacobian_matrix[5][5], i.jacobian_matrix[4][5], i.jacobian_matrix[3][5], i.jacobian_matrix[2][5], i.jacobian_matrix[1][5], i.jacobian_matrix[0][5] },
+					{ i.jacobian_matrix[5][4], i.jacobian_matrix[4][4], i.jacobian_matrix[3][4], i.jacobian_matrix[2][4], i.jacobian_matrix[1][4], i.jacobian_matrix[0][4] },
+					{ i.jacobian_matrix[5][3], i.jacobian_matrix[4][3], i.jacobian_matrix[3][3], i.jacobian_matrix[2][3], i.jacobian_matrix[1][3], i.jacobian_matrix[0][3] },
+					{ i.jacobian_matrix[5][2], i.jacobian_matrix[4][2], i.jacobian_matrix[3][2], i.jacobian_matrix[2][2], i.jacobian_matrix[1][2], i.jacobian_matrix[0][2] },
+					{ i.jacobian_matrix[5][1], i.jacobian_matrix[4][1], i.jacobian_matrix[3][1], i.jacobian_matrix[2][1], i.jacobian_matrix[1][1], i.jacobian_matrix[0][1] },
+					{ i.jacobian_matrix[5][0], i.jacobian_matrix[4][0], i.jacobian_matrix[3][0], i.jacobian_matrix[2][0], i.jacobian_matrix[1][0], i.jacobian_matrix[0][0] }
+				};
+			end
+			8'd111: begin
+				jjt_dataa <= {36{27'b0}};
+				jjt_datab <= {36{27'b0}};
+			end
+			default: begin
+				jjt_dataa <= jjt_dataa;
+				jjt_datab <= jjt_datab;
+			end
+		endcase
+	end
+
+	// MAT_MULT OUTPUTS
+	always_ff @(posedge i.clk)
+		if ( i.count==8'd111)
+			i.jjt_bias <= i.mat_mult_result;
+
+	// timing design prevents module outputs to shared multipliers colliding
+	assign i.array_mult_dataa = {3'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;
+	assign i.array_mult_datab = {3'b0,ifc_full_mat.array_mult_datab} | ifc_jacobian.array_mult_datab;
+	assign i.mat_mult_dataa = ifc_full_mat.mat_mult_dataa | ifc_jacobian.mat_mult_dataa | jjt_dataa;
+	assign i.mat_mult_datab = ifc_full_mat.mat_mult_datab | ifc_jacobian.mat_mult_datab | jjt_datab;
 
 endmodule

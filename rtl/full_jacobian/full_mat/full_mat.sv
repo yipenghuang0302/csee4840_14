@@ -121,8 +121,8 @@ module full_mat (
 				};
 			end
 			8'd89: begin // clear
-				i.mat_mult_dataa <= {36'b0};
-				i.mat_mult_datab <= {36'b0};
+				i.mat_mult_dataa <= {36{27'b0}};
+				i.mat_mult_datab <= {36{27'b0}};
 			end
 			default: begin
 				i.mat_mult_dataa <= i.mat_mult_dataa;

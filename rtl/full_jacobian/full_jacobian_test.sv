@@ -5,6 +5,7 @@ class full_jacobian_test;
 	real model_axis [6][3];
 	real model_dist_to_end [6][3];
 	real model_jacobian_matrix [6][6];
+	real model_jjt_bias [6][6];
 
 	function real abs (real num); 
 	   abs = (num<0) ? -num : num; 
@@ -105,17 +106,26 @@ class full_jacobian_test;
 			end
 		end
 
+		// jjt_bias = jacobian * jacobian transpose;
+		for ( int row=0 ; row<6 ; row++ ) // product row
+			for ( int col=0 ; col<6 ; col++ ) begin // product column
+				model_jjt_bias[row][col] = row==col ? 0.0 : 0.0; // bias term
+				for ( int k=0 ; k<6 ; k++ ) // inner term
+					model_jjt_bias[row][col] += model_jacobian_matrix[row][k] * model_jacobian_matrix[col][k];
+			end
+
 	endfunction
 
 	function void check_full_jacobian (
 		logic [5:0] [3:0] [3:0] [26:0] full_matrix,
 		logic [5:0] [2:0] [26:0] axis,
 		logic [5:0] [2:0] [26:0] dist_to_end,
-		logic [5:0] [5:0] [26:0] jacobian_matrix
+		logic [5:0] [5:0] [26:0] jacobian_matrix,
+		logic [5:0] [5:0] [26:0] jjt_bias
 	);
 
-		real abs_tol = 0.1;
-		real rel_tol = 0.1;
+		real abs_tol = 0.01;
+		real rel_tol = 0.01;
 
 		real full_matrix_real[4][4];
 		real full_matrix_error[4][4];
@@ -133,6 +143,10 @@ class full_jacobian_test;
 		real jacobian_error[6][6];
 		real jacobian_percent[6][6];
 
+		real jjt_bias_real[6][6];
+		real jjt_bias_error[6][6];
+		real jjt_bias_percent[6][6];
+
 		bit passed = 1'b1;
 
 		// CHECK THE FULL MATRIX
@@ -148,7 +162,7 @@ class full_jacobian_test;
 						$write("model_full_matrix=%f; dut_result=%f; full_matrix_percent=%f.\n", model_full_matrix[joint][i][j], full_matrix_real[i][j], full_matrix_percent[i][j]);
 						passed = 1'b0;
 					end else begin
-						// $write("%t : pass full matrix i=%d j=%d\n", $realtime, i, j);
+						$write("%t : pass full matrix i=%d j=%d\n", $realtime, i, j);
 					end
 				end
 			end
@@ -166,7 +180,7 @@ class full_jacobian_test;
 					$write("model_axis=%f; dut_result=%f; axis_percent=%f.\n", model_axis[joint][coord], axis_real[joint][coord], axis_percent[joint][coord]);
 					passed = 1'b0;
 				end else begin
-					// $write("%t : pass axis joint=%d coord=%d\n", $realtime, joint, coord);
+					$write("%t : pass axis joint=%d coord=%d\n", $realtime, joint, coord);
 				end
 			end
 		end
@@ -183,7 +197,7 @@ class full_jacobian_test;
 					$write("model_dist_to_end=%f; dut_result=%f; dist_to_end_percent=%f.\n", model_dist_to_end[joint][coord], dist_to_end_real[joint][coord], dist_to_end_percent[joint][coord]);
 					passed = 1'b0;
 				end else begin
-					// $write("%t : pass dist_to_end joint=%d coord=%d\n", $realtime, joint, coord);
+					$write("%t : pass dist_to_end joint=%d coord=%d\n", $realtime, joint, coord);
 				end
 			end
 		end
@@ -200,7 +214,24 @@ class full_jacobian_test;
 					$write("model_jacobian_matrix=%f; dut_result=%f; jacobian_percent=%f.\n", model_jacobian_matrix[i][j], jacobian_real[i][j], jacobian_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					// $write("%t : pass jacobian i=%d j=%d\n", $realtime, i, j);
+					$write("%t : pass jacobian i=%d j=%d\n", $realtime, i, j);
+				end
+			end
+		end
+
+		// CHECK JACOBIAN
+		for ( int i=0 ; i<6 ; i++ ) begin // full matrix row
+			for ( int j=0 ; j<6 ; j++ ) begin // full matrix column
+				jjt_bias_real[i][j] = real'(int'({{5{jjt_bias[i][j][26]}}, jjt_bias[i][j]}))/256.0;
+				jjt_bias_error[i][j] = abs( jjt_bias_real[i][j] - model_jjt_bias[i][j] );
+				jjt_bias_percent[i][j] = abs( jjt_bias_error[i][j] / model_jjt_bias[i][j] );
+				if (jjt_bias_error[i][j]>abs_tol && jjt_bias_percent[i][j]>rel_tol) begin
+					$write("%t : fail jjt_bias i=%d j=%d\n", $realtime, i, j);
+					$write("model_jjt_bias=%f; dut_result=%f; jjt_bias_error=%f.\n", model_jjt_bias[i][j], jjt_bias_real[i][j], jjt_bias_error[i][j]);
+					$write("model_jjt_bias=%f; dut_result=%f; jjt_bias_percent=%f.\n", model_jjt_bias[i][j], jjt_bias_real[i][j], jjt_bias_percent[i][j]);
+					passed = 1'b0;
+				end else begin
+					$write("%t : pass jjt_bias i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
@@ -208,7 +239,7 @@ class full_jacobian_test;
 		if (passed) begin
 			$display("%t : pass \n", $realtime);
 		end else begin
-			// $exit();
+			$exit();
 		end
 
 	endfunction
