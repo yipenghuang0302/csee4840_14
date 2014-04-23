@@ -665,7 +665,7 @@ set_global_assignment -name SDC_FILE sincos.sdc
 set_global_assignment -name TCL_SCRIPT_FILE sincos.tcl
 set_global_assignment -name SOURCE_FILE db/sincos.cmp.rdb
 set_global_assignment -name SYSTEMVERILOG_FILE sincos_interface.sv
-set_global_assignment -name VERILOG_FILE ../../../mult_27/mult_27_syn.v
+set_global_assignment -name VERILOG_FILE ../../../../mult_27/mult_27_syn.v
 set_global_assignment -name VERILOG_FILE mult_27_coeff_58/mult_27_coeff_58_syn.v
 set_global_assignment -name VERILOG_FILE mult_27_coeff_104/mult_27_coeff_104_syn.v
 set_global_assignment -name VERILOG_FILE mult_27_coeff_326/mult_27_coeff_326_syn.v

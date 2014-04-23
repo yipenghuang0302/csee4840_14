@@ -64,7 +64,7 @@ class full_mat_test;
 		real percent[4][4];
 		bit passed = 1'b1;
 
-		for ( int joint=0 ; joint<6 ; joint++ ) begin
+		for ( int joint=5 ; joint<6 ; joint++ ) begin
 			for ( int i=0 ; i<4 ; i++ ) begin // full matrix row
 				for ( int j=0 ; j<4 ; j++ ) begin // full matrix column
 					real_result[i][j] = real'(int'({{5{full_mat[joint][i][j][26]}}, full_mat[joint][i][j]}))/256.0;
