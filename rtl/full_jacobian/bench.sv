@@ -90,12 +90,13 @@ program full_jacobian_tb (ifc_full_jacobian.full_jacobian_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (99) @(ds.cb);
+			repeat (113) @(ds.cb);
 			test.check_full_jacobian (
 				ds.cb.full_matrix,
 				ds.cb.axis,
 				ds.cb.dist_to_end,
-				ds.cb.jacobian_matrix
+				ds.cb.jacobian_matrix,
+				ds.cb.jjt_bias
 			);
 		end
 	end

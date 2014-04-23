@@ -48,7 +48,7 @@ module full_jacobian_top ();
 	full_jacobian full_jacobian (ifc_full_jacobian.full_jacobian);
 
 	// LOGIC GOVERNING COUNT
-	parameter MAX = 100;
+	parameter MAX = 114;
 	always_ff @(posedge ifc_full_jacobian.clk) begin
 		if ( ifc_full_jacobian.rst ) begin // if parallel multiplier mode, clear counter
 			ifc_full_jacobian.count <= 8'b0;
@@ -66,9 +66,9 @@ module full_jacobian_top ();
 	assign ifc_mat_mult.en = ifc_full_jacobian.en;
 	// delay rst for mat_mult by five
 	always_ff @(posedge clk) begin
-		ifc_mat_mult.rst <= ifc_full_jacobian.count == 8'd4;
+		ifc_mat_mult.rst <= ifc_full_jacobian.count==8'd4 || ifc_full_jacobian.count==8'd98;
 	end
-	assign ifc_mat_mult.mat_mode = ifc_full_jacobian.count<8'd89 ? 1'b1 : 1'b0;
+	assign ifc_mat_mult.mat_mode = 8'd89<=ifc_full_jacobian.count&&ifc_full_jacobian.count<8'd98 ? 1'b0 : 1'b1;
 	assign ifc_mat_mult.dataa = ifc_full_jacobian.mat_mult_dataa;
 	assign ifc_mat_mult.datab = ifc_full_jacobian.mat_mult_datab;
 	mat_mult mat_mult (ifc_mat_mult.mat_mult);
