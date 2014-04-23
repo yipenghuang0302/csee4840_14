@@ -50,16 +50,21 @@ struct joint_dev {
 
 static u32 float_to_fixed(float num){
 	char *strnum = (char *)malloc(sizeof(char) * 100);
+	int neg = 0;
 	sprintf(strnum, "%f", num);
-	u32 decimal = (u32)(num << PRECISION); //Decimal part of number
+	if (*strnum == '-')
+		neg = 1;
+	u32 decimal = (u32)num << PRECISION; //Decimal part of number
 	u32 fraction;
 	strnum = strchr(strnum, '.');
-	sprintf(strnum, "%f", (1 << PRECISION) * atof(strnum));//Fractional part of number
+	sprintf(strnum, "%f", (float)(1 << PRECISION) * atof(strnum));//Fractional part of number
 	//Check if we need to round up 
 	if (*(strchr(strnum, '.') + 1) >= '5' && *(strchr(strnum, '.') + 1) <= '9')
 		fraction = (u32)(atof(strnum) + 1);
 	else
 		fraction = (u32)(atof(strnum));
+	if (neg)
+		fraction = -fraction;
 	return decimal + fraction;
 }
 
@@ -67,7 +72,7 @@ static u32 float_to_fixed(float num){
  * Write target position of the end effector and the bit vector for the joint types 
  * Assumes target position is in range and the device information has been set up
  */
-static void write_target(u32 target[3], u8 joint_t)
+static void write_target(float target[3], u8 joint_t)
 {
 	u32 curtarget;
 	for (int i = 0; i < 3; i++){
@@ -83,7 +88,7 @@ static void write_target(u32 target[3], u8 joint_t)
  * Write parameter for a given joint 
  * Assumes joint and parameter is in range and the device information has been set up
  */
-static void write_parameter(u8 joint, u8 parameter, u32 magnitude){
+static void write_parameter(u8 joint, u8 parameter, float magnitude){
 	u32 mag = float_to_fixed(magnitude);
 	iowrite32(mag, dev.virtbase+13+(8 * joint-1)+(parameter*4));
 	dev.dh_params[(joint-1) * 4 + parameter] = mag;
@@ -103,6 +108,7 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		if (copy_from_user(&vla, (ik_driver_arg_t *) arg,
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
+		//Distributed checks over a bunch of if statements to avoid one huge conditional
 		if (vla.joint < -2 || vla.joint > MAX_JOINT) 
 			return -EINVAL;
 		if (vla.joint == -1 && ((vla.target[0] < -64 || vla.target[0] > 64) ||
@@ -127,8 +133,7 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 				(vla.joint != -1 && 
 				 (vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_DISTANCE))) 
 			return -EINVAL;
-		//TODO: Convert from fixed-point to floating point
-		vla.magnitude = dev.dh_params[(vla.joint-1)*4 + vla.parameter];
+		vla.magnitude = dev.dh_params[(vla.joint-1)*4 + vla.parameter]/pow(2,PRECISION);
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))
 			return -EACCES;

@@ -2,6 +2,7 @@
 #define _IK_DRIVER_H
 
 #include <linux/ioctl.h>
+#include <math.h>
 
 //How many joints we have
 #define MAX_JOINT 6
@@ -12,7 +13,7 @@
 //Our fractional precision in our fixed-point representation
 #define PRECISION 20
 
-/* Directions the ball can go */
+/* DH Parameters */
 #define THETA 0
 #define L_OFFSET 1
 #define L_DISTANCE 2
