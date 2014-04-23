@@ -19,11 +19,6 @@ module full_jacobian (
 	assign ifc_full_mat.mat_mult_result = i.mat_mult_result;
 	full_mat full_mat (ifc_full_mat.full_mat);
 	// outputs
-	// timing design prevents module outputs to shared multipliers colliding
-	assign i.array_mult_dataa = {3'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;
-	assign i.array_mult_datab = {3'b0,ifc_full_mat.array_mult_datab} | ifc_jacobian.array_mult_datab;
-	assign i.mat_mult_dataa = ifc_full_mat.mat_mult_dataa | ifc_jacobian.mat_mult_dataa;
-	assign i.mat_mult_datab = ifc_full_mat.mat_mult_datab | ifc_jacobian.mat_mult_datab;
 	assign i.full_matrix = ifc_full_mat.full_matrix;
 
 	// INSTANTIATE JACOBIAN BLOCK
@@ -41,10 +36,11 @@ module full_jacobian (
 	assign ifc_jacobian.mat_mult_result = i.mat_mult_result;
 	jacobian jacobian (ifc_jacobian.jacobian);
 	// outputs
-	// assign i.array_mult_dataa = ifc_jacobian.array_mult_dataa;
-	// assign i.array_mult_datab = ifc_jacobian.array_mult_datab;
-	// assign i.mat_mult_dataa = ifc_jacobian.mat_mult_dataa;
-	// assign i.mat_mult_datab = ifc_jacobian.mat_mult_datab;
+	// timing design prevents module outputs to shared multipliers colliding
+	assign i.array_mult_dataa = {3'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;
+	assign i.array_mult_datab = {3'b0,ifc_full_mat.array_mult_datab} | ifc_jacobian.array_mult_datab;
+	assign i.mat_mult_dataa = ifc_full_mat.mat_mult_dataa | ifc_jacobian.mat_mult_dataa;
+	assign i.mat_mult_datab = ifc_full_mat.mat_mult_datab | ifc_jacobian.mat_mult_datab;
 	assign i.axis = ifc_jacobian.axis;
 	assign i.dist_to_end = ifc_jacobian.dist_to_end;
 	assign i.jacobian_matrix = ifc_jacobian.jacobian_matrix;

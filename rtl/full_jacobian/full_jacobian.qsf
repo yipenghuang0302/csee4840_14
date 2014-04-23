@@ -44,10 +44,6 @@ set_global_assignment -name PROJECT_CREATION_TIME_DATE "19:44:52  APRIL 11, 2014
 set_global_assignment -name LAST_QUARTUS_VERSION 13.1
 set_global_assignment -name SMART_RECOMPILE ON
 set_global_assignment -name FLOW_ENABLE_IO_ASSIGNMENT_ANALYSIS ON
-set_global_assignment -name SOURCE_FILE full_jacobian.qsf
-set_global_assignment -name SDC_FILE full_jacobian.sdc
-set_global_assignment -name SYSTEMVERILOG_FILE full_jacobian_interface.sv
-set_global_assignment -name SYSTEMVERILOG_FILE full_jacobian.sv
 
 # Classic Timing Assignments
 # ==========================
@@ -124,14 +120,22 @@ set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -
 set_global_assignment -name ENABLE_DRC_SETTINGS ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
-set_global_assignment -name SYSTEMVERILOG_FILE t_block/t_block_interface.sv
-set_global_assignment -name SYSTEMVERILOG_FILE t_block/t_block.sv
-set_global_assignment -name VERILOG_FILE t_block/sincos/mult_27_coeff_58/mult_27_coeff_58_syn.v
-set_global_assignment -name VERILOG_FILE t_block/sincos/mult_27_coeff_326/mult_27_coeff_326_syn.v
-set_global_assignment -name VERILOG_FILE ../../mult_27/mult_27_syn.v
-set_global_assignment -name SYSTEMVERILOG_FILE t_block/sincos/sincos_interface.sv
-set_global_assignment -name SYSTEMVERILOG_FILE t_block/sincos/cos.sv
-set_global_assignment -name SYSTEMVERILOG_FILE t_block/sincos/sin.sv
-set_global_assignment -name SYSTEMVERILOG_FILE t_block/sincos/sincos.sv
-set_global_assignment -name VERILOG_FILE t_block/sincos/mult_27_coeff_104/mult_27_coeff_104_syn.v
+set_global_assignment -name SYSTEMVERILOG_FILE full_jacobian_interface.sv
+set_global_assignment -name SYSTEMVERILOG_FILE full_mat/full_mat_interface.sv
+set_global_assignment -name SYSTEMVERILOG_FILE jacobian/jacobian_interface.sv
+set_global_assignment -name SYSTEMVERILOG_FILE full_mat/t_block/t_block_interface.sv
+set_global_assignment -name SOURCE_FILE full_jacobian.qsf
+set_global_assignment -name SDC_FILE full_jacobian.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE full_jacobian.sv
+set_global_assignment -name SYSTEMVERILOG_FILE jacobian/jacobian.sv
+set_global_assignment -name SYSTEMVERILOG_FILE full_mat/full_mat.sv
+set_global_assignment -name SYSTEMVERILOG_FILE full_mat/t_block/t_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE full_mat/t_block/sincos/cos.sv
+set_global_assignment -name SYSTEMVERILOG_FILE full_mat/t_block/sincos/sin.sv
+set_global_assignment -name SYSTEMVERILOG_FILE full_mat/t_block/sincos/sincos.sv
+set_global_assignment -name SYSTEMVERILOG_FILE full_mat/t_block/sincos/sincos_interface.sv
+set_global_assignment -name VERILOG_FILE full_mat/t_block/sincos/mult_27_coeff_58/mult_27_coeff_58_syn.v
+set_global_assignment -name VERILOG_FILE full_mat/t_block/sincos/mult_27_coeff_104/mult_27_coeff_104_syn.v
+set_global_assignment -name VERILOG_FILE full_mat/t_block/sincos/mult_27_coeff_326/mult_27_coeff_326_syn.v
+set_global_assignment -name VERILOG_FILE ../mult_27/mult_27_syn.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

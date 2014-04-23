@@ -22,19 +22,19 @@ logic [5:0] [26:0] array_mult_datab;
 
 logic [3:0] [3:0] [26:0] t_matrix;
 
-clocking cb @(posedge clk);
-	output en;
-	output rst;
-	output count;
-	output a;
-	output d;
-	output alpha;
-	output theta;
-
-	input t_matrix;
-endclocking
-
-modport t_block_tb (clocking cb);
+//clocking cb @(posedge clk);
+//	output en;
+//	output rst;
+//	output count;
+//	output a;
+//	output d;
+//	output alpha;
+//	output theta;
+//
+//	input t_matrix;
+//endclocking
+//
+//modport t_block_tb (clocking cb);
 
 // restrict directions
 modport t_block (
