@@ -3,8 +3,8 @@
 
 `timescale 1ns/1ps
 
-`include "jacobian_interface.sv"
-`include "jacobian.sv"
+`include "jacobian_interface_yipeng.sv"
+`include "jacobian_yipeng.sv"
 `include "bench.sv"
 
 `include "../mat_mult/mat_mult_interface.sv"
@@ -33,7 +33,7 @@ module jacobian_top ();
 	jacobian jacobian (ifc_jacobian.jacobian);
 
 	// LOGIC GOVERNING COUNT
-	parameter MAX = 91;
+	parameter MAX = 100;
 	always_ff @(posedge ifc_jacobian.clk) begin
 		if ( ifc_jacobian.rst ) begin // if parallel multiplier mode, clear counter
 			ifc_jacobian.count <= 8'b0;
@@ -53,7 +53,7 @@ module jacobian_top ();
 	always_ff @(posedge clk) begin
 		ifc_mat_mult.rst <= ifc_jacobian.count == 8'd4;
 	end
-	assign ifc_mat_mult.mat_mode = 1'b1;
+	assign ifc_mat_mult.mat_mode = ifc_jacobian.count<8'd90 ? 1'b1 : 1'b0;
 	assign ifc_mat_mult.dataa = ifc_jacobian.mat_mult_dataa;
 	assign ifc_mat_mult.datab = ifc_jacobian.mat_mult_datab;
 	mat_mult mat_mult (ifc_mat_mult.mat_mult);

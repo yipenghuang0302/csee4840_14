@@ -82,7 +82,7 @@ class t_block_test;
 
 				real_t_mat[i][j] = real'(int'({{5{dut_t_mat[i][j][26]}}, dut_t_mat[i][j]}))/256.0;
 				error[i][j] = abs( real_t_mat[i][j] - m_mat[0][i][j] );
-				percent[i][j] = error[i][j] / m_mat[0][i][j];
+				percent[i][j] = abs( error[i][j] / m_mat[0][i][j] );
 
 				passed = error[i][j] <= abs_tol || percent[i][j] <= rel_tol;
 

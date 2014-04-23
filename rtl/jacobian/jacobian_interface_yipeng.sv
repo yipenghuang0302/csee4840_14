@@ -3,9 +3,11 @@
  * Columbia University
  */
 
-interface ifc_jacobian_yipeng (
+interface ifc_jacobian (
 	input logic clk
 );
+
+logic en, rst;
 
 //Global clock cycle counter
 logic [7:0] count;
@@ -18,6 +20,12 @@ logic [5:0] joint_type;
 
 //T blocks
 logic [5:0] [3:0] [3:0] [26:0] full_matrix;
+
+// Axis of rotation / translation for joints 1...6
+logic [5:0] [2:0] [26:0] axis;
+
+// Location of joints 1...6
+logic [5:0] [2:0] [26:0] dist_to_end;
 
 //Jacobian
 logic [5:0] [5:0] [26:0] jacobian_matrix;
@@ -34,10 +42,13 @@ logic [5:0] [5:0] [26:0] mat_mult_datab;
 logic [5:0] [5:0] [26:0] mat_mult_result;
 
 clocking cb @(posedge clk);
+	output en, rst;
 	output z;
 	output joint_type;
 	output full_matrix;
 
+	input axis;
+	input dist_to_end;
 	input jacobian_matrix;
 endclocking
 
@@ -45,7 +56,7 @@ modport jacobian_tb (clocking cb);
 
 // restrict directions
 modport jacobian (
-	input clk,
+	input clk, en, rst,
 	input count,
 
 	input z,
@@ -60,6 +71,8 @@ modport jacobian (
 	output mat_mult_dataa,
 	output mat_mult_datab,
 
+	output axis,
+	output dist_to_end,
 	output jacobian_matrix
 );
 
