@@ -25,12 +25,12 @@ program jacobian_tb (ifc_jacobian.jacobian_tb ds);
 
 		trans.randomize();
 
-		//wrap input numbers to -50 ~ 50
+		//wrap input numbers to -16 ~ 16
 		for ( int joint=0 ; joint<6 ; joint++ ) begin // joint index
 			for ( int row=0 ; row<4 ; row++ ) begin // row index
 				for ( int col=0 ; col<4 ; col++ ) begin // col index
 					trans.full_mat_fraction[joint][row][col] = real'(trans.full_mat_increment[joint][row][col]) / 2147483648.0;
-					trans.full_mat_data[joint][row][col] = -50.0 + trans.full_mat_fraction[joint][row][col] * 2 * 50.0;
+					trans.full_mat_data[joint][row][col] = -16.0 + trans.full_mat_fraction[joint][row][col] * 2 * 16.0;
 					// $display("joint, row, col = %d", joint, row, col);
 					// $display("data = %f", trans.full_mat_data[joint][row][col]);
 					ds.cb.full_matrix[joint][row][col] <= int'(trans.full_mat_data[joint][row][col] * 256.0);
@@ -40,7 +40,7 @@ program jacobian_tb (ifc_jacobian.jacobian_tb ds);
 
 		for ( int z=0 ; z<3 ; z++ ) begin // z index
 			trans.z_fraction[z] = real'(trans.z_increment[z]) / 2147483648.0;
-			trans.z_data[z] = -50.0 + trans.z_fraction[z] * 2 * 50.0;
+			trans.z_data[z] = -16.0 + trans.z_fraction[z] * 2 * 16.0;
 			// $display("z = %d", z);
 			// $display("data = %f", trans.z_data[z]);
 			ds.cb.z[z] <= int'(trans.z_data[z] * 256.0);

@@ -1,4 +1,4 @@
-## Generated SDC file "full_mat.sdc"
+## Generated SDC file "full_jacobian.sdc"
 
 ## Copyright (C) 1991-2014 Altera Corporation
 ## Your use of Altera Corporation's design tools, logic functions 

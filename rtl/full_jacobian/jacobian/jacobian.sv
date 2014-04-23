@@ -104,7 +104,10 @@ module jacobian (
 	// LOGIC GOVERNING MAT MULT INPUT
 	// LOGIC GOVERNING dataa/datab (multiplications for cross-products)
 	always_ff @(posedge i.clk) begin
-		if ( i.count==8'd91 ) begin
+		if ( i.count==8'd0 ) begin
+			i.mat_mult_dataa <= {36{27'b0}};
+			i.mat_mult_datab <= {36{27'b0}};
+		end else if ( i.count==8'd91 ) begin
 			i.mat_mult_dataa <= {
 				i.axis[0][1],i.axis[0][2],i.axis[0][2],i.axis[0][0],i.axis[0][0],i.axis[0][1],
 				i.axis[1][1],i.axis[1][2],i.axis[1][2],i.axis[1][0],i.axis[1][0],i.axis[1][1],

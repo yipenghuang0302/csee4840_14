@@ -9,16 +9,16 @@ interface ifc_jacobian (
 
 logic en, rst;
 
-//Global clock cycle counter
+// Global clock cycle counter
 logic [7:0] count;
 
-//Base joint's axis of rotation/translation
+// Base joint's axis of rotation/translation
 logic [2:0] [26:0] z;
 
-//Bit vector describing type of each joint
+// Bit vector describing type of each joint
 logic [5:0] joint_type;
 
-//T blocks
+// T blocks
 logic [5:0] [3:0] [3:0] [26:0] full_matrix;
 
 // Axis of rotation / translation for joints 1...6
@@ -27,18 +27,18 @@ logic [5:0] [2:0] [26:0] axis;
 // Location of joints 1...6
 logic [5:0] [2:0] [26:0] dist_to_end;
 
-//Jacobian
+// Jacobian
 logic [5:0] [5:0] [26:0] jacobian_matrix;
 
-//Output to array multipliers
+// Output to array multipliers
 logic [8:0] [26:0] array_mult_dataa;
 logic [8:0] [26:0] array_mult_datab;
-//Input from array multipliers
+// Input from array multipliers
 logic [8:0] [26:0] array_mult_result;
-//Output to matrix multipliers
+// Output to matrix multipliers
 logic [5:0] [5:0] [26:0] mat_mult_dataa;
 logic [5:0] [5:0] [26:0] mat_mult_datab;
-//Input from matrix multipliers
+// Input from matrix multipliers
 logic [5:0] [5:0] [26:0] mat_mult_result;
 
 clocking cb @(posedge clk);

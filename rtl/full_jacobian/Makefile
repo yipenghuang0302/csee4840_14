@@ -1,7 +1,7 @@
 TOP=top
 INTERFACE=interface
 BENCH=bench
-DUT=full_mat
+DUT=full_jacobian
 
 .PHONY: help
 
