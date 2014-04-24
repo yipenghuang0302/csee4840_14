@@ -44,21 +44,21 @@ logic [5:0] [5:0] [26:0] jacobian_matrix;
 // jacobian * jacobian transpose + bias
 logic [5:0] [5:0] [26:0] jjt_bias;
 
-clocking cb @(posedge clk);
-	output en;
-	output rst;
-	output z;
-	output joint_type;
-	output dh_param;
-
-	input full_matrix;
-	input axis;
-	input dist_to_end;
-	input jacobian_matrix;
-	input jjt_bias;
-endclocking
-
-modport full_jacobian_tb (clocking cb);
+//clocking cb @(posedge clk);
+//	output en;
+//	output rst;
+//	output z;
+//	output joint_type;
+//	output dh_param;
+//
+//	input full_matrix;
+//	input axis;
+//	input dist_to_end;
+//	input jacobian_matrix;
+//	input jjt_bias;
+//endclocking
+//
+//modport full_jacobian_tb (clocking cb);
 
 // restrict directions
 modport full_jacobian (

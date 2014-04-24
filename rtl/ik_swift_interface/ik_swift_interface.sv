@@ -32,11 +32,6 @@
 `include "../array_mult/array_mult.sv"
 
 `include "../mult_27/mult_27.v"
-`include "../sim_models/lpm_mult.v"
-`include "../sim_models/mult_block.v"
-`include "../sim_models/addsub_block.v"
-`include "../sim_models/pipeline_internal_fv.v"
-`include "../sim_models/dffep.v"
 
 parameter THETA = 0;
 parameter L_OFFSET = 1;
@@ -55,7 +50,6 @@ module ik_swift_interface (
 	input logic [7:0] writedata,
 
 	// outputs
-	input logic [2:0] joint_select,
 	input logic [2:0] row_select,
 	input logic [2:0] col_select,
 	output logic [26:0] data
@@ -246,7 +240,7 @@ module ik_swift_interface (
 
 	// LOGIC GOVERNING OUTPUT
 	always_ff @(posedge clk) begin
-	 	data <= ifc_full_jacobian.jjt_bias[joint_select][row_select][col_select];
+	 	data <= ifc_full_jacobian.jjt_bias[row_select][col_select];
 	end
 
 endmodule
