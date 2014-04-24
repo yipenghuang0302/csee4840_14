@@ -6,8 +6,23 @@
 
 `timescale 1ns/1ps
 
-`include "../full_mat/full_mat_interface.sv"
-`include "../full_mat/full_mat.sv"
+`include "../full_jacobian/full_jacobian_interface.sv"
+`include "../full_jacobian/full_jacobian.sv"
+
+`include "../full_jacobian/full_mat/full_mat_interface.sv"
+`include "../full_jacobian/full_mat/full_mat.sv"
+`include "../full_jacobian/full_mat/t_block/t_block_interface.sv"
+`include "../full_jacobian/full_mat/t_block/t_block.sv"
+`include "../full_jacobian/full_mat/t_block/sincos/sincos_interface.sv"
+`include "../full_jacobian/full_mat/t_block/sincos/sincos.sv"
+`include "../full_jacobian/full_mat/t_block/sincos/sin.sv"
+`include "../full_jacobian/full_mat/t_block/sincos/cos.sv"
+`include "../full_jacobian/full_mat/t_block/sincos/mult_27_coeff_104/mult_27_coeff_104.v"
+`include "../full_jacobian/full_mat/t_block/sincos/mult_27_coeff_326/mult_27_coeff_326.v"
+`include "../full_jacobian/full_mat/t_block/sincos/mult_27_coeff_58/mult_27_coeff_58.v"
+
+`include "../full_jacobian/jacobian/jacobian_interface.sv"
+`include "../full_jacobian/jacobian/jacobian.sv"
 
 `include "../mat_mult/mat_mult_interface.sv"
 `include "../mat_mult/mat_mult.sv"
@@ -22,17 +37,6 @@
 `include "../sim_models/addsub_block.v"
 `include "../sim_models/pipeline_internal_fv.v"
 `include "../sim_models/dffep.v"
-
-`include "../full_mat/t_block/t_block_interface.sv"
-`include "../full_mat/t_block/t_block.sv"
-
-`include "../full_mat/t_block/sincos/sincos_interface.sv"
-`include "../full_mat/t_block/sincos/sincos.sv"
-`include "../full_mat/t_block/sincos/sin.sv"
-`include "../full_mat/t_block/sincos/cos.sv"
-`include "../full_mat/t_block/sincos/mult_27_coeff_104/mult_27_coeff_104.v"
-`include "../full_mat/t_block/sincos/mult_27_coeff_326/mult_27_coeff_326.v"
-`include "../full_mat/t_block/sincos/mult_27_coeff_58/mult_27_coeff_58.v"
 
 parameter THETA = 0;
 parameter L_OFFSET = 1;
@@ -52,8 +56,8 @@ module ik_swift_interface (
 
 	// outputs
 	input logic [2:0] joint_select,
-	input logic [1:0] row_select,
-	input logic [1:0] col_select,
+	input logic [2:0] row_select,
+	input logic [2:0] col_select,
 	output logic [26:0] data
 );
 
@@ -197,50 +201,52 @@ module ik_swift_interface (
 	end
 
 	// INSTANTIATE IK_FAST TOP MODULE
-	ifc_full_mat ifc_full_mat (clk);
-	assign ifc_full_mat.en = 1'b1;
-	assign ifc_full_mat.rst = reset;
-	assign ifc_full_mat.dh_param = dh_param;
-	full_mat full_mat (ifc_full_mat.full_mat);
+	ifc_full_jacobian ifc_full_jacobian (clk);
+	assign ifc_full_jacobian.en = 1'b1;
+	assign ifc_full_jacobian.rst = reset;
+	assign ifc_full_jacobian.z = { 27'd0, 27'd0, 27'd256 }; // unit vector in z direction
+	assign ifc_full_jacobian.joint_type = joint_type;
+	assign ifc_full_jacobian.dh_param = dh_param;
+	full_jacobian full_jacobian (ifc_full_jacobian.full_jacobian);
 
 	// LOGIC GOVERNING COUNT
-	parameter MAX = 91;
-	always_ff @(posedge ifc_full_mat.clk) begin
-		if ( ifc_full_mat.rst ) begin // if parallel multiplier mode, clear counter
-			ifc_full_mat.count <= 8'b0;
-		end else if ( ifc_full_mat.en ) begin
-			if ( ifc_full_mat.count==MAX-1'b1 ) begin
-				ifc_full_mat.count <= 8'b0;
+	parameter MAX = 114;
+	always_ff @(posedge ifc_full_jacobian.clk) begin
+		if ( ifc_full_jacobian.rst ) begin // if parallel multiplier mode, clear counter
+			ifc_full_jacobian.count <= 8'b0;
+		end else if ( ifc_full_jacobian.en ) begin
+			if ( ifc_full_jacobian.count==MAX-1'b1 ) begin
+				ifc_full_jacobian.count <= 8'b0;
 			end else begin
-				ifc_full_mat.count <= ifc_full_mat.count + 1'b1;
+				ifc_full_jacobian.count <= ifc_full_jacobian.count + 1'b1;
 			end
 		end
 	end
 
 	// instantiate mat_mult
 	ifc_mat_mult ifc_mat_mult (clk);
-	assign ifc_mat_mult.en = ifc_full_mat.en;
+	assign ifc_mat_mult.en = ifc_full_jacobian.en;
 	// delay rst for mat_mult by five
 	always_ff @(posedge clk) begin
-		ifc_mat_mult.rst <= ifc_full_mat.count == 8'd4;
+		ifc_mat_mult.rst <= ifc_full_jacobian.count==8'd4 || ifc_full_jacobian.count==8'd98;
 	end
-	assign ifc_mat_mult.mat_mode = 1'b1;
-	assign ifc_mat_mult.dataa = ifc_full_mat.mat_mult_dataa;
-	assign ifc_mat_mult.datab = ifc_full_mat.mat_mult_datab;
+	assign ifc_mat_mult.mat_mode = 8'd89<=ifc_full_jacobian.count&&ifc_full_jacobian.count<8'd98 ? 1'b0 : 1'b1;
+	assign ifc_mat_mult.dataa = ifc_full_jacobian.mat_mult_dataa;
+	assign ifc_mat_mult.datab = ifc_full_jacobian.mat_mult_datab;
 	mat_mult mat_mult (ifc_mat_mult.mat_mult);
-	assign ifc_full_mat.mat_mult_result = ifc_mat_mult.result;
+	assign ifc_full_jacobian.mat_mult_result = ifc_mat_mult.result;
 
 	ifc_array_mult ifc_array_mult (clk);
-	assign ifc_array_mult.en = ifc_full_mat.en;
-	assign ifc_array_mult.rst = ifc_full_mat.rst;
-	assign ifc_array_mult.dataa[5:0] = ifc_full_mat.array_mult_dataa;
-	assign ifc_array_mult.datab[5:0] = ifc_full_mat.array_mult_datab;
+	assign ifc_array_mult.en = ifc_full_jacobian.en;
+	assign ifc_array_mult.rst = ifc_full_jacobian.rst;
+	assign ifc_array_mult.dataa[8:0] = ifc_full_jacobian.array_mult_dataa;
+	assign ifc_array_mult.datab[8:0] = ifc_full_jacobian.array_mult_datab;
 	array_mult array_mult (ifc_array_mult.array_mult);
-	assign ifc_full_mat.array_mult_result = ifc_array_mult.result[5:0];
+	assign ifc_full_jacobian.array_mult_result = ifc_array_mult.result[8:0];
 
 	// LOGIC GOVERNING OUTPUT
 	always_ff @(posedge clk) begin
-	 	data <= ifc_full_mat.full_matrix[joint_select][row_select][col_select];
+	 	data <= ifc_full_jacobian.jjt_bias[joint_select][row_select][col_select];
 	end
 
 endmodule

@@ -38,8 +38,8 @@ class sincos_test;
 		cos_error = (cos_error<0) ? -cos_error : cos_error;
 
 		passed = (
-			sin_error <= 0.015
-			&& cos_error <= 0.015
+			sin_error <= 0.001
+			&& cos_error <= 0.001
 		);
 
 		if (passed) begin
@@ -48,7 +48,7 @@ class sincos_test;
 			$write("%t : fail sincos angle=%f\n", $realtime, model_angle[0]);
 			$write("model_sin=%f; dut_sin=%f; sin_error=%f.\n", model_sin[0], real_sin, sin_error);
 			$write("model_cos=%f; dut_cos=%f; cos_error=%f.\n", model_cos[0], real_cos, cos_error);
-			$exit();
+			// $exit();
 		end
 	endfunction
 

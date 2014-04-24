@@ -38,10 +38,15 @@ program full_jacobian_tb (ifc_full_jacobian.full_jacobian_tb ds);
 				trans.dh_fraction[i][j] = real'(trans.dh_increment[i][j]) / 2147483648.0;
 			end
 
-			trans.dh_data[i][THETA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][THETA] * 2 * 3.141592653589793238462643383279502884197;
-			trans.dh_data[i][L_OFFSET] = -64.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 64.0;
-			trans.dh_data[i][L_DISTANCE] = -64.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 64.0;
-			trans.dh_data[i][ALPHA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][ALPHA] * 2 * 3.141592653589793238462643383279502884197;
+			// trans.dh_data[i][THETA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][THETA] * 2 * 3.141592653589793238462643383279502884197;
+			// trans.dh_data[i][L_OFFSET] = -64.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 64.0;
+			// trans.dh_data[i][L_DISTANCE] = -64.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 64.0;
+			// trans.dh_data[i][ALPHA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][ALPHA] * 2 * 3.141592653589793238462643383279502884197;
+
+			trans.dh_data[i][THETA] = -3.0 + trans.dh_fraction[i][THETA] * 2 * 3.0;
+			trans.dh_data[i][L_OFFSET] = -16.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 16.0;
+			trans.dh_data[i][L_DISTANCE] = -16.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 16.0;
+			trans.dh_data[i][ALPHA] = -3.0 + trans.dh_fraction[i][ALPHA] * 2 * 3.0;
 
 			// $display("joint index = %d", i);
 			// $display("theta = %f", trans.dh_data[i][THETA]);
