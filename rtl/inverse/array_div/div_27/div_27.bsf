@@ -33,8 +33,8 @@ applicable agreement for further details.
 	(port
 		(pt 0 40)
 		(input)
-		(text "denom[27..0]" (rect 0 0 74 13)(font "Arial" (font_size 8)))
-		(text "denom[27..0]" (rect 20 34 82 46)(font "Arial" (font_size 8)))
+		(text "denom[26..0]" (rect 0 0 74 13)(font "Arial" (font_size 8)))
+		(text "denom[26..0]" (rect 20 34 82 46)(font "Arial" (font_size 8)))
 		(line (pt 0 40)(pt 16 40)(line_width 3))
 	)
 	(port
@@ -61,8 +61,8 @@ applicable agreement for further details.
 	(port
 		(pt 176 40)
 		(output)
-		(text "remain[27..0]" (rect 0 0 74 13)(font "Arial" (font_size 8)))
-		(text "remain[27..0]" (rect 95 34 157 46)(font "Arial" (font_size 8)))
+		(text "remain[26..0]" (rect 0 0 74 13)(font "Arial" (font_size 8)))
+		(text "remain[26..0]" (rect 95 34 157 46)(font "Arial" (font_size 8)))
 		(line (pt 176 40)(pt 160 40)(line_width 3))
 	)
 	(drawing

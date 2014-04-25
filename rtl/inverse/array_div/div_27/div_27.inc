@@ -17,11 +17,11 @@ FUNCTION div_27
 (
 	clken,
 	clock,
-	denom[27..0],
+	denom[26..0],
 	numer[26..0]
 )
 
 RETURNS (
 	quotient[26..0],
-	remain[27..0]
+	remain[26..0]
 );

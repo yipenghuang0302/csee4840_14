@@ -33,18 +33,18 @@
 //applicable agreement for further details.
 
 
-//lpm_divide DEVICE_FAMILY="Cyclone V" LPM_DREPRESENTATION="SIGNED" LPM_NREPRESENTATION="SIGNED" LPM_PIPELINE=5 LPM_REMAINDERPOSITIVE="FALSE" LPM_WIDTHD=28 LPM_WIDTHN=27 MAXIMIZE_SPEED=6 clken clock denom numer quotient remain
+//lpm_divide DEVICE_FAMILY="Cyclone V" LPM_DREPRESENTATION="SIGNED" LPM_NREPRESENTATION="SIGNED" LPM_PIPELINE=5 LPM_REMAINDERPOSITIVE="FALSE" LPM_WIDTHD=27 LPM_WIDTHN=27 MAXIMIZE_SPEED=6 clken clock denom numer quotient remain
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_abs 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_lpm_divide 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ cbx_util_mgl 2014:02:12:20:59:46:SJ  VERSION_END
 // synthesis VERILOG_INPUT_VERSION VERILOG_2001
 // altera message_off 10463
 
 
 
-//abs_divider DEN_REPRESENTATION="SIGNED" LPM_PIPELINE=5 MAXIMIZE_SPEED=6 NUM_REPRESENTATION="SIGNED" SKIP_BITS=0 WIDTH_D=28 WIDTH_N=28 clk_en clock denominator numerator quotient remainder
+//abs_divider DEN_REPRESENTATION="SIGNED" LPM_PIPELINE=5 MAXIMIZE_SPEED=6 NUM_REPRESENTATION="SIGNED" SKIP_BITS=0 WIDTH_D=27 WIDTH_N=27 clk_en clock denominator numerator quotient remainder
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_abs 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_lpm_divide 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ cbx_util_mgl 2014:02:12:20:59:46:SJ  VERSION_END
 
 
-//alt_u_div DEVICE_FAMILY="Cyclone V" LPM_PIPELINE=5 MAXIMIZE_SPEED=6 SKIP_BITS=0 WIDTH_D=28 WIDTH_N=28 WIDTH_Q=28 WIDTH_R=28 clk_en clock denominator numerator quotient remainder
+//alt_u_div DEVICE_FAMILY="Cyclone V" LPM_PIPELINE=5 MAXIMIZE_SPEED=6 SKIP_BITS=0 WIDTH_D=27 WIDTH_N=27 WIDTH_Q=27 WIDTH_R=27 clk_en clock denominator numerator quotient remainder
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_abs 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_lpm_divide 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ cbx_util_mgl 2014:02:12:20:59:46:SJ  VERSION_END
 
 
@@ -128,10 +128,6 @@
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ  VERSION_END
 
 
-//lpm_add_sub DEVICE_FAMILY="Cyclone V" LPM_DIRECTION="SUB" LPM_WIDTH=28 cout dataa datab result
-//VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ  VERSION_END
-
-
 //lpm_add_sub DEVICE_FAMILY="Cyclone V" LPM_DIRECTION="SUB" LPM_WIDTH=4 cout dataa datab result
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ  VERSION_END
 
@@ -159,18 +155,17 @@
 //lpm_add_sub DEVICE_FAMILY="Cyclone V" LPM_DIRECTION="SUB" LPM_WIDTH=10 cout dataa datab result
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ  VERSION_END
 
-//synthesis_resources = lut 434 reg 560 
+//synthesis_resources = lut 405 reg 540 
 //synopsys translate_off
 `timescale 1 ps / 1 ps
 //synopsys translate_on
-(* ALTERA_ATTRIBUTE = {"{-to DFFDenominator[0]} POWER_UP_LEVEL=HIGH;{-to DFFDenominator[1]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[2]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[3]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[4]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[5]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[6]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[7]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[8]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[9]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[10]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[11]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[12]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[13]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[14]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[15]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[16]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[17]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[18]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[19]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[20]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[21]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[22]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[23]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[24]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[25]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[26]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[27]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[28]} POWER_UP_LEVEL=HIGH;{-to DFFDenominator[29]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[30]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[31]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[32]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[33]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[34]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[35]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[36]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[37]} POWER_UP_LEVEL=LOW;",
-		"{-to DFFDenominator[38]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[39]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[40]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[41]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[42]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[43]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[44]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[45]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[46]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[47]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[48]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[49]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[50]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[51]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[52]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[53]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[54]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[55]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[56]} POWER_UP_LEVEL=HIGH;{-to DFFDenominator[57]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[58]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[59]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[60]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[61]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[62]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[63]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[64]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[65]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[66]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[67]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[68]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[69]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[70]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[71]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[72]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[73]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[74]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[75]} POWER_UP_LEVEL=LOW;",
-		"{-to DFFDenominator[76]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[77]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[78]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[79]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[80]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[81]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[82]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[83]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[84]} POWER_UP_LEVEL=HIGH;{-to DFFDenominator[85]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[86]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[87]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[88]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[89]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[90]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[91]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[92]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[93]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[94]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[95]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[96]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[97]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[98]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[99]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[100]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[101]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[102]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[103]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[104]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[105]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[106]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[107]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[108]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[109]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[110]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[111]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[112]} POWER_UP_LEVEL=HIGH;",
-		"{-to DFFDenominator[113]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[114]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[115]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[116]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[117]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[118]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[119]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[120]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[121]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[122]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[123]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[124]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[125]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[126]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[127]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[128]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[129]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[130]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[131]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[132]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[133]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[134]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[135]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[136]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[137]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[138]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[139]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[0]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[1]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[2]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[3]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[4]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[5]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[6]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[7]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[8]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[9]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[10]} POWER_UP_LEVEL=HIGH;",
-		"{-to DFFQuotient[11]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[12]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[13]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[14]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[15]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[16]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[17]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[18]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[19]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[20]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[21]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[22]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[23]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[24]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[25]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[26]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[27]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[28]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[29]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[30]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[31]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[32]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[33]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[34]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[35]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[36]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[37]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[38]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[39]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[40]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[41]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[42]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[43]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[44]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[45]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[46]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[47]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[48]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[49]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[50]} POWER_UP_LEVEL=LOW;",
-		"{-to DFFQuotient[51]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[52]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[53]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[54]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[55]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[56]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[57]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[58]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[59]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[60]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[61]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[62]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[63]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[64]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[65]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[66]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[67]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[68]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[69]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[70]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[71]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[72]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[73]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[74]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[75]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[76]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[77]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[78]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[79]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[80]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[81]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[82]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[83]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[84]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[85]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[86]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[87]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[88]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[89]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[90]} POWER_UP_LEVEL=HIGH;",
-		"{-to DFFQuotient[91]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[92]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[93]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[94]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[95]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[96]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[97]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[98]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[99]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[100]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[101]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[102]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[103]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[104]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[105]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[106]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[107]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[108]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[109]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[110]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[111]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[112]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[113]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[114]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[115]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[116]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[117]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[118]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[119]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[120]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[121]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[122]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[123]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[124]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[125]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[126]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[127]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[128]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[129]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[130]} POWER_UP_LEVEL=LOW;",
-		"{-to DFFQuotient[131]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[132]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[133]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[134]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[135]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[136]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[137]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[138]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[139]} POWER_UP_LEVEL=LOW"} *)
+(* ALTERA_ATTRIBUTE = {"{-to DFFDenominator[0]} POWER_UP_LEVEL=HIGH;{-to DFFDenominator[1]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[2]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[3]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[4]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[5]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[6]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[7]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[8]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[9]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[10]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[11]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[12]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[13]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[14]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[15]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[16]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[17]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[18]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[19]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[20]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[21]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[22]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[23]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[24]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[25]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[26]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[27]} POWER_UP_LEVEL=HIGH;{-to DFFDenominator[28]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[29]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[30]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[31]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[32]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[33]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[34]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[35]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[36]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[37]} POWER_UP_LEVEL=LOW;",
+		"{-to DFFDenominator[38]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[39]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[40]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[41]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[42]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[43]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[44]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[45]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[46]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[47]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[48]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[49]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[50]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[51]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[52]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[53]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[54]} POWER_UP_LEVEL=HIGH;{-to DFFDenominator[55]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[56]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[57]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[58]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[59]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[60]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[61]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[62]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[63]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[64]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[65]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[66]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[67]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[68]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[69]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[70]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[71]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[72]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[73]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[74]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[75]} POWER_UP_LEVEL=LOW;",
+		"{-to DFFDenominator[76]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[77]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[78]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[79]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[80]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[81]} POWER_UP_LEVEL=HIGH;{-to DFFDenominator[82]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[83]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[84]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[85]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[86]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[87]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[88]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[89]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[90]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[91]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[92]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[93]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[94]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[95]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[96]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[97]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[98]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[99]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[100]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[101]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[102]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[103]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[104]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[105]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[106]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[107]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[108]} POWER_UP_LEVEL=HIGH;{-to DFFDenominator[109]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[110]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[111]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[112]} POWER_UP_LEVEL=LOW;",
+		"{-to DFFDenominator[113]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[114]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[115]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[116]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[117]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[118]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[119]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[120]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[121]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[122]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[123]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[124]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[125]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[126]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[127]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[128]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[129]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[130]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[131]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[132]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[133]} POWER_UP_LEVEL=LOW;{-to DFFDenominator[134]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[0]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[1]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[2]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[3]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[4]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[5]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[6]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[7]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[8]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[9]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[10]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[11]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[12]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[13]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[14]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[15]} POWER_UP_LEVEL=HIGH;",
+		"{-to DFFQuotient[16]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[17]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[18]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[19]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[20]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[21]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[22]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[23]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[24]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[25]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[26]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[27]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[28]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[29]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[30]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[31]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[32]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[33]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[34]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[35]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[36]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[37]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[38]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[39]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[40]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[41]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[42]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[43]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[44]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[45]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[46]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[47]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[48]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[49]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[50]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[51]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[52]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[53]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[54]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[55]} POWER_UP_LEVEL=HIGH;",
+		"{-to DFFQuotient[56]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[57]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[58]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[59]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[60]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[61]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[62]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[63]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[64]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[65]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[66]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[67]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[68]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[69]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[70]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[71]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[72]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[73]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[74]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[75]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[76]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[77]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[78]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[79]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[80]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[81]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[82]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[83]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[84]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[85]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[86]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[87]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[88]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[89]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[90]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[91]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[92]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[93]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[94]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[95]} POWER_UP_LEVEL=LOW;",
+		"{-to DFFQuotient[96]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[97]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[98]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[99]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[100]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[101]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[102]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[103]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[104]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[105]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[106]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[107]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[108]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[109]} POWER_UP_LEVEL=HIGH;{-to DFFQuotient[110]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[111]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[112]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[113]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[114]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[115]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[116]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[117]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[118]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[119]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[120]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[121]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[122]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[123]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[124]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[125]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[126]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[127]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[128]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[129]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[130]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[131]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[132]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[133]} POWER_UP_LEVEL=LOW;{-to DFFQuotient[134]} POWER_UP_LEVEL=LOW"} *)
 module  div_27_alt_u_div
 	( 
 	clk_en,
@@ -181,10 +176,10 @@ module  div_27_alt_u_div
 	remainder) /* synthesis synthesis_clearbox=1 */;
 	input   clk_en;
 	input   clock;
-	input   [27:0]  denominator;
-	input   [27:0]  numerator;
-	output   [27:0]  quotient;
-	output   [27:0]  remainder;
+	input   [26:0]  denominator;
+	input   [26:0]  numerator;
+	output   [26:0]  quotient;
+	output   [26:0]  remainder;
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_off
 `endif
@@ -194,12 +189,12 @@ module  div_27_alt_u_div
 // synopsys translate_on
 `endif
 
-	wire	[139:0]	wire_DFFDenominator_d;
-	reg	[139:0]	DFFDenominator;
-	reg	[139:0]	DFFNumerator;
-	wire	[139:0]	wire_DFFQuotient_d;
-	reg	[139:0]	DFFQuotient;
-	reg	[139:0]	DFFStage;
+	wire	[134:0]	wire_DFFDenominator_d;
+	reg	[134:0]	DFFDenominator;
+	reg	[134:0]	DFFNumerator;
+	wire	[134:0]	wire_DFFQuotient_d;
+	reg	[134:0]	DFFQuotient;
+	reg	[134:0]	DFFStage;
 	wire	[1:0]	wire_add_sub_0_result_int;
 	wire	wire_add_sub_0_cout;
 	wire	[0:0]	wire_add_sub_0_dataa;
@@ -300,11 +295,6 @@ module  div_27_alt_u_div
 	wire	[26:0]	wire_add_sub_26_dataa;
 	wire	[26:0]	wire_add_sub_26_datab;
 	wire	[26:0]	wire_add_sub_26_result;
-	wire	[28:0]	wire_add_sub_27_result_int;
-	wire	wire_add_sub_27_cout;
-	wire	[27:0]	wire_add_sub_27_dataa;
-	wire	[27:0]	wire_add_sub_27_datab;
-	wire	[27:0]	wire_add_sub_27_result;
 	wire	[4:0]	wire_add_sub_3_result_int;
 	wire	wire_add_sub_3_cout;
 	wire	[3:0]	wire_add_sub_3_dataa;
@@ -341,19 +331,19 @@ module  div_27_alt_u_div
 	wire	[9:0]	wire_add_sub_9_datab;
 	wire	[9:0]	wire_add_sub_9_result;
 	wire aclr;
-	wire  [840:0]  DenominatorIn;
-	wire  [840:0]  DenominatorIn_tmp;
+	wire  [783:0]  DenominatorIn;
+	wire  [783:0]  DenominatorIn_tmp;
 	wire  gnd_wire;
-	wire  [811:0]  nose;
-	wire  [811:0]  NumeratorIn;
-	wire  [811:0]  NumeratorIn_tmp;
-	wire  [783:0]  prestg;
-	wire  [27:0]  quotient_tmp;
-	wire  [811:0]  sel;
-	wire  [811:0]  selnose;
-	wire  [811:0]  StageIn;
-	wire  [811:0]  StageIn_tmp;
-	wire  [783:0]  StageOut;
+	wire  [755:0]  nose;
+	wire  [755:0]  NumeratorIn;
+	wire  [755:0]  NumeratorIn_tmp;
+	wire  [728:0]  prestg;
+	wire  [26:0]  quotient_tmp;
+	wire  [755:0]  sel;
+	wire  [755:0]  selnose;
+	wire  [755:0]  StageIn;
+	wire  [755:0]  StageIn_tmp;
+	wire  [728:0]  StageOut;
 	wire  vcc_wire;
 
 	// synopsys translate_off
@@ -547,17 +537,17 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFDenominator[26:26] <= wire_DFFDenominator_d[26:26];
 	// synopsys translate_off
 	initial
-		DFFDenominator[27:27] = 0;
+		DFFDenominator[27:27] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[27:27] <= 1'b0;
+		if (aclr == 1'b1) DFFDenominator[27:27] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFDenominator[27:27] <= wire_DFFDenominator_d[27:27];
 	// synopsys translate_off
 	initial
-		DFFDenominator[28:28] = {1{1'b1}};
+		DFFDenominator[28:28] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[28:28] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFDenominator[28:28] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFDenominator[28:28] <= wire_DFFDenominator_d[28:28];
 	// synopsys translate_off
 	initial
@@ -736,10 +726,10 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFDenominator[53:53] <= wire_DFFDenominator_d[53:53];
 	// synopsys translate_off
 	initial
-		DFFDenominator[54:54] = 0;
+		DFFDenominator[54:54] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[54:54] <= 1'b0;
+		if (aclr == 1'b1) DFFDenominator[54:54] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFDenominator[54:54] <= wire_DFFDenominator_d[54:54];
 	// synopsys translate_off
 	initial
@@ -750,10 +740,10 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFDenominator[55:55] <= wire_DFFDenominator_d[55:55];
 	// synopsys translate_off
 	initial
-		DFFDenominator[56:56] = {1{1'b1}};
+		DFFDenominator[56:56] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[56:56] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFDenominator[56:56] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFDenominator[56:56] <= wire_DFFDenominator_d[56:56];
 	// synopsys translate_off
 	initial
@@ -925,10 +915,10 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFDenominator[80:80] <= wire_DFFDenominator_d[80:80];
 	// synopsys translate_off
 	initial
-		DFFDenominator[81:81] = 0;
+		DFFDenominator[81:81] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[81:81] <= 1'b0;
+		if (aclr == 1'b1) DFFDenominator[81:81] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFDenominator[81:81] <= wire_DFFDenominator_d[81:81];
 	// synopsys translate_off
 	initial
@@ -946,10 +936,10 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFDenominator[83:83] <= wire_DFFDenominator_d[83:83];
 	// synopsys translate_off
 	initial
-		DFFDenominator[84:84] = {1{1'b1}};
+		DFFDenominator[84:84] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[84:84] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFDenominator[84:84] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFDenominator[84:84] <= wire_DFFDenominator_d[84:84];
 	// synopsys translate_off
 	initial
@@ -1114,10 +1104,10 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFDenominator[107:107] <= wire_DFFDenominator_d[107:107];
 	// synopsys translate_off
 	initial
-		DFFDenominator[108:108] = 0;
+		DFFDenominator[108:108] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[108:108] <= 1'b0;
+		if (aclr == 1'b1) DFFDenominator[108:108] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFDenominator[108:108] <= wire_DFFDenominator_d[108:108];
 	// synopsys translate_off
 	initial
@@ -1142,10 +1132,10 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFDenominator[111:111] <= wire_DFFDenominator_d[111:111];
 	// synopsys translate_off
 	initial
-		DFFDenominator[112:112] = {1{1'b1}};
+		DFFDenominator[112:112] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[112:112] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFDenominator[112:112] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFDenominator[112:112] <= wire_DFFDenominator_d[112:112];
 	// synopsys translate_off
 	initial
@@ -1301,50 +1291,15 @@ module  div_27_alt_u_div
 	always @ ( posedge clock or  posedge aclr)
 		if (aclr == 1'b1) DFFDenominator[134:134] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFDenominator[134:134] <= wire_DFFDenominator_d[134:134];
-	// synopsys translate_off
-	initial
-		DFFDenominator[135:135] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[135:135] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFDenominator[135:135] <= wire_DFFDenominator_d[135:135];
-	// synopsys translate_off
-	initial
-		DFFDenominator[136:136] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[136:136] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFDenominator[136:136] <= wire_DFFDenominator_d[136:136];
-	// synopsys translate_off
-	initial
-		DFFDenominator[137:137] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[137:137] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFDenominator[137:137] <= wire_DFFDenominator_d[137:137];
-	// synopsys translate_off
-	initial
-		DFFDenominator[138:138] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[138:138] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFDenominator[138:138] <= wire_DFFDenominator_d[138:138];
-	// synopsys translate_off
-	initial
-		DFFDenominator[139:139] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFDenominator[139:139] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFDenominator[139:139] <= wire_DFFDenominator_d[139:139];
 	assign
-		wire_DFFDenominator_d = {DFFDenominator[111:0], denominator};
+		wire_DFFDenominator_d = {DFFDenominator[107:0], denominator};
 	// synopsys translate_off
 	initial
 		DFFNumerator = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFNumerator <= 140'b0;
-		else if  (clk_en == 1'b1)   DFFNumerator <= {DFFNumerator[111:0], numerator};
+		if (aclr == 1'b1) DFFNumerator <= 135'b0;
+		else if  (clk_en == 1'b1)   DFFNumerator <= {DFFNumerator[107:0], numerator};
 	// synopsys translate_off
 	initial
 		DFFQuotient[0:0] = {1{1'b1}};
@@ -1515,10 +1470,10 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFQuotient[23:23] <= wire_DFFQuotient_d[23:23];
 	// synopsys translate_off
 	initial
-		DFFQuotient[24:24] = {1{1'b1}};
+		DFFQuotient[24:24] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[24:24] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[24:24] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[24:24] <= wire_DFFQuotient_d[24:24];
 	// synopsys translate_off
 	initial
@@ -1536,10 +1491,10 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFQuotient[26:26] <= wire_DFFQuotient_d[26:26];
 	// synopsys translate_off
 	initial
-		DFFQuotient[27:27] = 0;
+		DFFQuotient[27:27] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[27:27] <= 1'b0;
+		if (aclr == 1'b1) DFFQuotient[27:27] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFQuotient[27:27] <= wire_DFFQuotient_d[27:27];
 	// synopsys translate_off
 	initial
@@ -1662,17 +1617,17 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFQuotient[44:44] <= wire_DFFQuotient_d[44:44];
 	// synopsys translate_off
 	initial
-		DFFQuotient[45:45] = {1{1'b1}};
+		DFFQuotient[45:45] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[45:45] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[45:45] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[45:45] <= wire_DFFQuotient_d[45:45];
 	// synopsys translate_off
 	initial
-		DFFQuotient[46:46] = {1{1'b1}};
+		DFFQuotient[46:46] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[46:46] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[46:46] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[46:46] <= wire_DFFQuotient_d[46:46];
 	// synopsys translate_off
 	initial
@@ -1725,17 +1680,17 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFQuotient[53:53] <= wire_DFFQuotient_d[53:53];
 	// synopsys translate_off
 	initial
-		DFFQuotient[54:54] = 0;
+		DFFQuotient[54:54] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[54:54] <= 1'b0;
+		if (aclr == 1'b1) DFFQuotient[54:54] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFQuotient[54:54] <= wire_DFFQuotient_d[54:54];
 	// synopsys translate_off
 	initial
-		DFFQuotient[55:55] = 0;
+		DFFQuotient[55:55] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[55:55] <= 1'b0;
+		if (aclr == 1'b1) DFFQuotient[55:55] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFQuotient[55:55] <= wire_DFFQuotient_d[55:55];
 	// synopsys translate_off
 	initial
@@ -1816,24 +1771,24 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFQuotient[66:66] <= wire_DFFQuotient_d[66:66];
 	// synopsys translate_off
 	initial
-		DFFQuotient[67:67] = {1{1'b1}};
+		DFFQuotient[67:67] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[67:67] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[67:67] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[67:67] <= wire_DFFQuotient_d[67:67];
 	// synopsys translate_off
 	initial
-		DFFQuotient[68:68] = {1{1'b1}};
+		DFFQuotient[68:68] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[68:68] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[68:68] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[68:68] <= wire_DFFQuotient_d[68:68];
 	// synopsys translate_off
 	initial
-		DFFQuotient[69:69] = {1{1'b1}};
+		DFFQuotient[69:69] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[69:69] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[69:69] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[69:69] <= wire_DFFQuotient_d[69:69];
 	// synopsys translate_off
 	initial
@@ -1914,24 +1869,24 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFQuotient[80:80] <= wire_DFFQuotient_d[80:80];
 	// synopsys translate_off
 	initial
-		DFFQuotient[81:81] = 0;
+		DFFQuotient[81:81] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[81:81] <= 1'b0;
+		if (aclr == 1'b1) DFFQuotient[81:81] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFQuotient[81:81] <= wire_DFFQuotient_d[81:81];
 	// synopsys translate_off
 	initial
-		DFFQuotient[82:82] = 0;
+		DFFQuotient[82:82] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[82:82] <= 1'b0;
+		if (aclr == 1'b1) DFFQuotient[82:82] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFQuotient[82:82] <= wire_DFFQuotient_d[82:82];
 	// synopsys translate_off
 	initial
-		DFFQuotient[83:83] = 0;
+		DFFQuotient[83:83] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[83:83] <= 1'b0;
+		if (aclr == 1'b1) DFFQuotient[83:83] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFQuotient[83:83] <= wire_DFFQuotient_d[83:83];
 	// synopsys translate_off
 	initial
@@ -1970,24 +1925,24 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFQuotient[88:88] <= wire_DFFQuotient_d[88:88];
 	// synopsys translate_off
 	initial
-		DFFQuotient[89:89] = {1{1'b1}};
+		DFFQuotient[89:89] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[89:89] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[89:89] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[89:89] <= wire_DFFQuotient_d[89:89];
 	// synopsys translate_off
 	initial
-		DFFQuotient[90:90] = {1{1'b1}};
+		DFFQuotient[90:90] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[90:90] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[90:90] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[90:90] <= wire_DFFQuotient_d[90:90];
 	// synopsys translate_off
 	initial
-		DFFQuotient[91:91] = {1{1'b1}};
+		DFFQuotient[91:91] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[91:91] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[91:91] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[91:91] <= wire_DFFQuotient_d[91:91];
 	// synopsys translate_off
 	initial
@@ -2103,17 +2058,17 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFQuotient[107:107] <= wire_DFFQuotient_d[107:107];
 	// synopsys translate_off
 	initial
-		DFFQuotient[108:108] = 0;
+		DFFQuotient[108:108] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[108:108] <= 1'b0;
+		if (aclr == 1'b1) DFFQuotient[108:108] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFQuotient[108:108] <= wire_DFFQuotient_d[108:108];
 	// synopsys translate_off
 	initial
-		DFFQuotient[109:109] = 0;
+		DFFQuotient[109:109] = {1{1'b1}};
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[109:109] <= 1'b0;
+		if (aclr == 1'b1) DFFQuotient[109:109] <= {1{1'b1}};
 		else if  (clk_en == 1'b1)   DFFQuotient[109:109] <= wire_DFFQuotient_d[109:109];
 	// synopsys translate_off
 	initial
@@ -2131,17 +2086,17 @@ module  div_27_alt_u_div
 		else if  (clk_en == 1'b1)   DFFQuotient[111:111] <= wire_DFFQuotient_d[111:111];
 	// synopsys translate_off
 	initial
-		DFFQuotient[112:112] = {1{1'b1}};
+		DFFQuotient[112:112] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[112:112] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[112:112] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[112:112] <= wire_DFFQuotient_d[112:112];
 	// synopsys translate_off
 	initial
-		DFFQuotient[113:113] = {1{1'b1}};
+		DFFQuotient[113:113] = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[113:113] <= {1{1'b1}};
+		if (aclr == 1'b1) DFFQuotient[113:113] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[113:113] <= wire_DFFQuotient_d[113:113];
 	// synopsys translate_off
 	initial
@@ -2290,57 +2245,22 @@ module  div_27_alt_u_div
 	always @ ( posedge clock or  posedge aclr)
 		if (aclr == 1'b1) DFFQuotient[134:134] <= 1'b0;
 		else if  (clk_en == 1'b1)   DFFQuotient[134:134] <= wire_DFFQuotient_d[134:134];
-	// synopsys translate_off
-	initial
-		DFFQuotient[135:135] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[135:135] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFQuotient[135:135] <= wire_DFFQuotient_d[135:135];
-	// synopsys translate_off
-	initial
-		DFFQuotient[136:136] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[136:136] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFQuotient[136:136] <= wire_DFFQuotient_d[136:136];
-	// synopsys translate_off
-	initial
-		DFFQuotient[137:137] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[137:137] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFQuotient[137:137] <= wire_DFFQuotient_d[137:137];
-	// synopsys translate_off
-	initial
-		DFFQuotient[138:138] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[138:138] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFQuotient[138:138] <= wire_DFFQuotient_d[138:138];
-	// synopsys translate_off
-	initial
-		DFFQuotient[139:139] = 0;
-	// synopsys translate_on
-	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFQuotient[139:139] <= 1'b0;
-		else if  (clk_en == 1'b1)   DFFQuotient[139:139] <= wire_DFFQuotient_d[139:139];
 	assign
-		wire_DFFQuotient_d = {DFFQuotient[111:92], (~ selnose[580]), (~ selnose[609]), (~ selnose[638]), (~ selnose[667]), (~ selnose[696]), (~ selnose[725]), {2{vcc_wire}}, DFFQuotient[83:70], (~ selnose[406]), (~ selnose[435]), (~ selnose[464]), (~ selnose[493]), (~ selnose[522]), (~ selnose[551]), {8{vcc_wire}}, DFFQuotient[55:47], (~ selnose[261]), (~ selnose[290]), (~ selnose[319]), (~ selnose[348]), (~ selnose[377]), {14{vcc_wire}}, DFFQuotient[27:25], (~ selnose[87]), (~ selnose[116]), (~ selnose[145]), (~ selnose[174]), (~ selnose[203]), (~ selnose[232]), {19{vcc_wire}}, (~ selnose[0]), (~ selnose[29]), (~ selnose[58]), {25{vcc_wire}}};
+		wire_DFFQuotient_d = {DFFQuotient[107:89], (~ selnose[532]), (~ selnose[560]), (~ selnose[588]), (~ selnose[616]), (~ selnose[644]), (~ selnose[672]), {2{vcc_wire}}, DFFQuotient[80:67], (~ selnose[392]), (~ selnose[420]), (~ selnose[448]), (~ selnose[476]), (~ selnose[504]), {8{vcc_wire}}, DFFQuotient[53:45], (~ selnose[252]), (~ selnose[280]), (~ selnose[308]), (~ selnose[336]), (~ selnose[364]), {13{vcc_wire}}, DFFQuotient[26:24], (~ selnose[84]), (~ selnose[112]), (~ selnose[140]), (~ selnose[168]), (~ selnose[196]), (~ selnose[224]), {18{vcc_wire}}, (~ selnose[0]), (~ selnose[28]), (~ selnose[56]), {24{vcc_wire}}};
 	// synopsys translate_off
 	initial
 		DFFStage = 0;
 	// synopsys translate_on
 	always @ ( posedge clock or  posedge aclr)
-		if (aclr == 1'b1) DFFStage <= 140'b0;
-		else if  (clk_en == 1'b1)   DFFStage <= {StageOut[727:700], StageOut[559:532], StageOut[391:364], StageOut[251:224], StageOut[83:56]};
+		if (aclr == 1'b1) DFFStage <= 135'b0;
+		else if  (clk_en == 1'b1)   DFFStage <= {StageOut[674:648], StageOut[512:486], StageOut[377:351], StageOut[242:216], StageOut[80:54]};
 	assign
 		wire_add_sub_0_result_int = wire_add_sub_0_dataa - wire_add_sub_0_datab;
 	assign
 		wire_add_sub_0_result = wire_add_sub_0_result_int[0:0],
 		wire_add_sub_0_cout = ~wire_add_sub_0_result_int[1:1];
 	assign
-		wire_add_sub_0_dataa = NumeratorIn[27],
+		wire_add_sub_0_dataa = NumeratorIn[26],
 		wire_add_sub_0_datab = DenominatorIn[0];
 	assign
 		wire_add_sub_1_result_int = wire_add_sub_1_dataa - wire_add_sub_1_datab;
@@ -2348,268 +2268,259 @@ module  div_27_alt_u_div
 		wire_add_sub_1_result = wire_add_sub_1_result_int[1:0],
 		wire_add_sub_1_cout = ~wire_add_sub_1_result_int[2:2];
 	assign
-		wire_add_sub_1_dataa = {StageIn[28], NumeratorIn[54]},
-		wire_add_sub_1_datab = DenominatorIn[30:29];
+		wire_add_sub_1_dataa = {StageIn[27], NumeratorIn[52]},
+		wire_add_sub_1_datab = DenominatorIn[29:28];
 	assign
 		wire_add_sub_10_result_int = wire_add_sub_10_dataa - wire_add_sub_10_datab;
 	assign
 		wire_add_sub_10_result = wire_add_sub_10_result_int[10:0],
 		wire_add_sub_10_cout = ~wire_add_sub_10_result_int[11:11];
 	assign
-		wire_add_sub_10_dataa = {StageIn[289:280], NumeratorIn[297]},
-		wire_add_sub_10_datab = DenominatorIn[300:290];
+		wire_add_sub_10_dataa = {StageIn[279:270], NumeratorIn[286]},
+		wire_add_sub_10_datab = DenominatorIn[290:280];
 	assign
 		wire_add_sub_11_result_int = wire_add_sub_11_dataa - wire_add_sub_11_datab;
 	assign
 		wire_add_sub_11_result = wire_add_sub_11_result_int[11:0],
 		wire_add_sub_11_cout = ~wire_add_sub_11_result_int[12:12];
 	assign
-		wire_add_sub_11_dataa = {StageIn[318:308], NumeratorIn[324]},
-		wire_add_sub_11_datab = DenominatorIn[330:319];
+		wire_add_sub_11_dataa = {StageIn[307:297], NumeratorIn[312]},
+		wire_add_sub_11_datab = DenominatorIn[319:308];
 	assign
 		wire_add_sub_12_result_int = wire_add_sub_12_dataa - wire_add_sub_12_datab;
 	assign
 		wire_add_sub_12_result = wire_add_sub_12_result_int[12:0],
 		wire_add_sub_12_cout = ~wire_add_sub_12_result_int[13:13];
 	assign
-		wire_add_sub_12_dataa = {StageIn[347:336], NumeratorIn[351]},
-		wire_add_sub_12_datab = DenominatorIn[360:348];
+		wire_add_sub_12_dataa = {StageIn[335:324], NumeratorIn[338]},
+		wire_add_sub_12_datab = DenominatorIn[348:336];
 	assign
 		wire_add_sub_13_result_int = wire_add_sub_13_dataa - wire_add_sub_13_datab;
 	assign
 		wire_add_sub_13_result = wire_add_sub_13_result_int[13:0],
 		wire_add_sub_13_cout = ~wire_add_sub_13_result_int[14:14];
 	assign
-		wire_add_sub_13_dataa = {StageIn[376:364], NumeratorIn[378]},
-		wire_add_sub_13_datab = DenominatorIn[390:377];
+		wire_add_sub_13_dataa = {StageIn[363:351], NumeratorIn[364]},
+		wire_add_sub_13_datab = DenominatorIn[377:364];
 	assign
 		wire_add_sub_14_result_int = wire_add_sub_14_dataa - wire_add_sub_14_datab;
 	assign
 		wire_add_sub_14_result = wire_add_sub_14_result_int[14:0],
 		wire_add_sub_14_cout = ~wire_add_sub_14_result_int[15:15];
 	assign
-		wire_add_sub_14_dataa = {StageIn[405:392], NumeratorIn[405]},
-		wire_add_sub_14_datab = DenominatorIn[420:406];
+		wire_add_sub_14_dataa = {StageIn[391:378], NumeratorIn[390]},
+		wire_add_sub_14_datab = DenominatorIn[406:392];
 	assign
 		wire_add_sub_15_result_int = wire_add_sub_15_dataa - wire_add_sub_15_datab;
 	assign
 		wire_add_sub_15_result = wire_add_sub_15_result_int[15:0],
 		wire_add_sub_15_cout = ~wire_add_sub_15_result_int[16:16];
 	assign
-		wire_add_sub_15_dataa = {StageIn[434:420], NumeratorIn[432]},
-		wire_add_sub_15_datab = DenominatorIn[450:435];
+		wire_add_sub_15_dataa = {StageIn[419:405], NumeratorIn[416]},
+		wire_add_sub_15_datab = DenominatorIn[435:420];
 	assign
 		wire_add_sub_16_result_int = wire_add_sub_16_dataa - wire_add_sub_16_datab;
 	assign
 		wire_add_sub_16_result = wire_add_sub_16_result_int[16:0],
 		wire_add_sub_16_cout = ~wire_add_sub_16_result_int[17:17];
 	assign
-		wire_add_sub_16_dataa = {StageIn[463:448], NumeratorIn[459]},
-		wire_add_sub_16_datab = DenominatorIn[480:464];
+		wire_add_sub_16_dataa = {StageIn[447:432], NumeratorIn[442]},
+		wire_add_sub_16_datab = DenominatorIn[464:448];
 	assign
 		wire_add_sub_17_result_int = wire_add_sub_17_dataa - wire_add_sub_17_datab;
 	assign
 		wire_add_sub_17_result = wire_add_sub_17_result_int[17:0],
 		wire_add_sub_17_cout = ~wire_add_sub_17_result_int[18:18];
 	assign
-		wire_add_sub_17_dataa = {StageIn[492:476], NumeratorIn[486]},
-		wire_add_sub_17_datab = DenominatorIn[510:493];
+		wire_add_sub_17_dataa = {StageIn[475:459], NumeratorIn[468]},
+		wire_add_sub_17_datab = DenominatorIn[493:476];
 	assign
 		wire_add_sub_18_result_int = wire_add_sub_18_dataa - wire_add_sub_18_datab;
 	assign
 		wire_add_sub_18_result = wire_add_sub_18_result_int[18:0],
 		wire_add_sub_18_cout = ~wire_add_sub_18_result_int[19:19];
 	assign
-		wire_add_sub_18_dataa = {StageIn[521:504], NumeratorIn[513]},
-		wire_add_sub_18_datab = DenominatorIn[540:522];
+		wire_add_sub_18_dataa = {StageIn[503:486], NumeratorIn[494]},
+		wire_add_sub_18_datab = DenominatorIn[522:504];
 	assign
 		wire_add_sub_19_result_int = wire_add_sub_19_dataa - wire_add_sub_19_datab;
 	assign
 		wire_add_sub_19_result = wire_add_sub_19_result_int[19:0],
 		wire_add_sub_19_cout = ~wire_add_sub_19_result_int[20:20];
 	assign
-		wire_add_sub_19_dataa = {StageIn[550:532], NumeratorIn[540]},
-		wire_add_sub_19_datab = DenominatorIn[570:551];
+		wire_add_sub_19_dataa = {StageIn[531:513], NumeratorIn[520]},
+		wire_add_sub_19_datab = DenominatorIn[551:532];
 	assign
 		wire_add_sub_2_result_int = wire_add_sub_2_dataa - wire_add_sub_2_datab;
 	assign
 		wire_add_sub_2_result = wire_add_sub_2_result_int[2:0],
 		wire_add_sub_2_cout = ~wire_add_sub_2_result_int[3:3];
 	assign
-		wire_add_sub_2_dataa = {StageIn[57:56], NumeratorIn[81]},
-		wire_add_sub_2_datab = DenominatorIn[60:58];
+		wire_add_sub_2_dataa = {StageIn[55:54], NumeratorIn[78]},
+		wire_add_sub_2_datab = DenominatorIn[58:56];
 	assign
 		wire_add_sub_20_result_int = wire_add_sub_20_dataa - wire_add_sub_20_datab;
 	assign
 		wire_add_sub_20_result = wire_add_sub_20_result_int[20:0],
 		wire_add_sub_20_cout = ~wire_add_sub_20_result_int[21:21];
 	assign
-		wire_add_sub_20_dataa = {StageIn[579:560], NumeratorIn[567]},
-		wire_add_sub_20_datab = DenominatorIn[600:580];
+		wire_add_sub_20_dataa = {StageIn[559:540], NumeratorIn[546]},
+		wire_add_sub_20_datab = DenominatorIn[580:560];
 	assign
 		wire_add_sub_21_result_int = wire_add_sub_21_dataa - wire_add_sub_21_datab;
 	assign
 		wire_add_sub_21_result = wire_add_sub_21_result_int[21:0],
 		wire_add_sub_21_cout = ~wire_add_sub_21_result_int[22:22];
 	assign
-		wire_add_sub_21_dataa = {StageIn[608:588], NumeratorIn[594]},
-		wire_add_sub_21_datab = DenominatorIn[630:609];
+		wire_add_sub_21_dataa = {StageIn[587:567], NumeratorIn[572]},
+		wire_add_sub_21_datab = DenominatorIn[609:588];
 	assign
 		wire_add_sub_22_result_int = wire_add_sub_22_dataa - wire_add_sub_22_datab;
 	assign
 		wire_add_sub_22_result = wire_add_sub_22_result_int[22:0],
 		wire_add_sub_22_cout = ~wire_add_sub_22_result_int[23:23];
 	assign
-		wire_add_sub_22_dataa = {StageIn[637:616], NumeratorIn[621]},
-		wire_add_sub_22_datab = DenominatorIn[660:638];
+		wire_add_sub_22_dataa = {StageIn[615:594], NumeratorIn[598]},
+		wire_add_sub_22_datab = DenominatorIn[638:616];
 	assign
 		wire_add_sub_23_result_int = wire_add_sub_23_dataa - wire_add_sub_23_datab;
 	assign
 		wire_add_sub_23_result = wire_add_sub_23_result_int[23:0],
 		wire_add_sub_23_cout = ~wire_add_sub_23_result_int[24:24];
 	assign
-		wire_add_sub_23_dataa = {StageIn[666:644], NumeratorIn[648]},
-		wire_add_sub_23_datab = DenominatorIn[690:667];
+		wire_add_sub_23_dataa = {StageIn[643:621], NumeratorIn[624]},
+		wire_add_sub_23_datab = DenominatorIn[667:644];
 	assign
 		wire_add_sub_24_result_int = wire_add_sub_24_dataa - wire_add_sub_24_datab;
 	assign
 		wire_add_sub_24_result = wire_add_sub_24_result_int[24:0],
 		wire_add_sub_24_cout = ~wire_add_sub_24_result_int[25:25];
 	assign
-		wire_add_sub_24_dataa = {StageIn[695:672], NumeratorIn[675]},
-		wire_add_sub_24_datab = DenominatorIn[720:696];
+		wire_add_sub_24_dataa = {StageIn[671:648], NumeratorIn[650]},
+		wire_add_sub_24_datab = DenominatorIn[696:672];
 	assign
 		wire_add_sub_25_result_int = wire_add_sub_25_dataa - wire_add_sub_25_datab;
 	assign
 		wire_add_sub_25_result = wire_add_sub_25_result_int[25:0],
 		wire_add_sub_25_cout = ~wire_add_sub_25_result_int[26:26];
 	assign
-		wire_add_sub_25_dataa = {StageIn[724:700], NumeratorIn[702]},
-		wire_add_sub_25_datab = DenominatorIn[750:725];
+		wire_add_sub_25_dataa = {StageIn[699:675], NumeratorIn[676]},
+		wire_add_sub_25_datab = DenominatorIn[725:700];
 	assign
 		wire_add_sub_26_result_int = wire_add_sub_26_dataa - wire_add_sub_26_datab;
 	assign
 		wire_add_sub_26_result = wire_add_sub_26_result_int[26:0],
 		wire_add_sub_26_cout = ~wire_add_sub_26_result_int[27:27];
 	assign
-		wire_add_sub_26_dataa = {StageIn[753:728], NumeratorIn[729]},
-		wire_add_sub_26_datab = DenominatorIn[780:754];
-	assign
-		wire_add_sub_27_result_int = wire_add_sub_27_dataa - wire_add_sub_27_datab;
-	assign
-		wire_add_sub_27_result = wire_add_sub_27_result_int[27:0],
-		wire_add_sub_27_cout = ~wire_add_sub_27_result_int[28:28];
-	assign
-		wire_add_sub_27_dataa = {StageIn[782:756], NumeratorIn[756]},
-		wire_add_sub_27_datab = DenominatorIn[810:783];
+		wire_add_sub_26_dataa = {StageIn[727:702], NumeratorIn[702]},
+		wire_add_sub_26_datab = DenominatorIn[754:728];
 	assign
 		wire_add_sub_3_result_int = wire_add_sub_3_dataa - wire_add_sub_3_datab;
 	assign
 		wire_add_sub_3_result = wire_add_sub_3_result_int[3:0],
 		wire_add_sub_3_cout = ~wire_add_sub_3_result_int[4:4];
 	assign
-		wire_add_sub_3_dataa = {StageIn[86:84], NumeratorIn[108]},
-		wire_add_sub_3_datab = DenominatorIn[90:87];
+		wire_add_sub_3_dataa = {StageIn[83:81], NumeratorIn[104]},
+		wire_add_sub_3_datab = DenominatorIn[87:84];
 	assign
 		wire_add_sub_4_result_int = wire_add_sub_4_dataa - wire_add_sub_4_datab;
 	assign
 		wire_add_sub_4_result = wire_add_sub_4_result_int[4:0],
 		wire_add_sub_4_cout = ~wire_add_sub_4_result_int[5:5];
 	assign
-		wire_add_sub_4_dataa = {StageIn[115:112], NumeratorIn[135]},
-		wire_add_sub_4_datab = DenominatorIn[120:116];
+		wire_add_sub_4_dataa = {StageIn[111:108], NumeratorIn[130]},
+		wire_add_sub_4_datab = DenominatorIn[116:112];
 	assign
 		wire_add_sub_5_result_int = wire_add_sub_5_dataa - wire_add_sub_5_datab;
 	assign
 		wire_add_sub_5_result = wire_add_sub_5_result_int[5:0],
 		wire_add_sub_5_cout = ~wire_add_sub_5_result_int[6:6];
 	assign
-		wire_add_sub_5_dataa = {StageIn[144:140], NumeratorIn[162]},
-		wire_add_sub_5_datab = DenominatorIn[150:145];
+		wire_add_sub_5_dataa = {StageIn[139:135], NumeratorIn[156]},
+		wire_add_sub_5_datab = DenominatorIn[145:140];
 	assign
 		wire_add_sub_6_result_int = wire_add_sub_6_dataa - wire_add_sub_6_datab;
 	assign
 		wire_add_sub_6_result = wire_add_sub_6_result_int[6:0],
 		wire_add_sub_6_cout = ~wire_add_sub_6_result_int[7:7];
 	assign
-		wire_add_sub_6_dataa = {StageIn[173:168], NumeratorIn[189]},
-		wire_add_sub_6_datab = DenominatorIn[180:174];
+		wire_add_sub_6_dataa = {StageIn[167:162], NumeratorIn[182]},
+		wire_add_sub_6_datab = DenominatorIn[174:168];
 	assign
 		wire_add_sub_7_result_int = wire_add_sub_7_dataa - wire_add_sub_7_datab;
 	assign
 		wire_add_sub_7_result = wire_add_sub_7_result_int[7:0],
 		wire_add_sub_7_cout = ~wire_add_sub_7_result_int[8:8];
 	assign
-		wire_add_sub_7_dataa = {StageIn[202:196], NumeratorIn[216]},
-		wire_add_sub_7_datab = DenominatorIn[210:203];
+		wire_add_sub_7_dataa = {StageIn[195:189], NumeratorIn[208]},
+		wire_add_sub_7_datab = DenominatorIn[203:196];
 	assign
 		wire_add_sub_8_result_int = wire_add_sub_8_dataa - wire_add_sub_8_datab;
 	assign
 		wire_add_sub_8_result = wire_add_sub_8_result_int[8:0],
 		wire_add_sub_8_cout = ~wire_add_sub_8_result_int[9:9];
 	assign
-		wire_add_sub_8_dataa = {StageIn[231:224], NumeratorIn[243]},
-		wire_add_sub_8_datab = DenominatorIn[240:232];
+		wire_add_sub_8_dataa = {StageIn[223:216], NumeratorIn[234]},
+		wire_add_sub_8_datab = DenominatorIn[232:224];
 	assign
 		wire_add_sub_9_result_int = wire_add_sub_9_dataa - wire_add_sub_9_datab;
 	assign
 		wire_add_sub_9_result = wire_add_sub_9_result_int[9:0],
 		wire_add_sub_9_cout = ~wire_add_sub_9_result_int[10:10];
 	assign
-		wire_add_sub_9_dataa = {StageIn[260:252], NumeratorIn[270]},
-		wire_add_sub_9_datab = DenominatorIn[270:261];
+		wire_add_sub_9_dataa = {StageIn[251:243], NumeratorIn[260]},
+		wire_add_sub_9_datab = DenominatorIn[261:252];
 	assign
 		aclr = 1'b0,
 		DenominatorIn = DenominatorIn_tmp,
-		DenominatorIn_tmp = {DenominatorIn[811:754], {gnd_wire, DFFDenominator[139:112]}, DenominatorIn[724:580], {gnd_wire, DFFDenominator[111:84]}, DenominatorIn[550:406], {gnd_wire, DFFDenominator[83:56]}, DenominatorIn[376:261], {gnd_wire, DFFDenominator[55:28]}, DenominatorIn[231:87], {gnd_wire, DFFDenominator[27:0]}, DenominatorIn[57:0], {gnd_wire, denominator}},
+		DenominatorIn_tmp = {DenominatorIn[755:700], {gnd_wire, DFFDenominator[134:108]}, DenominatorIn[671:532], {gnd_wire, DFFDenominator[107:81]}, DenominatorIn[503:392], {gnd_wire, DFFDenominator[80:54]}, DenominatorIn[363:252], {gnd_wire, DFFDenominator[53:27]}, DenominatorIn[223:84], {gnd_wire, DFFDenominator[26:0]}, DenominatorIn[55:0], {gnd_wire, denominator}},
 		gnd_wire = 1'b0,
-		nose = {{28{1'b0}}, wire_add_sub_27_cout, {28{1'b0}}, wire_add_sub_26_cout, {28{1'b0}}, wire_add_sub_25_cout, {28{1'b0}}, wire_add_sub_24_cout, {28{1'b0}}, wire_add_sub_23_cout, {28{1'b0}}, wire_add_sub_22_cout, {28{1'b0}}, wire_add_sub_21_cout, {28{1'b0}}, wire_add_sub_20_cout, {28{1'b0}}, wire_add_sub_19_cout, {28{1'b0}}, wire_add_sub_18_cout, {28{1'b0}}, wire_add_sub_17_cout, {28{1'b0}}, wire_add_sub_16_cout, {28{1'b0}}, wire_add_sub_15_cout, {28{1'b0}}, wire_add_sub_14_cout, {28{1'b0}}, wire_add_sub_13_cout, {28{1'b0}}, wire_add_sub_12_cout, {28{1'b0}}, wire_add_sub_11_cout, {28{1'b0}}, wire_add_sub_10_cout, {28{1'b0}}, wire_add_sub_9_cout, {28{1'b0}}, wire_add_sub_8_cout, {28{1'b0}}, wire_add_sub_7_cout, {28{1'b0}}, wire_add_sub_6_cout, {28{1'b0}}, wire_add_sub_5_cout, {28{1'b0}}, wire_add_sub_4_cout, {28{1'b0}}, wire_add_sub_3_cout, {28{1'b0}}, wire_add_sub_2_cout, {28{1'b0}}, wire_add_sub_1_cout, {28{1'b0}}, wire_add_sub_0_cout},
+		nose = {{27{1'b0}}, wire_add_sub_26_cout, {27{1'b0}}, wire_add_sub_25_cout, {27{1'b0}}, wire_add_sub_24_cout, {27{1'b0}}, wire_add_sub_23_cout, {27{1'b0}}, wire_add_sub_22_cout, {27{1'b0}}, wire_add_sub_21_cout, {27{1'b0}}, wire_add_sub_20_cout, {27{1'b0}}, wire_add_sub_19_cout, {27{1'b0}}, wire_add_sub_18_cout, {27{1'b0}}, wire_add_sub_17_cout, {27{1'b0}}, wire_add_sub_16_cout, {27{1'b0}}, wire_add_sub_15_cout, {27{1'b0}}, wire_add_sub_14_cout, {27{1'b0}}, wire_add_sub_13_cout, {27{1'b0}}, wire_add_sub_12_cout, {27{1'b0}}, wire_add_sub_11_cout, {27{1'b0}}, wire_add_sub_10_cout, {27{1'b0}}, wire_add_sub_9_cout, {27{1'b0}}, wire_add_sub_8_cout, {27{1'b0}}, wire_add_sub_7_cout, {27{1'b0}}, wire_add_sub_6_cout, {27{1'b0}}, wire_add_sub_5_cout, {27{1'b0}}, wire_add_sub_4_cout, {27{1'b0}}, wire_add_sub_3_cout, {27{1'b0}}, wire_add_sub_2_cout, {27{1'b0}}, wire_add_sub_1_cout, {27{1'b0}}, wire_add_sub_0_cout},
 		NumeratorIn = NumeratorIn_tmp,
-		NumeratorIn_tmp = {NumeratorIn[783:728], DFFNumerator[139:112], NumeratorIn[699:560], DFFNumerator[111:84], NumeratorIn[531:392], DFFNumerator[83:56], NumeratorIn[363:252], DFFNumerator[55:28], NumeratorIn[223:84], DFFNumerator[27:0], NumeratorIn[55:0], numerator},
-		prestg = {wire_add_sub_27_result, {1{1'b0}}, wire_add_sub_26_result, {2{1'b0}}, wire_add_sub_25_result, {3{1'b0}}, wire_add_sub_24_result, {4{1'b0}}, wire_add_sub_23_result, {5{1'b0}}, wire_add_sub_22_result, {6{1'b0}}, wire_add_sub_21_result, {7{1'b0}}, wire_add_sub_20_result, {8{1'b0}}, wire_add_sub_19_result, {9{1'b0}}, wire_add_sub_18_result, {10{1'b0}}, wire_add_sub_17_result, {11{1'b0}}, wire_add_sub_16_result, {12{1'b0}}, wire_add_sub_15_result, {13{1'b0}}, wire_add_sub_14_result, {14{1'b0}}, wire_add_sub_13_result, {15{1'b0}}, wire_add_sub_12_result, {16{1'b0}}, wire_add_sub_11_result, {17{1'b0}}, wire_add_sub_10_result, {18{1'b0}}, wire_add_sub_9_result, {19{1'b0}}, wire_add_sub_8_result, {20{1'b0}}, wire_add_sub_7_result, {21{1'b0}}, wire_add_sub_6_result, {22{1'b0}}, wire_add_sub_5_result, {23{1'b0}}, wire_add_sub_4_result, {24{1'b0}}, wire_add_sub_3_result, {25{1'b0}}, wire_add_sub_2_result, {26{1'b0}}, wire_add_sub_1_result, {27{1'b0}}, wire_add_sub_0_result},
+		NumeratorIn_tmp = {NumeratorIn[728:675], DFFNumerator[134:108], NumeratorIn[647:513], DFFNumerator[107:81], NumeratorIn[485:378], DFFNumerator[80:54], NumeratorIn[350:243], DFFNumerator[53:27], NumeratorIn[215:81], DFFNumerator[26:0], NumeratorIn[53:0], numerator},
+		prestg = {wire_add_sub_26_result, {1{1'b0}}, wire_add_sub_25_result, {2{1'b0}}, wire_add_sub_24_result, {3{1'b0}}, wire_add_sub_23_result, {4{1'b0}}, wire_add_sub_22_result, {5{1'b0}}, wire_add_sub_21_result, {6{1'b0}}, wire_add_sub_20_result, {7{1'b0}}, wire_add_sub_19_result, {8{1'b0}}, wire_add_sub_18_result, {9{1'b0}}, wire_add_sub_17_result, {10{1'b0}}, wire_add_sub_16_result, {11{1'b0}}, wire_add_sub_15_result, {12{1'b0}}, wire_add_sub_14_result, {13{1'b0}}, wire_add_sub_13_result, {14{1'b0}}, wire_add_sub_12_result, {15{1'b0}}, wire_add_sub_11_result, {16{1'b0}}, wire_add_sub_10_result, {17{1'b0}}, wire_add_sub_9_result, {18{1'b0}}, wire_add_sub_8_result, {19{1'b0}}, wire_add_sub_7_result, {20{1'b0}}, wire_add_sub_6_result, {21{1'b0}}, wire_add_sub_5_result, {22{1'b0}}, wire_add_sub_4_result, {23{1'b0}}, wire_add_sub_3_result, {24{1'b0}}, wire_add_sub_2_result, {25{1'b0}}, wire_add_sub_1_result, {26{1'b0}}, wire_add_sub_0_result},
 		quotient = quotient_tmp,
-		quotient_tmp = {DFFQuotient[139:114], (~ selnose[754]), (~ selnose[783])},
-		remainder = StageIn[811:784],
-		sel = {gnd_wire, (sel[811] | DenominatorIn[839]), (sel[810] | DenominatorIn[838]), (sel[809] | DenominatorIn[837]), (sel[808] | DenominatorIn[836]), (sel[807] | DenominatorIn[835]), (sel[806] | DenominatorIn[834]), (sel[805] | DenominatorIn[833]), (sel[804] | DenominatorIn[832]), (sel[803] | DenominatorIn[831]), (sel[802] | DenominatorIn[830]), (sel[801] | DenominatorIn[829]), (sel[800] | DenominatorIn[828]), (sel[799] | DenominatorIn[827]), (sel[798] | DenominatorIn[826]), (sel[797] | DenominatorIn[825]), (sel[796] | DenominatorIn[824]), (sel[795] | DenominatorIn[823]), (sel[794] | DenominatorIn[822]), (sel[793] | DenominatorIn[821]), (sel[792] | DenominatorIn[820]), (sel[791] | DenominatorIn[819]), (sel[790] | DenominatorIn[818]), (sel[789] | DenominatorIn[817]), (sel[788] | DenominatorIn[816]), (sel[787] | DenominatorIn[815]), (sel[786] | DenominatorIn[814]), (sel[785] | DenominatorIn[813]), gnd_wire, (sel[783] | DenominatorIn[810]), (sel[782] | DenominatorIn[809]), (sel[781] | DenominatorIn[808]), (sel[780] | DenominatorIn[807]), (sel[779] | DenominatorIn[806]), (sel[778] | DenominatorIn[805]), (sel[777] | DenominatorIn[804]), (sel[776] | DenominatorIn[803]), (sel[775] | DenominatorIn[802]), (sel[774] | DenominatorIn[801]), (sel[773] | DenominatorIn[800]), (sel[772] | DenominatorIn[799]), (sel[771] | DenominatorIn[798]), (sel[770] | DenominatorIn[797]), (sel[769] | DenominatorIn[796]), (sel[768] | DenominatorIn[795]), (sel[767] | DenominatorIn[794]), (sel[766] | DenominatorIn[793]), (sel[765] | DenominatorIn[792]), (sel[764] | DenominatorIn[791]), (sel[763] | DenominatorIn[790]), (sel[762] | DenominatorIn[789]), (sel[761] | DenominatorIn[788]), (sel[760] | DenominatorIn[787]), (sel[759] | DenominatorIn[786]), (sel[758] | DenominatorIn[785]), (sel[757] | DenominatorIn[784]), gnd_wire, (sel[755] | DenominatorIn[781]), (sel[754] | DenominatorIn[780]), (sel[753] | DenominatorIn[779]), (sel[752] | DenominatorIn[778]), (sel[751] | DenominatorIn[777]), (sel[750] | DenominatorIn[776]), (sel[749] | DenominatorIn[775]
-), (sel[748] | DenominatorIn[774]), (sel[747] | DenominatorIn[773]), (sel[746] | DenominatorIn[772]), (sel[745] | DenominatorIn[771]), (sel[744] | DenominatorIn[770]), (sel[743] | DenominatorIn[769]), (sel[742] | DenominatorIn[768]), (sel[741] | DenominatorIn[767]), (sel[740] | DenominatorIn[766]), (sel[739] | DenominatorIn[765]), (sel[738] | DenominatorIn[764]), (sel[737] | DenominatorIn[763]), (sel[736] | DenominatorIn[762]), (sel[735] | DenominatorIn[761]), (sel[734] | DenominatorIn[760]), (sel[733] | DenominatorIn[759]), (sel[732] | DenominatorIn[758]), (sel[731] | DenominatorIn[757]), (sel[730] | DenominatorIn[756]), (sel[729] | DenominatorIn[755]), gnd_wire, (sel[727] | DenominatorIn[752]), (sel[726] | DenominatorIn[751]), (sel[725] | DenominatorIn[750]), (sel[724] | DenominatorIn[749]), (sel[723] | DenominatorIn[748]), (sel[722] | DenominatorIn[747]), (sel[721] | DenominatorIn[746]), (sel[720] | DenominatorIn[745]), (sel[719] | DenominatorIn[744]), (sel[718] | DenominatorIn[743]), (sel[717] | DenominatorIn[742]), (sel[716] | DenominatorIn[741]), (sel[715] | DenominatorIn[740]), (sel[714] | DenominatorIn[739]), (sel[713] | DenominatorIn[738]), (sel[712] | DenominatorIn[737]), (sel[711] | DenominatorIn[736]), (sel[710] | DenominatorIn[735]), (sel[709] | DenominatorIn[734]), (sel[708] | DenominatorIn[733]), (sel[707] | DenominatorIn[732]), (sel[706] | DenominatorIn[731]), (sel[705] | DenominatorIn[730]), (sel[704] | DenominatorIn[729]), (sel[703] | DenominatorIn[728]), (sel[702] | DenominatorIn[727]), (sel[701] | DenominatorIn[726]), gnd_wire, (sel[699] | DenominatorIn[723]), (sel[698] | DenominatorIn[722]), (sel[697] | DenominatorIn[721]), (sel[696] | DenominatorIn[720]), (sel[695] | DenominatorIn[719]), (sel[694] | DenominatorIn[718]), (sel[693] | DenominatorIn[717]), (sel[692] | DenominatorIn[716]), (sel[691] | DenominatorIn[715]), (sel[690] | DenominatorIn[714]), (sel[689] | DenominatorIn[713]), (sel[688] | DenominatorIn[712]), (sel[687] | DenominatorIn[711]), (sel[686] | DenominatorIn[710]), (sel[685] | DenominatorIn[709]
-), (sel[684] | DenominatorIn[708]), (sel[683] | DenominatorIn[707]), (sel[682] | DenominatorIn[706]), (sel[681] | DenominatorIn[705]), (sel[680] | DenominatorIn[704]), (sel[679] | DenominatorIn[703]), (sel[678] | DenominatorIn[702]), (sel[677] | DenominatorIn[701]), (sel[676] | DenominatorIn[700]), (sel[675] | DenominatorIn[699]), (sel[674] | DenominatorIn[698]), (sel[673] | DenominatorIn[697]), gnd_wire, (sel[671] | DenominatorIn[694]), (sel[670] | DenominatorIn[693]), (sel[669] | DenominatorIn[692]), (sel[668] | DenominatorIn[691]), (sel[667] | DenominatorIn[690]), (sel[666] | DenominatorIn[689]), (sel[665] | DenominatorIn[688]), (sel[664] | DenominatorIn[687]), (sel[663] | DenominatorIn[686]), (sel[662] | DenominatorIn[685]), (sel[661] | DenominatorIn[684]), (sel[660] | DenominatorIn[683]), (sel[659] | DenominatorIn[682]), (sel[658] | DenominatorIn[681]), (sel[657] | DenominatorIn[680]), (sel[656] | DenominatorIn[679]), (sel[655] | DenominatorIn[678]), (sel[654] | DenominatorIn[677]), (sel[653] | DenominatorIn[676]), (sel[652] | DenominatorIn[675]), (sel[651] | DenominatorIn[674]), (sel[650] | DenominatorIn[673]), (sel[649] | DenominatorIn[672]), (sel[648] | DenominatorIn[671]), (sel[647] | DenominatorIn[670]), (sel[646] | DenominatorIn[669]), (sel[645] | DenominatorIn[668]), gnd_wire, (sel[643] | DenominatorIn[665]), (sel[642] | DenominatorIn[664]), (sel[641] | DenominatorIn[663]), (sel[640] | DenominatorIn[662]), (sel[639] | DenominatorIn[661]), (sel[638] | DenominatorIn[660]), (sel[637] | DenominatorIn[659]), (sel[636] | DenominatorIn[658]), (sel[635] | DenominatorIn[657]), (sel[634] | DenominatorIn[656]), (sel[633] | DenominatorIn[655]), (sel[632] | DenominatorIn[654]), (sel[631] | DenominatorIn[653]), (sel[630] | DenominatorIn[652]), (sel[629] | DenominatorIn[651]), (sel[628] | DenominatorIn[650]), (sel[627] | DenominatorIn[649]), (sel[626] | DenominatorIn[648]), (sel[625] | DenominatorIn[647]), (sel[624] | DenominatorIn[646]), (sel[623] | DenominatorIn[645]), (sel[622] | DenominatorIn[644]), (sel[621] | DenominatorIn[643]
-), (sel[620] | DenominatorIn[642]), (sel[619] | DenominatorIn[641]), (sel[618] | DenominatorIn[640]), (sel[617] | DenominatorIn[639]), gnd_wire, (sel[615] | DenominatorIn[636]), (sel[614] | DenominatorIn[635]), (sel[613] | DenominatorIn[634]), (sel[612] | DenominatorIn[633]), (sel[611] | DenominatorIn[632]), (sel[610] | DenominatorIn[631]), (sel[609] | DenominatorIn[630]), (sel[608] | DenominatorIn[629]), (sel[607] | DenominatorIn[628]), (sel[606] | DenominatorIn[627]), (sel[605] | DenominatorIn[626]), (sel[604] | DenominatorIn[625]), (sel[603] | DenominatorIn[624]), (sel[602] | DenominatorIn[623]), (sel[601] | DenominatorIn[622]), (sel[600] | DenominatorIn[621]), (sel[599] | DenominatorIn[620]), (sel[598] | DenominatorIn[619]), (sel[597] | DenominatorIn[618]), (sel[596] | DenominatorIn[617]), (sel[595] | DenominatorIn[616]), (sel[594] | DenominatorIn[615]), (sel[593] | DenominatorIn[614]), (sel[592] | DenominatorIn[613]), (sel[591] | DenominatorIn[612]), (sel[590] | DenominatorIn[611]), (sel[589] | DenominatorIn[610]), gnd_wire, (sel[587] | DenominatorIn[607]), (sel[586] | DenominatorIn[606]), (sel[585] | DenominatorIn[605]), (sel[584] | DenominatorIn[604]), (sel[583] | DenominatorIn[603]), (sel[582] | DenominatorIn[602]), (sel[581] | DenominatorIn[601]), (sel[580] | DenominatorIn[600]), (sel[579] | DenominatorIn[599]), (sel[578] | DenominatorIn[598]), (sel[577] | DenominatorIn[597]), (sel[576] | DenominatorIn[596]), (sel[575] | DenominatorIn[595]), (sel[574] | DenominatorIn[594]), (sel[573] | DenominatorIn[593]), (sel[572] | DenominatorIn[592]), (sel[571] | DenominatorIn[591]), (sel[570] | DenominatorIn[590]), (sel[569] | DenominatorIn[589]), (sel[568] | DenominatorIn[588]), (sel[567] | DenominatorIn[587]), (sel[566] | DenominatorIn[586]), (sel[565] | DenominatorIn[585]), (sel[564] | DenominatorIn[584]), (sel[563] | DenominatorIn[583]), (sel[562] | DenominatorIn[582]), (sel[561] | DenominatorIn[581]), gnd_wire, (sel[559] | DenominatorIn[578]), (sel[558] | DenominatorIn[577]), (sel[557] | DenominatorIn[576]), (sel[556]
- | DenominatorIn[575]), (sel[555] | DenominatorIn[574]), (sel[554] | DenominatorIn[573]), (sel[553] | DenominatorIn[572]), (sel[552] | DenominatorIn[571]), (sel[551] | DenominatorIn[570]), (sel[550] | DenominatorIn[569]), (sel[549] | DenominatorIn[568]), (sel[548] | DenominatorIn[567]), (sel[547] | DenominatorIn[566]), (sel[546] | DenominatorIn[565]), (sel[545] | DenominatorIn[564]), (sel[544] | DenominatorIn[563]), (sel[543] | DenominatorIn[562]), (sel[542] | DenominatorIn[561]), (sel[541] | DenominatorIn[560]), (sel[540] | DenominatorIn[559]), (sel[539] | DenominatorIn[558]), (sel[538] | DenominatorIn[557]), (sel[537] | DenominatorIn[556]), (sel[536] | DenominatorIn[555]), (sel[535] | DenominatorIn[554]), (sel[534] | DenominatorIn[553]), (sel[533] | DenominatorIn[552]), gnd_wire, (sel[531] | DenominatorIn[549]), (sel[530] | DenominatorIn[548]), (sel[529] | DenominatorIn[547]), (sel[528] | DenominatorIn[546]), (sel[527] | DenominatorIn[545]), (sel[526] | DenominatorIn[544]), (sel[525] | DenominatorIn[543]), (sel[524] | DenominatorIn[542]), (sel[523] | DenominatorIn[541]), (sel[522] | DenominatorIn[540]), (sel[521] | DenominatorIn[539]), (sel[520] | DenominatorIn[538]), (sel[519] | DenominatorIn[537]), (sel[518] | DenominatorIn[536]), (sel[517] | DenominatorIn[535]), (sel[516] | DenominatorIn[534]), (sel[515] | DenominatorIn[533]), (sel[514] | DenominatorIn[532]), (sel[513] | DenominatorIn[531]), (sel[512] | DenominatorIn[530]), (sel[511] | DenominatorIn[529]), (sel[510] | DenominatorIn[528]), (sel[509] | DenominatorIn[527]), (sel[508] | DenominatorIn[526]), (sel[507] | DenominatorIn[525]), (sel[506] | DenominatorIn[524]), (sel[505] | DenominatorIn[523]), gnd_wire, (sel[503] | DenominatorIn[520]), (sel[502] | DenominatorIn[519]), (sel[501] | DenominatorIn[518]), (sel[500] | DenominatorIn[517]), (sel[499] | DenominatorIn[516]), (sel[498] | DenominatorIn[515]), (sel[497] | DenominatorIn[514]), (sel[496] | DenominatorIn[513]), (sel[495] | DenominatorIn[512]), (sel[494] | DenominatorIn[511]), (sel[493] | DenominatorIn[510]
-), (sel[492] | DenominatorIn[509]), (sel[491] | DenominatorIn[508]), (sel[490] | DenominatorIn[507]), (sel[489] | DenominatorIn[506]), (sel[488] | DenominatorIn[505]), (sel[487] | DenominatorIn[504]), (sel[486] | DenominatorIn[503]), (sel[485] | DenominatorIn[502]), (sel[484] | DenominatorIn[501]), (sel[483] | DenominatorIn[500]), (sel[482] | DenominatorIn[499]), (sel[481] | DenominatorIn[498]), (sel[480] | DenominatorIn[497]), (sel[479] | DenominatorIn[496]), (sel[478] | DenominatorIn[495]), (sel[477] | DenominatorIn[494]), gnd_wire, (sel[475] | DenominatorIn[491]), (sel[474] | DenominatorIn[490]), (sel[473] | DenominatorIn[489]), (sel[472] | DenominatorIn[488]), (sel[471] | DenominatorIn[487]), (sel[470] | DenominatorIn[486]), (sel[469] | DenominatorIn[485]), (sel[468] | DenominatorIn[484]), (sel[467] | DenominatorIn[483]), (sel[466] | DenominatorIn[482]), (sel[465] | DenominatorIn[481]), (sel[464] | DenominatorIn[480]), (sel[463] | DenominatorIn[479]), (sel[462] | DenominatorIn[478]), (sel[461] | DenominatorIn[477]), (sel[460] | DenominatorIn[476]), (sel[459] | DenominatorIn[475]), (sel[458] | DenominatorIn[474]), (sel[457] | DenominatorIn[473]), (sel[456] | DenominatorIn[472]), (sel[455] | DenominatorIn[471]), (sel[454] | DenominatorIn[470]), (sel[453] | DenominatorIn[469]), (sel[452] | DenominatorIn[468]), (sel[451] | DenominatorIn[467]), (sel[450] | DenominatorIn[466]), (sel[449] | DenominatorIn[465]), gnd_wire, (sel[447] | DenominatorIn[462]), (sel[446] | DenominatorIn[461]), (sel[445] | DenominatorIn[460]), (sel[444] | DenominatorIn[459]), (sel[443] | DenominatorIn[458]), (sel[442] | DenominatorIn[457]), (sel[441] | DenominatorIn[456]), (sel[440] | DenominatorIn[455]), (sel[439] | DenominatorIn[454]), (sel[438] | DenominatorIn[453]), (sel[437] | DenominatorIn[452]), (sel[436] | DenominatorIn[451]), (sel[435] | DenominatorIn[450]), (sel[434] | DenominatorIn[449]), (sel[433] | DenominatorIn[448]), (sel[432] | DenominatorIn[447]), (sel[431] | DenominatorIn[446]), (sel[430] | DenominatorIn[445]), (sel[429] | DenominatorIn[444]
-), (sel[428] | DenominatorIn[443]), (sel[427] | DenominatorIn[442]), (sel[426] | DenominatorIn[441]), (sel[425] | DenominatorIn[440]), (sel[424] | DenominatorIn[439]), (sel[423] | DenominatorIn[438]), (sel[422] | DenominatorIn[437]), (sel[421] | DenominatorIn[436]), gnd_wire, (sel[419] | DenominatorIn[433]), (sel[418] | DenominatorIn[432]), (sel[417] | DenominatorIn[431]), (sel[416] | DenominatorIn[430]), (sel[415] | DenominatorIn[429]), (sel[414] | DenominatorIn[428]), (sel[413] | DenominatorIn[427]), (sel[412] | DenominatorIn[426]), (sel[411] | DenominatorIn[425]), (sel[410] | DenominatorIn[424]), (sel[409] | DenominatorIn[423]), (sel[408] | DenominatorIn[422]), (sel[407] | DenominatorIn[421]), (sel[406] | DenominatorIn[420]), (sel[405] | DenominatorIn[419]), (sel[404] | DenominatorIn[418]), (sel[403] | DenominatorIn[417]), (sel[402] | DenominatorIn[416]), (sel[401] | DenominatorIn[415]), (sel[400] | DenominatorIn[414]), (sel[399] | DenominatorIn[413]), (sel[398] | DenominatorIn[412]), (sel[397] | DenominatorIn[411]), (sel[396] | DenominatorIn[410]), (sel[395] | DenominatorIn[409]), (sel[394] | DenominatorIn[408]), (sel[393] | DenominatorIn[407]), gnd_wire, (sel[391] | DenominatorIn[404]), (sel[390] | DenominatorIn[403]), (sel[389] | DenominatorIn[402]), (sel[388] | DenominatorIn[401]), (sel[387] | DenominatorIn[400]), (sel[386] | DenominatorIn[399]), (sel[385] | DenominatorIn[398]), (sel[384] | DenominatorIn[397]), (sel[383] | DenominatorIn[396]), (sel[382] | DenominatorIn[395]), (sel[381] | DenominatorIn[394]), (sel[380] | DenominatorIn[393]), (sel[379] | DenominatorIn[392]), (sel[378] | DenominatorIn[391]), (sel[377] | DenominatorIn[390]), (sel[376] | DenominatorIn[389]), (sel[375] | DenominatorIn[388]), (sel[374] | DenominatorIn[387]), (sel[373] | DenominatorIn[386]), (sel[372] | DenominatorIn[385]), (sel[371] | DenominatorIn[384]), (sel[370] | DenominatorIn[383]), (sel[369] | DenominatorIn[382]), (sel[368] | DenominatorIn[381]), (sel[367] | DenominatorIn[380]), (sel[366] | DenominatorIn[379]), (sel[365] | DenominatorIn[378]
-), gnd_wire, (sel[363] | DenominatorIn[375]), (sel[362] | DenominatorIn[374]), (sel[361] | DenominatorIn[373]), (sel[360] | DenominatorIn[372]), (sel[359] | DenominatorIn[371]), (sel[358] | DenominatorIn[370]), (sel[357] | DenominatorIn[369]), (sel[356] | DenominatorIn[368]), (sel[355] | DenominatorIn[367]), (sel[354] | DenominatorIn[366]), (sel[353] | DenominatorIn[365]), (sel[352] | DenominatorIn[364]), (sel[351] | DenominatorIn[363]), (sel[350] | DenominatorIn[362]), (sel[349] | DenominatorIn[361]), (sel[348] | DenominatorIn[360]), (sel[347] | DenominatorIn[359]), (sel[346] | DenominatorIn[358]), (sel[345] | DenominatorIn[357]), (sel[344] | DenominatorIn[356]), (sel[343] | DenominatorIn[355]), (sel[342] | DenominatorIn[354]), (sel[341] | DenominatorIn[353]), (sel[340] | DenominatorIn[352]), (sel[339] | DenominatorIn[351]), (sel[338] | DenominatorIn[350]), (sel[337] | DenominatorIn[349]), gnd_wire, (sel[335] | DenominatorIn[346]), (sel[334] | DenominatorIn[345]), (sel[333] | DenominatorIn[344]), (sel[332] | DenominatorIn[343]), (sel[331] | DenominatorIn[342]), (sel[330] | DenominatorIn[341]), (sel[329] | DenominatorIn[340]), (sel[328] | DenominatorIn[339]), (sel[327] | DenominatorIn[338]), (sel[326] | DenominatorIn[337]), (sel[325] | DenominatorIn[336]), (sel[324] | DenominatorIn[335]), (sel[323] | DenominatorIn[334]), (sel[322] | DenominatorIn[333]), (sel[321] | DenominatorIn[332]), (sel[320] | DenominatorIn[331]), (sel[319] | DenominatorIn[330]), (sel[318] | DenominatorIn[329]), (sel[317] | DenominatorIn[328]), (sel[316] | DenominatorIn[327]), (sel[315] | DenominatorIn[326]), (sel[314] | DenominatorIn[325]), (sel[313] | DenominatorIn[324]), (sel[312] | DenominatorIn[323]), (sel[311] | DenominatorIn[322]), (sel[310] | DenominatorIn[321]), (sel[309] | DenominatorIn[320]), gnd_wire, (sel[307] | DenominatorIn[317]), (sel[306] | DenominatorIn[316]), (sel[305] | DenominatorIn[315]), (sel[304] | DenominatorIn[314]), (sel[303] | DenominatorIn[313]), (sel[302] | DenominatorIn[312]), (sel[301] | DenominatorIn[311]), (sel[300]
- | DenominatorIn[310]), (sel[299] | DenominatorIn[309]), (sel[298] | DenominatorIn[308]), (sel[297] | DenominatorIn[307]), (sel[296] | DenominatorIn[306]), (sel[295] | DenominatorIn[305]), (sel[294] | DenominatorIn[304]), (sel[293] | DenominatorIn[303]), (sel[292] | DenominatorIn[302]), (sel[291] | DenominatorIn[301]), (sel[290] | DenominatorIn[300]), (sel[289] | DenominatorIn[299]), (sel[288] | DenominatorIn[298]), (sel[287] | DenominatorIn[297]), (sel[286] | DenominatorIn[296]), (sel[285] | DenominatorIn[295]), (sel[284] | DenominatorIn[294]), (sel[283] | DenominatorIn[293]), (sel[282] | DenominatorIn[292]), (sel[281] | DenominatorIn[291]), gnd_wire, (sel[279] | DenominatorIn[288]), (sel[278] | DenominatorIn[287]), (sel[277] | DenominatorIn[286]), (sel[276] | DenominatorIn[285]), (sel[275] | DenominatorIn[284]), (sel[274] | DenominatorIn[283]), (sel[273] | DenominatorIn[282]), (sel[272] | DenominatorIn[281]), (sel[271] | DenominatorIn[280]), (sel[270] | DenominatorIn[279]), (sel[269] | DenominatorIn[278]), (sel[268] | DenominatorIn[277]), (sel[267] | DenominatorIn[276]), (sel[266] | DenominatorIn[275]), (sel[265] | DenominatorIn[274]), (sel[264] | DenominatorIn[273]), (sel[263] | DenominatorIn[272]), (sel[262] | DenominatorIn[271]), (sel[261] | DenominatorIn[270]), (sel[260] | DenominatorIn[269]), (sel[259] | DenominatorIn[268]), (sel[258] | DenominatorIn[267]), (sel[257] | DenominatorIn[266]), (sel[256] | DenominatorIn[265]), (sel[255] | DenominatorIn[264]), (sel[254] | DenominatorIn[263]), (sel[253] | DenominatorIn[262]), gnd_wire, (sel[251] | DenominatorIn[259]), (sel[250] | DenominatorIn[258]), (sel[249] | DenominatorIn[257]), (sel[248] | DenominatorIn[256]), (sel[247] | DenominatorIn[255]), (sel[246] | DenominatorIn[254]), (sel[245] | DenominatorIn[253]), (sel[244] | DenominatorIn[252]), (sel[243] | DenominatorIn[251]), (sel[242] | DenominatorIn[250]), (sel[241] | DenominatorIn[249]), (sel[240] | DenominatorIn[248]), (sel[239] | DenominatorIn[247]), (sel[238] | DenominatorIn[246]), (sel[237] | DenominatorIn[245]
-), (sel[236] | DenominatorIn[244]), (sel[235] | DenominatorIn[243]), (sel[234] | DenominatorIn[242]), (sel[233] | DenominatorIn[241]), (sel[232] | DenominatorIn[240]), (sel[231] | DenominatorIn[239]), (sel[230] | DenominatorIn[238]), (sel[229] | DenominatorIn[237]), (sel[228] | DenominatorIn[236]), (sel[227] | DenominatorIn[235]), (sel[226] | DenominatorIn[234]), (sel[225] | DenominatorIn[233]), gnd_wire, (sel[223] | DenominatorIn[230]), (sel[222] | DenominatorIn[229]), (sel[221] | DenominatorIn[228]), (sel[220] | DenominatorIn[227]), (sel[219] | DenominatorIn[226]), (sel[218] | DenominatorIn[225]), (sel[217] | DenominatorIn[224]), (sel[216] | DenominatorIn[223]), (sel[215] | DenominatorIn[222]), (sel[214] | DenominatorIn[221]), (sel[213] | DenominatorIn[220]), (sel[212] | DenominatorIn[219]), (sel[211] | DenominatorIn[218]), (sel[210] | DenominatorIn[217]), (sel[209] | DenominatorIn[216]), (sel[208] | DenominatorIn[215]), (sel[207] | DenominatorIn[214]), (sel[206] | DenominatorIn[213]), (sel[205] | DenominatorIn[212]), (sel[204] | DenominatorIn[211]), (sel[203] | DenominatorIn[210]), (sel[202] | DenominatorIn[209]), (sel[201] | DenominatorIn[208]), (sel[200] | DenominatorIn[207]), (sel[199] | DenominatorIn[206]), (sel[198] | DenominatorIn[205]), (sel[197] | DenominatorIn[204]), gnd_wire, (sel[195] | DenominatorIn[201]), (sel[194] | DenominatorIn[200]), (sel[193] | DenominatorIn[199]), (sel[192] | DenominatorIn[198]), (sel[191] | DenominatorIn[197]), (sel[190] | DenominatorIn[196]), (sel[189] | DenominatorIn[195]), (sel[188] | DenominatorIn[194]), (sel[187] | DenominatorIn[193]), (sel[186] | DenominatorIn[192]), (sel[185] | DenominatorIn[191]), (sel[184] | DenominatorIn[190]), (sel[183] | DenominatorIn[189]), (sel[182] | DenominatorIn[188]), (sel[181] | DenominatorIn[187]), (sel[180] | DenominatorIn[186]), (sel[179] | DenominatorIn[185]), (sel[178] | DenominatorIn[184]), (sel[177] | DenominatorIn[183]), (sel[176] | DenominatorIn[182]), (sel[175] | DenominatorIn[181]), (sel[174] | DenominatorIn[180]), (sel[173] | DenominatorIn[179]
-), (sel[172] | DenominatorIn[178]), (sel[171] | DenominatorIn[177]), (sel[170] | DenominatorIn[176]), (sel[169] | DenominatorIn[175]), gnd_wire, (sel[167] | DenominatorIn[172]), (sel[166] | DenominatorIn[171]), (sel[165] | DenominatorIn[170]), (sel[164] | DenominatorIn[169]), (sel[163] | DenominatorIn[168]), (sel[162] | DenominatorIn[167]), (sel[161] | DenominatorIn[166]), (sel[160] | DenominatorIn[165]), (sel[159] | DenominatorIn[164]), (sel[158] | DenominatorIn[163]), (sel[157] | DenominatorIn[162]), (sel[156] | DenominatorIn[161]), (sel[155] | DenominatorIn[160]), (sel[154] | DenominatorIn[159]), (sel[153] | DenominatorIn[158]), (sel[152] | DenominatorIn[157]), (sel[151] | DenominatorIn[156]), (sel[150] | DenominatorIn[155]), (sel[149] | DenominatorIn[154]), (sel[148] | DenominatorIn[153]), (sel[147] | DenominatorIn[152]), (sel[146] | DenominatorIn[151]), (sel[145] | DenominatorIn[150]), (sel[144] | DenominatorIn[149]), (sel[143] | DenominatorIn[148]), (sel[142] | DenominatorIn[147]), (sel[141] | DenominatorIn[146]), gnd_wire, (sel[139] | DenominatorIn[143]), (sel[138] | DenominatorIn[142]), (sel[137] | DenominatorIn[141]), (sel[136] | DenominatorIn[140]), (sel[135] | DenominatorIn[139]), (sel[134] | DenominatorIn[138]), (sel[133] | DenominatorIn[137]), (sel[132] | DenominatorIn[136]), (sel[131] | DenominatorIn[135]), (sel[130] | DenominatorIn[134]), (sel[129] | DenominatorIn[133]), (sel[128] | DenominatorIn[132]), (sel[127] | DenominatorIn[131]), (sel[126] | DenominatorIn[130]), (sel[125] | DenominatorIn[129]), (sel[124] | DenominatorIn[128]), (sel[123] | DenominatorIn[127]), (sel[122] | DenominatorIn[126]), (sel[121] | DenominatorIn[125]), (sel[120] | DenominatorIn[124]), (sel[119] | DenominatorIn[123]), (sel[118] | DenominatorIn[122]), (sel[117] | DenominatorIn[121]), (sel[116] | DenominatorIn[120]), (sel[115] | DenominatorIn[119]), (sel[114] | DenominatorIn[118]), (sel[113] | DenominatorIn[117]), gnd_wire, (sel[111] | DenominatorIn[114]), (sel[110] | DenominatorIn[113]), (sel[109] | DenominatorIn[112]), (sel[108]
- | DenominatorIn[111]), (sel[107] | DenominatorIn[110]), (sel[106] | DenominatorIn[109]), (sel[105] | DenominatorIn[108]), (sel[104] | DenominatorIn[107]), (sel[103] | DenominatorIn[106]), (sel[102] | DenominatorIn[105]), (sel[101] | DenominatorIn[104]), (sel[100] | DenominatorIn[103]), (sel[99] | DenominatorIn[102]), (sel[98] | DenominatorIn[101]), (sel[97] | DenominatorIn[100]), (sel[96] | DenominatorIn[99]), (sel[95] | DenominatorIn[98]), (sel[94] | DenominatorIn[97]), (sel[93] | DenominatorIn[96]), (sel[92] | DenominatorIn[95]), (sel[91] | DenominatorIn[94]), (sel[90] | DenominatorIn[93]), (sel[89] | DenominatorIn[92]), (sel[88] | DenominatorIn[91]), (sel[87] | DenominatorIn[90]), (sel[86] | DenominatorIn[89]), (sel[85] | DenominatorIn[88]), gnd_wire, (sel[83] | DenominatorIn[85]), (sel[82] | DenominatorIn[84]), (sel[81] | DenominatorIn[83]), (sel[80] | DenominatorIn[82]), (sel[79] | DenominatorIn[81]), (sel[78] | DenominatorIn[80]), (sel[77] | DenominatorIn[79]), (sel[76] | DenominatorIn[78]), (sel[75] | DenominatorIn[77]), (sel[74] | DenominatorIn[76]), (sel[73] | DenominatorIn[75]), (sel[72] | DenominatorIn[74]), (sel[71] | DenominatorIn[73]), (sel[70] | DenominatorIn[72]), (sel[69] | DenominatorIn[71]), (sel[68] | DenominatorIn[70]), (sel[67] | DenominatorIn[69]), (sel[66] | DenominatorIn[68]), (sel[65] | DenominatorIn[67]), (sel[64] | DenominatorIn[66]), (sel[63] | DenominatorIn[65]), (sel[62] | DenominatorIn[64]), (sel[61] | DenominatorIn[63]), (sel[60] | DenominatorIn[62]), (sel[59] | DenominatorIn[61]), (sel[58] | DenominatorIn[60]), (sel[57] | DenominatorIn[59]), gnd_wire, (sel[55] | DenominatorIn[56]), (sel[54] | DenominatorIn[55]), (sel[53] | DenominatorIn[54]), (sel[52] | DenominatorIn[53]), (sel[51] | DenominatorIn[52]), (sel[50] | DenominatorIn[51]), (sel[49] | DenominatorIn[50]), (sel[48] | DenominatorIn[49]), (sel[47] | DenominatorIn[48]), (sel[46] | DenominatorIn[47]), (sel[45] | DenominatorIn[46]), (sel[44] | DenominatorIn[45]), (sel[43] | DenominatorIn[44]), (sel[42] | DenominatorIn[43]), (sel[41]
- | DenominatorIn[42]), (sel[40] | DenominatorIn[41]), (sel[39] | DenominatorIn[40]), (sel[38] | DenominatorIn[39]), (sel[37] | DenominatorIn[38]), (sel[36] | DenominatorIn[37]), (sel[35] | DenominatorIn[36]), (sel[34] | DenominatorIn[35]), (sel[33] | DenominatorIn[34]), (sel[32] | DenominatorIn[33]), (sel[31] | DenominatorIn[32]), (sel[30] | DenominatorIn[31]), (sel[29] | DenominatorIn[30]), gnd_wire, (sel[27] | DenominatorIn[27]), (sel[26] | DenominatorIn[26]), (sel[25] | DenominatorIn[25]), (sel[24] | DenominatorIn[24]), (sel[23] | DenominatorIn[23]), (sel[22] | DenominatorIn[22]), (sel[21] | DenominatorIn[21]), (sel[20] | DenominatorIn[20]), (sel[19] | DenominatorIn[19]), (sel[18] | DenominatorIn[18]), (sel[17] | DenominatorIn[17]), (sel[16] | DenominatorIn[16]), (sel[15] | DenominatorIn[15]), (sel[14] | DenominatorIn[14]), (sel[13] | DenominatorIn[13]), (sel[12] | DenominatorIn[12]), (sel[11] | DenominatorIn[11]), (sel[10] | DenominatorIn[10]), (sel[9] | DenominatorIn[9]), (sel[8] | DenominatorIn[8]), (sel[7] | DenominatorIn[7]), (sel[6] | DenominatorIn[6]), (sel[5] | DenominatorIn[5]), (sel[4] | DenominatorIn[4]), (sel[3] | DenominatorIn[3]), (sel[2] | DenominatorIn[2]), (sel[1] | DenominatorIn[1])},
-		selnose = {((~ nose[811]) | sel[811]), ((~ nose[810]) | sel[810]), ((~ nose[809]) | sel[809]), ((~ nose[808]) | sel[808]), ((~ nose[807]) | sel[807]), ((~ nose[806]) | sel[806]), ((~ nose[805]) | sel[805]), ((~ nose[804]) | sel[804]), ((~ nose[803]) | sel[803]), ((~ nose[802]) | sel[802]), ((~ nose[801]) | sel[801]), ((~ nose[800]) | sel[800]), ((~ nose[799]) | sel[799]), ((~ nose[798]) | sel[798]), ((~ nose[797]) | sel[797]), ((~ nose[796]) | sel[796]), ((~ nose[795]) | sel[795]), ((~ nose[794]) | sel[794]), ((~ nose[793]) | sel[793]), ((~ nose[792]) | sel[792]), ((~ nose[791]) | sel[791]), ((~ nose[790]) | sel[790]), ((~ nose[789]) | sel[789]), ((~ nose[788]) | sel[788]), ((~ nose[787]) | sel[787]), ((~ nose[786]) | sel[786]), ((~ nose[785]) | sel[785]), ((~ nose[784]) | sel[784]), ((~ nose[783]) | sel[783]), ((~ nose[782]) | sel[782]), ((~ nose[781]) | sel[781]), ((~ nose[780]) | sel[780]), ((~ nose[779]) | sel[779]), ((~ nose[778]) | sel[778]), ((~ nose[777]) | sel[777]), ((~ nose[776]) | sel[776]), ((~ nose[775]) | sel[775]), ((~ nose[774]) | sel[774]), ((~ nose[773]) | sel[773]), ((~ nose[772]) | sel[772]), ((~ nose[771]) | sel[771]), ((~ nose[770]) | sel[770]), ((~ nose[769]) | sel[769]), ((~ nose[768]) | sel[768]), ((~ nose[767]) | sel[767]), ((~ nose[766]) | sel[766]), ((~ nose[765]) | sel[765]), ((~ nose[764]) | sel[764]), ((~ nose[763]) | sel[763]), ((~ nose[762]) | sel[762]), ((~ nose[761]) | sel[761]), ((~ nose[760]) | sel[760]), ((~ nose[759]) | sel[759]), ((~ nose[758]) | sel[758]), ((~ nose[757]) | sel[757]), ((~ nose[756]) | sel[756]), ((~ nose[755]) | sel[755]), ((~ nose[754]) | sel[754]), ((~ nose[753]) | sel[753]), ((~ nose[752]) | sel[752]), ((~ nose[751]) | sel[751]), ((~ nose[750]) | sel[750]), ((~ nose[749]) | sel[749]), ((~ nose[748]) | sel[748]), ((~ nose[747]) | sel[747]), ((~ nose[746]) | sel[746]), ((~ nose[745]) | sel[745]), ((~ nose[744]) | sel[744]), ((~ nose[743]) | sel[743]), ((~ nose[742]) | sel[742]), ((~ nose[741]) | sel[741]), ((~ nose[740]) | sel[740]), ((~ nose[739]) | sel[739]
-), ((~ nose[738]) | sel[738]), ((~ nose[737]) | sel[737]), ((~ nose[736]) | sel[736]), ((~ nose[735]) | sel[735]), ((~ nose[734]) | sel[734]), ((~ nose[733]) | sel[733]), ((~ nose[732]) | sel[732]), ((~ nose[731]) | sel[731]), ((~ nose[730]) | sel[730]), ((~ nose[729]) | sel[729]), ((~ nose[728]) | sel[728]), ((~ nose[727]) | sel[727]), ((~ nose[726]) | sel[726]), ((~ nose[725]) | sel[725]), ((~ nose[724]) | sel[724]), ((~ nose[723]) | sel[723]), ((~ nose[722]) | sel[722]), ((~ nose[721]) | sel[721]), ((~ nose[720]) | sel[720]), ((~ nose[719]) | sel[719]), ((~ nose[718]) | sel[718]), ((~ nose[717]) | sel[717]), ((~ nose[716]) | sel[716]), ((~ nose[715]) | sel[715]), ((~ nose[714]) | sel[714]), ((~ nose[713]) | sel[713]), ((~ nose[712]) | sel[712]), ((~ nose[711]) | sel[711]), ((~ nose[710]) | sel[710]), ((~ nose[709]) | sel[709]), ((~ nose[708]) | sel[708]), ((~ nose[707]) | sel[707]), ((~ nose[706]) | sel[706]), ((~ nose[705]) | sel[705]), ((~ nose[704]) | sel[704]), ((~ nose[703]) | sel[703]), ((~ nose[702]) | sel[702]), ((~ nose[701]) | sel[701]), ((~ nose[700]) | sel[700]), ((~ nose[699]) | sel[699]), ((~ nose[698]) | sel[698]), ((~ nose[697]) | sel[697]), ((~ nose[696]) | sel[696]), ((~ nose[695]) | sel[695]), ((~ nose[694]) | sel[694]), ((~ nose[693]) | sel[693]), ((~ nose[692]) | sel[692]), ((~ nose[691]) | sel[691]), ((~ nose[690]) | sel[690]), ((~ nose[689]) | sel[689]), ((~ nose[688]) | sel[688]), ((~ nose[687]) | sel[687]), ((~ nose[686]) | sel[686]), ((~ nose[685]) | sel[685]), ((~ nose[684]) | sel[684]), ((~ nose[683]) | sel[683]), ((~ nose[682]) | sel[682]), ((~ nose[681]) | sel[681]), ((~ nose[680]) | sel[680]), ((~ nose[679]) | sel[679]), ((~ nose[678]) | sel[678]), ((~ nose[677]) | sel[677]), ((~ nose[676]) | sel[676]), ((~ nose[675]) | sel[675]), ((~ nose[674]) | sel[674]), ((~ nose[673]) | sel[673]), ((~ nose[672]) | sel[672]), ((~ nose[671]) | sel[671]), ((~ nose[670]) | sel[670]), ((~ nose[669]) | sel[669]), ((~ nose[668]) | sel[668]), ((~ nose[667]) | sel[667]), ((~ nose[666]) | sel[666]), (
-(~ nose[665]) | sel[665]), ((~ nose[664]) | sel[664]), ((~ nose[663]) | sel[663]), ((~ nose[662]) | sel[662]), ((~ nose[661]) | sel[661]), ((~ nose[660]) | sel[660]), ((~ nose[659]) | sel[659]), ((~ nose[658]) | sel[658]), ((~ nose[657]) | sel[657]), ((~ nose[656]) | sel[656]), ((~ nose[655]) | sel[655]), ((~ nose[654]) | sel[654]), ((~ nose[653]) | sel[653]), ((~ nose[652]) | sel[652]), ((~ nose[651]) | sel[651]), ((~ nose[650]) | sel[650]), ((~ nose[649]) | sel[649]), ((~ nose[648]) | sel[648]), ((~ nose[647]) | sel[647]), ((~ nose[646]) | sel[646]), ((~ nose[645]) | sel[645]), ((~ nose[644]) | sel[644]), ((~ nose[643]) | sel[643]), ((~ nose[642]) | sel[642]), ((~ nose[641]) | sel[641]), ((~ nose[640]) | sel[640]), ((~ nose[639]) | sel[639]), ((~ nose[638]) | sel[638]), ((~ nose[637]) | sel[637]), ((~ nose[636]) | sel[636]), ((~ nose[635]) | sel[635]), ((~ nose[634]) | sel[634]), ((~ nose[633]) | sel[633]), ((~ nose[632]) | sel[632]), ((~ nose[631]) | sel[631]), ((~ nose[630]) | sel[630]), ((~ nose[629]) | sel[629]), ((~ nose[628]) | sel[628]), ((~ nose[627]) | sel[627]), ((~ nose[626]) | sel[626]), ((~ nose[625]) | sel[625]), ((~ nose[624]) | sel[624]), ((~ nose[623]) | sel[623]), ((~ nose[622]) | sel[622]), ((~ nose[621]) | sel[621]), ((~ nose[620]) | sel[620]), ((~ nose[619]) | sel[619]), ((~ nose[618]) | sel[618]), ((~ nose[617]) | sel[617]), ((~ nose[616]) | sel[616]), ((~ nose[615]) | sel[615]), ((~ nose[614]) | sel[614]), ((~ nose[613]) | sel[613]), ((~ nose[612]) | sel[612]), ((~ nose[611]) | sel[611]), ((~ nose[610]) | sel[610]), ((~ nose[609]) | sel[609]), ((~ nose[608]) | sel[608]), ((~ nose[607]) | sel[607]), ((~ nose[606]) | sel[606]), ((~ nose[605]) | sel[605]), ((~ nose[604]) | sel[604]), ((~ nose[603]) | sel[603]), ((~ nose[602]) | sel[602]), ((~ nose[601]) | sel[601]), ((~ nose[600]) | sel[600]), ((~ nose[599]) | sel[599]), ((~ nose[598]) | sel[598]), ((~ nose[597]) | sel[597]), ((~ nose[596]) | sel[596]), ((~ nose[595]) | sel[595]), ((~ nose[594]) | sel[594]), ((~ nose[593]) | sel[593]), ((~ nose[592]
-) | sel[592]), ((~ nose[591]) | sel[591]), ((~ nose[590]) | sel[590]), ((~ nose[589]) | sel[589]), ((~ nose[588]) | sel[588]), ((~ nose[587]) | sel[587]), ((~ nose[586]) | sel[586]), ((~ nose[585]) | sel[585]), ((~ nose[584]) | sel[584]), ((~ nose[583]) | sel[583]), ((~ nose[582]) | sel[582]), ((~ nose[581]) | sel[581]), ((~ nose[580]) | sel[580]), ((~ nose[579]) | sel[579]), ((~ nose[578]) | sel[578]), ((~ nose[577]) | sel[577]), ((~ nose[576]) | sel[576]), ((~ nose[575]) | sel[575]), ((~ nose[574]) | sel[574]), ((~ nose[573]) | sel[573]), ((~ nose[572]) | sel[572]), ((~ nose[571]) | sel[571]), ((~ nose[570]) | sel[570]), ((~ nose[569]) | sel[569]), ((~ nose[568]) | sel[568]), ((~ nose[567]) | sel[567]), ((~ nose[566]) | sel[566]), ((~ nose[565]) | sel[565]), ((~ nose[564]) | sel[564]), ((~ nose[563]) | sel[563]), ((~ nose[562]) | sel[562]), ((~ nose[561]) | sel[561]), ((~ nose[560]) | sel[560]), ((~ nose[559]) | sel[559]), ((~ nose[558]) | sel[558]), ((~ nose[557]) | sel[557]), ((~ nose[556]) | sel[556]), ((~ nose[555]) | sel[555]), ((~ nose[554]) | sel[554]), ((~ nose[553]) | sel[553]), ((~ nose[552]) | sel[552]), ((~ nose[551]) | sel[551]), ((~ nose[550]) | sel[550]), ((~ nose[549]) | sel[549]), ((~ nose[548]) | sel[548]), ((~ nose[547]) | sel[547]), ((~ nose[546]) | sel[546]), ((~ nose[545]) | sel[545]), ((~ nose[544]) | sel[544]), ((~ nose[543]) | sel[543]), ((~ nose[542]) | sel[542]), ((~ nose[541]) | sel[541]), ((~ nose[540]) | sel[540]), ((~ nose[539]) | sel[539]), ((~ nose[538]) | sel[538]), ((~ nose[537]) | sel[537]), ((~ nose[536]) | sel[536]), ((~ nose[535]) | sel[535]), ((~ nose[534]) | sel[534]), ((~ nose[533]) | sel[533]), ((~ nose[532]) | sel[532]), ((~ nose[531]) | sel[531]), ((~ nose[530]) | sel[530]), ((~ nose[529]) | sel[529]), ((~ nose[528]) | sel[528]), ((~ nose[527]) | sel[527]), ((~ nose[526]) | sel[526]), ((~ nose[525]) | sel[525]), ((~ nose[524]) | sel[524]), ((~ nose[523]) | sel[523]), ((~ nose[522]) | sel[522]), ((~ nose[521]) | sel[521]), ((~ nose[520]) | sel[520]), ((~ nose[519]) | sel[519]
-), ((~ nose[518]) | sel[518]), ((~ nose[517]) | sel[517]), ((~ nose[516]) | sel[516]), ((~ nose[515]) | sel[515]), ((~ nose[514]) | sel[514]), ((~ nose[513]) | sel[513]), ((~ nose[512]) | sel[512]), ((~ nose[511]) | sel[511]), ((~ nose[510]) | sel[510]), ((~ nose[509]) | sel[509]), ((~ nose[508]) | sel[508]), ((~ nose[507]) | sel[507]), ((~ nose[506]) | sel[506]), ((~ nose[505]) | sel[505]), ((~ nose[504]) | sel[504]), ((~ nose[503]) | sel[503]), ((~ nose[502]) | sel[502]), ((~ nose[501]) | sel[501]), ((~ nose[500]) | sel[500]), ((~ nose[499]) | sel[499]), ((~ nose[498]) | sel[498]), ((~ nose[497]) | sel[497]), ((~ nose[496]) | sel[496]), ((~ nose[495]) | sel[495]), ((~ nose[494]) | sel[494]), ((~ nose[493]) | sel[493]), ((~ nose[492]) | sel[492]), ((~ nose[491]) | sel[491]), ((~ nose[490]) | sel[490]), ((~ nose[489]) | sel[489]), ((~ nose[488]) | sel[488]), ((~ nose[487]) | sel[487]), ((~ nose[486]) | sel[486]), ((~ nose[485]) | sel[485]), ((~ nose[484]) | sel[484]), ((~ nose[483]) | sel[483]), ((~ nose[482]) | sel[482]), ((~ nose[481]) | sel[481]), ((~ nose[480]) | sel[480]), ((~ nose[479]) | sel[479]), ((~ nose[478]) | sel[478]), ((~ nose[477]) | sel[477]), ((~ nose[476]) | sel[476]), ((~ nose[475]) | sel[475]), ((~ nose[474]) | sel[474]), ((~ nose[473]) | sel[473]), ((~ nose[472]) | sel[472]), ((~ nose[471]) | sel[471]), ((~ nose[470]) | sel[470]), ((~ nose[469]) | sel[469]), ((~ nose[468]) | sel[468]), ((~ nose[467]) | sel[467]), ((~ nose[466]) | sel[466]), ((~ nose[465]) | sel[465]), ((~ nose[464]) | sel[464]), ((~ nose[463]) | sel[463]), ((~ nose[462]) | sel[462]), ((~ nose[461]) | sel[461]), ((~ nose[460]) | sel[460]), ((~ nose[459]) | sel[459]), ((~ nose[458]) | sel[458]), ((~ nose[457]) | sel[457]), ((~ nose[456]) | sel[456]), ((~ nose[455]) | sel[455]), ((~ nose[454]) | sel[454]), ((~ nose[453]) | sel[453]), ((~ nose[452]) | sel[452]), ((~ nose[451]) | sel[451]), ((~ nose[450]) | sel[450]), ((~ nose[449]) | sel[449]), ((~ nose[448]) | sel[448]), ((~ nose[447]) | sel[447]), ((~ nose[446]) | sel[446]), (
-(~ nose[445]) | sel[445]), ((~ nose[444]) | sel[444]), ((~ nose[443]) | sel[443]), ((~ nose[442]) | sel[442]), ((~ nose[441]) | sel[441]), ((~ nose[440]) | sel[440]), ((~ nose[439]) | sel[439]), ((~ nose[438]) | sel[438]), ((~ nose[437]) | sel[437]), ((~ nose[436]) | sel[436]), ((~ nose[435]) | sel[435]), ((~ nose[434]) | sel[434]), ((~ nose[433]) | sel[433]), ((~ nose[432]) | sel[432]), ((~ nose[431]) | sel[431]), ((~ nose[430]) | sel[430]), ((~ nose[429]) | sel[429]), ((~ nose[428]) | sel[428]), ((~ nose[427]) | sel[427]), ((~ nose[426]) | sel[426]), ((~ nose[425]) | sel[425]), ((~ nose[424]) | sel[424]), ((~ nose[423]) | sel[423]), ((~ nose[422]) | sel[422]), ((~ nose[421]) | sel[421]), ((~ nose[420]) | sel[420]), ((~ nose[419]) | sel[419]), ((~ nose[418]) | sel[418]), ((~ nose[417]) | sel[417]), ((~ nose[416]) | sel[416]), ((~ nose[415]) | sel[415]), ((~ nose[414]) | sel[414]), ((~ nose[413]) | sel[413]), ((~ nose[412]) | sel[412]), ((~ nose[411]) | sel[411]), ((~ nose[410]) | sel[410]), ((~ nose[409]) | sel[409]), ((~ nose[408]) | sel[408]), ((~ nose[407]) | sel[407]), ((~ nose[406]) | sel[406]), ((~ nose[405]) | sel[405]), ((~ nose[404]) | sel[404]), ((~ nose[403]) | sel[403]), ((~ nose[402]) | sel[402]), ((~ nose[401]) | sel[401]), ((~ nose[400]) | sel[400]), ((~ nose[399]) | sel[399]), ((~ nose[398]) | sel[398]), ((~ nose[397]) | sel[397]), ((~ nose[396]) | sel[396]), ((~ nose[395]) | sel[395]), ((~ nose[394]) | sel[394]), ((~ nose[393]) | sel[393]), ((~ nose[392]) | sel[392]), ((~ nose[391]) | sel[391]), ((~ nose[390]) | sel[390]), ((~ nose[389]) | sel[389]), ((~ nose[388]) | sel[388]), ((~ nose[387]) | sel[387]), ((~ nose[386]) | sel[386]), ((~ nose[385]) | sel[385]), ((~ nose[384]) | sel[384]), ((~ nose[383]) | sel[383]), ((~ nose[382]) | sel[382]), ((~ nose[381]) | sel[381]), ((~ nose[380]) | sel[380]), ((~ nose[379]) | sel[379]), ((~ nose[378]) | sel[378]), ((~ nose[377]) | sel[377]), ((~ nose[376]) | sel[376]), ((~ nose[375]) | sel[375]), ((~ nose[374]) | sel[374]), ((~ nose[373]) | sel[373]), ((~ nose[372]
-) | sel[372]), ((~ nose[371]) | sel[371]), ((~ nose[370]) | sel[370]), ((~ nose[369]) | sel[369]), ((~ nose[368]) | sel[368]), ((~ nose[367]) | sel[367]), ((~ nose[366]) | sel[366]), ((~ nose[365]) | sel[365]), ((~ nose[364]) | sel[364]), ((~ nose[363]) | sel[363]), ((~ nose[362]) | sel[362]), ((~ nose[361]) | sel[361]), ((~ nose[360]) | sel[360]), ((~ nose[359]) | sel[359]), ((~ nose[358]) | sel[358]), ((~ nose[357]) | sel[357]), ((~ nose[356]) | sel[356]), ((~ nose[355]) | sel[355]), ((~ nose[354]) | sel[354]), ((~ nose[353]) | sel[353]), ((~ nose[352]) | sel[352]), ((~ nose[351]) | sel[351]), ((~ nose[350]) | sel[350]), ((~ nose[349]) | sel[349]), ((~ nose[348]) | sel[348]), ((~ nose[347]) | sel[347]), ((~ nose[346]) | sel[346]), ((~ nose[345]) | sel[345]), ((~ nose[344]) | sel[344]), ((~ nose[343]) | sel[343]), ((~ nose[342]) | sel[342]), ((~ nose[341]) | sel[341]), ((~ nose[340]) | sel[340]), ((~ nose[339]) | sel[339]), ((~ nose[338]) | sel[338]), ((~ nose[337]) | sel[337]), ((~ nose[336]) | sel[336]), ((~ nose[335]) | sel[335]), ((~ nose[334]) | sel[334]), ((~ nose[333]) | sel[333]), ((~ nose[332]) | sel[332]), ((~ nose[331]) | sel[331]), ((~ nose[330]) | sel[330]), ((~ nose[329]) | sel[329]), ((~ nose[328]) | sel[328]), ((~ nose[327]) | sel[327]), ((~ nose[326]) | sel[326]), ((~ nose[325]) | sel[325]), ((~ nose[324]) | sel[324]), ((~ nose[323]) | sel[323]), ((~ nose[322]) | sel[322]), ((~ nose[321]) | sel[321]), ((~ nose[320]) | sel[320]), ((~ nose[319]) | sel[319]), ((~ nose[318]) | sel[318]), ((~ nose[317]) | sel[317]), ((~ nose[316]) | sel[316]), ((~ nose[315]) | sel[315]), ((~ nose[314]) | sel[314]), ((~ nose[313]) | sel[313]), ((~ nose[312]) | sel[312]), ((~ nose[311]) | sel[311]), ((~ nose[310]) | sel[310]), ((~ nose[309]) | sel[309]), ((~ nose[308]) | sel[308]), ((~ nose[307]) | sel[307]), ((~ nose[306]) | sel[306]), ((~ nose[305]) | sel[305]), ((~ nose[304]) | sel[304]), ((~ nose[303]) | sel[303]), ((~ nose[302]) | sel[302]), ((~ nose[301]) | sel[301]), ((~ nose[300]) | sel[300]), ((~ nose[299]) | sel[299]
-), ((~ nose[298]) | sel[298]), ((~ nose[297]) | sel[297]), ((~ nose[296]) | sel[296]), ((~ nose[295]) | sel[295]), ((~ nose[294]) | sel[294]), ((~ nose[293]) | sel[293]), ((~ nose[292]) | sel[292]), ((~ nose[291]) | sel[291]), ((~ nose[290]) | sel[290]), ((~ nose[289]) | sel[289]), ((~ nose[288]) | sel[288]), ((~ nose[287]) | sel[287]), ((~ nose[286]) | sel[286]), ((~ nose[285]) | sel[285]), ((~ nose[284]) | sel[284]), ((~ nose[283]) | sel[283]), ((~ nose[282]) | sel[282]), ((~ nose[281]) | sel[281]), ((~ nose[280]) | sel[280]), ((~ nose[279]) | sel[279]), ((~ nose[278]) | sel[278]), ((~ nose[277]) | sel[277]), ((~ nose[276]) | sel[276]), ((~ nose[275]) | sel[275]), ((~ nose[274]) | sel[274]), ((~ nose[273]) | sel[273]), ((~ nose[272]) | sel[272]), ((~ nose[271]) | sel[271]), ((~ nose[270]) | sel[270]), ((~ nose[269]) | sel[269]), ((~ nose[268]) | sel[268]), ((~ nose[267]) | sel[267]), ((~ nose[266]) | sel[266]), ((~ nose[265]) | sel[265]), ((~ nose[264]) | sel[264]), ((~ nose[263]) | sel[263]), ((~ nose[262]) | sel[262]), ((~ nose[261]) | sel[261]), ((~ nose[260]) | sel[260]), ((~ nose[259]) | sel[259]), ((~ nose[258]) | sel[258]), ((~ nose[257]) | sel[257]), ((~ nose[256]) | sel[256]), ((~ nose[255]) | sel[255]), ((~ nose[254]) | sel[254]), ((~ nose[253]) | sel[253]), ((~ nose[252]) | sel[252]), ((~ nose[251]) | sel[251]), ((~ nose[250]) | sel[250]), ((~ nose[249]) | sel[249]), ((~ nose[248]) | sel[248]), ((~ nose[247]) | sel[247]), ((~ nose[246]) | sel[246]), ((~ nose[245]) | sel[245]), ((~ nose[244]) | sel[244]), ((~ nose[243]) | sel[243]), ((~ nose[242]) | sel[242]), ((~ nose[241]) | sel[241]), ((~ nose[240]) | sel[240]), ((~ nose[239]) | sel[239]), ((~ nose[238]) | sel[238]), ((~ nose[237]) | sel[237]), ((~ nose[236]) | sel[236]), ((~ nose[235]) | sel[235]), ((~ nose[234]) | sel[234]), ((~ nose[233]) | sel[233]), ((~ nose[232]) | sel[232]), ((~ nose[231]) | sel[231]), ((~ nose[230]) | sel[230]), ((~ nose[229]) | sel[229]), ((~ nose[228]) | sel[228]), ((~ nose[227]) | sel[227]), ((~ nose[226]) | sel[226]), (
-(~ nose[225]) | sel[225]), ((~ nose[224]) | sel[224]), ((~ nose[223]) | sel[223]), ((~ nose[222]) | sel[222]), ((~ nose[221]) | sel[221]), ((~ nose[220]) | sel[220]), ((~ nose[219]) | sel[219]), ((~ nose[218]) | sel[218]), ((~ nose[217]) | sel[217]), ((~ nose[216]) | sel[216]), ((~ nose[215]) | sel[215]), ((~ nose[214]) | sel[214]), ((~ nose[213]) | sel[213]), ((~ nose[212]) | sel[212]), ((~ nose[211]) | sel[211]), ((~ nose[210]) | sel[210]), ((~ nose[209]) | sel[209]), ((~ nose[208]) | sel[208]), ((~ nose[207]) | sel[207]), ((~ nose[206]) | sel[206]), ((~ nose[205]) | sel[205]), ((~ nose[204]) | sel[204]), ((~ nose[203]) | sel[203]), ((~ nose[202]) | sel[202]), ((~ nose[201]) | sel[201]), ((~ nose[200]) | sel[200]), ((~ nose[199]) | sel[199]), ((~ nose[198]) | sel[198]), ((~ nose[197]) | sel[197]), ((~ nose[196]) | sel[196]), ((~ nose[195]) | sel[195]), ((~ nose[194]) | sel[194]), ((~ nose[193]) | sel[193]), ((~ nose[192]) | sel[192]), ((~ nose[191]) | sel[191]), ((~ nose[190]) | sel[190]), ((~ nose[189]) | sel[189]), ((~ nose[188]) | sel[188]), ((~ nose[187]) | sel[187]), ((~ nose[186]) | sel[186]), ((~ nose[185]) | sel[185]), ((~ nose[184]) | sel[184]), ((~ nose[183]) | sel[183]), ((~ nose[182]) | sel[182]), ((~ nose[181]) | sel[181]), ((~ nose[180]) | sel[180]), ((~ nose[179]) | sel[179]), ((~ nose[178]) | sel[178]), ((~ nose[177]) | sel[177]), ((~ nose[176]) | sel[176]), ((~ nose[175]) | sel[175]), ((~ nose[174]) | sel[174]), ((~ nose[173]) | sel[173]), ((~ nose[172]) | sel[172]), ((~ nose[171]) | sel[171]), ((~ nose[170]) | sel[170]), ((~ nose[169]) | sel[169]), ((~ nose[168]) | sel[168]), ((~ nose[167]) | sel[167]), ((~ nose[166]) | sel[166]), ((~ nose[165]) | sel[165]), ((~ nose[164]) | sel[164]), ((~ nose[163]) | sel[163]), ((~ nose[162]) | sel[162]), ((~ nose[161]) | sel[161]), ((~ nose[160]) | sel[160]), ((~ nose[159]) | sel[159]), ((~ nose[158]) | sel[158]), ((~ nose[157]) | sel[157]), ((~ nose[156]) | sel[156]), ((~ nose[155]) | sel[155]), ((~ nose[154]) | sel[154]), ((~ nose[153]) | sel[153]), ((~ nose[152]
-) | sel[152]), ((~ nose[151]) | sel[151]), ((~ nose[150]) | sel[150]), ((~ nose[149]) | sel[149]), ((~ nose[148]) | sel[148]), ((~ nose[147]) | sel[147]), ((~ nose[146]) | sel[146]), ((~ nose[145]) | sel[145]), ((~ nose[144]) | sel[144]), ((~ nose[143]) | sel[143]), ((~ nose[142]) | sel[142]), ((~ nose[141]) | sel[141]), ((~ nose[140]) | sel[140]), ((~ nose[139]) | sel[139]), ((~ nose[138]) | sel[138]), ((~ nose[137]) | sel[137]), ((~ nose[136]) | sel[136]), ((~ nose[135]) | sel[135]), ((~ nose[134]) | sel[134]), ((~ nose[133]) | sel[133]), ((~ nose[132]) | sel[132]), ((~ nose[131]) | sel[131]), ((~ nose[130]) | sel[130]), ((~ nose[129]) | sel[129]), ((~ nose[128]) | sel[128]), ((~ nose[127]) | sel[127]), ((~ nose[126]) | sel[126]), ((~ nose[125]) | sel[125]), ((~ nose[124]) | sel[124]), ((~ nose[123]) | sel[123]), ((~ nose[122]) | sel[122]), ((~ nose[121]) | sel[121]), ((~ nose[120]) | sel[120]), ((~ nose[119]) | sel[119]), ((~ nose[118]) | sel[118]), ((~ nose[117]) | sel[117]), ((~ nose[116]) | sel[116]), ((~ nose[115]) | sel[115]), ((~ nose[114]) | sel[114]), ((~ nose[113]) | sel[113]), ((~ nose[112]) | sel[112]), ((~ nose[111]) | sel[111]), ((~ nose[110]) | sel[110]), ((~ nose[109]) | sel[109]), ((~ nose[108]) | sel[108]), ((~ nose[107]) | sel[107]), ((~ nose[106]) | sel[106]), ((~ nose[105]) | sel[105]), ((~ nose[104]) | sel[104]), ((~ nose[103]) | sel[103]), ((~ nose[102]) | sel[102]), ((~ nose[101]) | sel[101]), ((~ nose[100]) | sel[100]), ((~ nose[99]) | sel[99]), ((~ nose[98]) | sel[98]), ((~ nose[97]) | sel[97]), ((~ nose[96]) | sel[96]), ((~ nose[95]) | sel[95]), ((~ nose[94]) | sel[94]), ((~ nose[93]) | sel[93]), ((~ nose[92]) | sel[92]), ((~ nose[91]) | sel[91]), ((~ nose[90]) | sel[90]), ((~ nose[89]) | sel[89]), ((~ nose[88]) | sel[88]), ((~ nose[87]) | sel[87]), ((~ nose[86]) | sel[86]), ((~ nose[85]) | sel[85]), ((~ nose[84]) | sel[84]), ((~ nose[83]) | sel[83]), ((~ nose[82]) | sel[82]), ((~ nose[81]) | sel[81]), ((~ nose[80]) | sel[80]), ((~ nose[79]) | sel[79]), ((~ nose[78]) | sel[78]), ((~ nose[77]
-) | sel[77]), ((~ nose[76]) | sel[76]), ((~ nose[75]) | sel[75]), ((~ nose[74]) | sel[74]), ((~ nose[73]) | sel[73]), ((~ nose[72]) | sel[72]), ((~ nose[71]) | sel[71]), ((~ nose[70]) | sel[70]), ((~ nose[69]) | sel[69]), ((~ nose[68]) | sel[68]), ((~ nose[67]) | sel[67]), ((~ nose[66]) | sel[66]), ((~ nose[65]) | sel[65]), ((~ nose[64]) | sel[64]), ((~ nose[63]) | sel[63]), ((~ nose[62]) | sel[62]), ((~ nose[61]) | sel[61]), ((~ nose[60]) | sel[60]), ((~ nose[59]) | sel[59]), ((~ nose[58]) | sel[58]), ((~ nose[57]) | sel[57]), ((~ nose[56]) | sel[56]), ((~ nose[55]) | sel[55]), ((~ nose[54]) | sel[54]), ((~ nose[53]) | sel[53]), ((~ nose[52]) | sel[52]), ((~ nose[51]) | sel[51]), ((~ nose[50]) | sel[50]), ((~ nose[49]) | sel[49]), ((~ nose[48]) | sel[48]), ((~ nose[47]) | sel[47]), ((~ nose[46]) | sel[46]), ((~ nose[45]) | sel[45]), ((~ nose[44]) | sel[44]), ((~ nose[43]) | sel[43]), ((~ nose[42]) | sel[42]), ((~ nose[41]) | sel[41]), ((~ nose[40]) | sel[40]), ((~ nose[39]) | sel[39]), ((~ nose[38]) | sel[38]), ((~ nose[37]) | sel[37]), ((~ nose[36]) | sel[36]), ((~ nose[35]) | sel[35]), ((~ nose[34]) | sel[34]), ((~ nose[33]) | sel[33]), ((~ nose[32]) | sel[32]), ((~ nose[31]) | sel[31]), ((~ nose[30]) | sel[30]), ((~ nose[29]) | sel[29]), ((~ nose[28]) | sel[28]), ((~ nose[27]) | sel[27]), ((~ nose[26]) | sel[26]), ((~ nose[25]) | sel[25]), ((~ nose[24]) | sel[24]), ((~ nose[23]) | sel[23]), ((~ nose[22]) | sel[22]), ((~ nose[21]) | sel[21]), ((~ nose[20]) | sel[20]), ((~ nose[19]) | sel[19]), ((~ nose[18]) | sel[18]), ((~ nose[17]) | sel[17]), ((~ nose[16]) | sel[16]), ((~ nose[15]) | sel[15]), ((~ nose[14]) | sel[14]), ((~ nose[13]) | sel[13]), ((~ nose[12]) | sel[12]), ((~ nose[11]) | sel[11]), ((~ nose[10]) | sel[10]), ((~ nose[9]) | sel[9]), ((~ nose[8]) | sel[8]), ((~ nose[7]) | sel[7]), ((~ nose[6]) | sel[6]), ((~ nose[5]) | sel[5]), ((~ nose[4]) | sel[4]), ((~ nose[3]) | sel[3]), ((~ nose[2]) | sel[2]), ((~ nose[1]) | sel[1]), ((~ nose[0]) | sel[0])},
+		quotient_tmp = {DFFQuotient[134:110], (~ selnose[700]), (~ selnose[728])},
+		remainder = StageIn[755:729],
+		sel = {gnd_wire, (sel[755] | DenominatorIn[782]), (sel[754] | DenominatorIn[781]), (sel[753] | DenominatorIn[780]), (sel[752] | DenominatorIn[779]), (sel[751] | DenominatorIn[778]), (sel[750] | DenominatorIn[777]), (sel[749] | DenominatorIn[776]), (sel[748] | DenominatorIn[775]), (sel[747] | DenominatorIn[774]), (sel[746] | DenominatorIn[773]), (sel[745] | DenominatorIn[772]), (sel[744] | DenominatorIn[771]), (sel[743] | DenominatorIn[770]), (sel[742] | DenominatorIn[769]), (sel[741] | DenominatorIn[768]), (sel[740] | DenominatorIn[767]), (sel[739] | DenominatorIn[766]), (sel[738] | DenominatorIn[765]), (sel[737] | DenominatorIn[764]), (sel[736] | DenominatorIn[763]), (sel[735] | DenominatorIn[762]), (sel[734] | DenominatorIn[761]), (sel[733] | DenominatorIn[760]), (sel[732] | DenominatorIn[759]), (sel[731] | DenominatorIn[758]), (sel[730] | DenominatorIn[757]), gnd_wire, (sel[728] | DenominatorIn[754]), (sel[727] | DenominatorIn[753]), (sel[726] | DenominatorIn[752]), (sel[725] | DenominatorIn[751]), (sel[724] | DenominatorIn[750]), (sel[723] | DenominatorIn[749]), (sel[722] | DenominatorIn[748]), (sel[721] | DenominatorIn[747]), (sel[720] | DenominatorIn[746]), (sel[719] | DenominatorIn[745]), (sel[718] | DenominatorIn[744]), (sel[717] | DenominatorIn[743]), (sel[716] | DenominatorIn[742]), (sel[715] | DenominatorIn[741]), (sel[714] | DenominatorIn[740]), (sel[713] | DenominatorIn[739]), (sel[712] | DenominatorIn[738]), (sel[711] | DenominatorIn[737]), (sel[710] | DenominatorIn[736]), (sel[709] | DenominatorIn[735]), (sel[708] | DenominatorIn[734]), (sel[707] | DenominatorIn[733]), (sel[706] | DenominatorIn[732]), (sel[705] | DenominatorIn[731]), (sel[704] | DenominatorIn[730]), (sel[703] | DenominatorIn[729]), gnd_wire, (sel[701] | DenominatorIn[726]), (sel[700] | DenominatorIn[725]), (sel[699] | DenominatorIn[724]), (sel[698] | DenominatorIn[723]), (sel[697] | DenominatorIn[722]), (sel[696] | DenominatorIn[721]), (sel[695] | DenominatorIn[720]), (sel[694] | DenominatorIn[719]), (sel[693] | DenominatorIn[718]
+), (sel[692] | DenominatorIn[717]), (sel[691] | DenominatorIn[716]), (sel[690] | DenominatorIn[715]), (sel[689] | DenominatorIn[714]), (sel[688] | DenominatorIn[713]), (sel[687] | DenominatorIn[712]), (sel[686] | DenominatorIn[711]), (sel[685] | DenominatorIn[710]), (sel[684] | DenominatorIn[709]), (sel[683] | DenominatorIn[708]), (sel[682] | DenominatorIn[707]), (sel[681] | DenominatorIn[706]), (sel[680] | DenominatorIn[705]), (sel[679] | DenominatorIn[704]), (sel[678] | DenominatorIn[703]), (sel[677] | DenominatorIn[702]), (sel[676] | DenominatorIn[701]), gnd_wire, (sel[674] | DenominatorIn[698]), (sel[673] | DenominatorIn[697]), (sel[672] | DenominatorIn[696]), (sel[671] | DenominatorIn[695]), (sel[670] | DenominatorIn[694]), (sel[669] | DenominatorIn[693]), (sel[668] | DenominatorIn[692]), (sel[667] | DenominatorIn[691]), (sel[666] | DenominatorIn[690]), (sel[665] | DenominatorIn[689]), (sel[664] | DenominatorIn[688]), (sel[663] | DenominatorIn[687]), (sel[662] | DenominatorIn[686]), (sel[661] | DenominatorIn[685]), (sel[660] | DenominatorIn[684]), (sel[659] | DenominatorIn[683]), (sel[658] | DenominatorIn[682]), (sel[657] | DenominatorIn[681]), (sel[656] | DenominatorIn[680]), (sel[655] | DenominatorIn[679]), (sel[654] | DenominatorIn[678]), (sel[653] | DenominatorIn[677]), (sel[652] | DenominatorIn[676]), (sel[651] | DenominatorIn[675]), (sel[650] | DenominatorIn[674]), (sel[649] | DenominatorIn[673]), gnd_wire, (sel[647] | DenominatorIn[670]), (sel[646] | DenominatorIn[669]), (sel[645] | DenominatorIn[668]), (sel[644] | DenominatorIn[667]), (sel[643] | DenominatorIn[666]), (sel[642] | DenominatorIn[665]), (sel[641] | DenominatorIn[664]), (sel[640] | DenominatorIn[663]), (sel[639] | DenominatorIn[662]), (sel[638] | DenominatorIn[661]), (sel[637] | DenominatorIn[660]), (sel[636] | DenominatorIn[659]), (sel[635] | DenominatorIn[658]), (sel[634] | DenominatorIn[657]), (sel[633] | DenominatorIn[656]), (sel[632] | DenominatorIn[655]), (sel[631] | DenominatorIn[654]), (sel[630] | DenominatorIn[653]), (sel[629] | DenominatorIn[652]
+), (sel[628] | DenominatorIn[651]), (sel[627] | DenominatorIn[650]), (sel[626] | DenominatorIn[649]), (sel[625] | DenominatorIn[648]), (sel[624] | DenominatorIn[647]), (sel[623] | DenominatorIn[646]), (sel[622] | DenominatorIn[645]), gnd_wire, (sel[620] | DenominatorIn[642]), (sel[619] | DenominatorIn[641]), (sel[618] | DenominatorIn[640]), (sel[617] | DenominatorIn[639]), (sel[616] | DenominatorIn[638]), (sel[615] | DenominatorIn[637]), (sel[614] | DenominatorIn[636]), (sel[613] | DenominatorIn[635]), (sel[612] | DenominatorIn[634]), (sel[611] | DenominatorIn[633]), (sel[610] | DenominatorIn[632]), (sel[609] | DenominatorIn[631]), (sel[608] | DenominatorIn[630]), (sel[607] | DenominatorIn[629]), (sel[606] | DenominatorIn[628]), (sel[605] | DenominatorIn[627]), (sel[604] | DenominatorIn[626]), (sel[603] | DenominatorIn[625]), (sel[602] | DenominatorIn[624]), (sel[601] | DenominatorIn[623]), (sel[600] | DenominatorIn[622]), (sel[599] | DenominatorIn[621]), (sel[598] | DenominatorIn[620]), (sel[597] | DenominatorIn[619]), (sel[596] | DenominatorIn[618]), (sel[595] | DenominatorIn[617]), gnd_wire, (sel[593] | DenominatorIn[614]), (sel[592] | DenominatorIn[613]), (sel[591] | DenominatorIn[612]), (sel[590] | DenominatorIn[611]), (sel[589] | DenominatorIn[610]), (sel[588] | DenominatorIn[609]), (sel[587] | DenominatorIn[608]), (sel[586] | DenominatorIn[607]), (sel[585] | DenominatorIn[606]), (sel[584] | DenominatorIn[605]), (sel[583] | DenominatorIn[604]), (sel[582] | DenominatorIn[603]), (sel[581] | DenominatorIn[602]), (sel[580] | DenominatorIn[601]), (sel[579] | DenominatorIn[600]), (sel[578] | DenominatorIn[599]), (sel[577] | DenominatorIn[598]), (sel[576] | DenominatorIn[597]), (sel[575] | DenominatorIn[596]), (sel[574] | DenominatorIn[595]), (sel[573] | DenominatorIn[594]), (sel[572] | DenominatorIn[593]), (sel[571] | DenominatorIn[592]), (sel[570] | DenominatorIn[591]), (sel[569] | DenominatorIn[590]), (sel[568] | DenominatorIn[589]), gnd_wire, (sel[566] | DenominatorIn[586]), (sel[565] | DenominatorIn[585]), (sel[564]
+ | DenominatorIn[584]), (sel[563] | DenominatorIn[583]), (sel[562] | DenominatorIn[582]), (sel[561] | DenominatorIn[581]), (sel[560] | DenominatorIn[580]), (sel[559] | DenominatorIn[579]), (sel[558] | DenominatorIn[578]), (sel[557] | DenominatorIn[577]), (sel[556] | DenominatorIn[576]), (sel[555] | DenominatorIn[575]), (sel[554] | DenominatorIn[574]), (sel[553] | DenominatorIn[573]), (sel[552] | DenominatorIn[572]), (sel[551] | DenominatorIn[571]), (sel[550] | DenominatorIn[570]), (sel[549] | DenominatorIn[569]), (sel[548] | DenominatorIn[568]), (sel[547] | DenominatorIn[567]), (sel[546] | DenominatorIn[566]), (sel[545] | DenominatorIn[565]), (sel[544] | DenominatorIn[564]), (sel[543] | DenominatorIn[563]), (sel[542] | DenominatorIn[562]), (sel[541] | DenominatorIn[561]), gnd_wire, (sel[539] | DenominatorIn[558]), (sel[538] | DenominatorIn[557]), (sel[537] | DenominatorIn[556]), (sel[536] | DenominatorIn[555]), (sel[535] | DenominatorIn[554]), (sel[534] | DenominatorIn[553]), (sel[533] | DenominatorIn[552]), (sel[532] | DenominatorIn[551]), (sel[531] | DenominatorIn[550]), (sel[530] | DenominatorIn[549]), (sel[529] | DenominatorIn[548]), (sel[528] | DenominatorIn[547]), (sel[527] | DenominatorIn[546]), (sel[526] | DenominatorIn[545]), (sel[525] | DenominatorIn[544]), (sel[524] | DenominatorIn[543]), (sel[523] | DenominatorIn[542]), (sel[522] | DenominatorIn[541]), (sel[521] | DenominatorIn[540]), (sel[520] | DenominatorIn[539]), (sel[519] | DenominatorIn[538]), (sel[518] | DenominatorIn[537]), (sel[517] | DenominatorIn[536]), (sel[516] | DenominatorIn[535]), (sel[515] | DenominatorIn[534]), (sel[514] | DenominatorIn[533]), gnd_wire, (sel[512] | DenominatorIn[530]), (sel[511] | DenominatorIn[529]), (sel[510] | DenominatorIn[528]), (sel[509] | DenominatorIn[527]), (sel[508] | DenominatorIn[526]), (sel[507] | DenominatorIn[525]), (sel[506] | DenominatorIn[524]), (sel[505] | DenominatorIn[523]), (sel[504] | DenominatorIn[522]), (sel[503] | DenominatorIn[521]), (sel[502] | DenominatorIn[520]), (sel[501] | DenominatorIn[519]
+), (sel[500] | DenominatorIn[518]), (sel[499] | DenominatorIn[517]), (sel[498] | DenominatorIn[516]), (sel[497] | DenominatorIn[515]), (sel[496] | DenominatorIn[514]), (sel[495] | DenominatorIn[513]), (sel[494] | DenominatorIn[512]), (sel[493] | DenominatorIn[511]), (sel[492] | DenominatorIn[510]), (sel[491] | DenominatorIn[509]), (sel[490] | DenominatorIn[508]), (sel[489] | DenominatorIn[507]), (sel[488] | DenominatorIn[506]), (sel[487] | DenominatorIn[505]), gnd_wire, (sel[485] | DenominatorIn[502]), (sel[484] | DenominatorIn[501]), (sel[483] | DenominatorIn[500]), (sel[482] | DenominatorIn[499]), (sel[481] | DenominatorIn[498]), (sel[480] | DenominatorIn[497]), (sel[479] | DenominatorIn[496]), (sel[478] | DenominatorIn[495]), (sel[477] | DenominatorIn[494]), (sel[476] | DenominatorIn[493]), (sel[475] | DenominatorIn[492]), (sel[474] | DenominatorIn[491]), (sel[473] | DenominatorIn[490]), (sel[472] | DenominatorIn[489]), (sel[471] | DenominatorIn[488]), (sel[470] | DenominatorIn[487]), (sel[469] | DenominatorIn[486]), (sel[468] | DenominatorIn[485]), (sel[467] | DenominatorIn[484]), (sel[466] | DenominatorIn[483]), (sel[465] | DenominatorIn[482]), (sel[464] | DenominatorIn[481]), (sel[463] | DenominatorIn[480]), (sel[462] | DenominatorIn[479]), (sel[461] | DenominatorIn[478]), (sel[460] | DenominatorIn[477]), gnd_wire, (sel[458] | DenominatorIn[474]), (sel[457] | DenominatorIn[473]), (sel[456] | DenominatorIn[472]), (sel[455] | DenominatorIn[471]), (sel[454] | DenominatorIn[470]), (sel[453] | DenominatorIn[469]), (sel[452] | DenominatorIn[468]), (sel[451] | DenominatorIn[467]), (sel[450] | DenominatorIn[466]), (sel[449] | DenominatorIn[465]), (sel[448] | DenominatorIn[464]), (sel[447] | DenominatorIn[463]), (sel[446] | DenominatorIn[462]), (sel[445] | DenominatorIn[461]), (sel[444] | DenominatorIn[460]), (sel[443] | DenominatorIn[459]), (sel[442] | DenominatorIn[458]), (sel[441] | DenominatorIn[457]), (sel[440] | DenominatorIn[456]), (sel[439] | DenominatorIn[455]), (sel[438] | DenominatorIn[454]), (sel[437] | DenominatorIn[453]
+), (sel[436] | DenominatorIn[452]), (sel[435] | DenominatorIn[451]), (sel[434] | DenominatorIn[450]), (sel[433] | DenominatorIn[449]), gnd_wire, (sel[431] | DenominatorIn[446]), (sel[430] | DenominatorIn[445]), (sel[429] | DenominatorIn[444]), (sel[428] | DenominatorIn[443]), (sel[427] | DenominatorIn[442]), (sel[426] | DenominatorIn[441]), (sel[425] | DenominatorIn[440]), (sel[424] | DenominatorIn[439]), (sel[423] | DenominatorIn[438]), (sel[422] | DenominatorIn[437]), (sel[421] | DenominatorIn[436]), (sel[420] | DenominatorIn[435]), (sel[419] | DenominatorIn[434]), (sel[418] | DenominatorIn[433]), (sel[417] | DenominatorIn[432]), (sel[416] | DenominatorIn[431]), (sel[415] | DenominatorIn[430]), (sel[414] | DenominatorIn[429]), (sel[413] | DenominatorIn[428]), (sel[412] | DenominatorIn[427]), (sel[411] | DenominatorIn[426]), (sel[410] | DenominatorIn[425]), (sel[409] | DenominatorIn[424]), (sel[408] | DenominatorIn[423]), (sel[407] | DenominatorIn[422]), (sel[406] | DenominatorIn[421]), gnd_wire, (sel[404] | DenominatorIn[418]), (sel[403] | DenominatorIn[417]), (sel[402] | DenominatorIn[416]), (sel[401] | DenominatorIn[415]), (sel[400] | DenominatorIn[414]), (sel[399] | DenominatorIn[413]), (sel[398] | DenominatorIn[412]), (sel[397] | DenominatorIn[411]), (sel[396] | DenominatorIn[410]), (sel[395] | DenominatorIn[409]), (sel[394] | DenominatorIn[408]), (sel[393] | DenominatorIn[407]), (sel[392] | DenominatorIn[406]), (sel[391] | DenominatorIn[405]), (sel[390] | DenominatorIn[404]), (sel[389] | DenominatorIn[403]), (sel[388] | DenominatorIn[402]), (sel[387] | DenominatorIn[401]), (sel[386] | DenominatorIn[400]), (sel[385] | DenominatorIn[399]), (sel[384] | DenominatorIn[398]), (sel[383] | DenominatorIn[397]), (sel[382] | DenominatorIn[396]), (sel[381] | DenominatorIn[395]), (sel[380] | DenominatorIn[394]), (sel[379] | DenominatorIn[393]), gnd_wire, (sel[377] | DenominatorIn[390]), (sel[376] | DenominatorIn[389]), (sel[375] | DenominatorIn[388]), (sel[374] | DenominatorIn[387]), (sel[373] | DenominatorIn[386]), (sel[372]
+ | DenominatorIn[385]), (sel[371] | DenominatorIn[384]), (sel[370] | DenominatorIn[383]), (sel[369] | DenominatorIn[382]), (sel[368] | DenominatorIn[381]), (sel[367] | DenominatorIn[380]), (sel[366] | DenominatorIn[379]), (sel[365] | DenominatorIn[378]), (sel[364] | DenominatorIn[377]), (sel[363] | DenominatorIn[376]), (sel[362] | DenominatorIn[375]), (sel[361] | DenominatorIn[374]), (sel[360] | DenominatorIn[373]), (sel[359] | DenominatorIn[372]), (sel[358] | DenominatorIn[371]), (sel[357] | DenominatorIn[370]), (sel[356] | DenominatorIn[369]), (sel[355] | DenominatorIn[368]), (sel[354] | DenominatorIn[367]), (sel[353] | DenominatorIn[366]), (sel[352] | DenominatorIn[365]), gnd_wire, (sel[350] | DenominatorIn[362]), (sel[349] | DenominatorIn[361]), (sel[348] | DenominatorIn[360]), (sel[347] | DenominatorIn[359]), (sel[346] | DenominatorIn[358]), (sel[345] | DenominatorIn[357]), (sel[344] | DenominatorIn[356]), (sel[343] | DenominatorIn[355]), (sel[342] | DenominatorIn[354]), (sel[341] | DenominatorIn[353]), (sel[340] | DenominatorIn[352]), (sel[339] | DenominatorIn[351]), (sel[338] | DenominatorIn[350]), (sel[337] | DenominatorIn[349]), (sel[336] | DenominatorIn[348]), (sel[335] | DenominatorIn[347]), (sel[334] | DenominatorIn[346]), (sel[333] | DenominatorIn[345]), (sel[332] | DenominatorIn[344]), (sel[331] | DenominatorIn[343]), (sel[330] | DenominatorIn[342]), (sel[329] | DenominatorIn[341]), (sel[328] | DenominatorIn[340]), (sel[327] | DenominatorIn[339]), (sel[326] | DenominatorIn[338]), (sel[325] | DenominatorIn[337]), gnd_wire, (sel[323] | DenominatorIn[334]), (sel[322] | DenominatorIn[333]), (sel[321] | DenominatorIn[332]), (sel[320] | DenominatorIn[331]), (sel[319] | DenominatorIn[330]), (sel[318] | DenominatorIn[329]), (sel[317] | DenominatorIn[328]), (sel[316] | DenominatorIn[327]), (sel[315] | DenominatorIn[326]), (sel[314] | DenominatorIn[325]), (sel[313] | DenominatorIn[324]), (sel[312] | DenominatorIn[323]), (sel[311] | DenominatorIn[322]), (sel[310] | DenominatorIn[321]), (sel[309] | DenominatorIn[320]
+), (sel[308] | DenominatorIn[319]), (sel[307] | DenominatorIn[318]), (sel[306] | DenominatorIn[317]), (sel[305] | DenominatorIn[316]), (sel[304] | DenominatorIn[315]), (sel[303] | DenominatorIn[314]), (sel[302] | DenominatorIn[313]), (sel[301] | DenominatorIn[312]), (sel[300] | DenominatorIn[311]), (sel[299] | DenominatorIn[310]), (sel[298] | DenominatorIn[309]), gnd_wire, (sel[296] | DenominatorIn[306]), (sel[295] | DenominatorIn[305]), (sel[294] | DenominatorIn[304]), (sel[293] | DenominatorIn[303]), (sel[292] | DenominatorIn[302]), (sel[291] | DenominatorIn[301]), (sel[290] | DenominatorIn[300]), (sel[289] | DenominatorIn[299]), (sel[288] | DenominatorIn[298]), (sel[287] | DenominatorIn[297]), (sel[286] | DenominatorIn[296]), (sel[285] | DenominatorIn[295]), (sel[284] | DenominatorIn[294]), (sel[283] | DenominatorIn[293]), (sel[282] | DenominatorIn[292]), (sel[281] | DenominatorIn[291]), (sel[280] | DenominatorIn[290]), (sel[279] | DenominatorIn[289]), (sel[278] | DenominatorIn[288]), (sel[277] | DenominatorIn[287]), (sel[276] | DenominatorIn[286]), (sel[275] | DenominatorIn[285]), (sel[274] | DenominatorIn[284]), (sel[273] | DenominatorIn[283]), (sel[272] | DenominatorIn[282]), (sel[271] | DenominatorIn[281]), gnd_wire, (sel[269] | DenominatorIn[278]), (sel[268] | DenominatorIn[277]), (sel[267] | DenominatorIn[276]), (sel[266] | DenominatorIn[275]), (sel[265] | DenominatorIn[274]), (sel[264] | DenominatorIn[273]), (sel[263] | DenominatorIn[272]), (sel[262] | DenominatorIn[271]), (sel[261] | DenominatorIn[270]), (sel[260] | DenominatorIn[269]), (sel[259] | DenominatorIn[268]), (sel[258] | DenominatorIn[267]), (sel[257] | DenominatorIn[266]), (sel[256] | DenominatorIn[265]), (sel[255] | DenominatorIn[264]), (sel[254] | DenominatorIn[263]), (sel[253] | DenominatorIn[262]), (sel[252] | DenominatorIn[261]), (sel[251] | DenominatorIn[260]), (sel[250] | DenominatorIn[259]), (sel[249] | DenominatorIn[258]), (sel[248] | DenominatorIn[257]), (sel[247] | DenominatorIn[256]), (sel[246] | DenominatorIn[255]), (sel[245] | DenominatorIn[254]
+), (sel[244] | DenominatorIn[253]), gnd_wire, (sel[242] | DenominatorIn[250]), (sel[241] | DenominatorIn[249]), (sel[240] | DenominatorIn[248]), (sel[239] | DenominatorIn[247]), (sel[238] | DenominatorIn[246]), (sel[237] | DenominatorIn[245]), (sel[236] | DenominatorIn[244]), (sel[235] | DenominatorIn[243]), (sel[234] | DenominatorIn[242]), (sel[233] | DenominatorIn[241]), (sel[232] | DenominatorIn[240]), (sel[231] | DenominatorIn[239]), (sel[230] | DenominatorIn[238]), (sel[229] | DenominatorIn[237]), (sel[228] | DenominatorIn[236]), (sel[227] | DenominatorIn[235]), (sel[226] | DenominatorIn[234]), (sel[225] | DenominatorIn[233]), (sel[224] | DenominatorIn[232]), (sel[223] | DenominatorIn[231]), (sel[222] | DenominatorIn[230]), (sel[221] | DenominatorIn[229]), (sel[220] | DenominatorIn[228]), (sel[219] | DenominatorIn[227]), (sel[218] | DenominatorIn[226]), (sel[217] | DenominatorIn[225]), gnd_wire, (sel[215] | DenominatorIn[222]), (sel[214] | DenominatorIn[221]), (sel[213] | DenominatorIn[220]), (sel[212] | DenominatorIn[219]), (sel[211] | DenominatorIn[218]), (sel[210] | DenominatorIn[217]), (sel[209] | DenominatorIn[216]), (sel[208] | DenominatorIn[215]), (sel[207] | DenominatorIn[214]), (sel[206] | DenominatorIn[213]), (sel[205] | DenominatorIn[212]), (sel[204] | DenominatorIn[211]), (sel[203] | DenominatorIn[210]), (sel[202] | DenominatorIn[209]), (sel[201] | DenominatorIn[208]), (sel[200] | DenominatorIn[207]), (sel[199] | DenominatorIn[206]), (sel[198] | DenominatorIn[205]), (sel[197] | DenominatorIn[204]), (sel[196] | DenominatorIn[203]), (sel[195] | DenominatorIn[202]), (sel[194] | DenominatorIn[201]), (sel[193] | DenominatorIn[200]), (sel[192] | DenominatorIn[199]), (sel[191] | DenominatorIn[198]), (sel[190] | DenominatorIn[197]), gnd_wire, (sel[188] | DenominatorIn[194]), (sel[187] | DenominatorIn[193]), (sel[186] | DenominatorIn[192]), (sel[185] | DenominatorIn[191]), (sel[184] | DenominatorIn[190]), (sel[183] | DenominatorIn[189]), (sel[182] | DenominatorIn[188]), (sel[181] | DenominatorIn[187]), (sel[180]
+ | DenominatorIn[186]), (sel[179] | DenominatorIn[185]), (sel[178] | DenominatorIn[184]), (sel[177] | DenominatorIn[183]), (sel[176] | DenominatorIn[182]), (sel[175] | DenominatorIn[181]), (sel[174] | DenominatorIn[180]), (sel[173] | DenominatorIn[179]), (sel[172] | DenominatorIn[178]), (sel[171] | DenominatorIn[177]), (sel[170] | DenominatorIn[176]), (sel[169] | DenominatorIn[175]), (sel[168] | DenominatorIn[174]), (sel[167] | DenominatorIn[173]), (sel[166] | DenominatorIn[172]), (sel[165] | DenominatorIn[171]), (sel[164] | DenominatorIn[170]), (sel[163] | DenominatorIn[169]), gnd_wire, (sel[161] | DenominatorIn[166]), (sel[160] | DenominatorIn[165]), (sel[159] | DenominatorIn[164]), (sel[158] | DenominatorIn[163]), (sel[157] | DenominatorIn[162]), (sel[156] | DenominatorIn[161]), (sel[155] | DenominatorIn[160]), (sel[154] | DenominatorIn[159]), (sel[153] | DenominatorIn[158]), (sel[152] | DenominatorIn[157]), (sel[151] | DenominatorIn[156]), (sel[150] | DenominatorIn[155]), (sel[149] | DenominatorIn[154]), (sel[148] | DenominatorIn[153]), (sel[147] | DenominatorIn[152]), (sel[146] | DenominatorIn[151]), (sel[145] | DenominatorIn[150]), (sel[144] | DenominatorIn[149]), (sel[143] | DenominatorIn[148]), (sel[142] | DenominatorIn[147]), (sel[141] | DenominatorIn[146]), (sel[140] | DenominatorIn[145]), (sel[139] | DenominatorIn[144]), (sel[138] | DenominatorIn[143]), (sel[137] | DenominatorIn[142]), (sel[136] | DenominatorIn[141]), gnd_wire, (sel[134] | DenominatorIn[138]), (sel[133] | DenominatorIn[137]), (sel[132] | DenominatorIn[136]), (sel[131] | DenominatorIn[135]), (sel[130] | DenominatorIn[134]), (sel[129] | DenominatorIn[133]), (sel[128] | DenominatorIn[132]), (sel[127] | DenominatorIn[131]), (sel[126] | DenominatorIn[130]), (sel[125] | DenominatorIn[129]), (sel[124] | DenominatorIn[128]), (sel[123] | DenominatorIn[127]), (sel[122] | DenominatorIn[126]), (sel[121] | DenominatorIn[125]), (sel[120] | DenominatorIn[124]), (sel[119] | DenominatorIn[123]), (sel[118] | DenominatorIn[122]), (sel[117] | DenominatorIn[121]
+), (sel[116] | DenominatorIn[120]), (sel[115] | DenominatorIn[119]), (sel[114] | DenominatorIn[118]), (sel[113] | DenominatorIn[117]), (sel[112] | DenominatorIn[116]), (sel[111] | DenominatorIn[115]), (sel[110] | DenominatorIn[114]), (sel[109] | DenominatorIn[113]), gnd_wire, (sel[107] | DenominatorIn[110]), (sel[106] | DenominatorIn[109]), (sel[105] | DenominatorIn[108]), (sel[104] | DenominatorIn[107]), (sel[103] | DenominatorIn[106]), (sel[102] | DenominatorIn[105]), (sel[101] | DenominatorIn[104]), (sel[100] | DenominatorIn[103]), (sel[99] | DenominatorIn[102]), (sel[98] | DenominatorIn[101]), (sel[97] | DenominatorIn[100]), (sel[96] | DenominatorIn[99]), (sel[95] | DenominatorIn[98]), (sel[94] | DenominatorIn[97]), (sel[93] | DenominatorIn[96]), (sel[92] | DenominatorIn[95]), (sel[91] | DenominatorIn[94]), (sel[90] | DenominatorIn[93]), (sel[89] | DenominatorIn[92]), (sel[88] | DenominatorIn[91]), (sel[87] | DenominatorIn[90]), (sel[86] | DenominatorIn[89]), (sel[85] | DenominatorIn[88]), (sel[84] | DenominatorIn[87]), (sel[83] | DenominatorIn[86]), (sel[82] | DenominatorIn[85]), gnd_wire, (sel[80] | DenominatorIn[82]), (sel[79] | DenominatorIn[81]), (sel[78] | DenominatorIn[80]), (sel[77] | DenominatorIn[79]), (sel[76] | DenominatorIn[78]), (sel[75] | DenominatorIn[77]), (sel[74] | DenominatorIn[76]), (sel[73] | DenominatorIn[75]), (sel[72] | DenominatorIn[74]), (sel[71] | DenominatorIn[73]), (sel[70] | DenominatorIn[72]), (sel[69] | DenominatorIn[71]), (sel[68] | DenominatorIn[70]), (sel[67] | DenominatorIn[69]), (sel[66] | DenominatorIn[68]), (sel[65] | DenominatorIn[67]), (sel[64] | DenominatorIn[66]), (sel[63] | DenominatorIn[65]), (sel[62] | DenominatorIn[64]), (sel[61] | DenominatorIn[63]), (sel[60] | DenominatorIn[62]), (sel[59] | DenominatorIn[61]), (sel[58] | DenominatorIn[60]), (sel[57] | DenominatorIn[59]), (sel[56] | DenominatorIn[58]), (sel[55] | DenominatorIn[57]), gnd_wire, (sel[53] | DenominatorIn[54]), (sel[52] | DenominatorIn[53]), (sel[51] | DenominatorIn[52]), (sel[50] | DenominatorIn[51]
+), (sel[49] | DenominatorIn[50]), (sel[48] | DenominatorIn[49]), (sel[47] | DenominatorIn[48]), (sel[46] | DenominatorIn[47]), (sel[45] | DenominatorIn[46]), (sel[44] | DenominatorIn[45]), (sel[43] | DenominatorIn[44]), (sel[42] | DenominatorIn[43]), (sel[41] | DenominatorIn[42]), (sel[40] | DenominatorIn[41]), (sel[39] | DenominatorIn[40]), (sel[38] | DenominatorIn[39]), (sel[37] | DenominatorIn[38]), (sel[36] | DenominatorIn[37]), (sel[35] | DenominatorIn[36]), (sel[34] | DenominatorIn[35]), (sel[33] | DenominatorIn[34]), (sel[32] | DenominatorIn[33]), (sel[31] | DenominatorIn[32]), (sel[30] | DenominatorIn[31]), (sel[29] | DenominatorIn[30]), (sel[28] | DenominatorIn[29]), gnd_wire, (sel[26] | DenominatorIn[26]), (sel[25] | DenominatorIn[25]), (sel[24] | DenominatorIn[24]), (sel[23] | DenominatorIn[23]), (sel[22] | DenominatorIn[22]), (sel[21] | DenominatorIn[21]), (sel[20] | DenominatorIn[20]), (sel[19] | DenominatorIn[19]), (sel[18] | DenominatorIn[18]), (sel[17] | DenominatorIn[17]), (sel[16] | DenominatorIn[16]), (sel[15] | DenominatorIn[15]), (sel[14] | DenominatorIn[14]), (sel[13] | DenominatorIn[13]), (sel[12] | DenominatorIn[12]), (sel[11] | DenominatorIn[11]), (sel[10] | DenominatorIn[10]), (sel[9] | DenominatorIn[9]), (sel[8] | DenominatorIn[8]), (sel[7] | DenominatorIn[7]), (sel[6] | DenominatorIn[6]), (sel[5] | DenominatorIn[5]), (sel[4] | DenominatorIn[4]), (sel[3] | DenominatorIn[3]), (sel[2] | DenominatorIn[2]), (sel[1] | DenominatorIn[1])},
+		selnose = {((~ nose[755]) | sel[755]), ((~ nose[754]) | sel[754]), ((~ nose[753]) | sel[753]), ((~ nose[752]) | sel[752]), ((~ nose[751]) | sel[751]), ((~ nose[750]) | sel[750]), ((~ nose[749]) | sel[749]), ((~ nose[748]) | sel[748]), ((~ nose[747]) | sel[747]), ((~ nose[746]) | sel[746]), ((~ nose[745]) | sel[745]), ((~ nose[744]) | sel[744]), ((~ nose[743]) | sel[743]), ((~ nose[742]) | sel[742]), ((~ nose[741]) | sel[741]), ((~ nose[740]) | sel[740]), ((~ nose[739]) | sel[739]), ((~ nose[738]) | sel[738]), ((~ nose[737]) | sel[737]), ((~ nose[736]) | sel[736]), ((~ nose[735]) | sel[735]), ((~ nose[734]) | sel[734]), ((~ nose[733]) | sel[733]), ((~ nose[732]) | sel[732]), ((~ nose[731]) | sel[731]), ((~ nose[730]) | sel[730]), ((~ nose[729]) | sel[729]), ((~ nose[728]) | sel[728]), ((~ nose[727]) | sel[727]), ((~ nose[726]) | sel[726]), ((~ nose[725]) | sel[725]), ((~ nose[724]) | sel[724]), ((~ nose[723]) | sel[723]), ((~ nose[722]) | sel[722]), ((~ nose[721]) | sel[721]), ((~ nose[720]) | sel[720]), ((~ nose[719]) | sel[719]), ((~ nose[718]) | sel[718]), ((~ nose[717]) | sel[717]), ((~ nose[716]) | sel[716]), ((~ nose[715]) | sel[715]), ((~ nose[714]) | sel[714]), ((~ nose[713]) | sel[713]), ((~ nose[712]) | sel[712]), ((~ nose[711]) | sel[711]), ((~ nose[710]) | sel[710]), ((~ nose[709]) | sel[709]), ((~ nose[708]) | sel[708]), ((~ nose[707]) | sel[707]), ((~ nose[706]) | sel[706]), ((~ nose[705]) | sel[705]), ((~ nose[704]) | sel[704]), ((~ nose[703]) | sel[703]), ((~ nose[702]) | sel[702]), ((~ nose[701]) | sel[701]), ((~ nose[700]) | sel[700]), ((~ nose[699]) | sel[699]), ((~ nose[698]) | sel[698]), ((~ nose[697]) | sel[697]), ((~ nose[696]) | sel[696]), ((~ nose[695]) | sel[695]), ((~ nose[694]) | sel[694]), ((~ nose[693]) | sel[693]), ((~ nose[692]) | sel[692]), ((~ nose[691]) | sel[691]), ((~ nose[690]) | sel[690]), ((~ nose[689]) | sel[689]), ((~ nose[688]) | sel[688]), ((~ nose[687]) | sel[687]), ((~ nose[686]) | sel[686]), ((~ nose[685]) | sel[685]), ((~ nose[684]) | sel[684]), ((~ nose[683]) | sel[683]
+), ((~ nose[682]) | sel[682]), ((~ nose[681]) | sel[681]), ((~ nose[680]) | sel[680]), ((~ nose[679]) | sel[679]), ((~ nose[678]) | sel[678]), ((~ nose[677]) | sel[677]), ((~ nose[676]) | sel[676]), ((~ nose[675]) | sel[675]), ((~ nose[674]) | sel[674]), ((~ nose[673]) | sel[673]), ((~ nose[672]) | sel[672]), ((~ nose[671]) | sel[671]), ((~ nose[670]) | sel[670]), ((~ nose[669]) | sel[669]), ((~ nose[668]) | sel[668]), ((~ nose[667]) | sel[667]), ((~ nose[666]) | sel[666]), ((~ nose[665]) | sel[665]), ((~ nose[664]) | sel[664]), ((~ nose[663]) | sel[663]), ((~ nose[662]) | sel[662]), ((~ nose[661]) | sel[661]), ((~ nose[660]) | sel[660]), ((~ nose[659]) | sel[659]), ((~ nose[658]) | sel[658]), ((~ nose[657]) | sel[657]), ((~ nose[656]) | sel[656]), ((~ nose[655]) | sel[655]), ((~ nose[654]) | sel[654]), ((~ nose[653]) | sel[653]), ((~ nose[652]) | sel[652]), ((~ nose[651]) | sel[651]), ((~ nose[650]) | sel[650]), ((~ nose[649]) | sel[649]), ((~ nose[648]) | sel[648]), ((~ nose[647]) | sel[647]), ((~ nose[646]) | sel[646]), ((~ nose[645]) | sel[645]), ((~ nose[644]) | sel[644]), ((~ nose[643]) | sel[643]), ((~ nose[642]) | sel[642]), ((~ nose[641]) | sel[641]), ((~ nose[640]) | sel[640]), ((~ nose[639]) | sel[639]), ((~ nose[638]) | sel[638]), ((~ nose[637]) | sel[637]), ((~ nose[636]) | sel[636]), ((~ nose[635]) | sel[635]), ((~ nose[634]) | sel[634]), ((~ nose[633]) | sel[633]), ((~ nose[632]) | sel[632]), ((~ nose[631]) | sel[631]), ((~ nose[630]) | sel[630]), ((~ nose[629]) | sel[629]), ((~ nose[628]) | sel[628]), ((~ nose[627]) | sel[627]), ((~ nose[626]) | sel[626]), ((~ nose[625]) | sel[625]), ((~ nose[624]) | sel[624]), ((~ nose[623]) | sel[623]), ((~ nose[622]) | sel[622]), ((~ nose[621]) | sel[621]), ((~ nose[620]) | sel[620]), ((~ nose[619]) | sel[619]), ((~ nose[618]) | sel[618]), ((~ nose[617]) | sel[617]), ((~ nose[616]) | sel[616]), ((~ nose[615]) | sel[615]), ((~ nose[614]) | sel[614]), ((~ nose[613]) | sel[613]), ((~ nose[612]) | sel[612]), ((~ nose[611]) | sel[611]), ((~ nose[610]) | sel[610]), (
+(~ nose[609]) | sel[609]), ((~ nose[608]) | sel[608]), ((~ nose[607]) | sel[607]), ((~ nose[606]) | sel[606]), ((~ nose[605]) | sel[605]), ((~ nose[604]) | sel[604]), ((~ nose[603]) | sel[603]), ((~ nose[602]) | sel[602]), ((~ nose[601]) | sel[601]), ((~ nose[600]) | sel[600]), ((~ nose[599]) | sel[599]), ((~ nose[598]) | sel[598]), ((~ nose[597]) | sel[597]), ((~ nose[596]) | sel[596]), ((~ nose[595]) | sel[595]), ((~ nose[594]) | sel[594]), ((~ nose[593]) | sel[593]), ((~ nose[592]) | sel[592]), ((~ nose[591]) | sel[591]), ((~ nose[590]) | sel[590]), ((~ nose[589]) | sel[589]), ((~ nose[588]) | sel[588]), ((~ nose[587]) | sel[587]), ((~ nose[586]) | sel[586]), ((~ nose[585]) | sel[585]), ((~ nose[584]) | sel[584]), ((~ nose[583]) | sel[583]), ((~ nose[582]) | sel[582]), ((~ nose[581]) | sel[581]), ((~ nose[580]) | sel[580]), ((~ nose[579]) | sel[579]), ((~ nose[578]) | sel[578]), ((~ nose[577]) | sel[577]), ((~ nose[576]) | sel[576]), ((~ nose[575]) | sel[575]), ((~ nose[574]) | sel[574]), ((~ nose[573]) | sel[573]), ((~ nose[572]) | sel[572]), ((~ nose[571]) | sel[571]), ((~ nose[570]) | sel[570]), ((~ nose[569]) | sel[569]), ((~ nose[568]) | sel[568]), ((~ nose[567]) | sel[567]), ((~ nose[566]) | sel[566]), ((~ nose[565]) | sel[565]), ((~ nose[564]) | sel[564]), ((~ nose[563]) | sel[563]), ((~ nose[562]) | sel[562]), ((~ nose[561]) | sel[561]), ((~ nose[560]) | sel[560]), ((~ nose[559]) | sel[559]), ((~ nose[558]) | sel[558]), ((~ nose[557]) | sel[557]), ((~ nose[556]) | sel[556]), ((~ nose[555]) | sel[555]), ((~ nose[554]) | sel[554]), ((~ nose[553]) | sel[553]), ((~ nose[552]) | sel[552]), ((~ nose[551]) | sel[551]), ((~ nose[550]) | sel[550]), ((~ nose[549]) | sel[549]), ((~ nose[548]) | sel[548]), ((~ nose[547]) | sel[547]), ((~ nose[546]) | sel[546]), ((~ nose[545]) | sel[545]), ((~ nose[544]) | sel[544]), ((~ nose[543]) | sel[543]), ((~ nose[542]) | sel[542]), ((~ nose[541]) | sel[541]), ((~ nose[540]) | sel[540]), ((~ nose[539]) | sel[539]), ((~ nose[538]) | sel[538]), ((~ nose[537]) | sel[537]), ((~ nose[536]
+) | sel[536]), ((~ nose[535]) | sel[535]), ((~ nose[534]) | sel[534]), ((~ nose[533]) | sel[533]), ((~ nose[532]) | sel[532]), ((~ nose[531]) | sel[531]), ((~ nose[530]) | sel[530]), ((~ nose[529]) | sel[529]), ((~ nose[528]) | sel[528]), ((~ nose[527]) | sel[527]), ((~ nose[526]) | sel[526]), ((~ nose[525]) | sel[525]), ((~ nose[524]) | sel[524]), ((~ nose[523]) | sel[523]), ((~ nose[522]) | sel[522]), ((~ nose[521]) | sel[521]), ((~ nose[520]) | sel[520]), ((~ nose[519]) | sel[519]), ((~ nose[518]) | sel[518]), ((~ nose[517]) | sel[517]), ((~ nose[516]) | sel[516]), ((~ nose[515]) | sel[515]), ((~ nose[514]) | sel[514]), ((~ nose[513]) | sel[513]), ((~ nose[512]) | sel[512]), ((~ nose[511]) | sel[511]), ((~ nose[510]) | sel[510]), ((~ nose[509]) | sel[509]), ((~ nose[508]) | sel[508]), ((~ nose[507]) | sel[507]), ((~ nose[506]) | sel[506]), ((~ nose[505]) | sel[505]), ((~ nose[504]) | sel[504]), ((~ nose[503]) | sel[503]), ((~ nose[502]) | sel[502]), ((~ nose[501]) | sel[501]), ((~ nose[500]) | sel[500]), ((~ nose[499]) | sel[499]), ((~ nose[498]) | sel[498]), ((~ nose[497]) | sel[497]), ((~ nose[496]) | sel[496]), ((~ nose[495]) | sel[495]), ((~ nose[494]) | sel[494]), ((~ nose[493]) | sel[493]), ((~ nose[492]) | sel[492]), ((~ nose[491]) | sel[491]), ((~ nose[490]) | sel[490]), ((~ nose[489]) | sel[489]), ((~ nose[488]) | sel[488]), ((~ nose[487]) | sel[487]), ((~ nose[486]) | sel[486]), ((~ nose[485]) | sel[485]), ((~ nose[484]) | sel[484]), ((~ nose[483]) | sel[483]), ((~ nose[482]) | sel[482]), ((~ nose[481]) | sel[481]), ((~ nose[480]) | sel[480]), ((~ nose[479]) | sel[479]), ((~ nose[478]) | sel[478]), ((~ nose[477]) | sel[477]), ((~ nose[476]) | sel[476]), ((~ nose[475]) | sel[475]), ((~ nose[474]) | sel[474]), ((~ nose[473]) | sel[473]), ((~ nose[472]) | sel[472]), ((~ nose[471]) | sel[471]), ((~ nose[470]) | sel[470]), ((~ nose[469]) | sel[469]), ((~ nose[468]) | sel[468]), ((~ nose[467]) | sel[467]), ((~ nose[466]) | sel[466]), ((~ nose[465]) | sel[465]), ((~ nose[464]) | sel[464]), ((~ nose[463]) | sel[463]
+), ((~ nose[462]) | sel[462]), ((~ nose[461]) | sel[461]), ((~ nose[460]) | sel[460]), ((~ nose[459]) | sel[459]), ((~ nose[458]) | sel[458]), ((~ nose[457]) | sel[457]), ((~ nose[456]) | sel[456]), ((~ nose[455]) | sel[455]), ((~ nose[454]) | sel[454]), ((~ nose[453]) | sel[453]), ((~ nose[452]) | sel[452]), ((~ nose[451]) | sel[451]), ((~ nose[450]) | sel[450]), ((~ nose[449]) | sel[449]), ((~ nose[448]) | sel[448]), ((~ nose[447]) | sel[447]), ((~ nose[446]) | sel[446]), ((~ nose[445]) | sel[445]), ((~ nose[444]) | sel[444]), ((~ nose[443]) | sel[443]), ((~ nose[442]) | sel[442]), ((~ nose[441]) | sel[441]), ((~ nose[440]) | sel[440]), ((~ nose[439]) | sel[439]), ((~ nose[438]) | sel[438]), ((~ nose[437]) | sel[437]), ((~ nose[436]) | sel[436]), ((~ nose[435]) | sel[435]), ((~ nose[434]) | sel[434]), ((~ nose[433]) | sel[433]), ((~ nose[432]) | sel[432]), ((~ nose[431]) | sel[431]), ((~ nose[430]) | sel[430]), ((~ nose[429]) | sel[429]), ((~ nose[428]) | sel[428]), ((~ nose[427]) | sel[427]), ((~ nose[426]) | sel[426]), ((~ nose[425]) | sel[425]), ((~ nose[424]) | sel[424]), ((~ nose[423]) | sel[423]), ((~ nose[422]) | sel[422]), ((~ nose[421]) | sel[421]), ((~ nose[420]) | sel[420]), ((~ nose[419]) | sel[419]), ((~ nose[418]) | sel[418]), ((~ nose[417]) | sel[417]), ((~ nose[416]) | sel[416]), ((~ nose[415]) | sel[415]), ((~ nose[414]) | sel[414]), ((~ nose[413]) | sel[413]), ((~ nose[412]) | sel[412]), ((~ nose[411]) | sel[411]), ((~ nose[410]) | sel[410]), ((~ nose[409]) | sel[409]), ((~ nose[408]) | sel[408]), ((~ nose[407]) | sel[407]), ((~ nose[406]) | sel[406]), ((~ nose[405]) | sel[405]), ((~ nose[404]) | sel[404]), ((~ nose[403]) | sel[403]), ((~ nose[402]) | sel[402]), ((~ nose[401]) | sel[401]), ((~ nose[400]) | sel[400]), ((~ nose[399]) | sel[399]), ((~ nose[398]) | sel[398]), ((~ nose[397]) | sel[397]), ((~ nose[396]) | sel[396]), ((~ nose[395]) | sel[395]), ((~ nose[394]) | sel[394]), ((~ nose[393]) | sel[393]), ((~ nose[392]) | sel[392]), ((~ nose[391]) | sel[391]), ((~ nose[390]) | sel[390]), (
+(~ nose[389]) | sel[389]), ((~ nose[388]) | sel[388]), ((~ nose[387]) | sel[387]), ((~ nose[386]) | sel[386]), ((~ nose[385]) | sel[385]), ((~ nose[384]) | sel[384]), ((~ nose[383]) | sel[383]), ((~ nose[382]) | sel[382]), ((~ nose[381]) | sel[381]), ((~ nose[380]) | sel[380]), ((~ nose[379]) | sel[379]), ((~ nose[378]) | sel[378]), ((~ nose[377]) | sel[377]), ((~ nose[376]) | sel[376]), ((~ nose[375]) | sel[375]), ((~ nose[374]) | sel[374]), ((~ nose[373]) | sel[373]), ((~ nose[372]) | sel[372]), ((~ nose[371]) | sel[371]), ((~ nose[370]) | sel[370]), ((~ nose[369]) | sel[369]), ((~ nose[368]) | sel[368]), ((~ nose[367]) | sel[367]), ((~ nose[366]) | sel[366]), ((~ nose[365]) | sel[365]), ((~ nose[364]) | sel[364]), ((~ nose[363]) | sel[363]), ((~ nose[362]) | sel[362]), ((~ nose[361]) | sel[361]), ((~ nose[360]) | sel[360]), ((~ nose[359]) | sel[359]), ((~ nose[358]) | sel[358]), ((~ nose[357]) | sel[357]), ((~ nose[356]) | sel[356]), ((~ nose[355]) | sel[355]), ((~ nose[354]) | sel[354]), ((~ nose[353]) | sel[353]), ((~ nose[352]) | sel[352]), ((~ nose[351]) | sel[351]), ((~ nose[350]) | sel[350]), ((~ nose[349]) | sel[349]), ((~ nose[348]) | sel[348]), ((~ nose[347]) | sel[347]), ((~ nose[346]) | sel[346]), ((~ nose[345]) | sel[345]), ((~ nose[344]) | sel[344]), ((~ nose[343]) | sel[343]), ((~ nose[342]) | sel[342]), ((~ nose[341]) | sel[341]), ((~ nose[340]) | sel[340]), ((~ nose[339]) | sel[339]), ((~ nose[338]) | sel[338]), ((~ nose[337]) | sel[337]), ((~ nose[336]) | sel[336]), ((~ nose[335]) | sel[335]), ((~ nose[334]) | sel[334]), ((~ nose[333]) | sel[333]), ((~ nose[332]) | sel[332]), ((~ nose[331]) | sel[331]), ((~ nose[330]) | sel[330]), ((~ nose[329]) | sel[329]), ((~ nose[328]) | sel[328]), ((~ nose[327]) | sel[327]), ((~ nose[326]) | sel[326]), ((~ nose[325]) | sel[325]), ((~ nose[324]) | sel[324]), ((~ nose[323]) | sel[323]), ((~ nose[322]) | sel[322]), ((~ nose[321]) | sel[321]), ((~ nose[320]) | sel[320]), ((~ nose[319]) | sel[319]), ((~ nose[318]) | sel[318]), ((~ nose[317]) | sel[317]), ((~ nose[316]
+) | sel[316]), ((~ nose[315]) | sel[315]), ((~ nose[314]) | sel[314]), ((~ nose[313]) | sel[313]), ((~ nose[312]) | sel[312]), ((~ nose[311]) | sel[311]), ((~ nose[310]) | sel[310]), ((~ nose[309]) | sel[309]), ((~ nose[308]) | sel[308]), ((~ nose[307]) | sel[307]), ((~ nose[306]) | sel[306]), ((~ nose[305]) | sel[305]), ((~ nose[304]) | sel[304]), ((~ nose[303]) | sel[303]), ((~ nose[302]) | sel[302]), ((~ nose[301]) | sel[301]), ((~ nose[300]) | sel[300]), ((~ nose[299]) | sel[299]), ((~ nose[298]) | sel[298]), ((~ nose[297]) | sel[297]), ((~ nose[296]) | sel[296]), ((~ nose[295]) | sel[295]), ((~ nose[294]) | sel[294]), ((~ nose[293]) | sel[293]), ((~ nose[292]) | sel[292]), ((~ nose[291]) | sel[291]), ((~ nose[290]) | sel[290]), ((~ nose[289]) | sel[289]), ((~ nose[288]) | sel[288]), ((~ nose[287]) | sel[287]), ((~ nose[286]) | sel[286]), ((~ nose[285]) | sel[285]), ((~ nose[284]) | sel[284]), ((~ nose[283]) | sel[283]), ((~ nose[282]) | sel[282]), ((~ nose[281]) | sel[281]), ((~ nose[280]) | sel[280]), ((~ nose[279]) | sel[279]), ((~ nose[278]) | sel[278]), ((~ nose[277]) | sel[277]), ((~ nose[276]) | sel[276]), ((~ nose[275]) | sel[275]), ((~ nose[274]) | sel[274]), ((~ nose[273]) | sel[273]), ((~ nose[272]) | sel[272]), ((~ nose[271]) | sel[271]), ((~ nose[270]) | sel[270]), ((~ nose[269]) | sel[269]), ((~ nose[268]) | sel[268]), ((~ nose[267]) | sel[267]), ((~ nose[266]) | sel[266]), ((~ nose[265]) | sel[265]), ((~ nose[264]) | sel[264]), ((~ nose[263]) | sel[263]), ((~ nose[262]) | sel[262]), ((~ nose[261]) | sel[261]), ((~ nose[260]) | sel[260]), ((~ nose[259]) | sel[259]), ((~ nose[258]) | sel[258]), ((~ nose[257]) | sel[257]), ((~ nose[256]) | sel[256]), ((~ nose[255]) | sel[255]), ((~ nose[254]) | sel[254]), ((~ nose[253]) | sel[253]), ((~ nose[252]) | sel[252]), ((~ nose[251]) | sel[251]), ((~ nose[250]) | sel[250]), ((~ nose[249]) | sel[249]), ((~ nose[248]) | sel[248]), ((~ nose[247]) | sel[247]), ((~ nose[246]) | sel[246]), ((~ nose[245]) | sel[245]), ((~ nose[244]) | sel[244]), ((~ nose[243]) | sel[243]
+), ((~ nose[242]) | sel[242]), ((~ nose[241]) | sel[241]), ((~ nose[240]) | sel[240]), ((~ nose[239]) | sel[239]), ((~ nose[238]) | sel[238]), ((~ nose[237]) | sel[237]), ((~ nose[236]) | sel[236]), ((~ nose[235]) | sel[235]), ((~ nose[234]) | sel[234]), ((~ nose[233]) | sel[233]), ((~ nose[232]) | sel[232]), ((~ nose[231]) | sel[231]), ((~ nose[230]) | sel[230]), ((~ nose[229]) | sel[229]), ((~ nose[228]) | sel[228]), ((~ nose[227]) | sel[227]), ((~ nose[226]) | sel[226]), ((~ nose[225]) | sel[225]), ((~ nose[224]) | sel[224]), ((~ nose[223]) | sel[223]), ((~ nose[222]) | sel[222]), ((~ nose[221]) | sel[221]), ((~ nose[220]) | sel[220]), ((~ nose[219]) | sel[219]), ((~ nose[218]) | sel[218]), ((~ nose[217]) | sel[217]), ((~ nose[216]) | sel[216]), ((~ nose[215]) | sel[215]), ((~ nose[214]) | sel[214]), ((~ nose[213]) | sel[213]), ((~ nose[212]) | sel[212]), ((~ nose[211]) | sel[211]), ((~ nose[210]) | sel[210]), ((~ nose[209]) | sel[209]), ((~ nose[208]) | sel[208]), ((~ nose[207]) | sel[207]), ((~ nose[206]) | sel[206]), ((~ nose[205]) | sel[205]), ((~ nose[204]) | sel[204]), ((~ nose[203]) | sel[203]), ((~ nose[202]) | sel[202]), ((~ nose[201]) | sel[201]), ((~ nose[200]) | sel[200]), ((~ nose[199]) | sel[199]), ((~ nose[198]) | sel[198]), ((~ nose[197]) | sel[197]), ((~ nose[196]) | sel[196]), ((~ nose[195]) | sel[195]), ((~ nose[194]) | sel[194]), ((~ nose[193]) | sel[193]), ((~ nose[192]) | sel[192]), ((~ nose[191]) | sel[191]), ((~ nose[190]) | sel[190]), ((~ nose[189]) | sel[189]), ((~ nose[188]) | sel[188]), ((~ nose[187]) | sel[187]), ((~ nose[186]) | sel[186]), ((~ nose[185]) | sel[185]), ((~ nose[184]) | sel[184]), ((~ nose[183]) | sel[183]), ((~ nose[182]) | sel[182]), ((~ nose[181]) | sel[181]), ((~ nose[180]) | sel[180]), ((~ nose[179]) | sel[179]), ((~ nose[178]) | sel[178]), ((~ nose[177]) | sel[177]), ((~ nose[176]) | sel[176]), ((~ nose[175]) | sel[175]), ((~ nose[174]) | sel[174]), ((~ nose[173]) | sel[173]), ((~ nose[172]) | sel[172]), ((~ nose[171]) | sel[171]), ((~ nose[170]) | sel[170]), (
+(~ nose[169]) | sel[169]), ((~ nose[168]) | sel[168]), ((~ nose[167]) | sel[167]), ((~ nose[166]) | sel[166]), ((~ nose[165]) | sel[165]), ((~ nose[164]) | sel[164]), ((~ nose[163]) | sel[163]), ((~ nose[162]) | sel[162]), ((~ nose[161]) | sel[161]), ((~ nose[160]) | sel[160]), ((~ nose[159]) | sel[159]), ((~ nose[158]) | sel[158]), ((~ nose[157]) | sel[157]), ((~ nose[156]) | sel[156]), ((~ nose[155]) | sel[155]), ((~ nose[154]) | sel[154]), ((~ nose[153]) | sel[153]), ((~ nose[152]) | sel[152]), ((~ nose[151]) | sel[151]), ((~ nose[150]) | sel[150]), ((~ nose[149]) | sel[149]), ((~ nose[148]) | sel[148]), ((~ nose[147]) | sel[147]), ((~ nose[146]) | sel[146]), ((~ nose[145]) | sel[145]), ((~ nose[144]) | sel[144]), ((~ nose[143]) | sel[143]), ((~ nose[142]) | sel[142]), ((~ nose[141]) | sel[141]), ((~ nose[140]) | sel[140]), ((~ nose[139]) | sel[139]), ((~ nose[138]) | sel[138]), ((~ nose[137]) | sel[137]), ((~ nose[136]) | sel[136]), ((~ nose[135]) | sel[135]), ((~ nose[134]) | sel[134]), ((~ nose[133]) | sel[133]), ((~ nose[132]) | sel[132]), ((~ nose[131]) | sel[131]), ((~ nose[130]) | sel[130]), ((~ nose[129]) | sel[129]), ((~ nose[128]) | sel[128]), ((~ nose[127]) | sel[127]), ((~ nose[126]) | sel[126]), ((~ nose[125]) | sel[125]), ((~ nose[124]) | sel[124]), ((~ nose[123]) | sel[123]), ((~ nose[122]) | sel[122]), ((~ nose[121]) | sel[121]), ((~ nose[120]) | sel[120]), ((~ nose[119]) | sel[119]), ((~ nose[118]) | sel[118]), ((~ nose[117]) | sel[117]), ((~ nose[116]) | sel[116]), ((~ nose[115]) | sel[115]), ((~ nose[114]) | sel[114]), ((~ nose[113]) | sel[113]), ((~ nose[112]) | sel[112]), ((~ nose[111]) | sel[111]), ((~ nose[110]) | sel[110]), ((~ nose[109]) | sel[109]), ((~ nose[108]) | sel[108]), ((~ nose[107]) | sel[107]), ((~ nose[106]) | sel[106]), ((~ nose[105]) | sel[105]), ((~ nose[104]) | sel[104]), ((~ nose[103]) | sel[103]), ((~ nose[102]) | sel[102]), ((~ nose[101]) | sel[101]), ((~ nose[100]) | sel[100]), ((~ nose[99]) | sel[99]), ((~ nose[98]) | sel[98]), ((~ nose[97]) | sel[97]), ((~ nose[96]
+) | sel[96]), ((~ nose[95]) | sel[95]), ((~ nose[94]) | sel[94]), ((~ nose[93]) | sel[93]), ((~ nose[92]) | sel[92]), ((~ nose[91]) | sel[91]), ((~ nose[90]) | sel[90]), ((~ nose[89]) | sel[89]), ((~ nose[88]) | sel[88]), ((~ nose[87]) | sel[87]), ((~ nose[86]) | sel[86]), ((~ nose[85]) | sel[85]), ((~ nose[84]) | sel[84]), ((~ nose[83]) | sel[83]), ((~ nose[82]) | sel[82]), ((~ nose[81]) | sel[81]), ((~ nose[80]) | sel[80]), ((~ nose[79]) | sel[79]), ((~ nose[78]) | sel[78]), ((~ nose[77]) | sel[77]), ((~ nose[76]) | sel[76]), ((~ nose[75]) | sel[75]), ((~ nose[74]) | sel[74]), ((~ nose[73]) | sel[73]), ((~ nose[72]) | sel[72]), ((~ nose[71]) | sel[71]), ((~ nose[70]) | sel[70]), ((~ nose[69]) | sel[69]), ((~ nose[68]) | sel[68]), ((~ nose[67]) | sel[67]), ((~ nose[66]) | sel[66]), ((~ nose[65]) | sel[65]), ((~ nose[64]) | sel[64]), ((~ nose[63]) | sel[63]), ((~ nose[62]) | sel[62]), ((~ nose[61]) | sel[61]), ((~ nose[60]) | sel[60]), ((~ nose[59]) | sel[59]), ((~ nose[58]) | sel[58]), ((~ nose[57]) | sel[57]), ((~ nose[56]) | sel[56]), ((~ nose[55]) | sel[55]), ((~ nose[54]) | sel[54]), ((~ nose[53]) | sel[53]), ((~ nose[52]) | sel[52]), ((~ nose[51]) | sel[51]), ((~ nose[50]) | sel[50]), ((~ nose[49]) | sel[49]), ((~ nose[48]) | sel[48]), ((~ nose[47]) | sel[47]), ((~ nose[46]) | sel[46]), ((~ nose[45]) | sel[45]), ((~ nose[44]) | sel[44]), ((~ nose[43]) | sel[43]), ((~ nose[42]) | sel[42]), ((~ nose[41]) | sel[41]), ((~ nose[40]) | sel[40]), ((~ nose[39]) | sel[39]), ((~ nose[38]) | sel[38]), ((~ nose[37]) | sel[37]), ((~ nose[36]) | sel[36]), ((~ nose[35]) | sel[35]), ((~ nose[34]) | sel[34]), ((~ nose[33]) | sel[33]), ((~ nose[32]) | sel[32]), ((~ nose[31]) | sel[31]), ((~ nose[30]) | sel[30]), ((~ nose[29]) | sel[29]), ((~ nose[28]) | sel[28]), ((~ nose[27]) | sel[27]), ((~ nose[26]) | sel[26]), ((~ nose[25]) | sel[25]), ((~ nose[24]) | sel[24]), ((~ nose[23]) | sel[23]), ((~ nose[22]) | sel[22]), ((~ nose[21]) | sel[21]), ((~ nose[20]) | sel[20]), ((~ nose[19]) | sel[19]), ((~ nose[18]) | sel[18]), ((~ nose[17]
+) | sel[17]), ((~ nose[16]) | sel[16]), ((~ nose[15]) | sel[15]), ((~ nose[14]) | sel[14]), ((~ nose[13]) | sel[13]), ((~ nose[12]) | sel[12]), ((~ nose[11]) | sel[11]), ((~ nose[10]) | sel[10]), ((~ nose[9]) | sel[9]), ((~ nose[8]) | sel[8]), ((~ nose[7]) | sel[7]), ((~ nose[6]) | sel[6]), ((~ nose[5]) | sel[5]), ((~ nose[4]) | sel[4]), ((~ nose[3]) | sel[3]), ((~ nose[2]) | sel[2]), ((~ nose[1]) | sel[1]), ((~ nose[0]) | sel[0])},
 		StageIn = StageIn_tmp,
-		StageIn_tmp = {StageOut[783:728], DFFStage[139:112], StageOut[699:560], DFFStage[111:84], StageOut[531:392], DFFStage[83:56], StageOut[363:252], DFFStage[55:28], StageOut[223:84], DFFStage[27:0], StageOut[55:0], {28{1'b0}}},
-		StageOut = {(({StageIn[782:756], NumeratorIn[756]} & {28{selnose[783]}}) | (prestg[783:756] & {28{(~ selnose[783])}})), (({StageIn[754:728], NumeratorIn[729]} & {28{selnose[754]}}) | (prestg[755:728] & {28{(~ selnose[754])}})), (({StageIn[726:700], NumeratorIn[702]} & {28{selnose[725]}}) | (prestg[727:700] & {28{(~ selnose[725])}})), (({StageIn[698:672], NumeratorIn[675]} & {28{selnose[696]}}) | (prestg[699:672] & {28{(~ selnose[696])}})), (({StageIn[670:644], NumeratorIn[648]} & {28{selnose[667]}}) | (prestg[671:644] & {28{(~ selnose[667])}})), (({StageIn[642:616], NumeratorIn[621]} & {28{selnose[638]}}) | (prestg[643:616] & {28{(~ selnose[638])}})), (({StageIn[614:588], NumeratorIn[594]} & {28{selnose[609]}}) | (prestg[615:588] & {28{(~ selnose[609])}})), (({StageIn[586:560], NumeratorIn[567]} & {28{selnose[580]}}) | (prestg[587:560] & {28{(~ selnose[580])}})), (({StageIn[558:532], NumeratorIn[540]} & {28{selnose[551]}}) | (prestg[559:532] & {28{(~ selnose[551])}})), (({StageIn[530:504], NumeratorIn[513]} & {28{selnose[522]}}) | (prestg[531:504] & {28{(~ selnose[522])}})), (({StageIn[502:476], NumeratorIn[486]} & {28{selnose[493]}}) | (prestg[503:476] & {28{(~ selnose[493])}})), (({StageIn[474:448], NumeratorIn[459]} & {28{selnose[464]}}) | (prestg[475:448] & {28{(~ selnose[464])}})), (({StageIn[446:420], NumeratorIn[432]} & {28{selnose[435]}}) | (prestg[447:420] & {28{(~ selnose[435])}})), (({StageIn[418:392], NumeratorIn[405]} & {28{selnose[406]}}) | (prestg[419:392] & {28{(~ selnose[406])}})), (({StageIn[390:364], NumeratorIn[378]} & {28{selnose[377]}}) | (prestg[391:364] & {28{(~ selnose[377])}})), (({StageIn[362:336], NumeratorIn[351]} & {28{selnose[348]}}) | (prestg[363:336] & {28{(~ selnose[348])}})), (({StageIn[334:308], NumeratorIn[324]} & {28{selnose[319]}}) | (prestg[335:308] & {28{(~ selnose[319])}})), (({StageIn[306:280], NumeratorIn[297]} & {28{selnose[290]}}) | (prestg[307:280] & {28{(~ selnose[290])}})), (({StageIn[278:252], NumeratorIn[270]} & {28{selnose[261]}}) | (prestg[279:252] & {28{(~ selnose[261]
-)}})), (({StageIn[250:224], NumeratorIn[243]} & {28{selnose[232]}}) | (prestg[251:224] & {28{(~ selnose[232])}})), (({StageIn[222:196], NumeratorIn[216]} & {28{selnose[203]}}) | (prestg[223:196] & {28{(~ selnose[203])}})), (({StageIn[194:168], NumeratorIn[189]} & {28{selnose[174]}}) | (prestg[195:168] & {28{(~ selnose[174])}})), (({StageIn[166:140], NumeratorIn[162]} & {28{selnose[145]}}) | (prestg[167:140] & {28{(~ selnose[145])}})), (({StageIn[138:112], NumeratorIn[135]} & {28{selnose[116]}}) | (prestg[139:112] & {28{(~ selnose[116])}})), (({StageIn[110:84], NumeratorIn[108]} & {28{selnose[87]}}) | (prestg[111:84] & {28{(~ selnose[87])}})), (({StageIn[82:56], NumeratorIn[81]} & {28{selnose[58]}}) | (prestg[83:56] & {28{(~ selnose[58])}})), (({StageIn[54:28], NumeratorIn[54]} & {28{selnose[29]}}) | (prestg[55:28] & {28{(~ selnose[29])}})), (({StageIn[26:0], NumeratorIn[27]} & {28{selnose[0]}}) | (prestg[27:0] & {28{(~ selnose[0])}}))},
+		StageIn_tmp = {StageOut[728:675], DFFStage[134:108], StageOut[647:513], DFFStage[107:81], StageOut[485:378], DFFStage[80:54], StageOut[350:243], DFFStage[53:27], StageOut[215:81], DFFStage[26:0], StageOut[53:0], {27{1'b0}}},
+		StageOut = {(({StageIn[727:702], NumeratorIn[702]} & {27{selnose[728]}}) | (prestg[728:702] & {27{(~ selnose[728])}})), (({StageIn[700:675], NumeratorIn[676]} & {27{selnose[700]}}) | (prestg[701:675] & {27{(~ selnose[700])}})), (({StageIn[673:648], NumeratorIn[650]} & {27{selnose[672]}}) | (prestg[674:648] & {27{(~ selnose[672])}})), (({StageIn[646:621], NumeratorIn[624]} & {27{selnose[644]}}) | (prestg[647:621] & {27{(~ selnose[644])}})), (({StageIn[619:594], NumeratorIn[598]} & {27{selnose[616]}}) | (prestg[620:594] & {27{(~ selnose[616])}})), (({StageIn[592:567], NumeratorIn[572]} & {27{selnose[588]}}) | (prestg[593:567] & {27{(~ selnose[588])}})), (({StageIn[565:540], NumeratorIn[546]} & {27{selnose[560]}}) | (prestg[566:540] & {27{(~ selnose[560])}})), (({StageIn[538:513], NumeratorIn[520]} & {27{selnose[532]}}) | (prestg[539:513] & {27{(~ selnose[532])}})), (({StageIn[511:486], NumeratorIn[494]} & {27{selnose[504]}}) | (prestg[512:486] & {27{(~ selnose[504])}})), (({StageIn[484:459], NumeratorIn[468]} & {27{selnose[476]}}) | (prestg[485:459] & {27{(~ selnose[476])}})), (({StageIn[457:432], NumeratorIn[442]} & {27{selnose[448]}}) | (prestg[458:432] & {27{(~ selnose[448])}})), (({StageIn[430:405], NumeratorIn[416]} & {27{selnose[420]}}) | (prestg[431:405] & {27{(~ selnose[420])}})), (({StageIn[403:378], NumeratorIn[390]} & {27{selnose[392]}}) | (prestg[404:378] & {27{(~ selnose[392])}})), (({StageIn[376:351], NumeratorIn[364]} & {27{selnose[364]}}) | (prestg[377:351] & {27{(~ selnose[364])}})), (({StageIn[349:324], NumeratorIn[338]} & {27{selnose[336]}}) | (prestg[350:324] & {27{(~ selnose[336])}})), (({StageIn[322:297], NumeratorIn[312]} & {27{selnose[308]}}) | (prestg[323:297] & {27{(~ selnose[308])}})), (({StageIn[295:270], NumeratorIn[286]} & {27{selnose[280]}}) | (prestg[296:270] & {27{(~ selnose[280])}})), (({StageIn[268:243], NumeratorIn[260]} & {27{selnose[252]}}) | (prestg[269:243] & {27{(~ selnose[252])}})), (({StageIn[241:216], NumeratorIn[234]} & {27{selnose[224]}}) | (prestg[242:216] & {27{(~ selnose[224]
+)}})), (({StageIn[214:189], NumeratorIn[208]} & {27{selnose[196]}}) | (prestg[215:189] & {27{(~ selnose[196])}})), (({StageIn[187:162], NumeratorIn[182]} & {27{selnose[168]}}) | (prestg[188:162] & {27{(~ selnose[168])}})), (({StageIn[160:135], NumeratorIn[156]} & {27{selnose[140]}}) | (prestg[161:135] & {27{(~ selnose[140])}})), (({StageIn[133:108], NumeratorIn[130]} & {27{selnose[112]}}) | (prestg[134:108] & {27{(~ selnose[112])}})), (({StageIn[106:81], NumeratorIn[104]} & {27{selnose[84]}}) | (prestg[107:81] & {27{(~ selnose[84])}})), (({StageIn[79:54], NumeratorIn[78]} & {27{selnose[56]}}) | (prestg[80:54] & {27{(~ selnose[56])}})), (({StageIn[52:27], NumeratorIn[52]} & {27{selnose[28]}}) | (prestg[53:27] & {27{(~ selnose[28])}})), (({StageIn[25:0], NumeratorIn[26]} & {27{selnose[0]}}) | (prestg[26:0] & {27{(~ selnose[0])}}))},
 		vcc_wire = 1'b1;
 endmodule //div_27_alt_u_div
 
 
-//lpm_abs DEVICE_FAMILY="Cyclone V" LPM_WIDTH=28 data result
+//lpm_abs DEVICE_FAMILY="Cyclone V" LPM_WIDTH=27 data result
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_abs 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ cbx_util_mgl 2014:02:12:20:59:46:SJ  VERSION_END
 
 
-//lpm_add_sub DEVICE_FAMILY="Cyclone V" LPM_DIRECTION="ADD" LPM_WIDTH=28 cin dataa datab result
+//lpm_add_sub DEVICE_FAMILY="Cyclone V" LPM_DIRECTION="ADD" LPM_WIDTH=27 cin dataa datab result
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ  VERSION_END
 
-//synthesis_resources = lut 28 
+//synthesis_resources = lut 27 
 //synopsys translate_off
 `timescale 1 ps / 1 ps
 //synopsys translate_on
@@ -2618,49 +2529,49 @@ module  div_27_lpm_abs
 	data,
 	overflow,
 	result) /* synthesis synthesis_clearbox=1 */;
-	input   [27:0]  data;
+	input   [26:0]  data;
 	output   overflow;
-	output   [27:0]  result;
+	output   [26:0]  result;
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_off
 `endif
-	tri0   [27:0]  data;
+	tri0   [26:0]  data;
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_on
 `endif
 
-	wire	[28:0]	wire_adder_result_int;
+	wire	[27:0]	wire_adder_result_int;
 	wire	wire_adder_cin;
-	wire	[27:0]	wire_adder_dataa;
-	wire	[27:0]	wire_adder_datab;
-	wire	[27:0]	wire_adder_result;
+	wire	[26:0]	wire_adder_dataa;
+	wire	[26:0]	wire_adder_datab;
+	wire	[26:0]	wire_adder_result;
 	wire  gnd_wire;
-	wire  [27:0]  result_tmp;
+	wire  [26:0]  result_tmp;
 
 	assign
 		wire_adder_result_int = {wire_adder_dataa, wire_adder_cin} + {wire_adder_datab, wire_adder_cin};
 	assign
-		wire_adder_result = wire_adder_result_int[28:1];
+		wire_adder_result = wire_adder_result_int[27:1];
 	assign
-		wire_adder_cin = data[27],
-		wire_adder_dataa = (data ^ {28{data[27]}}),
-		wire_adder_datab = {28{gnd_wire}};
+		wire_adder_cin = data[26],
+		wire_adder_dataa = (data ^ {27{data[26]}}),
+		wire_adder_datab = {27{gnd_wire}};
 	assign
 		gnd_wire = 1'b0,
-		overflow = (result_tmp[27] & data[27]),
+		overflow = (result_tmp[26] & data[26]),
 		result = result_tmp,
 		result_tmp = wire_adder_result;
 endmodule //div_27_lpm_abs
 
 
-//lpm_add_sub DEVICE_FAMILY="Cyclone V" LPM_DIRECTION="ADD" LPM_REPRESENTATION="UNSIGNED" LPM_WIDTH=28 cin dataa datab result
+//lpm_add_sub DEVICE_FAMILY="Cyclone V" LPM_DIRECTION="ADD" LPM_REPRESENTATION="UNSIGNED" LPM_WIDTH=27 cin dataa datab result
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ  VERSION_END
 
 
-//lpm_add_sub DEVICE_FAMILY="Cyclone V" LPM_DIRECTION="ADD" LPM_REPRESENTATION="UNSIGNED" LPM_WIDTH=28 cin dataa datab result
+//lpm_add_sub DEVICE_FAMILY="Cyclone V" LPM_DIRECTION="ADD" LPM_REPRESENTATION="UNSIGNED" LPM_WIDTH=27 cin dataa datab result
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ  VERSION_END
 
-//synthesis_resources = lut 546 reg 570 
+//synthesis_resources = lut 513 reg 550 
 //synopsys translate_off
 `timescale 1 ps / 1 ps
 //synopsys translate_on
@@ -2674,10 +2585,10 @@ module  div_27_abs_divider
 	remainder) /* synthesis synthesis_clearbox=1 */;
 	input   clk_en;
 	input   clock;
-	input   [27:0]  denominator;
-	input   [27:0]  numerator;
-	output   [27:0]  quotient;
-	output   [27:0]  remainder;
+	input   [26:0]  denominator;
+	input   [26:0]  numerator;
+	output   [26:0]  quotient;
+	output   [26:0]  remainder;
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_off
 `endif
@@ -2687,35 +2598,35 @@ module  div_27_abs_divider
 // synopsys translate_on
 `endif
 
-	wire  [27:0]   wire_divider_quotient;
-	wire  [27:0]   wire_divider_remainder;
+	wire  [26:0]   wire_divider_quotient;
+	wire  [26:0]   wire_divider_remainder;
 	(* ALTERA_ATTRIBUTE = {"POWER_UP_LEVEL=HIGH"} *)
 	reg	[4:0]	DFF_diff_signs;
 	reg	[4:0]	DFF_num_sign;
 	wire  wire_my_abs_den_overflow;
-	wire  [27:0]   wire_my_abs_den_result;
-	wire  [27:0]   wire_my_abs_num_result;
-	wire	[28:0]	wire_compl_add_quot_result_int;
+	wire  [26:0]   wire_my_abs_den_result;
+	wire  [26:0]   wire_my_abs_num_result;
+	wire	[27:0]	wire_compl_add_quot_result_int;
 	wire	wire_compl_add_quot_cin;
-	wire	[27:0]	wire_compl_add_quot_dataa;
-	wire	[27:0]	wire_compl_add_quot_datab;
-	wire	[27:0]	wire_compl_add_quot_result;
-	wire	[28:0]	wire_compl_add_rem_result_int;
+	wire	[26:0]	wire_compl_add_quot_dataa;
+	wire	[26:0]	wire_compl_add_quot_datab;
+	wire	[26:0]	wire_compl_add_quot_result;
+	wire	[27:0]	wire_compl_add_rem_result_int;
 	wire	wire_compl_add_rem_cin;
-	wire	[27:0]	wire_compl_add_rem_dataa;
-	wire	[27:0]	wire_compl_add_rem_datab;
-	wire	[27:0]	wire_compl_add_rem_result;
+	wire	[26:0]	wire_compl_add_rem_dataa;
+	wire	[26:0]	wire_compl_add_rem_datab;
+	wire	[26:0]	wire_compl_add_rem_result;
 	wire aclr;
 	wire  dff_num_sign_q_out;
 	wire  diff_signs;
 	wire  gnd_wire;
-	wire  [27:0]  neg_quot;
-	wire  [27:0]  neg_rem;
-	wire  [27:0]  norm_den;
-	wire  [27:0]  norm_num;
+	wire  [26:0]  neg_quot;
+	wire  [26:0]  neg_rem;
+	wire  [26:0]  norm_den;
+	wire  [26:0]  norm_num;
 	wire  num_sign;
-	wire  [27:0]  protect_quotient;
-	wire  [27:0]  protect_remainder;
+	wire  [26:0]  protect_quotient;
+	wire  [26:0]  protect_remainder;
 	wire  vcc_wire;
 
 	div_27_alt_u_div   divider
@@ -2752,37 +2663,37 @@ module  div_27_abs_divider
 	assign
 		wire_compl_add_quot_result_int = {wire_compl_add_quot_dataa, wire_compl_add_quot_cin} + {wire_compl_add_quot_datab, wire_compl_add_quot_cin};
 	assign
-		wire_compl_add_quot_result = wire_compl_add_quot_result_int[28:1];
+		wire_compl_add_quot_result = wire_compl_add_quot_result_int[27:1];
 	assign
 		wire_compl_add_quot_cin = vcc_wire,
 		wire_compl_add_quot_dataa = (~ protect_quotient),
-		wire_compl_add_quot_datab = {28{gnd_wire}};
+		wire_compl_add_quot_datab = {27{gnd_wire}};
 	assign
 		wire_compl_add_rem_result_int = {wire_compl_add_rem_dataa, wire_compl_add_rem_cin} + {wire_compl_add_rem_datab, wire_compl_add_rem_cin};
 	assign
-		wire_compl_add_rem_result = wire_compl_add_rem_result_int[28:1];
+		wire_compl_add_rem_result = wire_compl_add_rem_result_int[27:1];
 	assign
 		wire_compl_add_rem_cin = vcc_wire,
 		wire_compl_add_rem_dataa = (~ protect_remainder),
-		wire_compl_add_rem_datab = {28{gnd_wire}};
+		wire_compl_add_rem_datab = {27{gnd_wire}};
 	assign
 		aclr = 1'b0,
 		dff_num_sign_q_out = DFF_num_sign[0],
-		diff_signs = (numerator[27] ^ denominator[27]),
+		diff_signs = (numerator[26] ^ denominator[26]),
 		gnd_wire = 1'b0,
 		neg_quot = wire_compl_add_quot_result,
 		neg_rem = wire_compl_add_rem_result,
 		norm_den = wire_my_abs_den_result,
 		norm_num = wire_my_abs_num_result,
-		num_sign = numerator[27],
+		num_sign = numerator[26],
 		protect_quotient = wire_divider_quotient,
 		protect_remainder = wire_divider_remainder,
-		quotient = ((protect_quotient & {28{(~ DFF_diff_signs[0])}}) | (neg_quot & {28{DFF_diff_signs[0]}})),
-		remainder = ((protect_remainder & {28{(~ dff_num_sign_q_out)}}) | (neg_rem & {28{dff_num_sign_q_out}})),
+		quotient = ((protect_quotient & {27{(~ DFF_diff_signs[0])}}) | (neg_quot & {27{DFF_diff_signs[0]}})),
+		remainder = ((protect_remainder & {27{(~ dff_num_sign_q_out)}}) | (neg_rem & {27{dff_num_sign_q_out}})),
 		vcc_wire = 1'b1;
 endmodule //div_27_abs_divider
 
-//synthesis_resources = lut 546 reg 570 
+//synthesis_resources = lut 513 reg 550 
 //synopsys translate_off
 `timescale 1 ps / 1 ps
 //synopsys translate_on
@@ -2796,10 +2707,10 @@ module  div_27_lpm_divide
 	remain) /* synthesis synthesis_clearbox=1 */;
 	input   clken;
 	input   clock;
-	input   [27:0]  denom;
+	input   [26:0]  denom;
 	input   [26:0]  numer;
 	output   [26:0]  quotient;
-	output   [27:0]  remain;
+	output   [26:0]  remain;
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_off
 `endif
@@ -2809,10 +2720,9 @@ module  div_27_lpm_divide
 // synopsys translate_on
 `endif
 
-	wire  [27:0]   wire_divider_quotient;
-	wire  [27:0]   wire_divider_remainder;
-	wire  [0:0]  num_padder;
-	wire  [27:0]  numer_tmp;
+	wire  [26:0]   wire_divider_quotient;
+	wire  [26:0]   wire_divider_remainder;
+	wire  [26:0]  numer_tmp;
 
 	div_27_abs_divider   divider
 	( 
@@ -2823,9 +2733,8 @@ module  div_27_lpm_divide
 	.quotient(wire_divider_quotient),
 	.remainder(wire_divider_remainder));
 	assign
-		num_padder = {numer[26]},
-		numer_tmp = {num_padder, numer},
-		quotient = wire_divider_quotient[26:0],
+		numer_tmp = numer,
+		quotient = wire_divider_quotient,
 		remain = wire_divider_remainder;
 endmodule //div_27_lpm_divide
 //VALID FILE
@@ -2844,14 +2753,14 @@ module div_27 (
 
 	input	  clken;
 	input	  clock;
-	input	[27:0]  denom;
+	input	[26:0]  denom;
 	input	[26:0]  numer;
 	output	[26:0]  quotient;
-	output	[27:0]  remain;
+	output	[26:0]  remain;
 
-	wire [27:0] sub_wire0;
+	wire [26:0] sub_wire0;
 	wire [26:0] sub_wire1;
-	wire [27:0] remain = sub_wire0[27:0];
+	wire [26:0] remain = sub_wire0[26:0];
 	wire [26:0] quotient = sub_wire1[26:0];
 
 	div_27_lpm_divide	div_27_lpm_divide_component (
@@ -2880,20 +2789,20 @@ endmodule
 // Retrieval info: CONSTANT: LPM_NREPRESENTATION STRING "SIGNED"
 // Retrieval info: CONSTANT: LPM_PIPELINE NUMERIC "5"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_DIVIDE"
-// Retrieval info: CONSTANT: LPM_WIDTHD NUMERIC "28"
+// Retrieval info: CONSTANT: LPM_WIDTHD NUMERIC "27"
 // Retrieval info: CONSTANT: LPM_WIDTHN NUMERIC "27"
 // Retrieval info: USED_PORT: clken 0 0 0 0 INPUT NODEFVAL "clken"
 // Retrieval info: USED_PORT: clock 0 0 0 0 INPUT NODEFVAL "clock"
-// Retrieval info: USED_PORT: denom 0 0 28 0 INPUT NODEFVAL "denom[27..0]"
+// Retrieval info: USED_PORT: denom 0 0 27 0 INPUT NODEFVAL "denom[26..0]"
 // Retrieval info: USED_PORT: numer 0 0 27 0 INPUT NODEFVAL "numer[26..0]"
 // Retrieval info: USED_PORT: quotient 0 0 27 0 OUTPUT NODEFVAL "quotient[26..0]"
-// Retrieval info: USED_PORT: remain 0 0 28 0 OUTPUT NODEFVAL "remain[27..0]"
+// Retrieval info: USED_PORT: remain 0 0 27 0 OUTPUT NODEFVAL "remain[26..0]"
 // Retrieval info: CONNECT: @clken 0 0 0 0 clken 0 0 0 0
 // Retrieval info: CONNECT: @clock 0 0 0 0 clock 0 0 0 0
-// Retrieval info: CONNECT: @denom 0 0 28 0 denom 0 0 28 0
+// Retrieval info: CONNECT: @denom 0 0 27 0 denom 0 0 27 0
 // Retrieval info: CONNECT: @numer 0 0 27 0 numer 0 0 27 0
 // Retrieval info: CONNECT: quotient 0 0 27 0 @quotient 0 0 27 0
-// Retrieval info: CONNECT: remain 0 0 28 0 @remain 0 0 28 0
+// Retrieval info: CONNECT: remain 0 0 27 0 @remain 0 0 27 0
 // Retrieval info: GEN_FILE: TYPE_NORMAL div_27.v TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL div_27.inc TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL div_27.cmp TRUE
