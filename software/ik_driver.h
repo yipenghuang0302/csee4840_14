@@ -7,17 +7,32 @@
 //How many joints we have
 #define MAX_JOINT 6
 
+//Except for joint_type, all values will be stored
+//in 32 bit (4 byte) registers 
+#define REG_SIZE 4
+
+//Memory offset where we start to store dh-params
+#define PARAM_OFFSET 16
+
+//All dh-params for a single joint take up 16 bytes
+#define JOINT_OFFSET 16
+
 //PI
 #define M_PI 3.14159265358979323846264338327
 
 //Our fractional precision in our fixed-point representation
-#define PRECISION 20
+#define PRECISION 8 
+
+//Max and min values for any coordinates in our system
+#define MAX_COORD 64
+#define MIN_COORD -64
 
 /* DH Parameters */
-#define THETA 0
-#define L_OFFSET 1
-#define L_DISTANCE 2
-#define ALPHA 3
+#define THETA 0				//theta_i
+#define L_OFFSET 1		//d_i
+#define L_Length 2		//a_i
+#define ALPHA 3				//alpha_i
+#define NUM_PARAMS 4
 
 typedef struct {
 	unsigned char joint; /* Indicate which joint we're getting/setting; -1 indicates that we're setting the target */

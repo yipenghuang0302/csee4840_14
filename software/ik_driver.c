@@ -40,7 +40,7 @@ struct joint_dev {
 	void __iomem *virtbase; /* Where registers can be accessed in memory */
 	u8 joint_type; // ith bit is 1 if joint is rotational; 0 for translational
 	u32 target[3]; // Target position
-	u32 dh_params[JOINT_DOF * 4] // Every joint has 4 parameters 
+	u32 dh_params[JOINT_DOF * NUM_PARAMS] // Every joint has 4 parameters 
 } dev;
 
 
@@ -49,7 +49,7 @@ struct joint_dev {
  */
 
 static u32 float_to_fixed(float num){
-	char *strnum = (char *)malloc(sizeof(char) * 100);
+	char *strnum = (char *)malloc(sizeof(char) * 100);//Arbitrarily sized to 100
 	int neg = 0;
 	sprintf(strnum, "%f", num);
 	if (*strnum == '-')
@@ -75,12 +75,13 @@ static u32 float_to_fixed(float num){
 static void write_target(float target[3], u8 joint_t)
 {
 	u32 curtarget;
-	for (int i = 0; i < 3; i++){
+
+	iowrite8(joint_t, dev.virtbase);
+	for (int i = 1; i < 4; i++){
 		curtarget = float_to_fixed(target[i]);
-		iowrite32(curtarget, dev.virtbase+i*4);
+		iowrite32(curtarget, dev.virtbase+i*REG_SIZE);
 		dev.target[i] = curtarget;
 	}
-	iowrite8(joint_t, dev.virtbase+12);
 	dev.joint_type = joint_t;
 }
 
@@ -90,8 +91,8 @@ static void write_target(float target[3], u8 joint_t)
  */
 static void write_parameter(u8 joint, u8 parameter, float magnitude){
 	u32 mag = float_to_fixed(magnitude);
-	iowrite32(mag, dev.virtbase+13+(8 * joint-1)+(parameter*4));
-	dev.dh_params[(joint-1) * 4 + parameter] = mag;
+	iowrite32(mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint-1)+(parameter*REG_SIZE));
+	dev.dh_params[(joint-1) * NUM_PARAMS + parameter] = mag;
 }
 
 /*
@@ -111,9 +112,9 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		//Distributed checks over a bunch of if statements to avoid one huge conditional
 		if (vla.joint < -2 || vla.joint > MAX_JOINT) 
 			return -EINVAL;
-		if (vla.joint == -1 && ((vla.target[0] < -64 || vla.target[0] > 64) ||
-												   (vla.target[1] < -64 || vla.target[1] > 64) ||
-													 (vla.target[2] < -64 || vla.target[2] > 64)))
+		if (vla.joint == -1 && ((vla.target[0] < MIN_COORD || vla.target[0] > MAX_COORD) ||
+												   (vla.target[1] < MIN_COORD || vla.target[1] > MAX_COORD) ||
+													 (vla.target[2] < MIN_COORD || vla.target[2] > MAX_COORD)))
 			return -EINVAL;
 		if (vla.joint != -1 && vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_DISTANCE)
 			return -EINVAL;
