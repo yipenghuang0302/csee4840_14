@@ -1,0 +1,11 @@
+#ifndef __CONFIG_H_
+#define __CONFIG_H_
+
+#define _DEBUG
+#define SIGSLOT_PURE_ISO
+//#define DEBUGOUTPUTFORLEXER
+#define DEBUGOUTPUTFORXML
+#define JACOBIANDEBUGOUTPUT
+#define CCDDEBUGOUTPUT
+
+#endif
