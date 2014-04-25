@@ -17,8 +17,6 @@
 //All dh-params for a single joint take up 16 bytes
 #define JOINT_OFFSET 16
 
-//PI
-#define M_PI 3.14159265358979323846264338327
 
 //Our fractional precision in our fixed-point representation
 #define PRECISION 8 
@@ -36,10 +34,10 @@
 
 typedef struct {
 	unsigned char joint; /* Indicate which joint we're getting/setting; -1 indicates that we're setting the target */
-	unsigned float target[3]; /* (x,y,z) coordinates of target position */
 	unsigned char joint_type; /* The ith bit is 1 if ith joint is rotational; translational otherwise */
 	unsigned char parameter; /* Which DH param we're getting/setting */
-	unsigned float magnitude; 
+	float target[3]; /* (x,y,z) coordinates of target position */
+	float magnitude; 
 } ik_driver_arg_t;
 
 /* ioctls and their arguments */

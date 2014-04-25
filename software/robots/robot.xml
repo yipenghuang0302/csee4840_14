@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Robot name="KUKA robot KR5">
+  <Joints>
+  <joint name="joint1" id="1" alphai="90" ai="18" di="40" theta="var_0" />
+  <joint name="joint2" id="2" alphai="180" ai="60" di="13.5" theta="var_0" />
+  <joint name="joint3" id="3" alphai="-90" ai="12" di="13.5" theta="var_0" />
+  <joint name="joint4" id="4" alphai="90" ai="0" di="62" theta="var_0" />
+  <joint name="joint5" id="5" alphai="-90" ai="0" di="0" theta="var_0" />
+  <joint name="joint6" id="6" alphai="0" ai="0" di="0" theta="var_0" />
+  </Joints>
+</Robot>
+
