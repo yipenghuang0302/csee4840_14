@@ -7,13 +7,9 @@
 `include "array_div.sv"
 `include "bench.sv"
 
-`include "../mult_27/mult_27.v"
+`include "div_27/div_27.v"
 
-`include "../sim_models/lpm_mult.v"
-`include "../sim_models/mult_block.v"
-`include "../sim_models/addsub_block.v"
-`include "../sim_models/pipeline_internal_fv.v"
-`include "../sim_models/dffep.v"
+`include "../../sim_models/220model.v"
 
 module array_div_top ();
 
