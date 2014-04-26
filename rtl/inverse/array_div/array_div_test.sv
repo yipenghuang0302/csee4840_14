@@ -3,8 +3,8 @@ class array_div_test;
 
 	int n = 5;
 	int pipeline_depth = 6;
-	real model_numer[6][5];
-	real model_denom[6];
+	real model_dividends[6][5];
+	real model_divisor[6];
 	real model_result[6][5];
 
 	function real abs (real num); 
@@ -12,21 +12,21 @@ class array_div_test;
 	endfunction
 
 	function void update_array_div (
-		real numer[5],
-		real denom
+		real dividends[5],
+		real divisor
 	);
 
 		for ( int i=0 ; i<pipeline_depth-1 ; i++ ) begin // advance the pipeline
-			model_numer[i] = model_numer[i+1];
-			model_denom[i] = model_denom[i+1];
+			model_dividends[i] = model_dividends[i+1];
+			model_divisor[i] = model_divisor[i+1];
 			model_result[i] = model_result[i+1];
 		end
 
-		model_denom[pipeline_depth-1] = denom;
+		model_divisor[pipeline_depth-1] = divisor;
 
 		for (int i=0; i<n; i++) begin // product row
-			model_numer[pipeline_depth-1][i] = numer[i];
-			model_result[pipeline_depth-1][i] = numer[i] / denom;
+			model_dividends[pipeline_depth-1][i] = dividends[i];
+			model_result[pipeline_depth-1][i] = dividends[i] / divisor;
 		end
 
 	endfunction
@@ -48,8 +48,8 @@ class array_div_test;
 			percent[i] = abs( error[i] / model_result[0][i] );
 			if ( error[i]>abs_tol && percent[i]>rel_tol ) begin
 				$write("%t : fail array_div i=%d\n", $realtime, i);
-				$write("model_numer=%f.\n", model_numer[0][i],);
-				$write("model_denom=%f.\n", model_denom[0],);
+				$write("model_dividends=%f.\n", model_dividends[0][i],);
+				$write("model_divisor=%f.\n", model_divisor[0],);
 				$write("model_result=%f; dut_result=%f; error=%f.\n", model_result[0][i], real_result[i], error[i]);
 				$write("model_result=%f; dut_result=%f; percent=%f.\n", model_result[0][i], real_result[i], percent[i]);
 				passed = 1'b0;

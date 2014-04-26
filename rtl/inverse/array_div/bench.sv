@@ -2,12 +2,12 @@
 `include "array_div_test.sv"
 
 class array_div_transaction;
-	rand logic [5][30:0] increment_numer;
-	rand logic [30:0] increment_denom;
-	real fraction_numer[5];
-	real fraction_denom;
-	real numer[5];
-	real denom;
+	rand logic [5][30:0] increment_dividends;
+	rand logic [30:0] increment_divisor;
+	real fraction_dividends[5];
+	real fraction_divisor;
+	real dividends[5];
+	real divisor;
 endclass
 
 class array_div_env;
@@ -28,16 +28,16 @@ program array_div_tb (ifc_array_div.array_div_tb ds);
 
 		//wrap input numbers to -64 ~ 64
 		for (int i=0; i<n; i++) begin // product row
-			trans.fraction_numer[i] = real'(trans.increment_numer[i]) / 2147483648.0;
-			trans.fraction_denom = real'(trans.increment_denom) / 2147483648.0;
-			trans.numer[i] = -512.0 + trans.fraction_numer[i] * 2 * 512.0;
-			trans.denom = -512.0 + trans.fraction_denom * 2 * 512.0;
+			trans.fraction_dividends[i] = real'(trans.increment_dividends[i]) / 2147483648.0;
+			trans.fraction_divisor = real'(trans.increment_divisor) / 2147483648.0;
+			trans.dividends[i] = -512.0 + trans.fraction_dividends[i] * 2 * 512.0;
+			trans.divisor = -512.0 + trans.fraction_divisor * 2 * 512.0;
 			// $display("i=%d", i);
-			// $display("fraction_numer = %f, numer = %f", trans.fraction_numer[i], trans.numer[i]);
-			// $display("fraction_denom = %f, denom = %f", trans.fraction_denom, trans.denom);
+			// $display("fraction_dividends = %f, dividends = %f", trans.fraction_dividends[i], trans.dividends[i]);
+			// $display("fraction_divisor = %f, divisor = %f", trans.fraction_divisor, trans.divisor);
 			// passing data to design under test happens here
-			ds.cb.numer[i] <= int'(trans.numer[i] * 256.0);
-			ds.cb.denom <= int'(trans.denom * 256.0);
+			ds.cb.dividends[i] <= int'(trans.dividends[i] * 256.0);
+			ds.cb.divisor <= int'(trans.divisor * 256.0);
 		end
 
 		ds.cb.en <= 1'b1;
@@ -45,7 +45,7 @@ program array_div_tb (ifc_array_div.array_div_tb ds);
 
 		@(ds.cb);
 		test.update_array_div (
-			trans.numer, trans.denom
+			trans.dividends, trans.divisor
 		);
 
 	endtask
@@ -63,7 +63,7 @@ program array_div_tb (ifc_array_div.array_div_tb ds);
 		repeat (env.max_transactions) begin
 			do_cycle();
 			test.check_array_div (
-				ds.cb.quotient
+				ds.cb.quotients
 			);
 		end
 	end

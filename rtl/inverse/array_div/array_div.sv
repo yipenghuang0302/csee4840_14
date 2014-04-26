@@ -17,9 +17,9 @@ module array_div (
 			div_27	div_27_inst (
 				.clken( i.en ),
 				.clock( i.clk ),
-				.denom ( i.denom ),
-				.numer ( {i.numer[index][18:0],8'b0} ),
-				.quotient ( i.quotient[index] ),
+				.denom ( i.divisor ),
+				.numer ( {i.dividends[index][18:0],8'b0} ),
+				.quotient ( i.quotients[index] ),
 				.remain ( remain[index] )
 				);
 			// always_ff @(posedge i.clk) begin

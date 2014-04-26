@@ -10,17 +10,17 @@ interface ifc_array_div (
 parameter n = 5;
 
 logic en, rst;
-logic [n-1:0] [26:0] numer;
-logic [26:0] denom;
-logic [n-1:0] [26:0] quotient;
+logic [n-1:0] [26:0] dividends;
+logic [26:0] divisor;
+logic [n-1:0] [26:0] quotients;
 
 clocking cb @(posedge clk);
 	output en;
 	output rst;
-	output numer;
-	output denom;
+	output dividends;
+	output divisor;
 
-	input quotient;
+	input quotients;
 endclocking
 
 modport array_div_tb (clocking cb);
@@ -31,10 +31,10 @@ modport array_div (
 	input en,
 	input rst,
 
-	input numer,
-	input denom,
+	input dividends,
+	input divisor,
 
-	output quotient
+	output quotients
 );
 
 endinterface
