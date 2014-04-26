@@ -18,7 +18,7 @@ module array_div (
 				.clken( i.en ),
 				.clock( i.clk ),
 				.denom ( i.denom ),
-				.numer ( i.numer[index] ),
+				.numer ( {i.numer[index][18:0],8'b0} ),
 				.quotient ( i.quotient[index] ),
 				.remain ( remain[index] )
 				);

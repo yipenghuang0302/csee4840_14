@@ -32,9 +32,9 @@ program array_div_tb (ifc_array_div.array_div_tb ds);
 			trans.fraction_denom = real'(trans.increment_denom) / 2147483648.0;
 			trans.numer[i] = -512.0 + trans.fraction_numer[i] * 2 * 512.0;
 			trans.denom = -512.0 + trans.fraction_denom * 2 * 512.0;
-			$display("i=%d", i);
-			$display("fraction_numer = %f, numer = %f", trans.fraction_numer[i], trans.numer[i]);
-			$display("fraction_denom = %f, denom = %f", trans.fraction_denom, trans.denom);
+			// $display("i=%d", i);
+			// $display("fraction_numer = %f, numer = %f", trans.fraction_numer[i], trans.numer[i]);
+			// $display("fraction_denom = %f, denom = %f", trans.fraction_denom, trans.denom);
 			// passing data to design under test happens here
 			ds.cb.numer[i] <= int'(trans.numer[i] * 256.0);
 			ds.cb.denom <= int'(trans.denom * 256.0);
