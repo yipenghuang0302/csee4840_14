@@ -1,0 +1,71 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2014 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 0 0 208 136)
+	(text "sqrt_27" (rect 83 0 136 16)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 121 25 132)(font "Arial" ))
+	(port
+		(pt 0 48)
+		(input)
+		(text "radical[26..0]" (rect 0 0 71 13)(font "Arial" (font_size 8)))
+		(text "radical[26..0]" (rect 4 35 64 47)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 72 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "clk" (rect 0 0 17 13)(font "Arial" (font_size 8)))
+		(text "clk" (rect 4 51 16 63)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 72 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "ena" (rect 0 0 21 13)(font "Arial" (font_size 8)))
+		(text "ena" (rect 4 67 21 79)(font "Arial" (font_size 8)))
+		(line (pt 0 80)(pt 72 80))
+	)
+	(port
+		(pt 208 48)
+		(output)
+		(text "q[13..0]" (rect 0 0 42 13)(font "Arial" (font_size 8)))
+		(text "q[13..0]" (rect 169 35 204 47)(font "Arial" (font_size 8)))
+		(line (pt 208 48)(pt 120 48)(line_width 3))
+	)
+	(port
+		(pt 208 64)
+		(output)
+		(text "remainder[14..0]" (rect 0 0 92 13)(font "Arial" (font_size 8)))
+		(text "remainder[14..0]" (rect 127 51 205 63)(font "Arial" (font_size 8)))
+		(line (pt 208 64)(pt 120 64)(line_width 3))
+	)
+	(drawing
+		(line (pt 0 0)(pt 210 0))
+		(line (pt 210 0)(pt 210 138))
+		(line (pt 0 138)(pt 210 138))
+		(line (pt 0 0)(pt 0 138))
+		(line (pt 72 32)(pt 120 32))
+		(line (pt 120 32)(pt 120 120))
+		(line (pt 72 120)(pt 120 120))
+		(line (pt 72 32)(pt 72 120))
+	)
+)

@@ -6,31 +6,31 @@ except for joint_type which only requires 8 bits (the other 24 bits are unused).
 
 
 
-(8) joint_type; (24) <empty>;
-(32) target[0]
-(32) target[1]
-(32) target[2]
-(32) theta_1
-(32) d_1
-(32) a_1
-(32) alpha_1
-(32) theta_2
-(32) d_2
-(32) a_2
-(32) alpha_2
-(32) theta_3
-(32) d_3
-(32) a_3
-(32) alpha_3
-(32) theta_4
-(32) d_4
-(32) a_4
-(32) alpha_4
-(32) theta_5
-(32) d_5
-(32) a_5
-(32) alpha_5
-(32) theta_6
-(32) d_6
-(32) a_6
-(32) alpha_6
+00 (8) joint_type; (24) <empty>;
+01 (32) target[0]
+02 (32) target[1]
+03 (32) target[2]
+04 (32) theta_1
+05 (32) d_1
+06 (32) a_1
+07 (32) alpha_1
+08 (32) theta_2
+09 (32) d_2
+10 (32) a_2
+11 (32) alpha_2
+12 (32) theta_3
+13 (32) d_3
+14 (32) a_3
+15 (32) alpha_3
+16 (32) theta_4
+17 (32) d_4
+18 (32) a_4
+19 (32) alpha_4
+20 (32) theta_5
+21 (32) d_5
+22 (32) a_5
+23 (32) alpha_5
+24 (32) theta_6
+25 (32) d_6
+26 (32) a_6
+27 (32) alpha_6
