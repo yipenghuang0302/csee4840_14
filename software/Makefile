@@ -1,4 +1,5 @@
 CC=g++
+LFLAGS=-lGL -lGLU -lglut
 CFLAGS=-c -Wall -Wextra -I /proj/castl/home/yipeng/kirillv/eigen/Eigen/ -pg
 # -I /usr/include/eigen3/Eigen
 LDFLAGS=-Wall -Wextra -pg
@@ -6,8 +7,11 @@ SOURCES=xml_help/pugixml.cpp lexer.cpp CConfigLoader.cpp  testApp.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=testApp
 
-all: $(SOURCES) $(EXECUTABLE)
+all: $(SOURCES) $(EXECUTABLE) robot_arm
 
+robot_arm: robot_arm.cpp 
+	$(CC)  -w  robot_arm.cpp -o $@ $(LFLAGS)
+	
 $(EXECUTABLE): $(OBJECTS) 
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
@@ -15,4 +19,4 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm *.o testApp
+	rm *.o testApp robot_arm
