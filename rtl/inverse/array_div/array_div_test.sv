@@ -2,10 +2,10 @@
 class array_div_test;
 
 	int n = 5;
-	int pipeline_depth = 6;
-	real model_dividends[6][5];
-	real model_divisor[6];
-	real model_result[6][5];
+	int pipeline_depth = 11;
+	real model_dividends[11][5];
+	real model_divisor[11];
+	real model_result[11][5];
 
 	function real abs (real num); 
 	   abs = (num<0) ? -num : num; 

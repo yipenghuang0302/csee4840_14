@@ -22,12 +22,7 @@ module array_div (
 				.quotient ( i.quotients[index] ),
 				.remain ( remain[index] )
 				);
-			// always_ff @(posedge i.clk) begin
-			// 	mult_round[index] <= mult_result[index][7] ? mult_result[index][34:8] + 1'b1 : mult_result[index][34:8];
-			// end
 		end
 	endgenerate
-
-	// assign i.result = mult_round;
 
 endmodule
