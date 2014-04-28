@@ -1,0 +1,87 @@
+1). div
+i11 = 1/L11					after 1
+i22 = 1/L22					after 4
+i33 = 1/L33					after 7
+i44 = 1/L44					after 10
+i55 = 1/L55					after 13
+i66 = 1/L66					after 15
+
+2). mult / add (assume all i's start at 0)
+i21 = i11*-L21+i21				after 2
+i32 = i22*-L32+i32				after 5
+i43 = i33*-L43+i43				after 8
+i54 = i44*-L54+i54				after 11
+i65 = i55*-L65+i65				after 14
+
+i31 = i11*-L31+i31				after 2
+i42 = i22*-L42+i42				after 5
+i53 = i33*-L53+i53				after 8
+i64 = i44*-L64+i64				after 11
+
+i41 = i11*-L41+i41				after 2
+i52 = i22*-L52+i52				after 5
+i63 = i33*-L63+i63				after 8
+
+i51 = i11*-L51+i51				after 2
+i62 = i22*-L62+i62				after 5
+	
+i61 = i11*-L61+i61				after 2
+
+3). div
+i21 = i21/L22					after 4
+i32 = i32/L33 					after 7
+i43 = i43/L44					after 10
+i54 = i54/L55					after 13
+i65 = i65/L66					after 15
+
+4). mult / add
+i31 = i21*-L32 + i31				after 5
+i42 = i32*-L43 + i42				after 8
+i53 = i43*-L54 + i53				after 11
+i64 = i54*-L65 + i64				after 14
+
+i41 = i21*-L42 + i41				after 5
+i52 = i32*-L53 + i52				after 8
+i63 = i43*-L64 + i63				after 11
+
+i51 = i21*-L52 + i51				after 5
+i62 = i32*-L63 + i62				after 8
+
+i61 = i21*-L62 + i61				after 5
+
+5). div
+i31 = i31/L33					after 7
+i42 = i42/L44					after 10
+i53 = i53/L55					after 13
+i64 = i64/L66					after 15
+
+6). mult / add
+i41 = i31*-L43 + i41				after 8
+i52 = i42*-L54 + i52				after 11
+i63 = i53*-L65 + i63				after 14
+
+i51 = i31*-L53 + i51				after 8
+i62 = i42*-L64 + i62				after 11
+
+i61 = i31*-L63 + i61				after 8
+
+7). div
+i41 = i41/L44					after 10
+i52 = i52/L55					after 13
+i63 = i63/L66					after 15
+
+8). mult / add
+i51 = i41*-L54 + i51				after 11
+i62 = i52*-L65 + i62				after 14
+
+i61 = i41*-L64 + i61				after 11
+
+9). div
+i51 = i51/L55					after 13
+i62 = i62/L66					after 15
+
+10). mult  / add 	
+i61 = i51*-L65 + i61				after 14
+
+11). div
+i61 = i61/L66					after 15
