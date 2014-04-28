@@ -21,21 +21,13 @@ module cholesky (
 
 	sqrt_27 sqrt(clk, sqrt_ena, radical, q, remainder);
 
-	always_ff @(posedge i.clk) begin
-		if(step==0)begin
-			i.lt <= i.matrix;
-		end
-		else begin
-			i.lt <= i.lt;
-		end
-	end
 
     always_ff @(posedge i.clk)begin
         if(step == 0)
             old <= 0;
             add_counter <= 0;
-        else if(old != row_counter)begin
-            old <= row_counter;
+        else if(old != step)begin
+            old <= step;
             add_counter <= 0;
         end else begin
             old <= old;
@@ -111,92 +103,92 @@ module cholesky (
 
 	always_ff @(posedge i.clk) begin
 		if(step==4'd3)begin
- 			i.mat_mult_dataa[1][1] <= i.lt[1][0]
-			i.mat_mult_dataa[1][2] <= i.lt[1][0]
-			i.mat_mult_dataa[1][3] <= i.lt[1][0]
-			i.mat_mult_dataa[1][4] <= i.lt[1][0]
-			i.mat_mult_dataa[1][5] <= i.lt[1][0]
-			i.mat_mult_dataa[2][2] <= i.lt[2][0]
-			i.mat_mult_dataa[2][3] <= i.lt[2][0]
-			i.mat_mult_dataa[2][4] <= i.lt[2][0]
-			i.mat_mult_dataa[2][5] <= i.lt[2][0]
-			i.mat_mult_dataa[3][3] <= i.lt[3][0]
-			i.mat_mult_dataa[3][4] <= i.lt[3][0]
-			i.mat_mult_dataa[3][5] <= i.lt[3][0]
-			i.mat_mult_dataa[4][4] <= i.lt[4][0]
-			i.mat_mult_dataa[4][5] <= i.lt[4][0]
-			i.mat_mult_dataa[5][5] <= i.lt[5][0]
+ 			i.array_mult_dataa[0] <= i.lt[1][0]
+			i.array_mult_dataa[1] <= i.lt[1][0]
+			i.array_mult_dataa[2] <= i.lt[1][0]
+			i.array_mult_dataa[3] <= i.lt[1][0]
+			i.array_mult_dataa[4] <= i.lt[1][0]
+			i.array_mult_dataa[5] <= i.lt[2][0]
+			i.array_mult_dataa[6] <= i.lt[2][0]
+			i.array_mult_dataa[7] <= i.lt[2][0]
+			i.array_mult_dataa[8] <= i.lt[2][0]
+			i.array_mult_dataa[9] <= i.lt[3][0]
+			i.array_mult_dataa[10] <= i.lt[3][0]
+			i.array_mult_dataa[11] <= i.lt[3][0]
+			i.array_mult_dataa[12] <= i.lt[4][0]
+			i.array_mult_dataa[13] <= i.lt[4][0]
+			i.array_mult_dataa[14] <= i.lt[5][0]
 		end else if(step ==4'd6) begin
-			i.mat_mult_dataa[2][2] <= i.lt[2][1]
-            i.mat_mult_dataa[2][3] <= i.lt[2][1]
-            i.mat_mult_dataa[2][4] <= i.lt[2][1]
-            i.mat_mult_dataa[2][5] <= i.lt[2][1]
-            i.mat_mult_dataa[3][3] <= i.lt[3][1]
-            i.mat_mult_dataa[3][4] <= i.lt[3][1]
-            i.mat_mult_dataa[3][5] <= i.lt[3][1]
-            i.mat_mult_dataa[4][4] <= i.lt[4][1]
-            i.mat_mult_dataa[4][5] <= i.lt[4][1]
-            i.mat_mult_dataa[5][5] <= i.lt[5][1]
+			i.array_mult_dataa[0] <= i.lt[2][1]
+            i.array_mult_dataa[1] <= i.lt[2][1]
+            i.array_mult_dataa[2] <= i.lt[2][1]
+            i.array_mult_dataa[3] <= i.lt[2][1]
+            i.array_mult_dataa[4] <= i.lt[3][1]
+            i.array_mult_dataa[5] <= i.lt[3][1]
+            i.array_mult_dataa[6] <= i.lt[3][1]
+            i.array_mult_dataa[7] <= i.lt[4][1]
+            i.array_mult_dataa[8] <= i.lt[4][1]
+            i.array_mult_dataa[9] <= i.lt[5][1]
 		end else if(step==4'd9) begin
-			i.mat_mult_dataa[3][3] <= i.lt[3][2]
-            i.mat_mult_dataa[3][4] <= i.lt[3][2]
-            i.mat_mult_dataa[3][5] <= i.lt[3][2]
-            i.mat_mult_dataa[4][4] <= i.lt[4][2]
-            i.mat_mult_dataa[4][5] <= i.lt[4][2]
-            i.mat_mult_dataa[5][5] <= i.lt[5][2]
+			i.array_mult_dataa[0] <= i.lt[3][2]
+            i.array_mult_dataa[1] <= i.lt[3][2]
+            i.array_mult_dataa[2] <= i.lt[3][2]
+            i.array_mult_dataa[3] <= i.lt[4][2]
+            i.array_mult_dataa[4] <= i.lt[4][2]
+            i.array_mult_dataa[5] <= i.lt[5][2]
 		end	else if(step==4'd12) begin
-			i.mat_mult_dataa[4][4] <= i.lt[4][3]
-            i.mat_mult_dataa[4][5] <= i.lt[4][3]
-            i.mat_mult_dataa[5][5] <= i.lt[5][3]
+			i.array_mult_dataa[0] <= i.lt[4][3]
+            i.array_mult_dataa[1] <= i.lt[4][3]
+            i.array_mult_dataa[2] <= i.lt[5][3]
 		end else if(step==4'd15) begin
-			i.mat_mult_dataa[5][5] <= i.lt[5][3]
+			i.array_mult_dataa[0] <= i.lt[5][3]
 		end else
-			i.mat_mult_dataa = {5{5{27'b0}}};
+			i.array_mult_dataa = {15{27'b0}}};
 	end
 	
 	always_ff @(posedge i.clk) begin
 		if(step==4'd3)begin
- 			i.mat_mult_datab[1][1] <= i.lt[1][0]
-			i.mat_mult_datab[1][2] <= i.lt[2][0]
-			i.mat_mult_datab[1][3] <= i.lt[3][0]
-			i.mat_mult_datab[1][4] <= i.lt[4][0]
-			i.mat_mult_datab[1][5] <= i.lt[5][0]
-			i.mat_mult_datab[2][2] <= i.lt[2][0]
-			i.mat_mult_datab[2][3] <= i.lt[3][0]
-			i.mat_mult_datab[2][4] <= i.lt[4][0]
-			i.mat_mult_datab[2][5] <= i.lt[5][0]
-			i.mat_mult_datab[3][3] <= i.lt[3][0]
-			i.mat_mult_datab[3][4] <= i.lt[4][0]
-			i.mat_mult_datab[3][5] <= i.lt[5][0]
-			i.mat_mult_datab[4][4] <= i.lt[4][0]
-			i.mat_mult_datab[4][5] <= i.lt[5][0]
-			i.mat_mult_datab[5][5] <= i.lt[5][0]
+ 			i.array_mult_datab[0] <= i.lt[1][0]
+			i.array_mult_datab[1] <= i.lt[2][0]
+			i.array_mult_datab[2] <= i.lt[3][0]
+			i.array_mult_datab[3] <= i.lt[4][0]
+			i.array_mult_datab[4] <= i.lt[5][0]
+			i.array_mult_datab[5] <= i.lt[2][0]
+			i.array_mult_datab[6] <= i.lt[3][0]
+			i.array_mult_datab[7] <= i.lt[4][0]
+			i.array_mult_datab[8] <= i.lt[5][0]
+			i.array_mult_datab[9] <= i.lt[3][0]
+			i.array_mult_datab[10] <= i.lt[4][0]
+			i.array_mult_datab[11] <= i.lt[5][0]
+			i.array_mult_datab[12] <= i.lt[4][0]
+			i.array_mult_datab[13] <= i.lt[5][0]
+			i.array_mult_datab[14] <= i.lt[5][0]
 		end else if(step ==4'd6) begin
-			i.mat_mult_datab[2][2] <= i.lt[2][1]
-            i.mat_mult_datab[2][3] <= i.lt[3][1]
-            i.mat_mult_datab[2][4] <= i.lt[4][1]
-            i.mat_mult_datab[2][5] <= i.lt[5][1]
-            i.mat_mult_datab[3][3] <= i.lt[3][1]
-            i.mat_mult_datab[3][4] <= i.lt[4][1]
-            i.mat_mult_datab[3][5] <= i.lt[5][1]
-            i.mat_mult_datab[4][4] <= i.lt[4][1]
-            i.mat_mult_datab[4][5] <= i.lt[5][1]
-            i.mat_mult_datab[5][5] <= i.lt[5][1]
+			i.array_mult_datab[0] <= i.lt[2][1]
+            i.array_mult_datab[1] <= i.lt[3][1]
+            i.array_mult_datab[2] <= i.lt[4][1]
+            i.array_mult_datab[3] <= i.lt[5][1]
+            i.array_mult_datab[4] <= i.lt[3][1]
+            i.array_mult_datab[5] <= i.lt[4][1]
+            i.array_mult_datab[6] <= i.lt[5][1]
+            i.array_mult_datab[7] <= i.lt[4][1]
+            i.array_mult_datab[8] <= i.lt[5][1]
+            i.array_mult_datab[9] <= i.lt[5][1]
 		end else if(step==4'd9) begin
-			i.mat_mult_datab[3][3] <= i.lt[3][2]
-            i.mat_mult_datab[3][4] <= i.lt[4][2]
-            i.mat_mult_datab[3][5] <= i.lt[5][2]
-            i.mat_mult_datab[4][4] <= i.lt[4][2]
-            i.mat_mult_datab[4][5] <= i.lt[5][2]
-            i.mat_mult_datab[5][5] <= i.lt[5][2]
+			i.array_mult_datab[0] <= i.lt[3][2]
+            i.array_mult_datab[1] <= i.lt[4][2]
+            i.array_mult_datab[2] <= i.lt[5][2]
+            i.array_mult_datab[3] <= i.lt[4][2]
+            i.array_mult_datab[4] <= i.lt[5][2]
+            i.array_mult_datab[5] <= i.lt[5][2]
 		end	else if(step==4'd12) begin
-			i.mat_mult_datab[4][4] <= i.lt[4][3]
-            i.mat_mult_datab[4][5] <= i.lt[5][3]
-            i.mat_mult_datab[5][5] <= i.lt[5][3]
+			i.array_mult_datab[0] <= i.lt[4][3]
+            i.array_mult_datab[1] <= i.lt[5][3]
+            i.array_mult_datab[2] <= i.lt[5][3]
 		end else if(step==4'd15) begin
-			i.mat_mult_datab[5][5] <= i.lt[5][3]
+			i.array_mult_datab[0] <= i.lt[5][3]
 		end else
-			i.mat_mult_dataa = {5{5{27'b0}}};
+			i.array_mult_dataa = {15{27'b0}}};
 	end
 
 	always_ff @(posedge i.clk) begin
@@ -214,7 +206,12 @@ module cholesky (
         i.lt[2][5] <= 27'b0;
         i.lt[3][4] <= 27'b0;
         i.lt[4][5] <= 27'b0;
-		if(step== 4'd1 || step== 4'd4 || step== 4'd7 || 
+	
+		if(step==0)begin
+			i.lt <= i.matrix;
+		end
+
+		else if(step== 4'd1 || step== 4'd4 || step== 4'd7 || 
 		   step==4'd10 || step==4'd13 || step==4'd16) 
 			i.lt[row_count][row_count] <= {13'b0, q};
 		else if(step==4'd2)begin
@@ -225,25 +222,25 @@ module cholesky (
 			i.lt[5][0] <= i.quotients[4];
 		end else if(step==4'd3)begin
 	        if(add_counter > 4) begin
-                i.lt[1][1] <= i.lt[1][1] + mat_mult_result[1][1];
-                i.lt[1][2] <= i.lt[1][2] + mat_mult_result[1][2];
-                i.lt[1][3] <= i.lt[1][3] + mat_mult_result[1][3];
-                i.lt[1][4] <= i.lt[1][4] + mat_mult_result[1][4];
-                i.lt[1][5] <= i.lt[1][5] + mat_mult_result[1][5];
+                i.lt[1][1] <= i.lt[1][1] + array_mult_result[0];
+                i.lt[1][2] <= i.lt[1][2] + array_mult_result[1];
+                i.lt[1][3] <= i.lt[1][3] + array_mult_result[2];
+                i.lt[1][4] <= i.lt[1][4] + array_mult_result[3];
+                i.lt[1][5] <= i.lt[1][5] + array_mult_result[4];
 
-                i.lt[2][2] <= i.lt[2][2] + mat_mult_result[2][2];
-                i.lt[2][3] <= i.lt[2][3] + mat_mult_result[2][3];
-                i.lt[2][4] <= i.lt[2][4] + mat_mult_result[2][4];
-                i.lt[2][5] <= i.lt[2][5] + mat_mult_result[2][5];
+                i.lt[2][2] <= i.lt[2][2] + array_mult_result[5];
+                i.lt[2][3] <= i.lt[2][3] + array_mult_result[6];
+                i.lt[2][4] <= i.lt[2][4] + array_mult_result[7];
+                i.lt[2][5] <= i.lt[2][5] + array_mult_result[8];
 
-                i.lt[3][3] <= i.lt[3][3] + mat_mult_result[3][3];
-                i.lt[3][4] <= i.lt[3][4] + mat_mult_result[3][4];
-                i.lt[3][5] <= i.lt[3][5] + mat_mult_result[3][5];
+                i.lt[3][3] <= i.lt[3][3] + array_mult_result[9];
+                i.lt[3][4] <= i.lt[3][4] + array_mult_result[10];
+                i.lt[3][5] <= i.lt[3][5] + array_mult_result[11];
                 
-                i.lt[4][4] <= i.lt[4][4] + mat_mult_result[4][4];
-                i.lt[4][5] <= i.lt[4][5] + mat_mult_result[4][5];
+                i.lt[4][4] <= i.lt[4][4] + array_mult_result[12];
+                i.lt[4][5] <= i.lt[4][5] + array_mult_result[13];
                 
-                i.lt[5][5] <= i.lt[5][5] + mat_mult_result[5][5];
+                i.lt[5][5] <= i.lt[5][5] + array_mult_result[14];
                 
             end else begin
                 i.lt <= i.lt;
@@ -255,19 +252,19 @@ module cholesky (
             i.lt[5][1] <= i.quotients[3];			
         end else if(step==4'd6) begin
             if(add_counter > 4) begin
-                i.lt[2][2] <= i.lt[2][2] + mat_mult_result[2][2];
-                i.lt[2][3] <= i.lt[2][3] + mat_mult_result[2][3];
-                i.lt[2][4] <= i.lt[2][4] + mat_mult_result[2][4];
-                i.lt[2][5] <= i.lt[2][5] + mat_mult_result[2][5];
+                i.lt[2][2] <= i.lt[2][2] + array_mult_result[0];
+                i.lt[2][3] <= i.lt[2][3] + array_mult_result[1];
+                i.lt[2][4] <= i.lt[2][4] + array_mult_result[2];
+                i.lt[2][5] <= i.lt[2][5] + array_mult_result[3];
 
-                i.lt[3][3] <= i.lt[3][3] + mat_mult_result[3][3];
-                i.lt[3][4] <= i.lt[3][4] + mat_mult_result[3][4];
-                i.lt[3][5] <= i.lt[3][5] + mat_mult_result[3][5];
+                i.lt[3][3] <= i.lt[3][3] + array_mult_result[4];
+                i.lt[3][4] <= i.lt[3][4] + array_mult_result[5];
+                i.lt[3][5] <= i.lt[3][5] + array_mult_result[6];
                 
-                i.lt[4][4] <= i.lt[4][4] + mat_mult_result[4][4];
-                i.lt[4][5] <= i.lt[4][5] + mat_mult_result[4][5];
+                i.lt[4][4] <= i.lt[4][4] + array_mult_result[7];
+                i.lt[4][5] <= i.lt[4][5] + array_mult_result[8];
                 
-                i.lt[5][5] <= i.lt[5][5] + mat_mult_result[5][5];
+                i.lt[5][5] <= i.lt[5][5] + array_mult_result[9];
             end else begin
                 i.lt <= i.lt;
             end 
@@ -277,14 +274,14 @@ module cholesky (
             i.lt[5][2] <= i.quotients[2];
         end else if(step==4'd9) begin
             if(add_counter > 4) begin
-                i.lt[3][3] <= i.lt[3][3] + mat_mult_result[3][3];
-                i.lt[3][4] <= i.lt[3][4] + mat_mult_result[3][4];
-                i.lt[3][5] <= i.lt[3][5] + mat_mult_result[3][5];
+                i.lt[3][3] <= i.lt[3][3] + array_mult_result[0];
+                i.lt[3][4] <= i.lt[3][4] + array_mult_result[1];
+                i.lt[3][5] <= i.lt[3][5] + array_mult_result[2];
                 
-                i.lt[4][4] <= i.lt[4][4] + mat_mult_result[4][4];
-                i.lt[4][5] <= i.lt[4][5] + mat_mult_result[4][5];
+                i.lt[4][4] <= i.lt[4][4] + array_mult_result[3];
+                i.lt[4][5] <= i.lt[4][5] + array_mult_result[4];
                 
-                i.lt[5][5] <= i.lt[5][5] + mat_mult_result[5][5];
+                i.lt[5][5] <= i.lt[5][5] + array_mult_result[5];
 
             end else begin
                 i.lt <= i.lt;
@@ -294,10 +291,10 @@ module cholesky (
             i.lt[5][3] <= i.quotients[1];
         end else if(step==4'd12) begin
             if(add_counter > 4) begin
-                i.lt[4][4] <= i.lt[4][4] + mat_mult_result[4][4];
-                i.lt[4][5] <= i.lt[4][5] + mat_mult_result[4][5];
+                i.lt[4][4] <= i.lt[4][4] + array_mult_result[0];
+                i.lt[4][5] <= i.lt[4][5] + array_mult_result[1];
                 
-                i.lt[5][5] <= i.lt[5][5] + mat_mult_result[5][5];
+                i.lt[5][5] <= i.lt[5][5] + array_mult_result[2];
 
 
             end else begin
@@ -307,7 +304,7 @@ module cholesky (
             i.lt[5][3] <= i.quotients[1];
         end else if(step==4'd15) begin
             if(add_counter > 4) begin
-                i.lt[5][5] <= i.lt[5][5] + mat_mult_result[5][5];
+                i.lt[5][5] <= i.lt[5][5] + array_mult_result[0];
             end else begin
                 i.lt <= i.lt;
             end 

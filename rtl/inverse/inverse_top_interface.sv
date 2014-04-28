@@ -19,10 +19,10 @@ logic [5:0][5:0][26:0] matrix;
 logic [5:0][5:0][26:0] inverse;
 
 // Output to array multipliers
-logic [8:0] [26:0] array_mult_dataa;
-logic [8:0] [26:0] array_mult_datab;
+logic [14:0] [26:0] array_mult_dataa;
+logic [14:0] [26:0] array_mult_datab;
 // Input from array multipliers
-logic [8:0] [26:0] array_mult_result;
+logic [14:0] [26:0] array_mult_result;
 
 modport inverse_top (
 	input clk, en, rst,
