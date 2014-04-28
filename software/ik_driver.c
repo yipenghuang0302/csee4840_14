@@ -49,22 +49,12 @@ struct joint_dev {
  */
 
 static u32 float_to_fixed(float num){
-	char *strnum = (char *)malloc(sizeof(char) * 100);//Arbitrarily sized to 100
-	int neg = 0;
-	sprintf(strnum, "%f", num);
-	if (*strnum == '-')
-		neg = 1;
+	float frac = num - (u32)num;
 	u32 decimal = (u32)num << PRECISION; //Decimal part of number
-	u32 fraction;
-	strnum = strchr(strnum, '.');
-	sprintf(strnum, "%f", (float)(1 << PRECISION) * atof(strnum));//Fractional part of number
+	u32 fraction = (1 << PRECISION) * frac;
 	//Check if we need to round up 
-	if (*(strchr(strnum, '.') + 1) >= '5' && *(strchr(strnum, '.') + 1) <= '9')
-		fraction = (u32)(atof(strnum) + 1);
-	else
-		fraction = (u32)(atof(strnum));
-	if (neg)
-		fraction = -fraction;
+	if (frac >= .5 && frac <= 1.0)
+		fraction += 1;
 	return decimal + fraction;
 }
 

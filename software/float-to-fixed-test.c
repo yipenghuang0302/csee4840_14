@@ -7,25 +7,11 @@
 #define PRECISION 14
 
 static int float_to_fixed(float num){
-	int neg = 0;
-	char *strnum = (char *)malloc(sizeof(char) * 100);
-	sprintf(strnum, "%f", num);
-	if (*strnum == '-')
-		neg = 1;
 	int decimal = (int)num << PRECISION; //Decimal part of number
-	printf("The decimal portion is %d\n", decimal);
-	int fraction;
-	strnum = strchr(strnum, '.');
-	printf("The rest of the number is %s\n", strnum);
-	sprintf(strnum, "%f", (float)(1 << PRECISION) * atof(strnum));//Fractional part of number
-	printf("The rest of the number is %s\n", strnum);
+	int fraction = (1 << PRECISION) * (num - (int)num);
 	//Check if we need to round up 
-	if (*(strchr(strnum, '.') + 1) >= '5' && *(strchr(strnum, '.') + 1) <= '9')
-		fraction = (int)(atof(strnum) + 1);
-	else
-		fraction = (int)(atof(strnum));
-	if (neg)
-		fraction = -fraction;
+	if ((num - (int)num) >= .5 && (num - (int)num) <= 1.0)
+		fraction += 1;
 	return decimal + fraction;
 }
 
