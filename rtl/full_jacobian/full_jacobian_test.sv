@@ -203,8 +203,8 @@ class full_jacobian_test;
 		end
 
 		// CHECK JACOBIAN
-		for ( int i=0 ; i<6 ; i++ ) begin // full matrix row
-			for ( int j=0 ; j<6 ; j++ ) begin // full matrix column
+		for ( int i=0 ; i<6 ; i++ ) begin // jacobian matrix row
+			for ( int j=0 ; j<6 ; j++ ) begin // jacobian matrix column
 				jacobian_real[i][j] = real'(int'({{5{jacobian_matrix[i][j][26]}}, jacobian_matrix[i][j]}))/256.0;
 				jacobian_error[i][j] = abs( jacobian_real[i][j] - model_jacobian_matrix[i][j] );
 				jacobian_percent[i][j] = abs( jacobian_error[i][j] / model_jacobian_matrix[i][j] );
@@ -220,8 +220,8 @@ class full_jacobian_test;
 		end
 
 		// CHECK JACOBIAN
-		for ( int i=0 ; i<6 ; i++ ) begin // full matrix row
-			for ( int j=0 ; j<6 ; j++ ) begin // full matrix column
+		for ( int i=0 ; i<6 ; i++ ) begin // jacobian matrix row
+			for ( int j=0 ; j<6 ; j++ ) begin // jacobian matrix column
 				jjt_bias_real[i][j] = real'(int'({{5{jjt_bias[i][j][26]}}, jjt_bias[i][j]}))/256.0;
 				jjt_bias_error[i][j] = abs( jjt_bias_real[i][j] - model_jjt_bias[i][j] );
 				jjt_bias_percent[i][j] = abs( jjt_bias_error[i][j] / model_jjt_bias[i][j] );
