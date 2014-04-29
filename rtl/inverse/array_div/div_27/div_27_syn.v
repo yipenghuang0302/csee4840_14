@@ -33,18 +33,18 @@
 //applicable agreement for further details.
 
 
-//lpm_divide DEVICE_FAMILY="Cyclone V" LPM_DREPRESENTATION="SIGNED" LPM_NREPRESENTATION="SIGNED" LPM_PIPELINE=10 LPM_REMAINDERPOSITIVE="FALSE" LPM_WIDTHD=27 LPM_WIDTHN=27 MAXIMIZE_SPEED=6 clken clock denom numer quotient remain
+//lpm_divide DEVICE_FAMILY="Cyclone V" LPM_DREPRESENTATION="SIGNED" LPM_NREPRESENTATION="SIGNED" LPM_PIPELINE=5 LPM_REMAINDERPOSITIVE="FALSE" LPM_WIDTHD=27 LPM_WIDTHN=27 MAXIMIZE_SPEED=6 clken clock denom numer quotient remain
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_abs 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_lpm_divide 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ cbx_util_mgl 2014:02:12:20:59:46:SJ  VERSION_END
 // synthesis VERILOG_INPUT_VERSION VERILOG_2001
 // altera message_off 10463
 
 
 
-//abs_divider DEN_REPRESENTATION="SIGNED" LPM_PIPELINE=10 MAXIMIZE_SPEED=6 NUM_REPRESENTATION="SIGNED" SKIP_BITS=0 WIDTH_D=27 WIDTH_N=27 clk_en clock denominator numerator quotient remainder
+//abs_divider DEN_REPRESENTATION="SIGNED" LPM_PIPELINE=5 MAXIMIZE_SPEED=6 NUM_REPRESENTATION="SIGNED" SKIP_BITS=0 WIDTH_D=27 WIDTH_N=27 clk_en clock denominator numerator quotient remainder
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_abs 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_lpm_divide 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ cbx_util_mgl 2014:02:12:20:59:46:SJ  VERSION_END
 
 
-//alt_u_div DEVICE_FAMILY="Cyclone V" LPM_PIPELINE=10 MAXIMIZE_SPEED=6 SKIP_BITS=0 WIDTH_D=27 WIDTH_N=27 WIDTH_Q=27 WIDTH_R=27 clk_en clock denominator numerator quotient remainder
+//alt_u_div DEVICE_FAMILY="Cyclone V" LPM_PIPELINE=5 MAXIMIZE_SPEED=6 SKIP_BITS=0 WIDTH_D=27 WIDTH_N=27 WIDTH_Q=27 WIDTH_R=27 clk_en clock denominator numerator quotient remainder
 //VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_abs 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_lpm_divide 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ cbx_util_mgl 2014:02:12:20:59:46:SJ  VERSION_END
 
 
@@ -2787,7 +2787,7 @@ endmodule
 // Retrieval info: CONSTANT: LPM_DREPRESENTATION STRING "SIGNED"
 // Retrieval info: CONSTANT: LPM_HINT STRING "MAXIMIZE_SPEED=6,LPM_REMAINDERPOSITIVE=FALSE"
 // Retrieval info: CONSTANT: LPM_NREPRESENTATION STRING "SIGNED"
-// Retrieval info: CONSTANT: LPM_PIPELINE NUMERIC "10"
+// Retrieval info: CONSTANT: LPM_PIPELINE NUMERIC "5"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_DIVIDE"
 // Retrieval info: CONSTANT: LPM_WIDTHD NUMERIC "27"
 // Retrieval info: CONSTANT: LPM_WIDTHN NUMERIC "27"

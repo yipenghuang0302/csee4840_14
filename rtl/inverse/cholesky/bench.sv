@@ -2,6 +2,7 @@
 `include "cholesky_test.sv"
 
 class cholesky_transaction;
+	int n = 6;
 	rand logic [6][6][30:0] j_increment;
 	real j_fraction [6][6];
 	real j_data [6][6];
@@ -23,18 +24,18 @@ program cholesky_tb (ifc_cholesky.cholesky_tb ds);
 		trans.randomize();
 
 		//wrap input numbers to -16 ~ 16
-		for ( int row=0 ; row<6 ; row++ ) begin // row index
-			for ( int col=0 ; col<6 ; col++ ) begin // col index
+		for ( int row=0 ; row<trans.n ; row++ ) begin // row index
+			for ( int col=0 ; col<trans.n ; col++ ) begin // col index
 				trans.j_fraction[row][col] = real'(trans.j_increment[row][col]) / 2147483648.0;
 				trans.j_data[row][col] = -16.0 + trans.j_fraction[row][col] * 2 * 16.0;
 			end
 		end
 
 		// create jjt which is positive symmetric definite
-		for ( int row=0 ; row<6 ; row++ ) begin // row index
-			for ( int col=0 ; col<6 ; col++ ) begin // col index
+		for ( int row=0 ; row<trans.n ; row++ ) begin // row index
+			for ( int col=0 ; col<trans.n ; col++ ) begin // col index
 				trans.matrix_data[row][col] = 0.0;
-				for ( int index=0 ; index<6 ; index++ ) begin // index
+				for ( int index=0 ; index<trans.n ; index++ ) begin // index
 					trans.matrix_data[row][col] += trans.j_data[row][index] * trans.j_data[col][index];
 				end
 				$display("row, col = %d", row, col);

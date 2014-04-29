@@ -54,5 +54,3 @@ modport cholesky(
 );
 
 endinterface
-
-
