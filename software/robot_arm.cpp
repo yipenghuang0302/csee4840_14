@@ -84,7 +84,7 @@ void arm(int index){
 		//Base Joint (joint 0)
 
 		
-		glRotatef(robot.params[i].theta, 0, 0, 1);
+		glRotatef(theta, 0, 0, 1);
 
 		glBegin(GL_LINE_STRIP);
 			glVertex3f(0, 0, 0);
@@ -180,6 +180,7 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode( GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
 	glutInitWindowSize(500, 500);
 	glutInitWindowPosition(100, 100);
+
 	// We need to store this in case we do something behind GLUI's back
 	int GlutWindowID = glutCreateWindow("IKSwift Robot Simulator");
 	
