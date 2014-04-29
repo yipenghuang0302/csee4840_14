@@ -1,7 +1,0 @@
-
-
-/home/lianne/csee4840_14/rtl/inverse/ALTFP_SQRT.v
-
-Apr 15 01PM:00:46>: Variation file name (ALTFP_SQRT) is identical with the name of one of its sub-components.
-
-MegaWizard Plug-In Manager will rename the variation to "ALTFP_SQRa" to prevent compilation errors
