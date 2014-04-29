@@ -1,18 +1,18 @@
 // golden model class
 class array_div_test;
 
-	int n = 5;
+	int n = 6;
 	int pipeline_depth = 11;
-	real model_dividends[11][5];
+	real model_dividends[11][6];
 	real model_divisor[11];
-	real model_result[11][5];
+	real model_result[11][6];
 
 	function real abs (real num); 
 	   abs = (num<0) ? -num : num; 
 	endfunction
 
 	function void update_array_div (
-		real dividends[5],
+		real dividends[6],
 		real divisor
 	);
 
@@ -32,14 +32,14 @@ class array_div_test;
 	endfunction
 
 	function void check_array_div (
-		logic [4:0] [26:0] dut_result
+		logic [5:0] [26:0] dut_result
 	);
 
 		real abs_tol = 0.01;
 		real rel_tol = 0.01;
-		real real_result[5];
-		real error[5];
-		real percent[5];
+		real real_result[6];
+		real error[6];
+		real percent[6];
 		bit passed = 1'b1;
 
 		for (int i=0; i<n; i++) begin // product row

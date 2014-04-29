@@ -2,11 +2,11 @@
 `include "array_div_test.sv"
 
 class array_div_transaction;
-	rand logic [5][30:0] increment_dividends;
+	rand logic [6][30:0] increment_dividends;
 	rand logic [30:0] increment_divisor;
-	real fraction_dividends[5];
+	real fraction_dividends[6];
 	real fraction_divisor;
-	real dividends[5];
+	real dividends[6];
 	real divisor;
 endclass
 
@@ -16,7 +16,7 @@ endclass
 
 program array_div_tb (ifc_array_div.array_div_tb ds);
 
-	int n = 5;
+	int n = 6;
 
 	array_div_transaction trans;
 	array_div_env env;

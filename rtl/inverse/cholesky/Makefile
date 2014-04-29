@@ -1,7 +1,7 @@
 TOP=top
 INTERFACE=interface
 BENCH=bench
-DUT=inverse
+DUT=cholesky
 
 .PHONY: help
 

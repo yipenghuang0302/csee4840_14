@@ -75,7 +75,7 @@ module full_jacobian (
 
 	// MAT_MULT OUTPUTS
 	always_ff @(posedge i.clk)
-		if ( i.count==8'd111)
+		if ( i.count==8'd111 )
 			i.jjt_bias <= i.mat_mult_result;
 
 	// timing design prevents module outputs to shared multipliers colliding

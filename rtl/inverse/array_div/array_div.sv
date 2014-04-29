@@ -7,7 +7,7 @@ module array_div (
 	ifc_array_div.array_div i
 );
 
-	parameter n = 5;
+	parameter n = 6;
 
 	logic [n-1:0] [26:0] remain;
 

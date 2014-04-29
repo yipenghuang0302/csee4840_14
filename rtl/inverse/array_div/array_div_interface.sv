@@ -7,7 +7,7 @@ interface ifc_array_div (
 	input logic clk
 );
 
-parameter n = 5;
+parameter n = 6;
 
 logic en, rst;
 logic [n-1:0] [26:0] dividends;

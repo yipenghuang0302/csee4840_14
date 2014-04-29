@@ -7,7 +7,7 @@
 `include "sqrt_27.v"
 `include "bench.sv"
 
-`include "../../sim_models/altera_mf.v"
+`include "../../../sim_models/altera_mf.v"
 
 module sqrt_27_top ();
 
