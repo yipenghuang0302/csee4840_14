@@ -1,4 +1,13 @@
-
+/*
+ * This program displays the robot arm position and interacts
+ * with the device driver to display the intermediate positions
+ * over the course of our inverse kinematics algorithm
+ *
+ * Richard Townsend
+ * Lianne Lairmore
+ * Yipeng Huang
+ *
+ */
 #include <cstdio>
 #include <GL/glut.h>
 #include "CConfigLoader.h"
@@ -24,294 +33,69 @@ float rotateY[2] = {0, 0};
 float rotateZ[2] = {0, 0};
 
 float hand[2] = {0, 0};
-//float teapotScaleFactor = 1.0f;
 
-// Selected GLUI Widgets
-// Keep global pointers to the ones we want to change from other parts of the code
-// NOTE: There is a second way to do this deomnostrated below
+full_robot robot;
 
-/* LIANNE 2014
-GLUI_Spinner *scaleSpinner;
-GLUI_Translation *translator;
-GLUI_RadioGroup* radioButtons;
-*/ 
-
-void finger(void){
-	glBegin(GL_QUADS);
-		// sides
-		glVertex3f(0, 0, 0);
-		glVertex3f(0, 2, 0);
-		glVertex3f(1, 2, -.5);
-		glVertex3f(1, 0, -.5);
-
-		glVertex3f(1, 0, -.5);
-		glVertex3f(1, 2, -.5);
-		glVertex3f(2, 2, 0);
-		glVertex3f(2, 0, 0);
-
-		glVertex3f(2, 0, 0);
-		glVertex3f(2, 2, 0);
-		glVertex3f(3, 2, 0);
-		glVertex3f(3, 0, 0);
-
-		glVertex3f(3, 0, 0);
-		glVertex3f(3, 2, 0);
-		glVertex3f(3, 2, -.5);
-		glVertex3f(3, 0, -.5);
-	
-		glVertex3f(3, 2, -.5);
-		glVertex3f(3, 0, -.5);
-		glVertex3f(2, 0, -.5);
-		glVertex3f(2, 2, -.5);
-
-		glVertex3f(2, 0, -.5);
-		glVertex3f(2, 2, -.5);
-		glVertex3f(1, 2, -1);
-		glVertex3f(1, 0, -1);
-
-		glVertex3f(1, 2, -1);
-		glVertex3f(1, 0, -1);
-		glVertex3f(0, 0, -.5);
-		glVertex3f(0, 2, -.5);
-	
-		// top
-		glVertex3f(0, 2, 0);
-		glVertex3f(0, 2, -.5);
-		glVertex3f(1, 2, -1);
-		glVertex3f(1, 2, -.5);
-
-		glVertex3f(1, 2, -1);
-		glVertex3f(1, 2, -.5);
-		glVertex3f(2, 2, 0);
-		glVertex3f(2, 2, -.5);
-		
-		glVertex3f(2, 2, 0);
-		glVertex3f(2, 2, -.5);
-		glVertex3f(3, 2, -.5);
-		glVertex3f(3, 2, 0);
-
-		// bottom
-		glVertex3f(0, 0, 0);
-		glVertex3f(0, 0, -.5);
-		glVertex3f(1, 0, -1);
-		glVertex3f(1, 0, -.5);
-
-		glVertex3f(1, 0, -1);
-		glVertex3f(1, 0, -.5);
-		glVertex3f(2, 0, 0);
-		glVertex3f(2, 0, -.5);
-		
-		glVertex3f(2, 0, 0);
-		glVertex3f(2, 0, -.5);
-		glVertex3f(3, 0, -.5);
-		glVertex3f(3, 0, 0);
-
-	glEnd();
-
-}
 
 void arm(int index){
 
-	//Joint 1
+	float a,d,theta,alpha;
 
-	//Y axis currently points down, and using rotateY
-	//will let the user rotate this joint about the y axis
-	glRotatef(rotateY[index], 0, 1, 0);
-
-	glColor3f(.5, .5, .5);
-
-	glBegin(GL_TRIANGLE_STRIP);
-		glVertex3f(6.5,0, 6.5);	//1
-		glVertex3f(-6.5,0, 6.5);	//2
-		glVertex3f(6.5, 2, 6.5);	//3
-		glVertex3f(-6.5, 2, 6.5);	//4
-		glVertex3f(6.5, 2, -6.5);	//5
-		glVertex3f(-6.5, 2, -6.5);	//6
-		glVertex3f(6.5,0, -6.5);	//7
-		glVertex3f(-6.5,0, -6.5);	//8
-		glVertex3f(6.5,0, 6.5);	//9
-		glVertex3f(-6.5,0, 6.5); 	//10
-	glEnd();
-	glBegin(GL_QUADS);
-		glVertex3f(6.5, 0, 6.5);	//1
-		glVertex3f(6.5, 0, -6.5); 	//2
-		glVertex3f(6.5, 2, -6.5);	//3
-		glVertex3f(6.5, 2, 6.5);	//4 
-
-		glVertex3f(-6.5, 0, 6.5);	//1
-		glVertex3f(-6.5, 0, -6.5);	//2
-		glVertex3f(-6.5, 2, -6.5);	//3
-		glVertex3f(-6.5, 2, 6.5);	//4
-	glEnd();
-
-
-	//Joint 2
-
-
-	glColor3f(.7, .7, .7);
-	//translation moves the axis of rotation a bit higher than the base of the joint (for aesthetic purposes)
-	glTranslatef(0,2,0);
-	glRotatef(rotateX[index], 1, 0, 0);
-	glTranslatef(0, -2, 0);
-	glBegin(GL_QUADS);
-		// Bottom (needed for when rotating)
-		glVertex3f(-1.5, 2,1.5); 
-		glVertex3f(1.5, 2, 1.5);
-		glVertex3f(1.5, 2, -1.5);
-		glVertex3f(-1.5, 2,-1.5);
-		
-		// Front 
-		glVertex3f(-1.5, 2, 1.5);
-		glVertex3f(1.5, 2, 1.5);
-		glVertex3f(1.5, 11, 1.5);
-		glVertex3f(-1.5, 11, 1.5);
-		
-		// Left Side
-		glVertex3f(-1.5, 2, 1.5);
-		glVertex3f(-1.5, 2, -1.5);
-		glVertex3f(-1.5, 11, -1.5);
-		glVertex3f(-1.5, 11, 1.5);
-
-		// Back Side
-		glVertex3f(-1.5, 2, -1.5);
-		glVertex3f(1.5, 2, -1.5);
-		glVertex3f(1.5, 11, -1.5);
-		glVertex3f(-1.5, 11, -1.5);
-
-		// Right Side
-		glVertex3f(1.5, 2, -1.5);
-		glVertex3f(1.5, 2, 1.5);
-		glVertex3f(1.5, 11, 1.5);
-		glVertex3f(1.5, 11, -1.5);
-
-		// Top
-		glVertex3f(-1.5, 11, 1.5);
-		glVertex3f(1.5, 11, 1.5);
-		glVertex3f(1.5, 11, -1.5);
-		glVertex3f(-1.5, 11, -1.5);
-	glEnd();
-
-	//Joint 3
-
-	glColor3f(.7, .9, .7);
-	//translation moves the axis of rotation a bit higher than the base of the joint (for aesthetic purposes)
-	glTranslatef(0,12,0);
-	glRotatef(rotate2[index], 0, 1, 0);
-	glTranslatef(0, -12, 0);
-	glBegin(GL_QUADS);
-		// Bottom (needed for when rotating)
-		glVertex3f(-1.5, 11,-1.5); 
-		glVertex3f(-1.5, 11, 1.5);
-		glVertex3f(-1.5, 14, 1.5);
-		glVertex3f(-1.5, 14,-1.5);
-		
-		// Front 
-		glVertex3f(-1.5, 14, 1.5);
-		glVertex3f(6.5, 14, 1.5);
-		glVertex3f(6.5, 11, 1.5);
-		glVertex3f(-1.5, 11, 1.5);
-		
-		// Left Side
-		glVertex3f(-1.5, 11, 1.5);
-		glVertex3f(6.5, 11, 1.5);
-		glVertex3f(6.5, 11, -1.5);
-		glVertex3f(-1.5, 11, -1.5);
-
-		// Back Side
-		glVertex3f(-1.5, 14, 1.5);
-		glVertex3f(6.5, 14, 1.5);
-		glVertex3f(6.5, 11, 1.5);
-		glVertex3f(-1.5, 11, 1.5);
-
-		// Right Side
-		glVertex3f(-1.5, 14, 1.5);
-		glVertex3f(6.5, 14, 1.5);
-		glVertex3f(6.5, 14, -1.5);
-		glVertex3f(-1.5, 14, -1.5);
-
-		// Top
-		glVertex3f(6.5, 11, -1.5);
-		glVertex3f(6.5, 11, 1.5);
-		glVertex3f(6.5, 14, 1.5);
-		glVertex3f(6.5, 14, -1.5);
-	glEnd();
-	
-	//Joint 3
-
-	glColor3f(.5, .7, .5);
-	glTranslatef(5.5, 12, -2.5);
+	//Draw a base for the whole arm so we can rotate our viewing of the arm
 	glRotatef(rotateZ[index], 0, 0, 1);
-	glTranslatef(-5.5, -12, 2.5);
+	glBegin(GL_TRIANGLE_STRIP);
+		glVertex3f(1.5,-3, 0);	//1
+		glVertex3f(-1.5,-3, 0);	//5
+		glVertex3f(1.5, 3, 0);	//3
+		glVertex3f(-1.5, 3,0 );	//4
+		glVertex3f(1.5, 3, -2);	//5
+		glVertex3f(-1.5, 3, -2);	//6
+		glVertex3f(1.5,-3, -2);	//7
+		glVertex3f(-1.5,-3, -2);	//8
+		glVertex3f(1.5,-3, 0);	//9
+		glVertex3f(-1.5,-3, 0); 	//1-3
+	glEnd();
 	glBegin(GL_QUADS);
-		// Bottom
-		glVertex3f(5.5, 12, -1.5);
-		glVertex3f(5.5, 12, -3.5);
-		glVertex3f(5.5, 14, -3.5);
-		glVertex3f(5.5, 14, -1.5);
-	
-		// Front
-		glVertex3f(5.5, 12, -1.5);
-		glVertex3f(5.5, 14, -1.5);
-		glVertex3f(10.5, 14, -1.5);
-		glVertex3f(10.5, 12, -1.5);
+		glVertex3f(1.5, -3, 0);	//1
+		glVertex3f(1.5, -3, -2); 	//5
+		glVertex3f(1.5, 3, -2);	//3
+		glVertex3f(1.5, 3, 0);	//4 
 
-		// Below
-		glVertex3f(5.5, 12, -1.5);
-		glVertex3f(5.5, 12, -3.5);
-		glVertex3f(10.5, 12, -3.5);
-		glVertex3f(10.5, 12, -1.5);
-
-		// Back
-		glVertex3f(5.5, 12, -3.5);
-		glVertex3f(5.5, 14, -3.5);
-		glVertex3f(10.5, 14, -3.5);
-		glVertex3f(10.5, 12, -3.5);
-
-		// Above
-		glVertex3f(5.5, 14, -1.5);
-		glVertex3f(5.5, 14, -3.5);
-		glVertex3f(10.5, 14, -3.5);
-		glVertex3f(10.5, 14, -1.5);
-
-		// Top
-		glVertex3f(10.5, 12, -1.5);
-		glVertex3f(10.5, 14, -1.5);
-		glVertex3f(10.5, 14, -3.5);
-		glVertex3f(10.5, 12, -3.5);
+		glVertex3f(-1.5, -3, 0);	//1
+		glVertex3f(-1.5, -3, -2);	//5
+		glVertex3f(-1.5, 3, -2);	//3
+		glVertex3f(-1.5, 3, 0);	//4
 	glEnd();
 
 
-	if(hand[index] >= 0){
-		hand[index] = 0;
-	}else if(hand[index] <= -90){
-		hand[index] = -90;
+	//Draw the target for the end effector
+	glBegin(GL_LINES);
+		glVertex3f(0,0,0);
+		glVertex3f(robot.targetx, robot.targety, robot.targetz);
+	glEnd();
+
+	for (int i = 0; i < MAX_JOINT; i ++){
+		glColor3f(.2*i+.5, .2*i+.1, .2*i);
+		d = robot.params[i].d;
+		a = robot.params[i].a;
+		theta = robot.params[i].theta;
+		alpha = robot.params[i].alpha;
+
+		//Base Joint (joint 0)
+
+		
+		glRotatef(robot.params[i].theta, 0, 0, 1);
+
+		glBegin(GL_LINE_STRIP);
+			glVertex3f(0, 0, 0);
+			glVertex3f(a, 0, d);
+		glEnd();
+
+		glTranslatef(a, 0, d);
+		glRotatef(alpha, 1, 0, 0);
+
 	}
-
-
-	glColor3f(.7, .5, .5);
-	glPushMatrix();
-	// Back finger
-	glTranslatef(8.5, 9, -2.5);
-	glRotatef(-hand[index], 0, 1, 0);
-	finger();	
-	glPopMatrix();
-	
-	glColor3f(.7, .7, .5);
-	glPushMatrix();
-	// Front finger
-	glTranslatef(8.5, 9, -2.5);
-	glRotatef(hand[index], 0, 1, 0);
-	glRotatef(180, 1, 0, 0);	
-	glTranslatef(0, -2, 0);
-	finger();
-	glPopMatrix();
-	
-
-	glPopMatrix();
-	glPopMatrix();
-	//glPopMatrix();
 }
-
 
 void display(void) {
 	// Before we do anything we need to clear the screen
@@ -325,64 +109,15 @@ void display(void) {
 
 	// Perform the camera viewing transformation
 	gluLookAt(0.0f, 0.0f, -10.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f, 0.0f);
-/*
-	float yRotate[16] = {
-		teapotRotate[0], 0.0, teapotRotate[2], 0.0,
-		0.0, 1.0, 0.0, 0.0,
-		teapotRotate[8], 0.0, teapotRotate[10], 0.0,
-		0.0, 0.0, 0.0, 1.0 };
-*/
 
-
-	float reflect[16] = {
-		-1, 0, 0, 0, 
-		0, 1, 0, 0, 
-		0, 0, 1, 0, 
-		0, 0, 0, 1};
-
-	glRotatef(90, 0, 0, 1);
-	glTranslatef(armTranslate[0]-3, armTranslate[1], 0);
-	glMultMatrixf(arm1Rotate);//This is just the identity matrix though...
 	
-	//Base that the whole arm sits on (this is not part of the robot)
-	glColor3f(.5, .5, .7);
-	glBegin(GL_QUADS);
-		glVertex3f(-1.25, 1.2, -1);
-		glVertex3f(-1.25, -1.2, -1);
-		glVertex3f(1.25, -1.2, -1);
-		glVertex3f(1.25, 1.2, -1);
-	
-		glVertex3f(-1.25, 1.2, 1);
-		glVertex3f(-1.25, -1.2, 1);
-		glVertex3f(1.25, -1.2, 1);
-		glVertex3f(1.25, 1.2, 1);
-
-		glVertex3f(-1.25, 1.2, 1);
-		glVertex3f(-1.25, 1.2, -1);
-		glVertex3f(-1.25, -1.2, -1);
-		glVertex3f(-1.25, -1.2, 1);
-
-		glVertex3f(1.25, 1.2, 1);
-		glVertex3f(1.25, 1.2, -1);
-		glVertex3f(1.25, -1.2, -1);
-		glVertex3f(1.25, -1.2, 1);
-
-		glVertex3f(-1.25, 1.2, 1);
-		glVertex3f(-1.25, 1.2, -1);
-		glVertex3f(1.25, 1.2, -1);
-		glVertex3f(1.25, 1.2, 1);
-
-		glVertex3f(-1.25, -1.2, 1);
-		glVertex3f(-1.25, -1.2, -1);
-		glVertex3f(1.25, -1.2, -1);
-		glVertex3f(1.25, -1.2, 1);
-	glEnd();
-	
-
 	glPushMatrix();
-	glTranslatef(1.25,0 , 0);
-	glScalef(.2, .2, .2);
-	glRotatef(-90, 0, 0,1);
+	glRotatef(-90, 1, 0, 0);//Now z-axis points straight up, x points to left, and y is pointing into screen
+	glScalef(.1, .1, .1);
+
+
+
+	//Draw the arm
 	arm(0);
 	glPopMatrix();
 
@@ -414,35 +149,11 @@ void keyboard(unsigned char key, int x, int y) {
 	case 'Q':
 		exit(0);
 		break;
-	case 'x':
-		rotateX[0]+=5;
-		break;
-	case 'X':
-		rotateX[0]-=5;
-		break;
-	case 'y':
-		rotateY[0]+=5;
-		break;
-	case 'Y':
-		rotateY[0]-=5;
-		break;
 	case 'z':
 		rotateZ[0]+=5;
 		break;
 	case 'Z':
 		rotateZ[0]-=5;
-		break;
-	case 'a':
-		rotate2[0]+=5;
-		break;
-	case 'A':
-		rotate2[0]-=5;
-		break;
-	case 'o':
-		hand[0]-=5;
-		break;
-	case 'c':
-		hand[0]+=5;
 		break;
 	default:
 		break;
@@ -461,6 +172,9 @@ int main(int argc, char** argv) {
 	std::string str = "robots/robot.xml";
 	CConfigLoader cfg(str);
 	if(!cfg.LoadXml()) return 1;
+	robot = cfg.GetTable();
+
+	std::cout << robot.params[0].theta; 
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
@@ -472,11 +186,10 @@ int main(int argc, char** argv) {
 	// Call our init function
 	init();
 
-		//std::cout << cfg.GetTable().params[0].theta  << std::endl;
-    return 0;
 	// Register our callbacks with GLUT
 	// Note that these are actually pointers to the functions declared above.
 	glutDisplayFunc(display);
+	glutKeyboardFunc(keyboard);
 
 
 	// Call GLUT's main loop, which never ends

@@ -16,9 +16,7 @@ bool CConfigLoader::LoadXml()
     std::string  temp_string;
     std::string  out_temp_string;
 
-    Token tkn;
 
-    temp_struct.z_joint_type = NOTSET;
 
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(fname.c_str());
@@ -27,6 +25,15 @@ bool CConfigLoader::LoadXml()
     std::cout << "Load result: " << result.description() <<std::endl;
     std::cout << "Robot name: " << doc.child("Robot").attribute("name").value() << std::endl;
 #endif
+
+		for_load.targetx = doc.child("Robot").attribute("targetx").as_float();
+		for_load.targety = doc.child("Robot").attribute("targety").as_float();
+		for_load.targetz = doc.child("Robot").attribute("targetz").as_float();
+
+#ifdef DEBUGOUTPUTFORXML
+    std::cout << "Target:  " << for_load.targetx << " " << for_load.targety << " " << for_load.targetz <<std::endl;
+#endif
+
     pugi::xml_node tools = doc.child("Robot").child("Joints");
     //Second method
     for (pugi::xml_node tool = tools.child("joint"); tool; tool = tool.next_sibling("joint"))
@@ -36,10 +43,7 @@ bool CConfigLoader::LoadXml()
         std::cout << "Name: " << tool.attribute("name").value()<<std::endl;
 #endif
         temp_struct.joint_name  = tool.attribute("name").value();
-        //Id is currently not needed
-#ifdef DEBUGOUTPUTFORXML
-        std::cout << "id  : " << tool.attribute("id").value()<<std::endl;
-#endif
+
         //Get alphai of joint
 #ifdef DEBUGOUTPUTFORXML
         std::cout << "alphai    :" << tool.attribute("alphai").value()<<std::endl;
@@ -54,58 +58,16 @@ bool CConfigLoader::LoadXml()
 #ifdef DEBUGOUTPUTFORXML
         std::cout << "di        :" << tool.attribute("di").value()<<std::endl;
 #endif
-        temp_string             = tool.attribute("di").value();
-        tkn = scan_string(temp_string.c_str(),temp_string.size(),out_temp_string);
-        switch (tkn)
-        {
-        case INT:
-        case FLOAT:
-            temp_struct.d = tool.attribute("di").as_float();
-        	break;
-        case VAR:
-            temp_struct.d = (float)strtod(out_temp_string.c_str(), 0);
-            temp_struct.z_joint_type = PRISMATIC;
-            break;
-        case SPACE:
-        case END:
-        case ERROR:
-            std::cout<<"Error. Cannot convert :"<< temp_string<<std::endl;
-            return false;
-        }
+				temp_struct.d = tool.attribute("di").as_float();
+
         //Get theta of joint
 #ifdef DEBUGOUTPUTFORXML
         std::cout << "theta     :" << tool.attribute("theta").value()<<std::endl;
 #endif
-        temp_string             = tool.attribute("theta").value();
-        tkn = scan_string(temp_string.c_str(),temp_string.size(),out_temp_string);
-        switch (tkn)
-        {
-        case INT:
-        case FLOAT:
-            temp_struct.theta = tool.attribute("di").as_float();
-            break;
-        case VAR:
-            temp_struct.theta = (float)strtod(out_temp_string.c_str(), 0);
+				temp_struct.theta = tool.attribute("theta").as_float();
 
-            if (temp_struct.z_joint_type == PRISMATIC)
-            {
-                std::cout<<"Error. Joint cannot be REVOLUTE and PRISMATIC at the same time."<<std::endl;
-                return false;
-            }
+				temp_struct.z_joint_type = (char *)tool.attribute("type").value();
 
-            temp_struct.z_joint_type = REVOLUTE;
-            break;
-        case SPACE:
-        case END:
-        case ERROR:
-            std::cout<<"Error. Cannot convert :"<< temp_string<<std::endl;            
-            return false;
-        }
-
-        if (temp_struct.z_joint_type == NOTSET)
-        {
-            temp_struct.z_joint_type = CONSTANTJOINT;
-        }
 
 
 				//Add dh params for this joint to our full robot struct
