@@ -36,7 +36,7 @@ set_time_format -unit ns -decimal_places 3
 # Create Clock
 #**************************************************************
 
-create_clock -name {i.clk} -period 10.000 -waveform { 0.000 5.000 } [get_ports { i.clk }]
+create_clock -name {clk} -period 10.000 -waveform { 0.000 5.000 } [get_ports { clk }]
 
 #**************************************************************
 # Create Generated Clock
@@ -54,29 +54,29 @@ create_clock -name {i.clk} -period 10.000 -waveform { 0.000 5.000 } [get_ports {
 # Set Clock Uncertainty
 #**************************************************************
 
-set_clock_uncertainty -rise_from [get_clocks {i.clk}] -rise_to [get_clocks {i.clk}] -setup 0.100  
-set_clock_uncertainty -rise_from [get_clocks {i.clk}] -rise_to [get_clocks {i.clk}] -hold 0.060  
-set_clock_uncertainty -rise_from [get_clocks {i.clk}] -fall_to [get_clocks {i.clk}] -setup 0.100  
-set_clock_uncertainty -rise_from [get_clocks {i.clk}] -fall_to [get_clocks {i.clk}] -hold 0.060  
-set_clock_uncertainty -fall_from [get_clocks {i.clk}] -rise_to [get_clocks {i.clk}] -setup 0.100  
-set_clock_uncertainty -fall_from [get_clocks {i.clk}] -rise_to [get_clocks {i.clk}] -hold 0.060  
-set_clock_uncertainty -fall_from [get_clocks {i.clk}] -fall_to [get_clocks {i.clk}] -setup 0.100  
-set_clock_uncertainty -fall_from [get_clocks {i.clk}] -fall_to [get_clocks {i.clk}] -hold 0.060  
+set_clock_uncertainty -rise_from [get_clocks {clk}] -rise_to [get_clocks {clk}] -setup 0.100  
+set_clock_uncertainty -rise_from [get_clocks {clk}] -rise_to [get_clocks {clk}] -hold 0.060  
+set_clock_uncertainty -rise_from [get_clocks {clk}] -fall_to [get_clocks {clk}] -setup 0.100  
+set_clock_uncertainty -rise_from [get_clocks {clk}] -fall_to [get_clocks {clk}] -hold 0.060  
+set_clock_uncertainty -fall_from [get_clocks {clk}] -rise_to [get_clocks {clk}] -setup 0.100  
+set_clock_uncertainty -fall_from [get_clocks {clk}] -rise_to [get_clocks {clk}] -hold 0.060  
+set_clock_uncertainty -fall_from [get_clocks {clk}] -fall_to [get_clocks {clk}] -setup 0.100  
+set_clock_uncertainty -fall_from [get_clocks {clk}] -fall_to [get_clocks {clk}] -hold 0.060  
 
 
 #**************************************************************
 # Set Input Delay
 #**************************************************************
 
-set_input_delay -clock i.clk -max 1 [all_inputs]
+set_input_delay -clock clk -max 1 [all_inputs]
 
-set_input_delay -clock i.clk -min 1 [all_inputs]
+set_input_delay -clock clk -min 1 [all_inputs]
 
 #**************************************************************
 # Set Output Delay
 #**************************************************************
 
-set_output_delay -clock i.clk 1 [all_outputs]
+set_output_delay -clock clk 1 [all_outputs]
 
 #**************************************************************
 # Set Clock Groups
