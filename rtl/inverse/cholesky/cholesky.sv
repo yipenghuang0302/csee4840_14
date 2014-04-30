@@ -245,7 +245,7 @@ module cholesky (
 				i.array_mult_datab[8] <= i.quotients[3]; // A_43 = A_43 - L_40 * L_03 = A_43 - L_40 * L_30
 				i.array_mult_datab[9] <= i.quotients[4]; // A_44 = A_44 - L_40 * L_04 = A_44 - L_40 * L_40
 				i.array_mult_datab[10] <= i.quotients[1]; // A_51 = A_51 - L_50 * L_01 = A_51 - L_50 * L_10
-				i.array_mult_datab[11] <= i.quotients[3]; // A_52 = A_52 - L_50 * L_02 = A_52 - L_50 * L_20
+				i.array_mult_datab[11] <= i.quotients[2]; // A_52 = A_52 - L_50 * L_02 = A_52 - L_50 * L_20
 				i.array_mult_datab[12] <= i.quotients[3]; // A_53 = A_53 - L_50 * L_03 = A_53 - L_50 * L_30
 				i.array_mult_datab[13] <= i.quotients[4]; // A_54 = A_54 - L_50 * L_04 = A_54 - L_50 * L_40
 				i.array_mult_datab[14] <= i.quotients[5]; // A_55 = A_55 - L_50 * L_05 = A_55 - L_50 * L_50

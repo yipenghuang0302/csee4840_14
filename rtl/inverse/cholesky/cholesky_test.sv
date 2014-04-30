@@ -33,8 +33,8 @@ class cholesky_test;
 		logic [5:0] [5:0] [26:0] lt
 	);
 
-		real abs_tol = 0.05;
-		real rel_tol = 0.05;
+		real abs_tol = 0.01;
+		real rel_tol = 0.01;
 
 		real lt_real[6][6];
 		real lt_error[6][6];
@@ -54,13 +54,13 @@ class cholesky_test;
 					$write("model_lt=%f; dut_result=%f; lt_percent=%f.\n", model_lt[i][j], lt_real[i][j], lt_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass cholesky i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass cholesky i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
 
 		if (passed) begin
-			$display("%t : pass \n", $realtime);
+			// $display("%t : pass \n", $realtime);
 		end else begin
 			// $exit();
 		end
