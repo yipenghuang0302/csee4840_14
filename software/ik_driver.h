@@ -2,7 +2,9 @@
 #define _IK_DRIVER_H
 
 #include <linux/ioctl.h>
-#include <math.h>
+
+//PI
+# define M_PI		3.14159265358979323846
 
 //How many joints we have
 #define MAX_JOINT 6
@@ -28,7 +30,7 @@
 /* DH Parameters */
 #define THETA 0				//theta_i
 #define L_OFFSET 1		//d_i
-#define L_Length 2		//a_i
+#define L_LENGTH 2		//a_i
 #define ALPHA 3				//alpha_i
 #define NUM_PARAMS 4
 

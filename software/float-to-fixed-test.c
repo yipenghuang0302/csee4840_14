@@ -15,10 +15,19 @@ static int float_to_fixed(float num){
 	return decimal + fraction;
 }
 
+static float power(int a, int exp){
+	float result = 1.0;
+	while (exp > 0){
+		result = result * a;
+		exp--;
+	}
+	return result;
+}
+
 int main(){
 	float f = -5.4321;
 	float g = -3.0;
 	printf("The fixed-point equivalent of %f is %d\n", f, float_to_fixed(f));
 	printf("The fixed-point equivalent of %f is %d\n", g, float_to_fixed(g));
-	printf("%f + %f = %f", f, g, (float_to_fixed(f) + float_to_fixed(g))/pow(2,14));
+	printf("%f + %f = %f", f, g, (float_to_fixed(f) + float_to_fixed(g))/power(2,14));
 }
