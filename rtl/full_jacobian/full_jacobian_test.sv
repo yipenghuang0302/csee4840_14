@@ -162,7 +162,7 @@ class full_jacobian_test;
 						$write("model_full_matrix=%f; dut_result=%f; full_matrix_percent=%f.\n", model_full_matrix[joint][i][j], full_matrix_real[i][j], full_matrix_percent[i][j]);
 						passed = 1'b0;
 					end else begin
-						$write("%t : pass full matrix i=%d j=%d\n", $realtime, i, j);
+						// $write("%t : pass full matrix i=%d j=%d\n", $realtime, i, j);
 					end
 				end
 			end
@@ -180,7 +180,7 @@ class full_jacobian_test;
 					$write("model_axis=%f; dut_result=%f; axis_percent=%f.\n", model_axis[joint][coord], axis_real[joint][coord], axis_percent[joint][coord]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass axis joint=%d coord=%d\n", $realtime, joint, coord);
+					// $write("%t : pass axis joint=%d coord=%d\n", $realtime, joint, coord);
 				end
 			end
 		end
@@ -197,7 +197,7 @@ class full_jacobian_test;
 					$write("model_dist_to_end=%f; dut_result=%f; dist_to_end_percent=%f.\n", model_dist_to_end[joint][coord], dist_to_end_real[joint][coord], dist_to_end_percent[joint][coord]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass dist_to_end joint=%d coord=%d\n", $realtime, joint, coord);
+					// $write("%t : pass dist_to_end joint=%d coord=%d\n", $realtime, joint, coord);
 				end
 			end
 		end
@@ -214,7 +214,7 @@ class full_jacobian_test;
 					$write("model_jacobian_matrix=%f; dut_result=%f; jacobian_percent=%f.\n", model_jacobian_matrix[i][j], jacobian_real[i][j], jacobian_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass jacobian i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass jacobian i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
@@ -231,7 +231,7 @@ class full_jacobian_test;
 					$write("model_jjt_bias=%f; dut_result=%f; jjt_bias_percent=%f.\n", model_jjt_bias[i][j], jjt_bias_real[i][j], jjt_bias_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass jjt_bias i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass jjt_bias i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end

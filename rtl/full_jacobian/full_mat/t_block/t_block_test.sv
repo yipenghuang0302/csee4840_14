@@ -68,8 +68,8 @@ class t_block_test;
 		logic [3:0] [3:0] [26:0] dut_t_mat
 	);
 
-		real abs_tol = 0.89;
-		real rel_tol = 0.064;
+		real abs_tol = 0.05;
+		real rel_tol = 0.05;
 
 		real real_t_mat[4][4];
 		real error[4][4];
@@ -96,7 +96,7 @@ class t_block_test;
 					$write("m_alpha=%f\n", m_alpha[0]);
 					$write("m_theta=%f\n", m_theta[0]);
 					$write("m_mat[0][i][j]=%f; dut_mat[i][j]=%f; mat_error[i][j]=%f.\n", m_mat[0][i][j], real_t_mat[i][j], error[i][j]);
-					$exit();
+					// $exit();
 				end
 			end
 		end

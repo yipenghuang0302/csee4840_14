@@ -3,12 +3,12 @@
 
 `timescale 1ns/1ps
 
-module inverse_top (
+module inverse (
 	ifc_inverse.inverse_dut i
 );
 
 	// INSTANTIATE CHOLESKY BLOCK
-	ifc_cholesky ifc_cholesky (clk);
+	ifc_cholesky ifc_cholesky (i.clk);
 	// inputs
 	assign ifc_cholesky.en = i.en;
 	assign ifc_cholesky.rst = i.rst;
@@ -23,7 +23,7 @@ module inverse_top (
 	assign i.lt = ifc_cholesky.lt;
 
 	// INSTANTIATE LT INVERSE BLOCK
-	ifc_lt_inverse ifc_lt_inverse (clk);
+	ifc_lt_inverse ifc_lt_inverse (i.clk);
 	// inputs
 	assign ifc_lt_inverse.en = i.en;
 	assign ifc_lt_inverse.rst = i.rst;
@@ -39,7 +39,7 @@ module inverse_top (
 	assign i.lt_inverse = ifc_lt_inverse.lt_inverse;
 
 	// INSTANTIATE SHARED ARRAY DIV
-	ifc_array_div ifc_array_div (clk);
+	ifc_array_div ifc_array_div (i.clk);
 	// inputs
 	assign ifc_array_div.en = i.en;
 	assign ifc_array_div.rst = i.rst;

@@ -44,8 +44,8 @@ class mat_mult_test;
 		logic [5:0] [5:0] [26:0] dut_result
 	);
 
-		real abs_tol = 0.50;
-		real rel_tol = 0.03;
+		real abs_tol = 0.03;
+		real rel_tol = 0.02;
 		real real_result[6][6];
 		real error[6][6];
 		real percent[6][6];

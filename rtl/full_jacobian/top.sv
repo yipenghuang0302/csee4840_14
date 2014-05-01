@@ -48,7 +48,7 @@ module full_jacobian_top ();
 	full_jacobian full_jacobian (ifc_full_jacobian.full_jacobian);
 
 	// LOGIC GOVERNING COUNT
-	parameter MAX = 114;
+	parameter MAX = 113;
 	always_ff @(posedge ifc_full_jacobian.clk) begin
 		if ( ifc_full_jacobian.rst ) begin // if parallel multiplier mode, clear counter
 			ifc_full_jacobian.count <= 8'b0;

@@ -56,8 +56,8 @@ class full_mat_test;
 		logic [5:0] [3:0] [3:0] [26:0] full_mat
 	);
 
-		real abs_tol = 0.03;
-		real rel_tol = 0.06;
+		real abs_tol = 0.05;
+		real rel_tol = 0.10;
 
 		real real_result[4][4];
 		real error[4][4];
