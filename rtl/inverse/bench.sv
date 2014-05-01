@@ -38,8 +38,8 @@ program inverse_tb (ifc_inverse.inverse_tb ds);
 				for ( int index=0 ; index<trans.n ; index++ ) begin // index
 					trans.matrix_data[row][col] += trans.j_data[row][index] * trans.j_data[col][index];
 				end
-				$display("row, col = %d", row, col);
-				$display("data = %f", trans.matrix_data[row][col]);
+				// $display("row, col = %d", row, col);
+				// $display("data = %f", trans.matrix_data[row][col]);
 				ds.cb.matrix[row][col] <= int'(trans.matrix_data[row][col] * 256.0);
 			end
 		end

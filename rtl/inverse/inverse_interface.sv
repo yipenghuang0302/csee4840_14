@@ -34,19 +34,19 @@ logic [14:0] [26:0] array_mult_datab;
 // Input from array multipliers
 logic [14:0] [26:0] array_mult_result;
 
-clocking cb @(posedge clk);
-	output en;
-	output rst;
-	output matrix;
+// clocking cb @(posedge clk);
+// 	output en;
+// 	output rst;
+// 	output matrix;
+// 
+// 	input lt;
+// 	input lt_inverse;
+// 	input inverse;
+// endclocking
+// 
+// modport inverse_tb (clocking cb);
 
-	input lt;
-	input lt_inverse;
-	input inverse;
-endclocking
-
-modport lt_inverse_tb (clocking cb);
-
-modport inverse (
+modport inverse_dut (
 	input clk, en, rst,
 	input count,
 	

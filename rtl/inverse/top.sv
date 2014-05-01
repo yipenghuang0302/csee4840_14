@@ -3,6 +3,10 @@
 
 `timescale 1ns/1ps
 
+`include "inverse_interface.sv"
+`include "inverse.sv"
+`include "bench.sv"
+
 `include "cholesky/cholesky_interface.sv"
 `include "cholesky/cholesky.sv"
 `include "cholesky/sqrt_27/sqrt_27_interface.sv"

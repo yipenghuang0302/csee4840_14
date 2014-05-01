@@ -3,12 +3,12 @@
 
 `timescale 1ns/1ps
 
-module inverse_top (
+module inverse (
 	ifc_inverse.inverse_dut i
 );
 
 	// INSTANTIATE CHOLESKY BLOCK
-	ifc_cholesky ifc_cholesky (clk);
+	ifc_cholesky ifc_cholesky (i.clk);
 	// inputs
 	assign ifc_cholesky.en = i.en;
 	assign ifc_cholesky.rst = i.rst;
@@ -16,14 +16,12 @@ module inverse_top (
 	assign ifc_cholesky.matrix = i.matrix;
 	 // shared multiplier
 	assign ifc_cholesky.array_mult_result = i.array_mult_result;
-	 // shared divider
-	assign ifc_cholesky.quotients = ifc_array_div.quotients;
 	cholesky cholesky (ifc_cholesky.cholesky);
 	// outputs
 	assign i.lt = ifc_cholesky.lt;
 
 	// INSTANTIATE LT INVERSE BLOCK
-	ifc_lt_inverse ifc_lt_inverse (clk);
+	ifc_lt_inverse ifc_lt_inverse (i.clk);
 	// inputs
 	assign ifc_lt_inverse.en = i.en;
 	assign ifc_lt_inverse.rst = i.rst;
@@ -32,14 +30,12 @@ module inverse_top (
 	assign ifc_lt_inverse.lt = ifc_cholesky.lt;
 	 // shared multiplier
 	assign ifc_lt_inverse.array_mult_result = i.array_mult_result;
-	 // shared divider
-	assign ifc_lt_inverse.quotients = ifc_array_div.quotients;
 	lt_inverse lt_inverse (ifc_lt_inverse.lt_inverse_dut);
 	// outputs
 	assign i.lt_inverse = ifc_lt_inverse.lt_inverse;
 
 	// INSTANTIATE SHARED ARRAY DIV
-	ifc_array_div ifc_array_div (clk);
+	ifc_array_div ifc_array_div (i.clk);
 	// inputs
 	assign ifc_array_div.en = i.en;
 	assign ifc_array_div.rst = i.rst;
@@ -47,6 +43,8 @@ module inverse_top (
 	assign ifc_array_div.dividends = ifc_cholesky.dividends | ifc_lt_inverse.dividends;
 	assign ifc_array_div.divisor = ifc_cholesky.divisor;
 	array_div array_div (ifc_array_div.array_div);
+	assign ifc_cholesky.quotients = ifc_array_div.quotients;
+	assign ifc_lt_inverse.quotients = ifc_array_div.quotients;
 
 	// SHARED ARRAY MULT
 	// timing design prevents module outputs to shared multipliers colliding

@@ -39,20 +39,20 @@ program full_jacobian_tb (ifc_full_jacobian.full_jacobian_tb ds);
 			end
 
 			// trans.dh_data[i][THETA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][THETA] * 2 * 3.141592653589793238462643383279502884197;
-			// trans.dh_data[i][L_OFFSET] = -64.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 64.0;
-			// trans.dh_data[i][L_DISTANCE] = -64.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 64.0;
+			// trans.dh_data[i][L_OFFSET] = -8.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 8.0;
+			// trans.dh_data[i][L_DISTANCE] = -8.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 8.0;
 			// trans.dh_data[i][ALPHA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][ALPHA] * 2 * 3.141592653589793238462643383279502884197;
 
 			trans.dh_data[i][THETA] = -3.0 + trans.dh_fraction[i][THETA] * 2 * 3.0;
-			trans.dh_data[i][L_OFFSET] = -64.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 64.0;
-			trans.dh_data[i][L_DISTANCE] = -64.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 64.0;
+			trans.dh_data[i][L_OFFSET] = -8.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 8.0;
+			trans.dh_data[i][L_DISTANCE] = -8.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 8.0;
 			trans.dh_data[i][ALPHA] = -3.0 + trans.dh_fraction[i][ALPHA] * 2 * 3.0;
 
-			// $display("joint index = %d", i);
-			// $display("theta = %f", trans.dh_data[i][THETA]);
-			// $display("l_offset a = %f", trans.dh_data[i][L_OFFSET]);
-			// $display("l_distance d = %f", trans.dh_data[i][L_DISTANCE]);
-			// $display("alpha = %f", trans.dh_data[i][ALPHA]);
+			$display("joint index = %d", i);
+			$display("theta = %f", trans.dh_data[i][THETA]);
+			$display("l_offset a = %f", trans.dh_data[i][L_OFFSET]);
+			$display("l_distance d = %f", trans.dh_data[i][L_DISTANCE]);
+			$display("alpha = %f", trans.dh_data[i][ALPHA]);
 
 			// passing data to design under test happens here
 			for (int j=0; j<4; j++) begin // dh_parameter index
@@ -64,9 +64,9 @@ program full_jacobian_tb (ifc_full_jacobian.full_jacobian_tb ds);
 		// GENERATE Z BASIS VECTOR
 		for ( int z=0 ; z<3 ; z++ ) begin // z index
 			trans.z_fraction[z] = real'(trans.z_increment[z]) / 2147483648.0;
-			trans.z_data[z] = -50.0 + trans.z_fraction[z] * 2 * 50.0;
-			// $display("z = %d", z);
-			// $display("data = %f", trans.z_data[z]);
+			trans.z_data[z] = -8.0 + trans.z_fraction[z] * 2 * 8.0;
+			$display("z = %d", z);
+			$display("data = %f", trans.z_data[z]);
 			ds.cb.z[z] <= int'(trans.z_data[z] * 256.0);
 		end
 
@@ -95,7 +95,7 @@ program full_jacobian_tb (ifc_full_jacobian.full_jacobian_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (113) @(ds.cb);
+			repeat (112) @(ds.cb);
 			test.check_full_jacobian (
 				ds.cb.full_matrix,
 				ds.cb.axis,
