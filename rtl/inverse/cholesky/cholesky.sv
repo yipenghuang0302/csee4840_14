@@ -170,6 +170,7 @@ module cholesky (
 			8'd154: i.divisor <= ifc_sqrt_27.q; // i.lt[row][row]; // L_22
 			8'd172: i.divisor <= ifc_sqrt_27.q; // i.lt[row][row]; // L_33
 			8'd190: i.divisor <= ifc_sqrt_27.q; // i.lt[row][row]; // L_44
+			8'd208: i.divisor <= ifc_sqrt_27.q; // i.lt[row][row]; // L_55
 			default: i.divisor <= 27'b0;
 		endcase
 	end
