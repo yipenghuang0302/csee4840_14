@@ -22,7 +22,7 @@ leda:
 	leda -full64 -sverilog -top $(top) *.sv
 
 bench:
-	vcs -full64 -sverilog +define+VPD +warn=all +lint=all,noVCDE -notice -PP ik_swift_interface.sv -o testbench.exe
+	vcs -full64 -sverilog +define+VPD +warn=all +lint=all,noVCDE,noVNGS -notice -PP ik_swift_interface.sv -o testbench.exe
 
 wave:
 	vcs -vpd2vcd vcdplus.vpd waveform.vcd
