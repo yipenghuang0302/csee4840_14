@@ -40,7 +40,7 @@ class jacobian_test;
 				position[joint][row] = full_matrix[joint-1][row][3];
 
 		// CALCULATE VECTOR TO END OF EFFECTOR
-		for ( int joint=1 ; joint<6 ; joint++ )
+		for ( int joint=0 ; joint<6 ; joint++ )
 			for ( int row=0 ; row<3 ; row++ )
 				model_dist_to_end[joint][row] = full_matrix[5][row][3] - position[joint][row];
 
@@ -71,8 +71,8 @@ class jacobian_test;
 		logic [5:0] [5:0] [26:0] jacobian_matrix
 	);
 
-		real abs_tol = 0.02;
-		real rel_tol = 0.02;
+		real abs_tol = 0.01;
+		real rel_tol = 0.01;
 
 		real axis_real[6][3];
 		real axis_error[6][3];
@@ -100,7 +100,7 @@ class jacobian_test;
 					$write("model_axis=%f; dut_result=%f; axis_percent=%f.\n", model_axis[joint][coord], axis_real[joint][coord], axis_percent[joint][coord]);
 					passed = 1'b0;
 				end else begin
-					// $write("%t : pass axis joint=%d coord=%d\n", $realtime, joint, coord);
+					$write("%t : pass axis joint=%d coord=%d\n", $realtime, joint, coord);
 				end
 			end
 		end
@@ -117,7 +117,7 @@ class jacobian_test;
 					$write("model_dist_to_end=%f; dut_result=%f; dist_to_end_percent=%f.\n", model_dist_to_end[joint][coord], dist_to_end_real[joint][coord], dist_to_end_percent[joint][coord]);
 					passed = 1'b0;
 				end else begin
-					// $write("%t : pass dist_to_end joint=%d coord=%d\n", $realtime, joint, coord);
+					$write("%t : pass dist_to_end joint=%d coord=%d\n", $realtime, joint, coord);
 				end
 			end
 		end
@@ -134,7 +134,7 @@ class jacobian_test;
 					$write("model_jacobian_matrix=%f; dut_result=%f; jacobian_percent=%f.\n", model_jacobian_matrix[i][j], jacobian_real[i][j], jacobian_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					// $write("%t : pass jacobian i=%d j=%d\n", $realtime, i, j);
+					$write("%t : pass jacobian i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end

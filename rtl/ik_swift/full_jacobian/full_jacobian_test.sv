@@ -83,7 +83,7 @@ class full_jacobian_test;
 				position[joint][row] = model_full_matrix[joint-1][row][3];
 
 		// CALCULATE VECTOR TO END OF EFFECTOR
-		for ( int joint=1 ; joint<6 ; joint++ )
+		for ( int joint=0 ; joint<6 ; joint++ )
 			for ( int row=0 ; row<3 ; row++ )
 				model_dist_to_end[joint][row] = model_full_matrix[5][row][3] - position[joint][row];
 
@@ -239,7 +239,7 @@ class full_jacobian_test;
 		if (passed) begin
 			$display("%t : pass \n", $realtime);
 		end else begin
-			// $exit();
+			$exit();
 		end
 
 	endfunction

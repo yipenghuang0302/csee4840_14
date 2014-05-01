@@ -16,6 +16,8 @@ logic [2:0] [26:0] z;
 logic [5:0] joint_type;
 // dh joint parameters
 logic [5:0] [3:0] [26:0] dh_param;
+// target coordinates
+logic [5:0] [26:0] target;
 
 // TEST OUTPUTS
 // jacobian
@@ -23,9 +25,15 @@ logic [5:0] [5:0] [26:0] jacobian_matrix;
 // jacobian * jacobian transpose + bias
 logic [5:0] [5:0] [26:0] jjt_bias;
 // LT decomposition of given matrix
-logic [5:0][5:0][26:0] lt;
+logic [5:0] [5:0] [26:0] lt;
 // ik_swift of given matrix
-logic [5:0][5:0][26:0] inverse;
+logic [5:0] [5:0] [26:0] inverse;
+// damped least squares matrix
+logic [5:0] [5:0] [26:0] dls;
+
+// OUTPUTS
+// deltas for joint parameters
+logic [5:0] [26:0] delta;
 
 clocking cb @(posedge clk);
 	output en;
@@ -33,11 +41,14 @@ clocking cb @(posedge clk);
 	output z;
 	output joint_type;
 	output dh_param;
+	output target;
 
 	input jacobian_matrix;
 	input jjt_bias;
 	input lt;
 	input inverse;
+	input dls;
+	input delta;
 endclocking
 
 modport ik_swift_tb (clocking cb);
@@ -49,11 +60,14 @@ modport ik_swift (
 	input z,
 	input joint_type,
 	input dh_param,
+	input target,
 
 	output jacobian_matrix,
 	output jjt_bias,
 	output lt,
-	output inverse
+	output inverse,
+	output dls,
+	output delta
 );
 
 endinterface

@@ -41,9 +41,10 @@ module cholesky (
 	// LOGIC GOVERNING SQRT RADICAL
 	// L_xx = sqrt(A_xx)
 	always_ff @(posedge i.clk) begin
-		if (
-			i.count==8'd112 || i.count==8'd130 || i.count==8'd148 ||
-			i.count==8'd166 || i.count==8'd184 || i.count==8'd202
+		if ( i.count==8'd112 )
+			ifc_sqrt_27.radical <= i.matrix[row][row];
+		else if (
+			i.count==8'd130 || i.count==8'd148 || i.count==8'd166 || i.count==8'd184 || i.count==8'd202
 		)
 			ifc_sqrt_27.radical <= temp[row][row];
 		else 

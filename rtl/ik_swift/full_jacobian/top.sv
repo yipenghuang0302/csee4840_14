@@ -68,7 +68,7 @@ module full_jacobian_top ();
 	always_ff @(posedge clk) begin
 		ifc_mat_mult.rst <= ifc_full_jacobian.count==8'd28 || ifc_full_jacobian.count==8'd98;
 	end
-	assign ifc_mat_mult.mat_mode = 8'd89<=ifc_full_jacobian.count&&ifc_full_jacobian.count<8'd98 ? 1'b0 : 1'b1;
+	assign ifc_mat_mult.mat_mode = 8'd90<=ifc_full_jacobian.count&&ifc_full_jacobian.count<8'd99 ? 1'b0 : 1'b1;
 	assign ifc_mat_mult.dataa = ifc_full_jacobian.mat_mult_dataa;
 	assign ifc_mat_mult.datab = ifc_full_jacobian.mat_mult_datab;
 	mat_mult mat_mult (ifc_mat_mult.mat_mult);

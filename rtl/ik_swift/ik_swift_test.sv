@@ -7,6 +7,8 @@ class ik_swift_test;
 	real m_jjt_bias [6][6];
 	real m_lt [6][6];
 	real m_inverse [6][6];
+	real m_dls [6][6];
+	real m_delta [6];
 
 	function real abs (real num); 
 		abs = (num<0) ? -num : num; 
@@ -15,7 +17,8 @@ class ik_swift_test;
 	function void update_ik_swift (
 		real z [3],
 		logic [5:0] joint_type,
-		real dh_param [6][4]
+		real dh_param [6][4],
+		real target [6]
 	);
 
 		real full_matrix [6][4][4];
@@ -24,6 +27,7 @@ class ik_swift_test;
 		real position [6][3];
 		real dist_to_end [6][3];
 		real lt_inv [6][6];
+		real error [6];
 
 		// GENERATE FULL MATRIX
 		// iterate over joint index
@@ -84,7 +88,7 @@ class ik_swift_test;
 				position[joint][row] = full_matrix[joint-1][row][3];
 
 		// CALCULATE VECTOR TO END OF EFFECTOR
-		for ( int joint=1 ; joint<n ; joint++ )
+		for ( int joint=0 ; joint<n ; joint++ )
 			for ( int row=0 ; row<3 ; row++ )
 				dist_to_end[joint][row] = full_matrix[5][row][3] - position[joint][row];
 
@@ -121,6 +125,14 @@ class ik_swift_test;
 				m_lt[row][col] = 0.0;
 				lt_inv[row][col] = 0.0;
 				m_inverse[row][col] = 0.0;
+				m_dls[row][col] = 0.0;
+			end
+			m_delta[row] = 0.0;
+		end
+
+		for ( int i=0 ; i<n ; i++ ) begin // jjt row
+			for ( int j=0 ; j<n ; j++ ) begin // jjt column
+				$write("m_jjt_bias=%f;\n", m_jjt_bias[i][j]);
 			end
 		end
 
@@ -164,13 +176,33 @@ class ik_swift_test;
 				for ( int index=0 ; index<n ; index++ )
 					m_inverse[row][col] += lt_inv[index][row] * lt_inv[index][col];
 
+		// MATRIX MULTIPLY TO GET DLS MATRIX
+		// JT * INVERSE
+		for ( int row=0 ; row<n ; row++ )
+			for ( int col=0 ; col<n ; col++ )
+				for ( int index=0 ; index<n ; index++ )
+					m_dls[row][col] += m_jacobian[index][row] * m_inverse[index][col];
+
+		// DETERMINE ERROR VECTOR
+		for ( int row=0 ; row<3 ; row++ ) begin
+			error[row] = target[row] - position[5][row];
+			error[row+3] = target[row+3] - axis[5][row];
+		end
+
+		// MATRIX VECTOR MULTIPLY TO GET DELTA THETA
+		for ( int row=0 ; row<n ; row++ )
+			for ( int col=0 ; col<n ; col++ )
+				m_delta[row] += m_dls[row][col] * error[col];
+
 	endfunction
 
 	function void check_ik_swift (
 		logic [5:0] [5:0] [26:0] jacobian_matrix,
 		logic [5:0] [5:0] [26:0] jjt_bias,
 		logic [5:0] [5:0] [26:0] lt,
-		logic [5:0] [5:0] [26:0] inverse
+		logic [5:0] [5:0] [26:0] inverse,
+		logic [5:0] [5:0] [26:0] dls,
+		logic [5:0] [26:0] delta
 	);
 
 		real abs_tol = 0.01;
@@ -191,6 +223,14 @@ class ik_swift_test;
 		real inverse_real[6][6];
 		real inverse_error[6][6];
 		real inverse_percent[6][6];
+
+		real dls_real[6][6];
+		real dls_error[6][6];
+		real dls_percent[6][6];
+
+		real delta_real[6];
+		real delta_error[6];
+		real delta_percent[6];
 
 		bit passed = 1'b1;
 
@@ -260,6 +300,38 @@ class ik_swift_test;
 				$write("m_inverse=%f; dut_result=%f; inverse_error=%f.\n", m_inverse[i][j], inverse_real[i][j], inverse_error[i][j]);
 				$write("m_inverse=%f; dut_result=%f; inverse_percent=%f.\n", m_inverse[i][j], inverse_real[i][j], inverse_percent[i][j]);
 			end
+		end
+
+		// CHECK DLS
+		for ( int i=0 ; i<n ; i++ ) begin // dls row
+			for ( int j=0 ; j<n ; j++ ) begin // dls column
+				dls_real[i][j] = real'(int'({{5{dls[i][j][26]}}, dls[i][j]}))/256.0;
+				dls_error[i][j] = abs( dls_real[i][j] - m_dls[i][j] );
+				dls_percent[i][j] = abs( dls_error[i][j] / m_dls[i][j] );
+				if (dls_error[i][j]>abs_tol && dls_percent[i][j]>rel_tol) begin
+					$write("%t : fail dls i=%d j=%d\n", $realtime, i, j);
+					passed = 1'b0;
+				end else begin
+					$write("%t : pass dls i=%d j=%d\n", $realtime, i, j);
+				end
+				$write("m_dls=%f; dut_result=%f; dls_error=%f.\n", m_dls[i][j], dls_real[i][j], dls_error[i][j]);
+				$write("m_dls=%f; dut_result=%f; dls_percent=%f.\n", m_dls[i][j], dls_real[i][j], dls_percent[i][j]);
+			end
+		end
+
+		// CHECK DELTA
+		for ( int i=0 ; i<n ; i++ ) begin // delta row
+			delta_real[i] = real'(int'({{5{delta[i][26]}}, delta[i]}))/256.0;
+			delta_error[i] = abs( delta_real[i] - m_delta[i] );
+			delta_percent[i] = abs( delta_error[i] / m_delta[i] );
+			if (delta_error[i]>abs_tol && delta_percent[i]>rel_tol) begin
+				$write("%t : fail delta i=%d\n", $realtime, i);
+				passed = 1'b0;
+			end else begin
+				$write("%t : pass delta i=%d\n", $realtime, i);
+			end
+			$write("m_delta=%f; dut_result=%f; delta_error=%f.\n", m_delta[i], delta_real[i], delta_error[i]);
+			$write("m_delta=%f; dut_result=%f; delta_percent=%f.\n", m_delta[i], delta_real[i], delta_percent[i]);
 		end
 
 		if (passed) begin

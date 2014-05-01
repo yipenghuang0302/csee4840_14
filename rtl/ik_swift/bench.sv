@@ -8,15 +8,19 @@ parameter ALPHA = 3;
 
 class ik_swift_transaction;
 
-	rand logic [6][4][30:0] dh_increment;
-	real dh_fraction [6][4];
-	real dh_data [6][4];
-
 	rand logic [3][30:0] z_increment;
 	real z_fraction [3];
 	real z_data [3];
 
 	rand logic [5:0] joint_type;
+
+	rand logic [6][4][30:0] dh_increment;
+	real dh_fraction [6][4];
+	real dh_data [6][4];
+
+	rand logic [6][30:0] target_increment;
+	real target_fraction [6];
+	real target_data [6];
 
 endclass
 
@@ -34,6 +38,15 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 
 		trans.randomize();
 
+		// GENERATE Z BASIS VECTOR
+		for ( int z=0 ; z<3 ; z++ ) begin // z index
+			trans.z_fraction[z] = real'(trans.z_increment[z]) / 2147483648.0;
+			trans.z_data[z] = -4.0 + trans.z_fraction[z] * 2 * 4.0;
+			$display("z = %d", z);
+			$display("data = %f", trans.z_data[z]);
+			ds.cb.z[z] <= int'(trans.z_data[z] * 256.0);
+		end
+
 		// GENERATE DH_PARAMS
 		//wrap input numbers to -64 ~ 64
 		for (int i=0; i<6; i++) begin // joint index
@@ -48,8 +61,8 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 			// trans.dh_data[i][ALPHA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][ALPHA] * 2 * 3.141592653589793238462643383279502884197;
 
 			trans.dh_data[i][THETA] = -3.0 + trans.dh_fraction[i][THETA] * 2 * 3.0;
-			trans.dh_data[i][L_OFFSET] = -8.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 8.0;
-			trans.dh_data[i][L_DISTANCE] = -8.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 8.0;
+			trans.dh_data[i][L_OFFSET] = -4.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 4.0;
+			trans.dh_data[i][L_DISTANCE] = -4.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 4.0;
 			trans.dh_data[i][ALPHA] = -3.0 + trans.dh_fraction[i][ALPHA] * 2 * 3.0;
 
 			$display("joint index = %d", i);
@@ -65,14 +78,16 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 
 		end
 
-		// GENERATE Z BASIS VECTOR
-		for ( int z=0 ; z<3 ; z++ ) begin // z index
-			trans.z_fraction[z] = real'(trans.z_increment[z]) / 2147483648.0;
-			trans.z_data[z] = -8.0 + trans.z_fraction[z] * 2 * 8.0;
-			$display("z = %d", z);
-			$display("data = %f", trans.z_data[z]);
-			ds.cb.z[z] <= int'(trans.z_data[z] * 256.0);
+		// GENERATE TARGET COORDINATE VECTOR
+		for ( int index=0 ; index<3 ; index++ ) begin // index
+			trans.target_fraction[index] = real'(trans.target_increment[index]) / 2147483648.0;
+			trans.target_data[index] = -4.0 + trans.target_fraction[index] * 2 * 4.0;
+			$display("target coordinate = %d", index);
+			$display("data = %f", trans.target_data[index]);
+			ds.cb.target[index] <= int'(trans.target_data[index] * 256.0);
 		end
+
+		$display("joint type = %b", trans.joint_type);
 
 		ds.cb.joint_type <= trans.joint_type;
 		ds.cb.en <= 1'b1;
@@ -82,7 +97,8 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 		test.update_ik_swift (
 			trans.z_data,
 			trans.joint_type,
-			trans.dh_data
+			trans.dh_data,
+			trans.target_data
 		);
 
 	endtask
@@ -99,12 +115,14 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (228) @(ds.cb); // 246
+			repeat (248) @(ds.cb);
 			test.check_ik_swift (
 				ds.cb.jacobian_matrix,
 				ds.cb.jjt_bias,
 				ds.cb.lt,
-				ds.cb.inverse
+				ds.cb.inverse,
+				ds.cb.dls,
+				ds.cb.delta
 			);
 		end
 	end

@@ -99,7 +99,7 @@ module jacobian (
 			i.dist_to_end[5][2] <= i.full_matrix[5][2][3] - i.full_matrix[4][2][3];
 		end
 	end
-	assign i.dist_to_end[0] = {27'd0, 27'd0, 27'd0};
+	assign i.dist_to_end[0] = {i.full_matrix[5][2][3], i.full_matrix[5][1][3], i.full_matrix[5][0][3]};
 
 	// LOGIC GOVERNING MAT MULT INPUT
 	// LOGIC GOVERNING dataa/datab (multiplications for cross-products)
