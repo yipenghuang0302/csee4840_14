@@ -16,8 +16,6 @@ module inverse (
 	assign ifc_cholesky.matrix = i.matrix;
 	 // shared multiplier
 	assign ifc_cholesky.array_mult_result = i.array_mult_result;
-	 // shared divider
-	assign ifc_cholesky.quotients = ifc_array_div.quotients;
 	cholesky cholesky (ifc_cholesky.cholesky);
 	// outputs
 	assign i.lt = ifc_cholesky.lt;
@@ -32,8 +30,6 @@ module inverse (
 	assign ifc_lt_inverse.lt = ifc_cholesky.lt;
 	 // shared multiplier
 	assign ifc_lt_inverse.array_mult_result = i.array_mult_result;
-	 // shared divider
-	assign ifc_lt_inverse.quotients = ifc_array_div.quotients;
 	lt_inverse lt_inverse (ifc_lt_inverse.lt_inverse_dut);
 	// outputs
 	assign i.lt_inverse = ifc_lt_inverse.lt_inverse;
@@ -47,6 +43,8 @@ module inverse (
 	assign ifc_array_div.dividends = ifc_cholesky.dividends | ifc_lt_inverse.dividends;
 	assign ifc_array_div.divisor = ifc_cholesky.divisor;
 	array_div array_div (ifc_array_div.array_div);
+	assign ifc_cholesky.quotients = ifc_array_div.quotients;
+	assign ifc_lt_inverse.quotients = ifc_array_div.quotients;
 
 	// SHARED ARRAY MULT
 	// timing design prevents module outputs to shared multipliers colliding
