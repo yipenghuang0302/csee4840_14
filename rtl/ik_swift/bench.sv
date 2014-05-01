@@ -1,0 +1,112 @@
+`timescale 1ns/1ps
+`include "ik_swift_test.sv"
+
+parameter THETA = 0;
+parameter L_OFFSET = 1;
+parameter L_DISTANCE = 2;
+parameter ALPHA = 3;
+
+class ik_swift_transaction;
+
+	rand logic [6][4][30:0] dh_increment;
+	real dh_fraction [6][4];
+	real dh_data [6][4];
+
+	rand logic [3][30:0] z_increment;
+	real z_fraction [3];
+	real z_data [3];
+
+	rand logic [5:0] joint_type;
+
+endclass
+
+class ik_swift_env;
+	int max_transactions = 1000000;
+endclass
+
+program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
+
+	ik_swift_transaction trans;
+	ik_swift_env env;
+	ik_swift_test test;
+
+	task do_cycle;
+
+		trans.randomize();
+
+		// GENERATE DH_PARAMS
+		//wrap input numbers to -64 ~ 64
+		for (int i=0; i<6; i++) begin // joint index
+
+			for (int j=0; j<4; j++) begin // dh_parameter index
+				trans.dh_fraction[i][j] = real'(trans.dh_increment[i][j]) / 2147483648.0;
+			end
+
+			// trans.dh_data[i][THETA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][THETA] * 2 * 3.141592653589793238462643383279502884197;
+			// trans.dh_data[i][L_OFFSET] = -8.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 8.0;
+			// trans.dh_data[i][L_DISTANCE] = -8.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 8.0;
+			// trans.dh_data[i][ALPHA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][ALPHA] * 2 * 3.141592653589793238462643383279502884197;
+
+			trans.dh_data[i][THETA] = -3.0 + trans.dh_fraction[i][THETA] * 2 * 3.0;
+			trans.dh_data[i][L_OFFSET] = -8.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 8.0;
+			trans.dh_data[i][L_DISTANCE] = -8.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 8.0;
+			trans.dh_data[i][ALPHA] = -3.0 + trans.dh_fraction[i][ALPHA] * 2 * 3.0;
+
+			$display("joint index = %d", i);
+			$display("theta = %f", trans.dh_data[i][THETA]);
+			$display("l_offset a = %f", trans.dh_data[i][L_OFFSET]);
+			$display("l_distance d = %f", trans.dh_data[i][L_DISTANCE]);
+			$display("alpha = %f", trans.dh_data[i][ALPHA]);
+
+			// passing data to design under test happens here
+			for (int j=0; j<4; j++) begin // dh_parameter index
+				ds.cb.dh_param[i][j] <= int'(trans.dh_data[i][j] * 256.0);
+			end
+
+		end
+
+		// GENERATE Z BASIS VECTOR
+		for ( int z=0 ; z<3 ; z++ ) begin // z index
+			trans.z_fraction[z] = real'(trans.z_increment[z]) / 2147483648.0;
+			trans.z_data[z] = -8.0 + trans.z_fraction[z] * 2 * 8.0;
+			$display("z = %d", z);
+			$display("data = %f", trans.z_data[z]);
+			ds.cb.z[z] <= int'(trans.z_data[z] * 256.0);
+		end
+
+		ds.cb.joint_type <= trans.joint_type;
+		ds.cb.en <= 1'b1;
+		ds.cb.rst <= 1'b0;
+
+		@(ds.cb);
+		test.update_ik_swift (
+			trans.z_data,
+			trans.joint_type,
+			trans.dh_data
+		);
+
+	endtask
+
+	initial begin
+		trans = new();
+		test = new();
+		env = new();
+
+		@(ds.cb);
+		ds.cb.rst <= 1'b1;
+		@(ds.cb);
+
+		// testing
+		repeat (env.max_transactions) begin
+			do_cycle();
+			repeat (228) @(ds.cb); // 246
+			test.check_ik_swift (
+				ds.cb.jacobian_matrix,
+				ds.cb.jjt_bias,
+				ds.cb.lt,
+				ds.cb.inverse
+			);
+		end
+	end
+
+endprogram

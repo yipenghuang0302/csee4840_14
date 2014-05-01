@@ -55,7 +55,7 @@ module cholesky (
 	// LOGIC GOVERNING ARRAY DIV QUOTIENTS
 	always_ff @(posedge i.clk) begin
 		case (i.count)
-			8'd111: begin
+			8'd112: begin
 				// INITIALIZE LOWER TRIANGULAR MATRIX
 				i.lt <= {36{27'b0}};
 			end
@@ -288,7 +288,7 @@ module cholesky (
 	// LOGIC GOVERNING ARRAY MULT RESULT
 	always_ff @(posedge i.clk) begin
 		case (i.count)
-			8'd111: begin
+			8'd112: begin
 				// INITIALIZE LOWER TEMP MATRIX
 				temp <= i.matrix;
 			end
