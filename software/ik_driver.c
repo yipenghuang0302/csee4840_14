@@ -14,6 +14,7 @@
  * checkpatch.pl --file --no-tree ik_driver.c
  */
 
+
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/errno.h>
@@ -27,6 +28,9 @@
 #include <linux/of_address.h>
 #include <linux/fs.h>
 #include <linux/uaccess.h>
+
+#include "hps.h"
+#include "hps_0.h"
 #include "ik_driver.h"
 
 #define DRIVER_NAME "ik_driver"
@@ -40,7 +44,7 @@ struct joint_dev {
 	void __iomem *virtbase; /* Where registers can be accessed in memory */
 	u8 joint_type; // ith bit is 1 if joint is rotational; 0 for translational
 	u32 target[3]; // Target position
-	u32 dh_params[JOINT_DOF * NUM_PARAMS] // Every joint has 4 parameters 
+	u32 dh_params[MAX_JOINT * NUM_PARAMS]; // Every joint has 4 parameters 
 } dev;
 
 
@@ -59,15 +63,31 @@ static u32 float_to_fixed(float num){
 }
 
 /*
+ * Compute a^exp. We need this to convert a fixed point value back to a floating
+ * point representation; as just doing bit shifting wasn't working (maybe there's
+ * a work-around...)
+ */
+static float power(int a, int exp){
+	float result = 1.0;
+	while (exp > 0){
+		result = result * a;
+		exp--;
+	}
+	return result;
+}
+
+
+/*
  * Write target position of the end effector and the bit vector for the joint types 
  * Assumes target position is in range and the device information has been set up
  */
 static void write_target(float target[3], u8 joint_t)
 {
+	int i;
 	u32 curtarget;
 
 	iowrite8(joint_t, dev.virtbase);
-	for (int i = 1; i < 4; i++){
+	for (i = 1; i < 4; i++){
 		curtarget = float_to_fixed(target[i]);
 		iowrite32(curtarget, dev.virtbase+i*REG_SIZE);
 		dev.target[i] = curtarget;
@@ -106,7 +126,7 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 												   (vla.target[1] < MIN_COORD || vla.target[1] > MAX_COORD) ||
 													 (vla.target[2] < MIN_COORD || vla.target[2] > MAX_COORD)))
 			return -EINVAL;
-		if (vla.joint != -1 && vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_DISTANCE)
+		if (vla.joint != -1 && vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_LENGTH)
 			return -EINVAL;
 		if (vla.joint != -1 && (vla.magnitude > M_PI/2 || vla.magnitude < -M_PI/2))
 			return -EINVAL;
@@ -122,9 +142,9 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 			return -EACCES;
 		if (vla.joint < -2 || vla.joint > MAX_JOINT || 
 				(vla.joint != -1 && 
-				 (vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_DISTANCE))) 
+				 (vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_LENGTH))) 
 			return -EINVAL;
-		vla.magnitude = dev.dh_params[(vla.joint-1)*4 + vla.parameter]/pow(2,PRECISION);
+		vla.magnitude = dev.dh_params[(vla.joint-1)*4 + vla.parameter]/power(2,PRECISION);
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))
 			return -EACCES;
