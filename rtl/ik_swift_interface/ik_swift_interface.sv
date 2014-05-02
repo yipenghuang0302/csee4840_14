@@ -44,13 +44,13 @@
 `include "../ik_swift/array_mult/array_mult.sv"
 
 `include "../ik_swift/mult_27/mult_27.v"
-`include "../ik_swift/sim_models/lpm_mult.v"
-`include "../ik_swift/sim_models/mult_block.v"
-`include "../ik_swift/sim_models/addsub_block.v"
-`include "../ik_swift/sim_models/pipeline_internal_fv.v"
-`include "../ik_swift/sim_models/dffep.v"
-`include "../ik_swift/sim_models/altera_mf.v"
-`include "../ik_swift/sim_models/220model.v"
+//`include "../ik_swift/sim_models/lpm_mult.v"
+//`include "../ik_swift/sim_models/mult_block.v"
+//`include "../ik_swift/sim_models/addsub_block.v"
+//`include "../ik_swift/sim_models/pipeline_internal_fv.v"
+//`include "../ik_swift/sim_models/dffep.v"
+//`include "../ik_swift/sim_models/altera_mf.v"
+//`include "../ik_swift/sim_models/220model.v"
 
 parameter THETA = 0;
 parameter L_OFFSET = 1;
