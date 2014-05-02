@@ -19,8 +19,8 @@ bool CConfigLoader::LoadXml()
     pugi::xml_document doc;
 
     //Show robot name
-#ifdef DEBUGOUTPUTFORXML
     pugi::xml_parse_result result = doc.load_file(fname.c_str());
+#ifdef DEBUGOUTPUTFORXML
     std::cout << "Load result: " << result.description() <<std::endl;
     std::cout << "Robot name: " << doc.child("Robot").attribute("name").value() << std::endl;
 #endif
