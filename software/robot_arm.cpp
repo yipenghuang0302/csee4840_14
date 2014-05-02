@@ -10,8 +10,15 @@
  */
 #include <cstdio>
 #include <GL/glut.h>
-#include "CConfigLoader.h"
 #include <iostream>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+#include <unistd.h>
+#include "CConfigLoader.h"
+#include "ik_driver.h"
 
 
 // GLUI Live-Variables (Global Variables)
@@ -36,6 +43,20 @@ float hand[2] = {0, 0};
 
 full_robot robot;
 
+int ik_driver_fd;
+
+void write_target(float targetx, float targety, float targetz)
+{
+  ik_driver_arg_t vla;
+	vla.joint = -1;
+	vla.target[0] = targetx;
+	vla.target[1] = targety;
+	vla.target[2] = targetz;
+	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
+		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
+		return;
+	}
+}
 
 void arm(int index){
 
@@ -73,6 +94,9 @@ void arm(int index){
 		glVertex3f(0,0,0);
 		glVertex3f(robot.targetx, robot.targety, robot.targetz);
 	glEnd();
+
+	//UNCOMMENT WHEN TALKING TO HARDWARE 
+  //write_target(robot.targetx, robot.targety, robot.targetz);
 
 	for (int i = 0; i < MAX_JOINT; i ++){
 		glColor3f(.2*i+.5, .2*i+.1, .2*i);
@@ -167,6 +191,17 @@ void keyboard(unsigned char key, int x, int y) {
 }
 
 int main(int argc, char** argv) {
+
+	//DO THIS WHEN CONNECTING TO HARDWARE
+	/*
+  static const char filename[] = "/dev/ik_driver";
+
+
+  if ( (ik_driver_fd = open(filename, O_RDWR)) == -1) {
+    fprintf(stderr, "could not open %s\n", filename);
+    return -1;
+  }
+	*/
 
 	//Get dh params from xml file
 	std::string str = "robots/robot.xml";
