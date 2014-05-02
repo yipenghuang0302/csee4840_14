@@ -45,6 +45,7 @@ full_robot robot;
 
 int ik_driver_fd;
 
+//Write the target for the end effector to the device
 void write_target(float targetx, float targety, float targetz)
 {
   ik_driver_arg_t vla;
@@ -52,6 +53,23 @@ void write_target(float targetx, float targety, float targetz)
 	vla.target[0] = targetx;
 	vla.target[1] = targety;
 	vla.target[2] = targetz;
+	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
+		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
+		return;
+	}
+}
+
+//Write a dh param for a specific joint to the device, converting from degrees to radians
+//if applicable
+void write_param(int joint, char param_type, float magnitude)
+{
+  ik_driver_arg_t vla;
+	vla.joint = (char)joint;
+	vla.parameter = param_type;
+	if (vla.parameter == THETA || vla.parameter == ALPHA)
+		vla.magnitude = magnitude * M_PI / 180;//Convert from degrees to radians
+	else
+		vla.magnitude = magnitude;
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
