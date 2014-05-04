@@ -10,8 +10,8 @@
 /*#define _TEST1*/
 /*#define _TEST2*/
 /*#define _TESTJACIBIANTRANSPOSE*/
-#define _TESTJACIBIANPSEUDO
-/*#define _TESTDLS*/
+/*#define _TESTJACIBIANPSEUDO*/
+#define _TESTDLS
 
 int main()
 {
@@ -91,7 +91,9 @@ int main()
     CAlgoFactory factory;
     VectorXf des(6);
 /*    float speccfc = 0.001f;*/
-    des << 200.0f , 200.0f , 0.0f , 0.0f , 0.0f , 0.0f ;
+/*    des << 200.0f , 200.0f , 0.0f , 0.0f , 0.0f , 0.0f ;*/
+/*	targetx="9" targety="-15.28" targetz="3.2"*/
+    des << 9.0f , -15.28f , 3.2f , 0.0f , 0.0f , 0.0f ;
 
     CAlgoAbstract * pJpt = factory.GiveMeSolver(JACOBIANPSEVDOINVERSE,des,robot);
     pJpt->CalculateData();
@@ -110,7 +112,9 @@ int main()
     CAlgoFactory factory;
     VectorXf des(6);
     float speccfc = 0.001f;
-    des << 200.0f , 200.0f , 0.0f , 0.0f , 0.0f , 0.0f ;
+/*    des << 200.0f , 200.0f , 0.0f , 0.0f , 0.0f , 0.0f ;*/
+/*	targetx="9" targety="-15.28" targetz="3.2"*/
+    des << 9.0f , -15.28f , 3.2f , 0.0f , 0.0f , 0.0f ;
 
     CAlgoAbstract * pJpt = factory.GiveMeSolver(DUMPEDLEASTSQUARES,des,robot);
     pJpt->SetAdditionalParametr(speccfc);

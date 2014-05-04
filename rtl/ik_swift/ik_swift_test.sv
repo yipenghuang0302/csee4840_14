@@ -23,8 +23,8 @@ class ik_swift_test;
 
 		real full_matrix [6][4][4];
 		real rotation [6][3][3];
-		real axis [6][3];
-		real position [6][3];
+		real axis [7][3];
+		real position [7][3];
 		real dist_to_end [6][3];
 		real lt_inv [6][6];
 		real error [6];
@@ -74,7 +74,7 @@ class ik_swift_test;
 
 		// GENERATE AXES OF ROTATION
 		axis[0] = z; // first joint just comes off of basis vector
-		for ( int joint=1 ; joint<n ; joint++ )
+		for ( int joint=1 ; joint<n+1 ; joint++ )
 			for ( int row=0 ; row<3 ; row++ ) begin
 				axis[joint][row] = 0.0; // clear data from last round
 				for ( int col=0 ; col<3 ; col++ )
@@ -83,7 +83,7 @@ class ik_swift_test;
 
 		// EXTRACT POSITION FROM TRANSFORMATION MATRICES
 		position[0] = { 0.0, 0.0, 0.0 }; // first joint starts at origin
-		for ( int joint=1 ; joint<n ; joint++ )
+		for ( int joint=1 ; joint<n+1 ; joint++ )
 			for ( int row=0 ; row<3 ; row++ )
 				position[joint][row] = full_matrix[joint-1][row][3];
 
@@ -114,7 +114,7 @@ class ik_swift_test;
 		// jjt_bias = jacobian * jacobian transpose;
 		for ( int row=0 ; row<n ; row++ ) // product row
 			for ( int col=0 ; col<n ; col++ ) begin // product column
-				m_jjt_bias[row][col] = row==col ? 0.0 : 0.0; // bias term
+				m_jjt_bias[row][col] = row==col ? 0.001*0.001 : 0.0; // bias term
 				for ( int k=0 ; k<n ; k++ ) // inner term
 					m_jjt_bias[row][col] += m_jacobian[row][k] * m_jacobian[col][k];
 			end
@@ -128,12 +128,6 @@ class ik_swift_test;
 				m_dls[row][col] = 0.0;
 			end
 			m_delta[row] = 0.0;
-		end
-
-		for ( int i=0 ; i<n ; i++ ) begin // jjt row
-			for ( int j=0 ; j<n ; j++ ) begin // jjt column
-				$write("m_jjt_bias=%f;\n", m_jjt_bias[i][j]);
-			end
 		end
 
 		// CALCULATE LOWER TRIANGULAR MATRIX
@@ -185,8 +179,9 @@ class ik_swift_test;
 
 		// DETERMINE ERROR VECTOR
 		for ( int row=0 ; row<3 ; row++ ) begin
-			error[row] = target[row] - position[5][row];
-			error[row+3] = target[row+3] - axis[5][row];
+			error[row] = target[row] - position[6][row];
+			error[row+3] = 0.0;
+			// target[row+3] - axis[6][row];
 		end
 
 		// MATRIX VECTOR MULTIPLY TO GET DELTA THETA

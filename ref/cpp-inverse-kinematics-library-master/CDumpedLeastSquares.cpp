@@ -2,6 +2,8 @@
 #include "CJacobian.h"
 #include <iostream>
 
+#define JACOBIANDEBUGOUTPUT
+
 CDumpedLeastSquares::CDumpedLeastSquares( IN VectorXf & desired_position , IN CRobot & robot ):
                                                                                                 mtxinstance(CMatrixFactory::GetInstance()),
                                                                                                 _desired_position(desired_position),
@@ -70,11 +72,17 @@ OUT VectorXf CDumpedLeastSquares::CalculateData()
         svd.pinv(result_out);
 
 #ifdef JACOBIANDEBUGOUTPUT
+        std::cout<<"Two"<<std::endl<<two<<std::endl;
         std::cout<<"Result"<<std::endl<<result_out<<std::endl;
+        std::cout<<"jac->GetJacobian().transpose()"<<std::endl<<jac->GetJacobian().transpose()<<std::endl;
 #endif
 
         result_out = jac->GetJacobian().transpose() * result_out;
-        
+
+#ifdef JACOBIANDEBUGOUTPUT
+        std::cout<<"result_out"<<std::endl<<result_out<<std::endl;
+#endif
+
         delta_theta =  result_out * delta_translation;
 
 #ifdef JACOBIANDEBUGOUTPUT
