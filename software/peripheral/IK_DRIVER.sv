@@ -10,7 +10,7 @@ module IK_DRIVER(input logic        clk,
 	       input logic [31:0]  writedata,
 	       input logic 	  write,
 	       input 		  chipselect,
-	       input logic [27:0]  address,
+	       input logic [4:0]  address,
 
 	       output logic [7:0] VGA_R, VGA_G, VGA_B,
 	       output logic 	  VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_n,

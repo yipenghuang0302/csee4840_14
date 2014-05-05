@@ -45,14 +45,28 @@ full_robot robot;
 
 int ik_driver_fd;
 
+/*
+ * Convert a floating point number to our fixed-point representation
+ */
+
+int float_to_fixed(float num){
+	float frac = num - (int)num;
+	int decimal = (int)num << PRECISION; //Decimal part of number
+	int fraction = (1 << PRECISION) * frac;
+	//Check if we need to round up 
+	if (frac >= .5 && frac <= 1.0)
+		fraction += 1;
+	return decimal + fraction;
+}
+
 //Write the target for the end effector to the device
 void write_target(float targetx, float targety, float targetz)
 {
   ik_driver_arg_t vla;
 	vla.joint = -1;
-	vla.target[0] = targetx;
-	vla.target[1] = targety;
-	vla.target[2] = targetz;
+	vla.target[0] = float_to_fixed(targetx);
+	vla.target[1] = float_to_fixed(targety);
+	vla.target[2] = float_to_fixed(targetz);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
@@ -66,14 +80,25 @@ void write_param(int joint, char param_type, float magnitude)
   ik_driver_arg_t vla;
 	vla.joint = (char)joint;
 	vla.parameter = param_type;
-	if (vla.parameter == THETA || vla.parameter == ALPHA)
-		vla.magnitude = magnitude * M_PI / 180;//Convert from degrees to radians
+	if (vla.parameter == THETA || vla.parameter == ALPHA){
+		//Do this error checking here so we don't use floats in the kernel
+		if (magnitude < -M_PI/2 || magnitude > M_PI/2)
+			return -EINVAL;
+		else
+			vla.magnitude = float_to_fixed(magnitude * M_PI / 180);//Convert from degrees to radians
+	}
 	else
-		vla.magnitude = magnitude;
+		vla.magnitude = float_to_fixed(magnitude);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
 	}
+}
+
+//TODO
+float read_param(){
+//Make sure you divide by 2^Precision since the driver only sees fixed-point numbers
+	return 0.0;
 }
 
 void arm(int index){

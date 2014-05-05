@@ -1,6 +1,6 @@
 CC=g++
 LFLAGS=-lGL -lGLU -lglut
-CFLAGS=-c -Wall -Wextra -I /proj/castl/home/yipeng/kirillv/eigen/Eigen/ -pg
+CFLAGS=-c -Wall -Wextra -pg
 LDFLAGS=-Wall -Wextra -pg
 SOURCES=xml_help/pugixml.cpp lexer.cpp CConfigLoader.cpp robot_arm.cpp
 OBJECTS=$(SOURCES:.cpp=.o)

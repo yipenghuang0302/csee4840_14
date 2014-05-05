@@ -38,8 +38,8 @@ typedef struct {
 	unsigned char joint; /* Indicate which joint we're getting/setting; -1 indicates that we're setting the target */
 	unsigned char joint_type; /* The ith bit is 1 if ith joint is rotational; translational otherwise */
 	unsigned char parameter; /* Which DH param we're getting/setting */
-	float target[3]; /* (x,y,z) coordinates of target position */
-	float magnitude; 
+	signed int target[3]; /* (x,y,z) coordinates of target position */
+	signed int magnitude; 
 } ik_driver_arg_t;
 
 /* ioctls and their arguments */
