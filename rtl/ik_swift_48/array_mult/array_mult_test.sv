@@ -1,17 +1,17 @@
 // golden model class
 class array_mult_test;
 
-	int n = 5;
+	int n = 3;
 	int pipeline_depth = 5;
-	real model_result[5][5];
+	real model_result[5][3];
 
 	function real abs (real num); 
 	   abs = (num<0) ? -num : num; 
 	endfunction
 
 	function void update_array_mult (
-		real dataa[5],
-		real datab[5]
+		real dataa[3],
+		real datab[3]
 	);
 
 		for ( int i=0 ; i<pipeline_depth-1 ; i++ ) begin // advance the pipeline
@@ -25,18 +25,18 @@ class array_mult_test;
 	endfunction
 
 	function void check_array_mult (
-		logic [4:0] [35:0] dut_result
+		logic [2:0] [44:0] dut_result
 	);
 
-		real abs_tol = 0.00001;
-		real rel_tol = 0.00001;
-		real real_result[5];
-		real error[5];
-		real percent[5];
+		real abs_tol = 0.00000001;
+		real rel_tol = 0.00000001;
+		real real_result[3];
+		real error[3];
+		real percent[3];
 		bit passed = 1'b1;
 
 		for (int i=0; i<n; i++) begin // product row
-			real_result[i] = real'(longint'({{28{dut_result[i][35]}}, dut_result[i]}))/262144.0;
+			real_result[i] = real'(longint'({{19{dut_result[i][44]}}, dut_result[i]}))/4194304.0;
 			error[i] = abs( real_result[i] - model_result[0][i] );
 				percent[i] = error[i] / model_result[0][i];
 			if ( error[i]>abs_tol && percent[i]>rel_tol ) begin

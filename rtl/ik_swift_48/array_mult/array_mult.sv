@@ -7,15 +7,15 @@ module array_mult (
 	ifc_array_mult.array_mult i
 );
 
-	parameter n = 4;
+	parameter n = 3;
 
-	logic [n-1:0] [71:0] mult_result;
-	logic [n-1:0] [35:0] mult_round;
+	logic [n-1:0] [89:0] mult_result;
+	logic [n-1:0] [44:0] mult_round;
 
 	genvar index;
 	generate
-		for ( index=n-1 ; index>=0 ; index-- ) begin: mult_36_row
-			mult_36 mult_36_inst (
+		for ( index=n-1 ; index>=0 ; index-- ) begin: mult_45_row
+			mult_45 mult_45_inst (
 				.clken(i.en),
 				.clock(i.clk),
 				.dataa(i.dataa[index]),
@@ -23,7 +23,7 @@ module array_mult (
 				.result(mult_result[index])
 			);
 			always_ff @(posedge i.clk) begin
-				mult_round[index] <= mult_result[index][17] ? mult_result[index][53:18] + 1'b1 : mult_result[index][53:18];
+				mult_round[index] <= mult_result[index][21] ? mult_result[index][66:22] + 1'b1 : mult_result[index][66:22];
 			end
 		end
 	endgenerate

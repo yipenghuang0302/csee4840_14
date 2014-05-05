@@ -10,9 +10,9 @@ interface ifc_array_mult (
 parameter n = 4;
 
 logic en, rst;
-logic [n-1:0] [35:0] dataa;
-logic [n-1:0] [35:0] datab;
-logic [n-1:0] [35:0] result;
+logic [n-1:0] [44:0] dataa;
+logic [n-1:0] [44:0] datab;
+logic [n-1:0] [44:0] result;
 
 // clocking cb @(posedge clk);
 // 	output en;

@@ -2,12 +2,12 @@
 `include "array_mult_test.sv"
 
 class array_mult_transaction;
-	rand logic [5][30:0] increment_a;
-	rand logic [5][30:0] increment_b;
-	real fraction_a[5];
-	real fraction_b[5];
-	real dataa[5];
-	real datab[5];
+	rand logic [3][30:0] increment_a;
+	rand logic [3][30:0] increment_b;
+	real fraction_a[3];
+	real fraction_b[3];
+	real dataa[3];
+	real datab[3];
 endclass
 
 class array_mult_env;
@@ -16,7 +16,7 @@ endclass
 
 program array_mult_tb (ifc_array_mult.array_mult_tb ds);
 
-	int n = 5;
+	int n = 3;
 
 	array_mult_transaction trans;
 	array_mult_env env;
@@ -30,14 +30,14 @@ program array_mult_tb (ifc_array_mult.array_mult_tb ds);
 		for (int i=0; i<n; i++) begin // product row
 			trans.fraction_a[i] = real'(trans.increment_a[i]) / 2147483648.0;
 			trans.fraction_b[i] = real'(trans.increment_b[i]) / 2147483648.0;
-			trans.dataa[i] = -256.0 + trans.fraction_a[i] * 2 * 256.0;
-			trans.datab[i] = -256.0 + trans.fraction_b[i] * 2 * 256.0;
+			trans.dataa[i] = -2048.0 + trans.fraction_a[i] * 2 * 2048.0;
+			trans.datab[i] = -2048.0 + trans.fraction_b[i] * 2 * 2048.0;
 			// $display("i=%d", i);
 			// $display("fraction_a = %f, dataa = %f", trans.fraction_a[i], trans.dataa[i]);
 			// $display("fraction_b = %f, datab = %f", trans.fraction_b[i], trans.datab[i]);
 			// passing data to design under test happens here
-			ds.cb.dataa[i] <= longint'(trans.dataa[i] * 262144.0);
-			ds.cb.datab[i] <= longint'(trans.datab[i] * 262144.0);
+			ds.cb.dataa[i] <= longint'(trans.dataa[i] * 4194304.0);
+			ds.cb.datab[i] <= longint'(trans.datab[i] * 4194304.0);
 		end
 
 		ds.cb.en <= 1'b1;
