@@ -657,6 +657,8 @@ set_instance_assignment -name GLOBAL_SIGNAL OFF -to u0|hps_0|hps_io|border|hps_s
 set_instance_assignment -name GLOBAL_SIGNAL OFF -to u0|hps_0|hps_io|border|hps_sdram_inst|p0|umemphy|uread_datapath|reset_n_fifo_wraddress[3] -tag __hps_sdram_p0
 set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION_FOR_NON_GLOBAL_CLOCKS ON -to u0|hps_0|hps_io|border|hps_sdram_inst -tag __hps_sdram_p0
 set_instance_assignment -name PLL_COMPENSATION_MODE DIRECT -to u0|hps_0|hps_io|border|hps_sdram_inst|pll0|fbout -tag __hps_sdram_p0
+set_global_assignment -name SYSTEMVERILOG_FILE sin.sv
+set_global_assignment -name SYSTEMVERILOG_FILE cos.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sincos.sv
 set_global_assignment -name QIP_FILE lab3/synthesis/lab3.qip
 set_global_assignment -name SOURCE_FILE sincos.qpf

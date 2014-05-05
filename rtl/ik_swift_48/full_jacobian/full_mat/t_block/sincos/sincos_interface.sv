@@ -12,15 +12,15 @@ logic [47:0] angle;
 logic [47:0] sin;
 logic [47:0] cos;
 
-clocking cb @(posedge clk);
-	output en;
-	output rst;
-	output angle;
-	input sin;
-	input cos;
-endclocking
-
-modport sincos_tb (clocking cb);
+//clocking cb @(posedge clk);
+//	output en;
+//	output rst;
+//	output angle;
+//	input sin;
+//	input cos;
+//endclocking
+//
+//modport sincos_tb (clocking cb);
 
 // restrict directions
 modport sincos (
