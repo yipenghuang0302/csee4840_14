@@ -8,9 +8,9 @@ interface ifc_sincos (
 );
 
 logic en, rst;
-logic [26:0] angle;
-logic [26:0] sin;
-logic [26:0] cos;
+logic [47:0] angle;
+logic [47:0] sin;
+logic [47:0] cos;
 
 clocking cb @(posedge clk);
 	output en;

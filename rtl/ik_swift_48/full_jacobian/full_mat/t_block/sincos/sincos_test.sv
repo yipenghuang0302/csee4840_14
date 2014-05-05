@@ -23,13 +23,13 @@ class sincos_test;
 	endfunction
 
 	function void check_sincos (
-		logic [26:0] dut_sin,
-		logic [26:0] dut_cos
+		logic [47:0] dut_sin,
+		logic [47:0] dut_cos
 	);
-		int int_sin = int'({{5{dut_sin[26]}}, dut_sin});
-		int int_cos = int'({{5{dut_cos[26]}}, dut_cos});
-		real real_sin = real'(int_sin)/256.0;
-		real real_cos = real'(int_cos)/256.0;
+		longint int_sin = longint'({{16{dut_sin[47]}}, dut_sin});
+		longint int_cos = longint'({{16{dut_cos[47]}}, dut_cos});
+		real real_sin = real'(int_sin)/16777216.0;
+		real real_cos = real'(int_cos)/16777216.0;
 		real sin_error = real_sin-model_sin[0];
 		real cos_error = real_cos-model_cos[0];
 		bit passed;
