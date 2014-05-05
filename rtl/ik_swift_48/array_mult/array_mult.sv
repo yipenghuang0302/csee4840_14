@@ -7,7 +7,7 @@ module array_mult (
 	ifc_array_mult.array_mult i
 );
 
-	parameter n = 6;
+	parameter n = 4;
 
 	logic [n-1:0] [71:0] mult_result;
 	logic [n-1:0] [35:0] mult_round;

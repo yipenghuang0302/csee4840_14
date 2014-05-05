@@ -7,7 +7,7 @@ interface ifc_array_mult (
 	input logic clk
 );
 
-parameter n = 6;
+parameter n = 4;
 
 logic en, rst;
 logic [n-1:0] [35:0] dataa;

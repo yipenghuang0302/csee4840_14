@@ -2,12 +2,12 @@
 `include "array_mult_test.sv"
 
 class array_mult_transaction;
-	rand logic [6][30:0] increment_a;
-	rand logic [6][30:0] increment_b;
-	real fraction_a[6];
-	real fraction_b[6];
-	real dataa[6];
-	real datab[6];
+	rand logic [5][30:0] increment_a;
+	rand logic [5][30:0] increment_b;
+	real fraction_a[5];
+	real fraction_b[5];
+	real dataa[5];
+	real datab[5];
 endclass
 
 class array_mult_env;
@@ -16,7 +16,7 @@ endclass
 
 program array_mult_tb (ifc_array_mult.array_mult_tb ds);
 
-	int n = 6;
+	int n = 5;
 
 	array_mult_transaction trans;
 	array_mult_env env;
