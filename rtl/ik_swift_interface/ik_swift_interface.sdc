@@ -126,6 +126,15 @@ set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[2
 set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[24]}]
 set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[25]}]
 set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[26]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[27]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[28]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[29]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[30]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[31]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[32]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[33]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[34]}]
+set_output_delay -add_delay  -clock [get_clocks {clk}]  1.000 [get_ports {data[35]}]
 
 
 #**************************************************************

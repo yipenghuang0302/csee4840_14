@@ -3,7 +3,7 @@
  * Columbia University
  */
 
-interface ifc_cholesky (
+interface ifc_cholesky_block (
 	input logic clk
 );
 
@@ -23,19 +23,19 @@ logic [5:0] [35:0] dividends;
 logic [35:0] divisor;
 logic [5:0] [35:0] quotients;
 
-//clocking cb @(posedge clk);
-//	output en;
-//	output rst;
-//	output count;
-//
-//	output matrix;
-//	input lt;
-//endclocking
-//
-//modport cholesky_tb (clocking cb);
+clocking cb @(posedge clk);
+	output en;
+	output rst;
+	output count;
+
+	output matrix;
+	input lt;
+endclocking
+
+modport cholesky_block_tb (clocking cb);
 
 // restrict directions
-modport cholesky(
+modport cholesky_block(
 
 	input clk, en, rst,
 	input count,

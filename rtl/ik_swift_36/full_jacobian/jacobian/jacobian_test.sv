@@ -66,7 +66,7 @@ class jacobian_test;
 	endfunction
 
 	function void check_jacobian (
-		logic [5:0] [2:0] [35:0] axis,
+		logic [6:0] [2:0] [35:0] axis,
 		logic [5:0] [2:0] [35:0] dist_to_end,
 		logic [5:0] [5:0] [35:0] jacobian_matrix
 	);
@@ -74,9 +74,9 @@ class jacobian_test;
 		real abs_tol = 0.0001;
 		real rel_tol = 0.0001;
 
-		real axis_real[6][3];
-		real axis_error[6][3];
-		real axis_percent[6][3];
+		real axis_real[7][3];
+		real axis_error[7][3];
+		real axis_percent[7][3];
 
 		real dist_to_end_real[6][3];
 		real dist_to_end_error[6][3];

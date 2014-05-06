@@ -1,5 +1,5 @@
 // golden model class
-class lt_inverse_test;
+class lt_block_test;
 
 	int n = 6;
 	real m_lt_inv [6][6];
@@ -8,7 +8,7 @@ class lt_inverse_test;
 		abs = (num<0) ? -num : num; 
 	endfunction
 
-	function void update_lt_inverse (
+	function void update_lt_block (
 		real lt [6][6]
 	);
 
@@ -48,7 +48,7 @@ class lt_inverse_test;
 
 	endfunction
 
-	function void check_lt_inverse (
+	function void check_lt_block (
 		logic [5:0] [5:0] [35:0] lt_inverse
 	);
 

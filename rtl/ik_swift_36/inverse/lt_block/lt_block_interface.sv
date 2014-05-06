@@ -3,7 +3,7 @@
  * Columbia University
  */
 
-interface ifc_lt_inverse (
+interface ifc_lt_block (
 	input logic clk
 );
 
@@ -23,19 +23,19 @@ logic [5:0] [35:0] dividends;
 logic [35:0] divisor;
 logic [5:0] [35:0] quotients;
 
-//clocking cb @(posedge clk);
-//	output en;
-//	output rst;
-//	output count;
-//
-//	output lt;
-//	input lt_inverse;
-//endclocking
-//
-//modport lt_inverse_tb (clocking cb);
+clocking cb @(posedge clk);
+	output en;
+	output rst;
+	output count;
+
+	output lt;
+	input lt_inverse;
+endclocking
+
+modport lt_block_tb (clocking cb);
 
 // restrict directions
-modport lt_inverse_dut (
+modport lt_block_dut (
 
 	input clk, en, rst,
 	input count,

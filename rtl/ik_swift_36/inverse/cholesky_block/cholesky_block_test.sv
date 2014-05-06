@@ -1,5 +1,5 @@
 // golden model class
-class cholesky_test;
+class cholesky_block_test;
 
 	int n = 6;
 	real model_lt [6][6];
@@ -8,7 +8,7 @@ class cholesky_test;
 		abs = (num<0) ? -num : num; 
 	endfunction
 
-	function void update_cholesky (
+	function void update_cholesky_block (
 		real matrix [6][6]
 	);
 
@@ -29,7 +29,7 @@ class cholesky_test;
 
 	endfunction
 
-	function void check_cholesky (
+	function void check_cholesky_block (
 		logic [5:0] [5:0] [35:0] lt
 	);
 
@@ -42,25 +42,25 @@ class cholesky_test;
 
 		bit passed = 1'b1;
 
-		// CHECK cholesky
+		// CHECK cholesky_block
 		for ( int i=0 ; i<n ; i++ ) begin // cholesky row
 			for ( int j=0 ; j<n ; j++ ) begin // cholesky column
 				lt_real[i][j] = real'(longint'({{28{lt[i][j][35]}}, lt[i][j]}))/65536.0;
 				lt_error[i][j] = abs( lt_real[i][j] - model_lt[i][j] );
 				lt_percent[i][j] = abs( lt_error[i][j] / model_lt[i][j] );
 				if (lt_error[i][j]>abs_tol && lt_percent[i][j]>rel_tol) begin
-					$write("%t : fail cholesky i=%d j=%d\n", $realtime, i, j);
+					$write("%t : fail cholesky_block i=%d j=%d\n", $realtime, i, j);
 					$write("model_lt=%f; dut_result=%f; lt_error=%f.\n", model_lt[i][j], lt_real[i][j], lt_error[i][j]);
 					$write("model_lt=%f; dut_result=%f; lt_percent=%f.\n", model_lt[i][j], lt_real[i][j], lt_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					// $write("%t : pass cholesky i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass cholesky_block i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
 
 		if (passed) begin
-			// $display("%t : pass \n", $realtime);
+			$display("%t : pass \n", $realtime);
 		end else begin
 			// $exit();
 		end

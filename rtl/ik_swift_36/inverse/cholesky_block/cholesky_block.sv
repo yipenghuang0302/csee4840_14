@@ -3,8 +3,8 @@
  * Columbia University
  */
 
-module cholesky (
-	ifc_cholesky.cholesky i
+module cholesky_block (
+	ifc_cholesky_block.cholesky_block i
 );
 
 	// LOGIC GOVERNING ROW COUNTER

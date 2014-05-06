@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
-`include "cholesky_test.sv"
+`include "cholesky_block_test.sv"
 
-class cholesky_transaction;
+class cholesky_block_transaction;
 	int n = 6;
 	rand logic [6][6][30:0] j_increment;
 	real j_fraction [6][6];
@@ -9,15 +9,15 @@ class cholesky_transaction;
 	real matrix_data [6][6];
 endclass
 
-class cholesky_env;
+class cholesky_block_env;
 	int max_transactions = 1000000;
 endclass
 
-program cholesky_tb (ifc_cholesky.cholesky_tb ds);
+program cholesky_block_tb (ifc_cholesky_block.cholesky_block_tb ds);
 
-	cholesky_transaction trans;
-	cholesky_env env;
-	cholesky_test test;
+	cholesky_block_transaction trans;
+	cholesky_block_env env;
+	cholesky_block_test test;
 
 	task do_cycle;
 
@@ -48,7 +48,7 @@ program cholesky_tb (ifc_cholesky.cholesky_tb ds);
 		ds.cb.rst <= 1'b0;
 
 		@(ds.cb);
-		test.update_cholesky (
+		test.update_cholesky_block (
 			trans.matrix_data
 		);
 
@@ -67,7 +67,7 @@ program cholesky_tb (ifc_cholesky.cholesky_tb ds);
 		repeat (env.max_transactions) begin
 			do_cycle();
 			repeat (210) @(ds.cb);
-			test.check_cholesky (
+			test.check_cholesky_block (
 				ds.cb.lt
 			);
 		end

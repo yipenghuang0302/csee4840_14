@@ -7,14 +7,14 @@
 `include "inverse.sv"
 `include "bench.sv"
 
-`include "cholesky/cholesky_interface.sv"
-`include "cholesky/cholesky.sv"
-`include "cholesky/sqrt_52/sqrt_52_interface.sv"
-`include "cholesky/sqrt_52/sqrt_52.v"
+`include "cholesky_block/cholesky_block_interface.sv"
+`include "cholesky_block/cholesky_block.sv"
+`include "cholesky_block/sqrt_52/sqrt_52_interface.sv"
+`include "cholesky_block/sqrt_52/sqrt_52.v"
 `include "../sim_models/altera_mf.v"
 
-`include "lt_inverse/lt_inverse_interface.sv"
-`include "lt_inverse/lt_inverse.sv"
+`include "lt_block/lt_block_interface.sv"
+`include "lt_block/lt_block.sv"
 
 `include "array_div/array_div_interface.sv"
 `include "array_div/array_div.sv"

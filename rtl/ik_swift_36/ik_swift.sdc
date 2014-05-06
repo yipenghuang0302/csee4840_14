@@ -1,4 +1,4 @@
-## Generated SDC file "cholesky.sdc"
+## Generated SDC file "ik_swift.sdc"
 
 ## Copyright (C) 1991-2014 Altera Corporation
 ## Your use of Altera Corporation's design tools, logic functions 

@@ -109,7 +109,7 @@ class full_jacobian_test;
 		// jjt_bias = jacobian * jacobian transpose;
 		for ( int row=0 ; row<6 ; row++ ) // product row
 			for ( int col=0 ; col<6 ; col++ ) begin // product column
-				model_jjt_bias[row][col] = row==col ? 0.0 : 0.0; // bias term
+				model_jjt_bias[row][col] = row==col ? 0.00001525878*64 : 0.0; // bias term
 				for ( int k=0 ; k<6 ; k++ ) // inner term
 					model_jjt_bias[row][col] += model_jacobian_matrix[row][k] * model_jacobian_matrix[col][k];
 			end
@@ -118,22 +118,22 @@ class full_jacobian_test;
 
 	function void check_full_jacobian (
 		logic [5:0] [3:0] [3:0] [35:0] full_matrix,
-		logic [5:0] [2:0] [35:0] axis,
+		logic [6:0] [2:0] [35:0] axis,
 		logic [5:0] [2:0] [35:0] dist_to_end,
 		logic [5:0] [5:0] [35:0] jacobian_matrix,
 		logic [5:0] [5:0] [35:0] jjt_bias
 	);
 
-		real abs_tol = 0.0001;
-		real rel_tol = 0.0001;
+		real abs_tol = 0.01;
+		real rel_tol = 0.01;
 
 		real full_matrix_real[4][4];
 		real full_matrix_error[4][4];
 		real full_matrix_percent[4][4];
 
-		real axis_real[6][3];
-		real axis_error[6][3];
-		real axis_percent[6][3];
+		real axis_real[7][3];
+		real axis_error[7][3];
+		real axis_percent[7][3];
 
 		real dist_to_end_real[6][3];
 		real dist_to_end_error[6][3];

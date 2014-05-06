@@ -76,7 +76,13 @@ module full_jacobian (
 	// MAT_MULT OUTPUTS
 	always_ff @(posedge i.clk)
 		if ( i.count==8'd111 )
-			i.jjt_bias <= i.mat_mult_result;
+			i.jjt_bias <= i.mat_mult_result + {
+			{ 36'd64, 36'b0, 36'b0, 36'b0, 36'b0, 36'b0 },
+			{ 36'b0, 36'd64, 36'b0, 36'b0, 36'b0, 36'b0 },
+			{ 36'b0, 36'b0, 36'd64, 36'b0, 36'b0, 36'b0 },
+			{ 36'b0, 36'b0, 36'b0, 36'd64, 36'b0, 36'b0 },
+			{ 36'b0, 36'b0, 36'b0, 36'b0, 36'd64, 36'b0 },
+			{ 36'b0, 36'b0, 36'b0, 36'b0, 36'b0, 36'd64 }};
 
 	// timing design prevents module outputs to shared multipliers colliding
 	assign i.array_mult_dataa = {3'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;

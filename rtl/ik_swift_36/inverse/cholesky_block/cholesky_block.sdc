@@ -1,4 +1,4 @@
-## Generated SDC file "lt_inverse.sdc"
+## Generated SDC file "cholesky_block.sdc"
 
 ## Copyright (C) 1991-2014 Altera Corporation
 ## Your use of Altera Corporation's design tools, logic functions 

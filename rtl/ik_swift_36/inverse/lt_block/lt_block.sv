@@ -2,8 +2,8 @@
  * Yipeng Huang, Richard Townsend, Lianne Lairmore
  * Columbia University
  */
-module lt_inverse (
-	ifc_lt_inverse.lt_inverse_dut i
+module lt_block (
+	ifc_lt_block.lt_block_dut i
 );
 
 	// LOWER TEMP MATRIX

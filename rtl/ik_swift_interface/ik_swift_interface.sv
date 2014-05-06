@@ -21,21 +21,21 @@
 `include "../ik_swift/full_jacobian/full_mat/t_block/sincos/sincos.sv"
 `include "../ik_swift/full_jacobian/full_mat/t_block/sincos/sin.sv"
 `include "../ik_swift/full_jacobian/full_mat/t_block/sincos/cos.sv"
-`include "../ik_swift/full_jacobian/full_mat/t_block/sincos/mult_27_coeff_104/mult_27_coeff_104.v"
-`include "../ik_swift/full_jacobian/full_mat/t_block/sincos/mult_27_coeff_326/mult_27_coeff_326.v"
-`include "../ik_swift/full_jacobian/full_mat/t_block/sincos/mult_27_coeff_58/mult_27_coeff_58.v"
+`include "../ik_swift/full_jacobian/full_mat/t_block/sincos/mult_36_coeff_26561/mult_36_coeff_26561.v"
+`include "../ik_swift/full_jacobian/full_mat/t_block/sincos/mult_36_coeff_83443/mult_36_coeff_83443.v"
+`include "../ik_swift/full_jacobian/full_mat/t_block/sincos/mult_36_coeff_14746/mult_36_coeff_14746.v"
 
 `include "../ik_swift/inverse/inverse_interface.sv"
 `include "../ik_swift/inverse/inverse.sv"
 `include "../ik_swift/inverse/cholesky/cholesky_interface.sv"
 `include "../ik_swift/inverse/cholesky/cholesky.sv"
-`include "../ik_swift/inverse/cholesky/sqrt_27/sqrt_27_interface.sv"
-`include "../ik_swift/inverse/cholesky/sqrt_27/sqrt_27.v"
+`include "../ik_swift/inverse/cholesky/sqrt_52/sqrt_52_interface.sv"
+`include "../ik_swift/inverse/cholesky/sqrt_52/sqrt_52.v"
 `include "../ik_swift/inverse/lt_inverse/lt_inverse_interface.sv"
 `include "../ik_swift/inverse/lt_inverse/lt_inverse.sv"
 `include "../ik_swift/inverse/array_div/array_div_interface.sv"
 `include "../ik_swift/inverse/array_div/array_div.sv"
-`include "../ik_swift/inverse/array_div/div_27/div_27.v"
+`include "../ik_swift/inverse/array_div/div_52/div_52.v"
 
 `include "../ik_swift/mat_mult/mat_mult_interface.sv"
 `include "../ik_swift/mat_mult/mat_mult.sv"
@@ -43,7 +43,7 @@
 `include "../ik_swift/array_mult/array_mult_interface.sv"
 `include "../ik_swift/array_mult/array_mult.sv"
 
-`include "../ik_swift/mult_27/mult_27.v"
+`include "../ik_swift/mult_36/mult_36.v"
 //`include "../ik_swift/sim_models/lpm_mult.v"
 //`include "../ik_swift/sim_models/mult_block.v"
 //`include "../ik_swift/sim_models/addsub_block.v"
@@ -70,22 +70,22 @@ module ik_swift_interface (
 
 	// outputs
 	input logic [2:0] row_select,
-	output logic [26:0] data
+	output logic [35:0] data
 );
 
 	// LOGIC GOVERNING MEMORY SPACE
-	logic [2:0] [26:0] target; // (x,y,z) coordinates of target position
+	logic [2:0] [35:0] target; // (x,y,z) coordinates of target position
 	// TODO: what about orientation?
 	logic [5:0] joint_type; // The ith bit is 1 if ith joint is rotational; translational otherwise
-	logic [5:0] [3:0] [26:0] dh_param;
+	logic [5:0] [3:0] [35:0] dh_param;
 	// TODO: unsigned char start;
 	// TODO: unsigned char ready;
 
 	always_ff @(posedge clk) begin
 		if (reset) begin
 			joint_type <= {6'b0};
-			target <= {3{27'b0}};
-			dh_param <= {24{27'b0}};
+			target <= {3{36'b0}};
+			dh_param <= {24{36'b0}};
 		end else if ( chipselect && write ) begin
 			case (address)
 
@@ -221,7 +221,7 @@ module ik_swift_interface (
 	assign ifc_ik_swift.rst = reset;
 	// INPUTS
 	// base joint's axis of rotation/translation
-	assign ifc_ik_swift.z = { 27'd0, 27'd0, 27'd256 }; // unit vector in z direction
+	assign ifc_ik_swift.z = { 36'd0, 36'd0, 36'd65536 }; // unit vector in z direction
 	// bit vector describing type of each joint
 	assign ifc_ik_swift.joint_type = joint_type;
 	// dh joint parameters

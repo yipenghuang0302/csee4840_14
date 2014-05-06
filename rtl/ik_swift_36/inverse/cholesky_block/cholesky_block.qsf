@@ -25,7 +25,7 @@
 # Notes:
 #
 # 1) The default values for assignments are stored in the file:
-#		lt_inverse_assignment_defaults.qdf
+#		cholesky_block_assignment_defaults.qdf
 #    If this file doesn't exist, see file:
 #		assignment_defaults.qdf
 #
@@ -54,7 +54,7 @@ set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 # Analysis & Synthesis Assignments
 # ================================
 set_global_assignment -name FAMILY "Cyclone V"
-set_global_assignment -name TOP_LEVEL_ENTITY lt_inverse
+set_global_assignment -name TOP_LEVEL_ENTITY cholesky_block
 set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
 set_global_assignment -name VERILOG_SHOW_LMF_MAPPING_MESSAGES OFF
 
@@ -101,7 +101,7 @@ set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 # -------------------------------------
 
 # ----------------------
-# start ENTITY(lt_inverse)
+# start ENTITY(cholesky_block)
 
 	# start DESIGN_PARTITION(Top)
 	# ---------------------------
@@ -115,14 +115,16 @@ set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 	# end DESIGN_PARTITION(Top)
 	# -------------------------
 
-# end ENTITY(lt_inverse)
+# end ENTITY(cholesky_block)
 # --------------------
 set_global_assignment -name ENABLE_DRC_SETTINGS ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
-set_global_assignment -name SOURCE_FILE lt_inverse.qsf
-set_global_assignment -name SDC_FILE lt_inverse.sdc
-set_global_assignment -name SYSTEMVERILOG_FILE lt_inverse_interface.sv
-set_global_assignment -name SYSTEMVERILOG_FILE lt_inverse.sv
+set_global_assignment -name SOURCE_FILE cholesky_block.qsf
+set_global_assignment -name SDC_FILE cholesky_block.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE cholesky_block_interface.sv
+set_global_assignment -name SYSTEMVERILOG_FILE cholesky_block.sv
 set_global_assignment -name VERILOG_FILE ../../mult_36/mult_36_syn.v
+set_global_assignment -name SYSTEMVERILOG_FILE sqrt_52/sqrt_52_interface.sv
+set_global_assignment -name VERILOG_FILE sqrt_52/sqrt_52.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

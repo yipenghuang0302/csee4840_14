@@ -33,7 +33,7 @@ logic [5:0] [5:0] [35:0] mat_mult_datab;
 logic [5:0] [3:0] [3:0] [35:0] full_matrix;
 
 // axis of rotation / translation for joints 1...6
-logic [5:0] [2:0] [35:0] axis;
+logic [6:0] [2:0] [35:0] axis;
 
 // location of joints 1...6
 logic [5:0] [2:0] [35:0] dist_to_end;

@@ -1,22 +1,22 @@
 `timescale 1ns/1ps
-`include "lt_inverse_test.sv"
+`include "lt_block_test.sv"
 
-class lt_inverse_transaction;
+class lt_block_transaction;
 	int n = 6;
 	rand logic [6][6][30:0] lt_increment;
 	real lt_fraction [6][6];
 	real lt_data [6][6];
 endclass
 
-class lt_inverse_env;
+class lt_block_env;
 	int max_transactions = 1000000;
 endclass
 
-program lt_inverse_tb (ifc_lt_inverse.lt_inverse_tb ds);
+program lt_block_tb (ifc_lt_block.lt_block_tb ds);
 
-	lt_inverse_transaction trans;
-	lt_inverse_env env;
-	lt_inverse_test test;
+	lt_block_transaction trans;
+	lt_block_env env;
+	lt_block_test test;
 
 	task do_cycle;
 
@@ -41,7 +41,7 @@ program lt_inverse_tb (ifc_lt_inverse.lt_inverse_tb ds);
 		ds.cb.rst <= 1'b0;
 
 		@(ds.cb);
-		test.update_lt_inverse (
+		test.update_lt_block (
 			trans.lt_data
 		);
 
@@ -60,7 +60,7 @@ program lt_inverse_tb (ifc_lt_inverse.lt_inverse_tb ds);
 		repeat (env.max_transactions) begin
 			do_cycle();
 			repeat (216) @(ds.cb);
-			test.check_lt_inverse (
+			test.check_lt_block (
 				ds.cb.lt_inverse
 			);
 		end
