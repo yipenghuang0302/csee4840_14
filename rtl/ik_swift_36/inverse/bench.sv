@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
-`include "cholesky_test.sv"
+`include "inverse_test.sv"
 
-class cholesky_transaction;
+class inverse_transaction;
 	int n = 6;
 	rand logic [6][6][30:0] j_increment;
 	real j_fraction [6][6];
@@ -9,15 +9,15 @@ class cholesky_transaction;
 	real matrix_data [6][6];
 endclass
 
-class cholesky_env;
+class inverse_env;
 	int max_transactions = 1000000;
 endclass
 
-program cholesky_tb (ifc_cholesky.cholesky_tb ds);
+program inverse_tb (ifc_inverse.inverse_tb ds);
 
-	cholesky_transaction trans;
-	cholesky_env env;
-	cholesky_test test;
+	inverse_transaction trans;
+	inverse_env env;
+	inverse_test test;
 
 	task do_cycle;
 
@@ -48,7 +48,7 @@ program cholesky_tb (ifc_cholesky.cholesky_tb ds);
 		ds.cb.rst <= 1'b0;
 
 		@(ds.cb);
-		test.update_cholesky (
+		test.update_inverse (
 			trans.matrix_data
 		);
 
@@ -66,9 +66,11 @@ program cholesky_tb (ifc_cholesky.cholesky_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			repeat (210) @(ds.cb);
-			test.check_cholesky (
-				ds.cb.lt
+			repeat (228) @(ds.cb);
+			test.check_inverse (
+				ds.cb.lt,
+				ds.cb.lt_inverse,
+				ds.cb.inverse
 			);
 		end
 	end

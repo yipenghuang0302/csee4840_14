@@ -39,8 +39,8 @@ program full_jacobian_tb (ifc_full_jacobian.full_jacobian_tb ds);
 			end
 
 			trans.dh_data[i][THETA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][THETA] * 2 * 3.141592653589793238462643383279502884197;
-			trans.dh_data[i][L_OFFSET] = -16.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 16.0;
-			trans.dh_data[i][L_DISTANCE] = -16.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 16.0;
+			trans.dh_data[i][L_OFFSET] = -4.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 4.0;
+			trans.dh_data[i][L_DISTANCE] = -4.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 4.0;
 			trans.dh_data[i][ALPHA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][ALPHA] * 2 * 3.141592653589793238462643383279502884197;
 
 			$display("joint index = %d", i);
@@ -59,7 +59,7 @@ program full_jacobian_tb (ifc_full_jacobian.full_jacobian_tb ds);
 		// GENERATE Z BASIS VECTOR
 		for ( int z=0 ; z<3 ; z++ ) begin // z index
 			trans.z_fraction[z] = real'(trans.z_increment[z]) / 2147483648.0;
-			trans.z_data[z] = -16.0 + trans.z_fraction[z] * 2 * 16.0;
+			trans.z_data[z] = -4.0 + trans.z_fraction[z] * 2 * 4.0;
 			$display("z = %d", z);
 			$display("data = %f", trans.z_data[z]);
 			ds.cb.z[z] <= int'(trans.z_data[z] * 65536.0);

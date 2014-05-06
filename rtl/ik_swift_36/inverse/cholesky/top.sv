@@ -7,13 +7,13 @@
 `include "cholesky.sv"
 `include "bench.sv"
 
-`include "sqrt_27/sqrt_27_interface.sv"
-`include "sqrt_27/sqrt_27.v"
+`include "sqrt_52/sqrt_52_interface.sv"
+`include "sqrt_52/sqrt_52.v"
 `include "../../sim_models/altera_mf.v"
 
 `include "../../array_mult/array_mult_interface.sv"
 `include "../../array_mult/array_mult.sv"
-`include "../../mult_27/mult_27.v"
+`include "../../mult_36/mult_36.v"
 `include "../../sim_models/lpm_mult.v"
 `include "../../sim_models/mult_block.v"
 `include "../../sim_models/addsub_block.v"
@@ -22,7 +22,7 @@
 
 `include "../array_div/array_div_interface.sv"
 `include "../array_div/array_div.sv"
-`include "../array_div/div_27/div_27.v"
+`include "../array_div/div_52/div_52.v"
 `include "../../sim_models/220model.v"
 
 module cholesky_top ();

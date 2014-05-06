@@ -1,7 +1,7 @@
 // golden model class
 class jacobian_test;
 
-	real model_axis [6][3];
+	real model_axis [7][3];
 	real model_dist_to_end [6][3];
 	real model_jacobian_matrix [6][6];
 
@@ -16,7 +16,7 @@ class jacobian_test;
 	);
 
 		real rotation [6][3][3];
-		real position [6][3];
+		real position [7][3];
 
 		// EXTRACT ROTATION FROM TRANSFORMATION MATRICES
 		for ( int joint=0 ; joint<6 ; joint++ )
@@ -26,7 +26,7 @@ class jacobian_test;
 
 		// GENERATE AXES OF ROTATION
 		model_axis[0] = z; // first joint just comes off of basis vector
-		for ( int joint=1 ; joint<6 ; joint++ )
+		for ( int joint=1 ; joint<7 ; joint++ )
 			for ( int row=0 ; row<3 ; row++ ) begin
 				model_axis[joint][row] = 0.0; // clear data from last round
 				for ( int col=0 ; col<3 ; col++ )
@@ -35,7 +35,7 @@ class jacobian_test;
 
 		// EXTRACT POSITION FROM TRANSFORMATION MATRICES
 		position[0] = { 0.0, 0.0, 0.0 }; // first joint starts at origin
-		for ( int joint=1 ; joint<6 ; joint++ )
+		for ( int joint=1 ; joint<7 ; joint++ )
 			for ( int row=0 ; row<3 ; row++ )
 				position[joint][row] = full_matrix[joint-1][row][3];
 
@@ -89,7 +89,7 @@ class jacobian_test;
 		bit passed = 1'b1;
 
 		// CHECK AXIS
-		for ( int joint=0 ; joint<6 ; joint++ ) begin // axis joint
+		for ( int joint=0 ; joint<7 ; joint++ ) begin // axis joint
 			for ( int coord=0 ; coord<3 ; coord++ ) begin // axis coordinate
 				axis_real[joint][coord] = real'(longint'({{28{axis[joint][coord][35]}}, axis[joint][coord]}))/65536.0;
 				axis_error[joint][coord] = abs( axis_real[joint][coord] - model_axis[joint][coord] );

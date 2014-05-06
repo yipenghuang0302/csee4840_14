@@ -124,7 +124,7 @@ set_global_assignment -name SOURCE_FILE cholesky.qsf
 set_global_assignment -name SDC_FILE cholesky.sdc
 set_global_assignment -name SYSTEMVERILOG_FILE cholesky_interface.sv
 set_global_assignment -name SYSTEMVERILOG_FILE cholesky.sv
-set_global_assignment -name VERILOG_FILE ../../mult_27/mult_27_syn.v
-set_global_assignment -name SYSTEMVERILOG_FILE sqrt_27/sqrt_27_interface.sv
-set_global_assignment -name VERILOG_FILE sqrt_27/sqrt_27.v
+set_global_assignment -name VERILOG_FILE ../../mult_36/mult_36_syn.v
+set_global_assignment -name SYSTEMVERILOG_FILE sqrt_52/sqrt_52_interface.sv
+set_global_assignment -name VERILOG_FILE sqrt_52/sqrt_52.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

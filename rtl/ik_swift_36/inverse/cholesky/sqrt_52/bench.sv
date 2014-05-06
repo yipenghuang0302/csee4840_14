@@ -1,21 +1,21 @@
 `timescale 1ns/1ps
-`include "sqrt_27_test.sv"
+`include "sqrt_52_test.sv"
 
-class sqrt_27_transaction;
+class sqrt_52_transaction;
 	rand logic [30:0] increment_radical;
 	real fraction_radical;
 	real radical;
 endclass
 
-class sqrt_27_env;
+class sqrt_52_env;
 	int max_transactions = 100000000;
 endclass
 
-program sqrt_27_tb (ifc_sqrt_27.sqrt_27_tb ds);
+program sqrt_52_tb (ifc_sqrt_52.sqrt_52_tb ds);
 
-	sqrt_27_transaction trans;
-	sqrt_27_env env;
-	sqrt_27_test test;
+	sqrt_52_transaction trans;
+	sqrt_52_env env;
+	sqrt_52_test test;
 
 	task do_cycle;
 
@@ -23,16 +23,16 @@ program sqrt_27_tb (ifc_sqrt_27.sqrt_27_tb ds);
 
 		//wrap input numbers to -64 ~ 64
 		trans.fraction_radical = real'(trans.increment_radical) / 2147483648.0;
-		trans.radical = 0.0 + trans.fraction_radical * 2 * 1024.0;
+		trans.radical = 0.0 + trans.fraction_radical * 1048576.0;
 		// $display("fraction_radical = %f, radical = %f", trans.fraction_radical, trans.radical);
 		// passing data to design under test happens here
-		ds.cb.radical <= int'(trans.radical * 256.0);
+		ds.cb.radical <= longint'(trans.radical * 65536.0);
 
 		ds.cb.en <= 1'b1;
 		ds.cb.rst <= 1'b0;
 
 		@(ds.cb);
-		test.update_sqrt_27 (
+		test.update_sqrt_52 (
 			trans.radical
 		);
 
@@ -50,7 +50,7 @@ program sqrt_27_tb (ifc_sqrt_27.sqrt_27_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			test.check_sqrt_27 (
+			test.check_sqrt_52 (
 				ds.cb.q
 			);
 		end

@@ -35,7 +35,8 @@ module jacobian (
 			i.count==8'd42 || i.count==8'd43 ||
 			i.count==8'd54 || i.count==8'd55 ||
 			i.count==8'd66 || i.count==8'd67 ||
-			i.count==8'd78 || i.count==8'd79 ) begin 
+			i.count==8'd78 || i.count==8'd79 ||
+			i.count==8'd90 || i.count==8'd91 ) begin 
 			// || i.count==8'd90 
 			i.array_mult_dataa[0] <= i.full_matrix[joint][0][0];
 			i.array_mult_dataa[1] <= i.full_matrix[joint][0][1];
@@ -65,12 +66,12 @@ module jacobian (
 	// LOGIC GOVERNING ARRAY MULT OUTPUT
 	// axis[5:0] (axis of rotation/translation)
 	always_ff @(posedge i.clk) begin
-		if ( i.count==8'd34 || i.count==8'd47 || i.count==8'd59 || i.count==8'd71 || i.count==8'd83 ) begin 
+		if ( i.count==8'd34 || i.count==8'd47 || i.count==8'd59 || i.count==8'd71 || i.count==8'd83 || i.count==8'd95 ) begin 
 			// || i.count==8'd95 
 			i.axis[joint+1][0] <= i.array_mult_result[0] + i.array_mult_result[1];
 			i.axis[joint+1][1] <= i.array_mult_result[3] + i.array_mult_result[4];
 			i.axis[joint+1][2] <= i.array_mult_result[6] + i.array_mult_result[7];
-		end else if ( i.count==8'd35 || i.count==8'd48 || i.count==8'd60 || i.count==8'd72 || i.count==8'd84 ) begin 
+		end else if ( i.count==8'd35 || i.count==8'd48 || i.count==8'd60 || i.count==8'd72 || i.count==8'd84 || i.count==8'd96 ) begin 
 			// || i.count==8'd96 
 			i.axis[joint+1][0] <= i.axis[joint+1][0] + i.array_mult_result[2];
 			i.axis[joint+1][1] <= i.axis[joint+1][1] + i.array_mult_result[5];

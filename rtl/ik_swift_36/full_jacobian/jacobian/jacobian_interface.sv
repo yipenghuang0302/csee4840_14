@@ -22,7 +22,7 @@ logic [5:0] joint_type;
 logic [5:0] [3:0] [3:0] [35:0] full_matrix;
 
 // Axis of rotation / translation for joints 1...6
-logic [5:0] [2:0] [35:0] axis;
+logic [6:0] [2:0] [35:0] axis;
 
 // Location of joints 1...6
 logic [5:0] [2:0] [35:0] dist_to_end;

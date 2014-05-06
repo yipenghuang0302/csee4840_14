@@ -1,7 +1,7 @@
 TOP=top
 INTERFACE=interface
 BENCH=bench
-DUT=sqrt_52
+DUT=inverse
 
 .PHONY: help
 

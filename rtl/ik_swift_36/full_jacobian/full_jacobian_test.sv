@@ -2,7 +2,7 @@
 class full_jacobian_test;
 
 	real model_full_matrix [6][4][4];
-	real model_axis [6][3];
+	real model_axis [7][3];
 	real model_dist_to_end [6][3];
 	real model_jacobian_matrix [6][6];
 	real model_jjt_bias [6][6];
@@ -18,7 +18,7 @@ class full_jacobian_test;
 	);
 
 		real rotation [6][3][3];
-		real position [6][3];
+		real position [7][3];
 
 		// GENERATE FULL MATRIX
 		// iterate over joint index
@@ -69,7 +69,7 @@ class full_jacobian_test;
 
 		// GENERATE AXES OF ROTATION
 		model_axis[0] = z; // first joint just comes off of basis vector
-		for ( int joint=1 ; joint<6 ; joint++ )
+		for ( int joint=1 ; joint<7 ; joint++ )
 			for ( int row=0 ; row<3 ; row++ ) begin
 				model_axis[joint][row] = 0.0; // clear data from last round
 				for ( int col=0 ; col<3 ; col++ )
@@ -78,7 +78,7 @@ class full_jacobian_test;
 
 		// EXTRACT POSITION FROM TRANSFORMATION MATRICES
 		position[0] = { 0.0, 0.0, 0.0 }; // first joint starts at origin
-		for ( int joint=1 ; joint<6 ; joint++ )
+		for ( int joint=1 ; joint<7 ; joint++ )
 			for ( int row=0 ; row<3 ; row++ )
 				position[joint][row] = model_full_matrix[joint-1][row][3];
 
@@ -124,8 +124,8 @@ class full_jacobian_test;
 		logic [5:0] [5:0] [35:0] jjt_bias
 	);
 
-		real abs_tol = 0.01;
-		real rel_tol = 0.01;
+		real abs_tol = 0.0001;
+		real rel_tol = 0.0001;
 
 		real full_matrix_real[4][4];
 		real full_matrix_error[4][4];
@@ -169,7 +169,7 @@ class full_jacobian_test;
 		end
 
 		// CHECK AXIS
-		for ( int joint=0 ; joint<6 ; joint++ ) begin // axis joint
+		for ( int joint=0 ; joint<7 ; joint++ ) begin // axis joint
 			for ( int coord=0 ; coord<3 ; coord++ ) begin // axis coordinate
 				axis_real[joint][coord] = real'(longint'({{28{axis[joint][coord][35]}}, axis[joint][coord]}))/65536.0;
 				axis_error[joint][coord] = abs( axis_real[joint][coord] - model_axis[joint][coord] );

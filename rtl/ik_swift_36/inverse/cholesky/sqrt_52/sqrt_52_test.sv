@@ -1,5 +1,5 @@
 // golden model class
-class sqrt_27_test;
+class sqrt_52_test;
 
 	int pipeline_depth = 6;
 	real model_radical[6];
@@ -9,7 +9,7 @@ class sqrt_27_test;
 	   abs = (num<0) ? -num : num; 
 	endfunction
 
-	function void update_sqrt_27 (
+	function void update_sqrt_52 (
 		real radical
 	);
 
@@ -23,21 +23,21 @@ class sqrt_27_test;
 
 	endfunction
 
-	function void check_sqrt_27 (
-		logic [26:0] dut_q
+	function void check_sqrt_52 (
+		logic [35:0] dut_q
 	);
 
-		real abs_tol = 0.01;
-		real rel_tol = 0.01;
+		real abs_tol = 0.00001;
+		real rel_tol = 0.00001;
 		real real_q;
 		real error;
 		real percent;
 
-		real_q = real'(int'({{5{dut_q[26]}}, dut_q}))/256.0;
+		real_q = real'(longint'({{28{dut_q[35]}}, dut_q}))/65536.0;
 		error = abs( real_q - model_q[0] );
 		percent = abs( error / model_q[0] );
 		if ( error>abs_tol && percent>rel_tol ) begin
-			$write("%t : fail sqrt_27\n", $realtime);
+			$write("%t : fail sqrt_52\n", $realtime);
 			$write("model_radical=%f.\n", model_radical[0],);
 			$write("model_q=%f; dut_q=%f; error=%f.\n", model_q[0], real_q, error);
 			$write("model_q=%f; dut_q=%f; percent=%f.\n", model_q[0], real_q, percent);
