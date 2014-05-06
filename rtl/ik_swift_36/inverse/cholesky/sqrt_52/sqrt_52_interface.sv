@@ -11,15 +11,15 @@ logic en, rst;
 logic [35:0] radical;
 logic [35:0] q;
 
-clocking cb @(posedge clk);
-	output en;
-	output rst;
-
-	output radical;
-	input q;
-endclocking
-
-modport sqrt_52_tb (clocking cb);
+//clocking cb @(posedge clk);
+//	output en;
+//	output rst;
+//
+//	output radical;
+//	input q;
+//endclocking
+//
+//modport sqrt_52_tb (clocking cb);
 
 // restrict directions
 modport sqrt_52 (
