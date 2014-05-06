@@ -124,8 +124,8 @@ class full_jacobian_test;
 		logic [5:0] [5:0] [35:0] jjt_bias
 	);
 
-		real abs_tol = 0.001;
-		real rel_tol = 0.001;
+		real abs_tol = 0.01;
+		real rel_tol = 0.01;
 
 		real full_matrix_real[4][4];
 		real full_matrix_error[4][4];
