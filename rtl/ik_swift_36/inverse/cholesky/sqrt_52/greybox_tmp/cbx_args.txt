@@ -1,0 +1,10 @@
+PIPELINE=5
+Q_PORT_WIDTH=26
+R_PORT_WIDTH=27
+WIDTH=52
+DEVICE_FAMILY="Cyclone V"
+clk
+ena
+radical
+q
+remainder
