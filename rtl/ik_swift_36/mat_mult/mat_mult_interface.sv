@@ -14,17 +14,17 @@ logic [5:0] [5:0] [35:0] dataa;
 logic [5:0] [5:0] [35:0] datab;
 logic [5:0] [5:0] [35:0] result;
 
-clocking cb @(posedge clk);
-	output en;
-	output rst;
-	output mat_mode;
-	output dataa;
-	output datab;
-
-	input result;
-endclocking
-
-modport mat_mult_tb (clocking cb);
+//clocking cb @(posedge clk);
+//	output en;
+//	output rst;
+//	output mat_mode;
+//	output dataa;
+//	output datab;
+//
+//	input result;
+//endclocking
+//
+//modport mat_mult_tb (clocking cb);
 
 // restrict directions
 modport mat_mult (

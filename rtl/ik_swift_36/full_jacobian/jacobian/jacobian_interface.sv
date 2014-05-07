@@ -41,18 +41,18 @@ logic [5:0] [5:0] [35:0] mat_mult_datab;
 // Input from matrix multipliers
 logic [5:0] [5:0] [35:0] mat_mult_result;
 
-clocking cb @(posedge clk);
-	output en, rst;
-	output z;
-	output joint_type;
-	output full_matrix;
-
-	input axis;
-	input dist_to_end;
-	input jacobian_matrix;
-endclocking
-
-modport jacobian_tb (clocking cb);
+//clocking cb @(posedge clk);
+//	output en, rst;
+//	output z;
+//	output joint_type;
+//	output full_matrix;
+//
+//	input axis;
+//	input dist_to_end;
+//	input jacobian_matrix;
+//endclocking
+//
+//modport jacobian_tb (clocking cb);
 
 // restrict directions
 modport jacobian (
