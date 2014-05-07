@@ -53,37 +53,38 @@ module inverse (
 
 	// MATRIX MULTIPLY FOR L^-T * L^-1
 	// MAT_MULT INPUTS
-	always_ff @(posedge i.clk) begin
-		case (i.count)
-			8'd0: begin
-				i.mat_mult_dataa <= {36{36'b0}};
-				i.mat_mult_datab <= {36{36'b0}};
-			end
-			8'd215: begin
-				i.mat_mult_dataa <= {
-					{ i.lt_inverse[5][5], i.lt_inverse[4][5], i.lt_inverse[3][5], i.lt_inverse[2][5], i.lt_inverse[1][5], i.lt_inverse[0][5] },
-					{ i.lt_inverse[5][4], i.lt_inverse[4][4], i.lt_inverse[3][4], i.lt_inverse[2][4], i.lt_inverse[1][4], i.lt_inverse[0][4] },
-					{ i.lt_inverse[5][3], i.lt_inverse[4][3], i.lt_inverse[3][3], i.lt_inverse[2][3], i.lt_inverse[1][3], i.lt_inverse[0][3] },
-					{ i.lt_inverse[5][2], i.lt_inverse[4][2], i.lt_inverse[3][2], i.lt_inverse[2][2], i.lt_inverse[1][2], i.lt_inverse[0][2] },
-					{ i.lt_inverse[5][1], i.lt_inverse[4][1], i.lt_inverse[3][1], i.lt_inverse[2][1], i.lt_inverse[1][1], i.lt_inverse[0][1] },
-					{ i.lt_inverse[5][0], i.lt_inverse[4][0], i.lt_inverse[3][0], i.lt_inverse[2][0], i.lt_inverse[1][0], i.lt_inverse[0][0] }
-				};
-				i.mat_mult_datab <= i.lt_inverse;
-			end
-			8'd227: begin
-				i.mat_mult_dataa <= {36{36'b0}};
-				i.mat_mult_datab <= {36{36'b0}};
-			end
-			default: begin
-				i.mat_mult_dataa <= i.mat_mult_dataa;
-				i.mat_mult_datab <= i.mat_mult_datab;
-			end
-		endcase
-	end
+	always_ff @(posedge i.clk)
+		if (i.en)
+			case (i.count)
+				8'd0: begin
+					i.mat_mult_dataa <= {36{36'b0}};
+					i.mat_mult_datab <= {36{36'b0}};
+				end
+				8'd215: begin
+					i.mat_mult_dataa <= {
+						{ i.lt_inverse[5][5], i.lt_inverse[4][5], i.lt_inverse[3][5], i.lt_inverse[2][5], i.lt_inverse[1][5], i.lt_inverse[0][5] },
+						{ i.lt_inverse[5][4], i.lt_inverse[4][4], i.lt_inverse[3][4], i.lt_inverse[2][4], i.lt_inverse[1][4], i.lt_inverse[0][4] },
+						{ i.lt_inverse[5][3], i.lt_inverse[4][3], i.lt_inverse[3][3], i.lt_inverse[2][3], i.lt_inverse[1][3], i.lt_inverse[0][3] },
+						{ i.lt_inverse[5][2], i.lt_inverse[4][2], i.lt_inverse[3][2], i.lt_inverse[2][2], i.lt_inverse[1][2], i.lt_inverse[0][2] },
+						{ i.lt_inverse[5][1], i.lt_inverse[4][1], i.lt_inverse[3][1], i.lt_inverse[2][1], i.lt_inverse[1][1], i.lt_inverse[0][1] },
+						{ i.lt_inverse[5][0], i.lt_inverse[4][0], i.lt_inverse[3][0], i.lt_inverse[2][0], i.lt_inverse[1][0], i.lt_inverse[0][0] }
+					};
+					i.mat_mult_datab <= i.lt_inverse;
+				end
+				8'd227: begin
+					i.mat_mult_dataa <= {36{36'b0}};
+					i.mat_mult_datab <= {36{36'b0}};
+				end
+				default: begin
+					i.mat_mult_dataa <= i.mat_mult_dataa;
+					i.mat_mult_datab <= i.mat_mult_datab;
+				end
+			endcase
 
 	// MAT_MULT OUTPUTS
 	always_ff @(posedge i.clk)
-		if ( i.count==8'd227 )
-			i.inverse <= i.mat_mult_result;
+		if (i.en)
+			if ( i.count==8'd227 )
+				i.inverse <= i.mat_mult_result;
 
 endmodule

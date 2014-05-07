@@ -353,7 +353,7 @@ class ik_swift_test;
 		if (passed) begin
 			$display("%t : pass \n", $realtime);
 		end else begin
-			$exit();
+			// $exit();
 		end
 
 	endfunction

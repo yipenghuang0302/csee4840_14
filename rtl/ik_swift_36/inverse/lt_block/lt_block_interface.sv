@@ -23,16 +23,16 @@ logic [5:0] [35:0] dividends;
 logic [35:0] divisor;
 logic [5:0] [35:0] quotients;
 
-//clocking cb @(posedge clk);
-//	output en;
-//	output rst;
-//	output count;
-//
-//	output lt;
-//	input lt_inverse;
-//endclocking
-//
-//modport lt_block_tb (clocking cb);
+// clocking cb @(posedge clk);
+// 	output en;
+// 	output rst;
+// 	output count;
+// 
+// 	output lt;
+// 	input lt_inverse;
+// endclocking
+// 
+// modport lt_block_tb (clocking cb);
 
 // restrict directions
 modport lt_block_dut (
