@@ -17,6 +17,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
+#include <math.h>
 #include "CConfigLoader.h"
 #include "ik_driver.h"
 
@@ -82,8 +83,10 @@ void write_param(int joint, char param_type, float magnitude)
 	vla.parameter = param_type;
 	if (vla.parameter == THETA || vla.parameter == ALPHA){
 		//Do this error checking here so we don't use floats in the kernel
-		if (magnitude < -M_PI/2 || magnitude > M_PI/2)
-			return -EINVAL;
+		if (magnitude < -M_PI/2 || magnitude > M_PI/2){
+			perror("Magnitude of parameter is outside acceptable range");
+			return;
+		}
 		else
 			vla.magnitude = float_to_fixed(magnitude * M_PI / 180);//Convert from degrees to radians
 	}
@@ -95,10 +98,26 @@ void write_param(int joint, char param_type, float magnitude)
 	}
 }
 
-//TODO
-float read_param(){
-//Make sure you divide by 2^Precision since the driver only sees fixed-point numbers
-	return 0.0;
+//Read a specific dh param for a specific joint from the hardware
+float read_param(int joint, char param_type){
+	ik_driver_arg_t vla;
+	float value;
+
+	//Get param
+	vla.joint = (char)joint;
+	vla.parameter = param_type;
+	if (ioctl(ik_driver_fd, IK_DRIVER_READ_PARAM, &vla)) {
+		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
+		return 0;
+	}
+
+	//Convert from fixed to float
+	value = vla.magnitude / pow(2,PRECISION);
+
+	//convert from radians to degrees if necessary
+	if (param_type == THETA || param_type == ALPHA)
+		value = value * 180 / M_PI;
+	return value;
 }
 
 void arm(int index){
@@ -138,9 +157,8 @@ void arm(int index){
 		glVertex3f(robot.targetx, robot.targety, robot.targetz);
 	glEnd();
 
-	//UNCOMMENT WHEN TALKING TO HARDWARE 
-  //write_target(robot.targetx, robot.targety, robot.targetz);
 
+	//Draw the links of the robot arm
 	for (int i = 0; i < MAX_JOINT; i ++){
 		glColor3f(.2*i+.5, .2*i+.1, .2*i);
 		d = robot.params[i].d;
@@ -148,9 +166,13 @@ void arm(int index){
 		theta = robot.params[i].theta;
 		alpha = robot.params[i].alpha;
 
-		//Base Joint (joint 0)
+		/* Do this when talking to hardware
+			 d = read_param(i, L_OFFSET); 
+			 a = read_param(i, L_LENGTH); 
+			 theta = read_param(i, theta); 
+			 alpha = read_param(i, alpha); 
+		 */
 
-		
 		glRotatef(theta, 0, 0, 1);
 
 		glBegin(GL_LINE_STRIP);
@@ -252,7 +274,20 @@ int main(int argc, char** argv) {
 	if(!cfg.LoadXml()) return 1;
 	robot = cfg.GetTable();
 
-	std::cout << robot.params[0].theta; 
+	//UNCOMMENT WHEN TALKING TO HARDWARE 
+	/*
+
+	//Write target to hardware
+  write_target(robot.targetx, robot.targety, robot.targetz);
+
+	//Inform hardware of initial configuration
+	for (int i = 0; i < MAX_JOINT; i ++){
+		write_param(i, L_OFFSET, robot.params[i].d);
+		write_param(i, L_LENGTH, robot.params[i].a);
+		write_param(i, THETA, robot.params[i].theta);
+		write_param(i, ALPHA, robot.params[i].alpha);
+	}
+	*/
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
