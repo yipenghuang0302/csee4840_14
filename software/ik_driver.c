@@ -72,8 +72,8 @@ static void write_target(u32 target[3], u8 joint_t)
  */
 static void write_parameter(u8 joint, u8 parameter, u32 magnitude){
 	u32 mag = magnitude;
-	iowrite32(mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint-1)+(parameter*REG_SIZE));
-	dev.dh_params[(joint-1) * NUM_PARAMS + parameter] = mag;
+	iowrite32(mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint)+(parameter*REG_SIZE));
+	dev.dh_params[(joint) * NUM_PARAMS + parameter] = mag;
 }
 
 /*
@@ -116,7 +116,7 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 				(vla.joint != -1 && 
 				 (vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_LENGTH))) 
 			return -EINVAL;
-		vla.magnitude = dev.dh_params[(vla.joint-1)*4 + vla.parameter];
+		vla.magnitude = dev.dh_params[(vla.joint)*4 + vla.parameter];
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))
 			return -EACCES;
