@@ -4,7 +4,7 @@
 // MODULE: lpm_mult 
 
 // ============================================================
-// File Name: mult_36_coeff_83443.v
+// File Name: mult_36_dsp.v
 // Megafunction Name(s):
 // 			lpm_mult
 //
@@ -36,31 +36,32 @@
 // synopsys translate_off
 `timescale 1 ps / 1 ps
 // synopsys translate_on
-module mult_36_coeff_83443 (
+module mult_36_dsp (
 	clken,
 	clock,
 	dataa,
+	datab,
 	result);
 
 	input	  clken;
 	input	  clock;
 	input	[35:0]  dataa;
+	input	[35:0]  datab;
 	output	[71:0]  result;
 
 	wire [71:0] sub_wire0;
-	wire [35:0] sub_wire1 = 36'd83443;
 	wire [71:0] result = sub_wire0[71:0];
 
 	lpm_mult	lpm_mult_component (
 				.clock (clock),
-				.datab (sub_wire1),
+				.datab (datab),
 				.clken (clken),
 				.dataa (dataa),
 				.result (sub_wire0),
 				.aclr (1'b0),
 				.sum (1'b0));
 	defparam
-		lpm_mult_component.lpm_hint = "DEDICATED_MULTIPLIER_CIRCUITRY=NO,INPUT_B_IS_CONSTANT=YES,MAXIMIZE_SPEED=1",
+		lpm_mult_component.lpm_hint = "DEDICATED_MULTIPLIER_CIRCUITRY=YES,MAXIMIZE_SPEED=1",
 		lpm_mult_component.lpm_pipeline = 3,
 		lpm_mult_component.lpm_representation = "SIGNED",
 		lpm_mult_component.lpm_type = "LPM_MULT",
@@ -75,15 +76,15 @@ endmodule
 // CNX file retrieval info
 // ============================================================
 // Retrieval info: PRIVATE: AutoSizeResult NUMERIC "1"
-// Retrieval info: PRIVATE: B_isConstant NUMERIC "1"
-// Retrieval info: PRIVATE: ConstantB NUMERIC "83443"
+// Retrieval info: PRIVATE: B_isConstant NUMERIC "0"
+// Retrieval info: PRIVATE: ConstantB NUMERIC "0"
 // Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone V"
 // Retrieval info: PRIVATE: LPM_PIPELINE NUMERIC "3"
 // Retrieval info: PRIVATE: Latency NUMERIC "1"
 // Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "1"
 // Retrieval info: PRIVATE: SignedMult NUMERIC "1"
 // Retrieval info: PRIVATE: USE_MULT NUMERIC "1"
-// Retrieval info: PRIVATE: ValidConstant NUMERIC "1"
+// Retrieval info: PRIVATE: ValidConstant NUMERIC "0"
 // Retrieval info: PRIVATE: WidthA NUMERIC "36"
 // Retrieval info: PRIVATE: WidthB NUMERIC "36"
 // Retrieval info: PRIVATE: WidthP NUMERIC "72"
@@ -92,7 +93,7 @@ endmodule
 // Retrieval info: PRIVATE: new_diagram STRING "1"
 // Retrieval info: PRIVATE: optimize NUMERIC "2"
 // Retrieval info: LIBRARY: lpm lpm.lpm_components.all
-// Retrieval info: CONSTANT: LPM_HINT STRING "DEDICATED_MULTIPLIER_CIRCUITRY=NO,INPUT_B_IS_CONSTANT=YES,MAXIMIZE_SPEED=1"
+// Retrieval info: CONSTANT: LPM_HINT STRING "MAXIMIZE_SPEED=1"
 // Retrieval info: CONSTANT: LPM_PIPELINE NUMERIC "3"
 // Retrieval info: CONSTANT: LPM_REPRESENTATION STRING "SIGNED"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_MULT"
@@ -102,17 +103,18 @@ endmodule
 // Retrieval info: USED_PORT: clken 0 0 0 0 INPUT NODEFVAL "clken"
 // Retrieval info: USED_PORT: clock 0 0 0 0 INPUT NODEFVAL "clock"
 // Retrieval info: USED_PORT: dataa 0 0 36 0 INPUT NODEFVAL "dataa[35..0]"
+// Retrieval info: USED_PORT: datab 0 0 36 0 INPUT NODEFVAL "datab[35..0]"
 // Retrieval info: USED_PORT: result 0 0 72 0 OUTPUT NODEFVAL "result[71..0]"
 // Retrieval info: CONNECT: @clken 0 0 0 0 clken 0 0 0 0
 // Retrieval info: CONNECT: @clock 0 0 0 0 clock 0 0 0 0
 // Retrieval info: CONNECT: @dataa 0 0 36 0 dataa 0 0 36 0
-// Retrieval info: CONNECT: @datab 0 0 36 0 83443 0 0 36 0
+// Retrieval info: CONNECT: @datab 0 0 36 0 datab 0 0 36 0
 // Retrieval info: CONNECT: result 0 0 72 0 @result 0 0 72 0
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443.inc FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443.cmp FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443.bsf FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443_inst.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443_bb.v FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443_syn.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp.inc FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp.cmp FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp.bsf FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp_inst.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp_bb.v FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp_syn.v TRUE
 // Retrieval info: LIB_FILE: lpm

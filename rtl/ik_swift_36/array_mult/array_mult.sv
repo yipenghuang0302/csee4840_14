@@ -22,9 +22,9 @@ module array_mult (
 				.datab(i.datab[index]),
 				.result(mult_result[index])
 			);
-			always_ff @(posedge i.clk) begin
-				mult_round[index] <= mult_result[index][15] ? mult_result[index][51:16] + 1'b1 : mult_result[index][51:16];
-			end
+			always_ff @(posedge i.clk)
+				if (i.en)
+					mult_round[index] <= mult_result[index][15] ? mult_result[index][51:16] + 1'b1 : mult_result[index][51:16];
 		end
 	endgenerate
 

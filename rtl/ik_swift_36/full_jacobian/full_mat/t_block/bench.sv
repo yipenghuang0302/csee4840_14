@@ -2,6 +2,7 @@
 `include "t_block_test.sv"
 
 class t_block_transaction;
+	rand logic en;
 	rand logic [30:0] increment_a;
 	rand logic [30:0] increment_d;
 	rand logic [30:0] increment_alpha;
@@ -9,7 +10,7 @@ class t_block_transaction;
 endclass
 
 class t_block_env;
-	int warmup = 30;
+	int warmup = 40;
 	int max_transactions = 1000000;
 endclass
 
@@ -51,7 +52,7 @@ program t_block_tb (ifc_t_block.t_block_tb ds);
 		// $display("fraction_theta = %f, theta = %f", fraction_theta, theta);
 
 		// passing data to design under test happens here
-		ds.cb.en <= 1'b1;
+		ds.cb.en <= trans.en;
 		ds.cb.rst <= 1'b0;
 		ds.cb.count <= 8'd24;
 		ds.cb.a <= longint'(a * 65536.0);
@@ -60,9 +61,10 @@ program t_block_tb (ifc_t_block.t_block_tb ds);
 		ds.cb.theta <= longint'(theta * 65536.0);
 
 		@(ds.cb);
-		test.update_t_block (
-			a, d, alpha, theta
-		);
+		if (trans.en)
+			test.update_t_block (
+				a, d, alpha, theta
+			);
 
 	endtask
 
@@ -78,9 +80,10 @@ program t_block_tb (ifc_t_block.t_block_tb ds);
 		// testing
 		repeat (env.max_transactions) begin
 			do_cycle();
-			test.check_t_block (
-				ds.cb.t_matrix
-			);
+			if (trans.en)
+				test.check_t_block (
+					ds.cb.t_matrix
+				);
 		end
 	end
 endprogram

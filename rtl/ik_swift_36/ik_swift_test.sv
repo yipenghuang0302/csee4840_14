@@ -200,8 +200,8 @@ class ik_swift_test;
 		logic [5:0] [35:0] delta
 	);
 
-		real abs_tol = 0.01;
-		real rel_tol = 0.01;
+		real abs_tol = 0.005;
+		real rel_tol = 0.005;
 
 		real jacobian_real[6][6];
 		real jacobian_error[6][6];
@@ -275,12 +275,12 @@ class ik_swift_test;
 				lt_percent[i][j] = abs( lt_error[i][j] / m_lt[i][j] );
 				if (lt_error[i][j]>abs_tol && lt_percent[i][j]>rel_tol) begin
 					$write("%t : fail cholesky i=%d j=%d\n", $realtime, i, j);
+					$write("m_lt=%f; dut_result=%f; lt_error=%f.\n", m_lt[i][j], lt_real[i][j], lt_error[i][j]);
+					$write("m_lt=%f; dut_result=%f; lt_percent=%f.\n", m_lt[i][j], lt_real[i][j], lt_percent[i][j]);
 					passed = 1'b0;
 				end else begin
 					$write("%t : pass cholesky i=%d j=%d\n", $realtime, i, j);
 				end
-				$write("m_lt=%f; dut_result=%f; lt_error=%f.\n", m_lt[i][j], lt_real[i][j], lt_error[i][j]);
-				$write("m_lt=%f; dut_result=%f; lt_percent=%f.\n", m_lt[i][j], lt_real[i][j], lt_percent[i][j]);
 			end
 		end
 
@@ -292,12 +292,12 @@ class ik_swift_test;
 				lt_inverse_percent[i][j] = abs( lt_inverse_error[i][j] / m_lt_inv[i][j] );
 				if (lt_inverse_error[i][j]>abs_tol && lt_inverse_percent[i][j]>rel_tol) begin
 					$write("%t : fail lt_inverse i=%d j=%d\n", $realtime, i, j);
+					$write("m_lt_inv=%f; dut_result=%f; lt_inverse_error=%f.\n", m_lt_inv[i][j], lt_inverse_real[i][j], lt_inverse_error[i][j]);
+					$write("m_lt_inv=%f; dut_result=%f; lt_inverse_percent=%f.\n", m_lt_inv[i][j], lt_inverse_real[i][j], lt_inverse_percent[i][j]);
 					passed = 1'b0;
 				end else begin
 					$write("%t : pass lt_inverse i=%d j=%d\n", $realtime, i, j);
 				end
-				$write("m_lt_inv=%f; dut_result=%f; lt_inverse_error=%f.\n", m_lt_inv[i][j], lt_inverse_real[i][j], lt_inverse_error[i][j]);
-				$write("m_lt_inv=%f; dut_result=%f; lt_inverse_percent=%f.\n", m_lt_inv[i][j], lt_inverse_real[i][j], lt_inverse_percent[i][j]);
 			end
 		end
 
@@ -326,12 +326,12 @@ class ik_swift_test;
 				dls_percent[i][j] = abs( dls_error[i][j] / m_dls[i][j] );
 				if (dls_error[i][j]>abs_tol && dls_percent[i][j]>rel_tol) begin
 					$write("%t : fail dls i=%d j=%d\n", $realtime, i, j);
+					$write("m_dls=%f; dut_result=%f; dls_error=%f.\n", m_dls[i][j], dls_real[i][j], dls_error[i][j]);
+					$write("m_dls=%f; dut_result=%f; dls_percent=%f.\n", m_dls[i][j], dls_real[i][j], dls_percent[i][j]);
 					passed = 1'b0;
 				end else begin
 					$write("%t : pass dls i=%d j=%d\n", $realtime, i, j);
 				end
-				$write("m_dls=%f; dut_result=%f; dls_error=%f.\n", m_dls[i][j], dls_real[i][j], dls_error[i][j]);
-				$write("m_dls=%f; dut_result=%f; dls_percent=%f.\n", m_dls[i][j], dls_real[i][j], dls_percent[i][j]);
 			end
 		end
 
@@ -342,12 +342,12 @@ class ik_swift_test;
 			delta_percent[i] = abs( delta_error[i] / m_delta[i] );
 			if (delta_error[i]>abs_tol && delta_percent[i]>rel_tol) begin
 				$write("%t : fail delta i=%d\n", $realtime, i);
-				$write("m_delta=%f; dut_result=%f; delta_error=%f.\n", m_delta[i], delta_real[i], delta_error[i]);
-				$write("m_delta=%f; dut_result=%f; delta_percent=%f.\n", m_delta[i], delta_real[i], delta_percent[i]);
 				passed = 1'b0;
 			end else begin
 				$write("%t : pass delta i=%d\n", $realtime, i);
 			end
+			$write("m_delta=%f; dut_result=%f; delta_error=%f.\n", m_delta[i], delta_real[i], delta_error[i]);
+			$write("m_delta=%f; dut_result=%f; delta_percent=%f.\n", m_delta[i], delta_real[i], delta_percent[i]);
 		end
 
 		if (passed) begin

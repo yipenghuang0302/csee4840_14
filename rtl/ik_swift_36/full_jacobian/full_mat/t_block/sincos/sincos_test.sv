@@ -43,7 +43,7 @@ class sincos_test;
 		);
 
 		if (passed) begin
-			// $display("%t : pass \n", $realtime);
+			$display("%t : pass \n", $realtime);
 		end else begin
 			$write("%t : fail sincos angle=%f\n", $realtime, model_angle[0]);
 			$write("model_sin=%f; dut_sin=%f; sin_error=%f.\n", model_sin[0], real_sin, sin_error);

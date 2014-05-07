@@ -4,12 +4,12 @@ class mat_mult_test;
 	int n = 6;
 
 	// if testing in parallel multiplier mode
-	// int pipeline_depth = 7;
-	// real model_result[7][6][6];
+	int pipeline_depth = 7;
+	real model_result[7][6][6];
 
 	// if testing in matrix multiplier mode
-	int pipeline_depth = 2;
-	real model_result[2][6][6];
+	// int pipeline_depth = 2;
+	// real model_result[2][6][6];
 
 	function real abs (real num); 
 	   abs = (num<0) ? -num : num; 

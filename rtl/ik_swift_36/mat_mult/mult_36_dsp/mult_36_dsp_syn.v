@@ -4,7 +4,7 @@
 // MODULE: lpm_mult 
 
 // ============================================================
-// File Name: mult_36_coeff_83443.v
+// File Name: mult_36_dsp.v
 // Megafunction Name(s):
 // 			lpm_mult
 //
@@ -33,41 +33,105 @@
 //applicable agreement for further details.
 
 
-// synopsys translate_off
+//lpm_mult DEVICE_FAMILY="Cyclone V" LPM_PIPELINE=3 LPM_REPRESENTATION="SIGNED" LPM_WIDTHA=36 LPM_WIDTHB=36 LPM_WIDTHP=72 MAXIMIZE_SPEED=1 clken clock dataa datab result
+//VERSION_BEGIN 13.1 cbx_cycloneii 2014:02:12:20:59:46:SJ cbx_lpm_add_sub 2014:02:12:20:59:46:SJ cbx_lpm_mult 2014:02:12:20:59:46:SJ cbx_mgl 2014:02:12:21:04:28:SJ cbx_padd 2014:02:12:20:59:46:SJ cbx_stratix 2014:02:12:20:59:46:SJ cbx_stratixii 2014:02:12:20:59:46:SJ cbx_util_mgl 2014:02:12:20:59:46:SJ  VERSION_END
+// synthesis VERILOG_INPUT_VERSION VERILOG_2001
+// altera message_off 10463
+
+
+//synthesis_resources = 
+//synopsys translate_off
 `timescale 1 ps / 1 ps
-// synopsys translate_on
-module mult_36_coeff_83443 (
+//synopsys translate_on
+module  mult_36_dsp_mult
+	( 
 	clken,
 	clock,
 	dataa,
-	result);
+	datab,
+	result) /* synthesis synthesis_clearbox=1 */;
+	input   clken;
+	input   clock;
+	input   [35:0]  dataa;
+	input   [35:0]  datab;
+	output   [71:0]  result;
+`ifndef ALTERA_RESERVED_QIS
+// synopsys translate_off
+`endif
+	tri1   clken;
+	tri0   clock;
+`ifndef ALTERA_RESERVED_QIS
+// synopsys translate_on
+`endif
+
+	reg	[35:0]	dataa_input_reg;
+	reg	[35:0]	datab_input_reg;
+	reg	[71:0]	result_output_reg;
+	reg	[71:0]	result_extra0_reg;
+	wire	signed	[35:0]	dataa_wire;
+	wire	signed	[35:0]	datab_wire;
+	wire	signed	[71:0]	result_wire;
+
+
+	// synopsys translate_off
+	initial
+		dataa_input_reg = 0;
+	// synopsys translate_on
+	always @(posedge clock)
+		 if (clken == 1'b1)	dataa_input_reg <= dataa;
+	// synopsys translate_off
+	initial
+		datab_input_reg = 0;
+	// synopsys translate_on
+	always @(posedge clock)
+		 if (clken == 1'b1)	datab_input_reg <= datab;
+	// synopsys translate_off
+	initial
+		result_output_reg = 0;
+	// synopsys translate_on
+	always @(posedge clock)
+		 if (clken == 1'b1)	result_output_reg <= result_extra0_reg;
+	// synopsys translate_off
+	initial
+		result_extra0_reg = 0;
+	// synopsys translate_on
+	always @(posedge clock)
+		 if (clken == 1'b1)	result_extra0_reg <= result_wire[71:0];
+
+	assign dataa_wire = dataa_input_reg;
+	assign datab_wire = datab_input_reg;
+	assign result_wire = dataa_wire * datab_wire;
+	assign result = ({result_output_reg});
+
+endmodule //mult_36_dsp_mult
+//VALID FILE
+
+
+// synopsys translate_off
+`timescale 1 ps / 1 ps
+// synopsys translate_on
+module mult_36_dsp (
+	clken,
+	clock,
+	dataa,
+	datab,
+	result)/* synthesis synthesis_clearbox = 1 */;
 
 	input	  clken;
 	input	  clock;
 	input	[35:0]  dataa;
+	input	[35:0]  datab;
 	output	[71:0]  result;
 
 	wire [71:0] sub_wire0;
-	wire [35:0] sub_wire1 = 36'd83443;
 	wire [71:0] result = sub_wire0[71:0];
 
-	lpm_mult	lpm_mult_component (
+	mult_36_dsp_mult	mult_36_dsp_mult_component (
 				.clock (clock),
-				.datab (sub_wire1),
+				.datab (datab),
 				.clken (clken),
 				.dataa (dataa),
-				.result (sub_wire0),
-				.aclr (1'b0),
-				.sum (1'b0));
-	defparam
-		lpm_mult_component.lpm_hint = "DEDICATED_MULTIPLIER_CIRCUITRY=NO,INPUT_B_IS_CONSTANT=YES,MAXIMIZE_SPEED=1",
-		lpm_mult_component.lpm_pipeline = 3,
-		lpm_mult_component.lpm_representation = "SIGNED",
-		lpm_mult_component.lpm_type = "LPM_MULT",
-		lpm_mult_component.lpm_widtha = 36,
-		lpm_mult_component.lpm_widthb = 36,
-		lpm_mult_component.lpm_widthp = 72;
-
+				.result (sub_wire0));
 
 endmodule
 
@@ -75,15 +139,15 @@ endmodule
 // CNX file retrieval info
 // ============================================================
 // Retrieval info: PRIVATE: AutoSizeResult NUMERIC "1"
-// Retrieval info: PRIVATE: B_isConstant NUMERIC "1"
-// Retrieval info: PRIVATE: ConstantB NUMERIC "83443"
+// Retrieval info: PRIVATE: B_isConstant NUMERIC "0"
+// Retrieval info: PRIVATE: ConstantB NUMERIC "0"
 // Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone V"
 // Retrieval info: PRIVATE: LPM_PIPELINE NUMERIC "3"
 // Retrieval info: PRIVATE: Latency NUMERIC "1"
 // Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "1"
 // Retrieval info: PRIVATE: SignedMult NUMERIC "1"
 // Retrieval info: PRIVATE: USE_MULT NUMERIC "1"
-// Retrieval info: PRIVATE: ValidConstant NUMERIC "1"
+// Retrieval info: PRIVATE: ValidConstant NUMERIC "0"
 // Retrieval info: PRIVATE: WidthA NUMERIC "36"
 // Retrieval info: PRIVATE: WidthB NUMERIC "36"
 // Retrieval info: PRIVATE: WidthP NUMERIC "72"
@@ -92,7 +156,7 @@ endmodule
 // Retrieval info: PRIVATE: new_diagram STRING "1"
 // Retrieval info: PRIVATE: optimize NUMERIC "2"
 // Retrieval info: LIBRARY: lpm lpm.lpm_components.all
-// Retrieval info: CONSTANT: LPM_HINT STRING "DEDICATED_MULTIPLIER_CIRCUITRY=NO,INPUT_B_IS_CONSTANT=YES,MAXIMIZE_SPEED=1"
+// Retrieval info: CONSTANT: LPM_HINT STRING "DEDICATED_MULTIPLIER_CIRCUITRY=YES,MAXIMIZE_SPEED=1"
 // Retrieval info: CONSTANT: LPM_PIPELINE NUMERIC "3"
 // Retrieval info: CONSTANT: LPM_REPRESENTATION STRING "SIGNED"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_MULT"
@@ -102,17 +166,18 @@ endmodule
 // Retrieval info: USED_PORT: clken 0 0 0 0 INPUT NODEFVAL "clken"
 // Retrieval info: USED_PORT: clock 0 0 0 0 INPUT NODEFVAL "clock"
 // Retrieval info: USED_PORT: dataa 0 0 36 0 INPUT NODEFVAL "dataa[35..0]"
+// Retrieval info: USED_PORT: datab 0 0 36 0 INPUT NODEFVAL "datab[35..0]"
 // Retrieval info: USED_PORT: result 0 0 72 0 OUTPUT NODEFVAL "result[71..0]"
 // Retrieval info: CONNECT: @clken 0 0 0 0 clken 0 0 0 0
 // Retrieval info: CONNECT: @clock 0 0 0 0 clock 0 0 0 0
 // Retrieval info: CONNECT: @dataa 0 0 36 0 dataa 0 0 36 0
-// Retrieval info: CONNECT: @datab 0 0 36 0 83443 0 0 36 0
+// Retrieval info: CONNECT: @datab 0 0 36 0 datab 0 0 36 0
 // Retrieval info: CONNECT: result 0 0 72 0 @result 0 0 72 0
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443.inc FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443.cmp FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443.bsf FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443_inst.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443_bb.v FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_coeff_83443_syn.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp.inc FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp.cmp FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp.bsf FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp_inst.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp_bb.v FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL mult_36_dsp_syn.v TRUE
 // Retrieval info: LIB_FILE: lpm

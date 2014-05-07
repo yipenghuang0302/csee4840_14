@@ -36,50 +36,50 @@ module mat_mult (
 	end
 
 	// LOGIC GOVERNING MULT_ARRAY_DATAA/B
-	always_ff @(posedge i.clk) begin
-		case(i.mat_mode)
-			1'b0: begin // parallel multiplier mode
-				mult_array_dataa <= i.dataa;
-				mult_array_datab <= i.datab;
-			end
-			1'b1: begin // matrix multiplier mode
-				case(count)
-					4'd0: begin
-						mult_array_dataa <= {{6{i.dataa[5][5]}}, {6{i.dataa[4][5]}}, {6{i.dataa[3][5]}}, {6{i.dataa[2][5]}}, {6{i.dataa[1][5]}}, {6{i.dataa[0][5]}}};
-						mult_array_datab <= {6{i.datab[5][5], i.datab[5][4], i.datab[5][3], i.datab[5][2], i.datab[5][1], i.datab[5][0]}};
-					end
-					4'd1: begin
-						mult_array_dataa <= {{6{i.dataa[5][4]}}, {6{i.dataa[4][4]}}, {6{i.dataa[3][4]}}, {6{i.dataa[2][4]}}, {6{i.dataa[1][4]}}, {6{i.dataa[0][4]}}};
-						mult_array_datab <= {6{i.datab[4][5], i.datab[4][4], i.datab[4][3], i.datab[4][2], i.datab[4][1], i.datab[4][0]}};
-					end
-					4'd2: begin
-						mult_array_dataa <= {{6{i.dataa[5][3]}}, {6{i.dataa[4][3]}}, {6{i.dataa[3][3]}}, {6{i.dataa[2][3]}}, {6{i.dataa[1][3]}}, {6{i.dataa[0][3]}}};
-						mult_array_datab <= {6{i.datab[3][5], i.datab[3][4], i.datab[3][3], i.datab[3][2], i.datab[3][1], i.datab[3][0]}};
-					end
-					4'd3: begin
-						mult_array_dataa <= {{6{i.dataa[5][2]}}, {6{i.dataa[4][2]}}, {6{i.dataa[3][2]}}, {6{i.dataa[2][2]}}, {6{i.dataa[1][2]}}, {6{i.dataa[0][2]}}};
-						mult_array_datab <= {6{i.datab[2][5], i.datab[2][4], i.datab[2][3], i.datab[2][2], i.datab[2][1], i.datab[2][0]}};
-					end
-					4'd4: begin
-						mult_array_dataa <= {{6{i.dataa[5][1]}}, {6{i.dataa[4][1]}}, {6{i.dataa[3][1]}}, {6{i.dataa[2][1]}}, {6{i.dataa[1][1]}}, {6{i.dataa[0][1]}}};
-						mult_array_datab <= {6{i.datab[1][5], i.datab[1][4], i.datab[1][3], i.datab[1][2], i.datab[1][1], i.datab[1][0]}};
-					end
-					4'd5: begin
-						mult_array_dataa <= {{6{i.dataa[5][0]}}, {6{i.dataa[4][0]}}, {6{i.dataa[3][0]}}, {6{i.dataa[2][0]}}, {6{i.dataa[1][0]}}, {6{i.dataa[0][0]}}};
-						mult_array_datab <= {6{i.datab[0][5], i.datab[0][4], i.datab[0][3], i.datab[0][2], i.datab[0][1], i.datab[0][0]}};
-					end
-					default: begin
-						mult_array_dataa <= {36{36'b0}};
-						mult_array_datab <= {36{36'b0}};
-					end
-				endcase
-			end
-			default: begin
-				mult_array_dataa <= {36{36'b0}};
-				mult_array_datab <= {36{36'b0}};
-			end
-		endcase
-	end
+	always_ff @(posedge i.clk)
+		if (i.en)
+			case(i.mat_mode)
+				1'b0: begin // parallel multiplier mode
+					mult_array_dataa <= i.dataa;
+					mult_array_datab <= i.datab;
+				end
+				1'b1: begin // matrix multiplier mode
+					case(count)
+						4'd0: begin
+							mult_array_dataa <= {{6{i.dataa[5][5]}}, {6{i.dataa[4][5]}}, {6{i.dataa[3][5]}}, {6{i.dataa[2][5]}}, {6{i.dataa[1][5]}}, {6{i.dataa[0][5]}}};
+							mult_array_datab <= {6{i.datab[5][5], i.datab[5][4], i.datab[5][3], i.datab[5][2], i.datab[5][1], i.datab[5][0]}};
+						end
+						4'd1: begin
+							mult_array_dataa <= {{6{i.dataa[5][4]}}, {6{i.dataa[4][4]}}, {6{i.dataa[3][4]}}, {6{i.dataa[2][4]}}, {6{i.dataa[1][4]}}, {6{i.dataa[0][4]}}};
+							mult_array_datab <= {6{i.datab[4][5], i.datab[4][4], i.datab[4][3], i.datab[4][2], i.datab[4][1], i.datab[4][0]}};
+						end
+						4'd2: begin
+							mult_array_dataa <= {{6{i.dataa[5][3]}}, {6{i.dataa[4][3]}}, {6{i.dataa[3][3]}}, {6{i.dataa[2][3]}}, {6{i.dataa[1][3]}}, {6{i.dataa[0][3]}}};
+							mult_array_datab <= {6{i.datab[3][5], i.datab[3][4], i.datab[3][3], i.datab[3][2], i.datab[3][1], i.datab[3][0]}};
+						end
+						4'd3: begin
+							mult_array_dataa <= {{6{i.dataa[5][2]}}, {6{i.dataa[4][2]}}, {6{i.dataa[3][2]}}, {6{i.dataa[2][2]}}, {6{i.dataa[1][2]}}, {6{i.dataa[0][2]}}};
+							mult_array_datab <= {6{i.datab[2][5], i.datab[2][4], i.datab[2][3], i.datab[2][2], i.datab[2][1], i.datab[2][0]}};
+						end
+						4'd4: begin
+							mult_array_dataa <= {{6{i.dataa[5][1]}}, {6{i.dataa[4][1]}}, {6{i.dataa[3][1]}}, {6{i.dataa[2][1]}}, {6{i.dataa[1][1]}}, {6{i.dataa[0][1]}}};
+							mult_array_datab <= {6{i.datab[1][5], i.datab[1][4], i.datab[1][3], i.datab[1][2], i.datab[1][1], i.datab[1][0]}};
+						end
+						4'd5: begin
+							mult_array_dataa <= {{6{i.dataa[5][0]}}, {6{i.dataa[4][0]}}, {6{i.dataa[3][0]}}, {6{i.dataa[2][0]}}, {6{i.dataa[1][0]}}, {6{i.dataa[0][0]}}};
+							mult_array_datab <= {6{i.datab[0][5], i.datab[0][4], i.datab[0][3], i.datab[0][2], i.datab[0][1], i.datab[0][0]}};
+						end
+						default: begin
+							mult_array_dataa <= {36{36'b0}};
+							mult_array_datab <= {36{36'b0}};
+						end
+					endcase
+				end
+				default: begin
+					mult_array_dataa <= {36{36'b0}};
+					mult_array_datab <= {36{36'b0}};
+				end
+			endcase
 
 	// LOGIC GOVERNING RESULT
 	genvar index, jndex;
@@ -89,7 +89,7 @@ module mat_mult (
 				always_ff @(posedge i.clk) begin
 					if ( i.rst ) begin
 						i.result[index][jndex] <= 36'b0;
-					end else begin
+					end else if (i.en) begin
 						if ( i.mat_mode ) begin // matrix multiplier mode
 							if ( i.en && (count==4'd5) ) begin
 								i.result[index][jndex] <= mult_array_result[index][jndex];

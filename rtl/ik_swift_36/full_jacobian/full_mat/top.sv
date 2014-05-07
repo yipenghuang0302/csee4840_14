@@ -10,6 +10,7 @@
 `include "../../mat_mult/mat_mult_interface.sv"
 `include "../../mat_mult/mat_mult.sv"
 `include "../../mat_mult/mult_array.sv"
+`include "../../mat_mult/mult_36_dsp/mult_36_dsp.v"
 
 `include "../../array_mult/array_mult_interface.sv"
 `include "../../array_mult/array_mult.sv"
@@ -46,13 +47,15 @@ module full_mat_top ();
 	// LOGIC GOVERNING COUNT
 	parameter MAX = 91;
 	always_ff @(posedge ifc_full_mat.clk) begin
-		if ( ifc_full_mat.rst ) begin // if parallel multiplier mode, clear counter
+		if ( ifc_full_mat.rst ) begin
 			ifc_full_mat.count <= 8'b0;
 		end else if ( ifc_full_mat.en ) begin
-			if ( ifc_full_mat.count==MAX-1'b1 ) begin
-				ifc_full_mat.count <= 8'b0;
-			end else begin
-				ifc_full_mat.count <= ifc_full_mat.count + 1'b1;
+			if (ifc_full_mat.en) begin
+				if ( ifc_full_mat.count==MAX-1'b1 ) begin
+					ifc_full_mat.count <= 8'b0;
+				end else begin
+					ifc_full_mat.count <= ifc_full_mat.count + 1'b1;
+				end
 			end
 		end
 	end
@@ -61,9 +64,9 @@ module full_mat_top ();
 	ifc_mat_mult ifc_mat_mult (clk);
 	assign ifc_mat_mult.en = ifc_full_mat.en;
 	// delay rst for mat_mult by five
-	always_ff @(posedge clk) begin
-		ifc_mat_mult.rst <= ifc_full_mat.count == 8'd4;
-	end
+	always_ff @(posedge clk)
+		if (ifc_full_mat.en)
+			ifc_mat_mult.rst <= ifc_full_mat.count == 8'd4;
 	assign ifc_mat_mult.mat_mode = 1'b1;
 	assign ifc_mat_mult.dataa = ifc_full_mat.mat_mult_dataa;
 	assign ifc_mat_mult.datab = ifc_full_mat.mat_mult_datab;

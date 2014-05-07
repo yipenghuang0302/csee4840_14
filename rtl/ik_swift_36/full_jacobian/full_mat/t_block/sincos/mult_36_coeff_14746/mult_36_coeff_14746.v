@@ -60,7 +60,7 @@ module mult_36_coeff_14746 (
 				.aclr (1'b0),
 				.sum (1'b0));
 	defparam
-		lpm_mult_component.lpm_hint = "INPUT_B_IS_CONSTANT=YES,MAXIMIZE_SPEED=1",
+		lpm_mult_component.lpm_hint = "DEDICATED_MULTIPLIER_CIRCUITRY=NO,INPUT_B_IS_CONSTANT=YES,MAXIMIZE_SPEED=1",
 		lpm_mult_component.lpm_pipeline = 3,
 		lpm_mult_component.lpm_representation = "SIGNED",
 		lpm_mult_component.lpm_type = "LPM_MULT",

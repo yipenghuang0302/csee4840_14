@@ -11,10 +11,11 @@ module sincos (
 	logic [35:0] angle_delay_1;
 	logic [35:0] angle_delay_2;
 
-	always_ff @(posedge i.clk) begin
-		angle_delay_1 <= i.angle;
-		angle_delay_2 <= angle_delay_1;
-	end
+	always_ff @(posedge i.clk)
+		if (i.en) begin
+			angle_delay_1 <= i.angle;
+			angle_delay_2 <= angle_delay_1;
+		end
 
 	sin sin_block (
 		.clk ( i.clk ),

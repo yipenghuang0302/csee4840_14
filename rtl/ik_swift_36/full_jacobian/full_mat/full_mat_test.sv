@@ -56,8 +56,8 @@ class full_mat_test;
 		logic [5:0] [3:0] [3:0] [35:0] full_mat
 	);
 
-		real abs_tol = 0.05;
-		real rel_tol = 0.05;
+		real abs_tol = 0.01;
+		real rel_tol = 0.01;
 
 		real real_result[4][4];
 		real error[4][4];
@@ -69,7 +69,7 @@ class full_mat_test;
 				for ( int j=0 ; j<4 ; j++ ) begin // full matrix column
 					real_result[i][j] = real'(longint'({{28{full_mat[joint][i][j][35]}}, full_mat[joint][i][j]}))/65536.0;
 					error[i][j] = abs( real_result[i][j] - model_full_matrix[joint][i][j] );
-	 				percent[i][j] = abs( error[i][j] / model_full_matrix[joint][i][j] );
+					percent[i][j] = abs( error[i][j] / model_full_matrix[joint][i][j] );
 					if (error[i][j]>abs_tol && percent[i][j]>rel_tol) begin
 						$write("%t : fail full_mat joint=%d i=%d j=%d\n", $realtime, joint, i, j);
 						$write("model_full_matrix=%f; dut_result=%f; error=%f.\n", model_full_matrix[joint][i][j], real_result[i][j], error[i][j]);

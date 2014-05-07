@@ -22,65 +22,65 @@ module t_block (
 	// delay a by 22
 	logic [22:0] [35:0] a_delay;
 	assign a_delay[0] = i.a;
-	always_ff @(posedge i.clk) begin
-		a_delay[22:1] <= a_delay[21:0];
-	end
+	always_ff @(posedge i.clk)
+		if (i.en)
+			a_delay[22:1] <= a_delay[21:0];
 
 	// delay d by 26
 	logic [27:0] [35:0] d_delay;
 	assign d_delay[0] = i.d;
-	always_ff @(posedge i.clk) begin
-		d_delay[27:1] <= d_delay[26:0];
-	end
+	always_ff @(posedge i.clk)
+		if (i.en)
+			d_delay[27:1] <= d_delay[26:0];
 
 	// LOGIC GOVERNING ARRAY MULT INPUTS
-	always_ff @(posedge i.clk) begin
-		if ( 8'd23<=i.count && i.count<8'd29 ) begin
-			i.array_mult_dataa[0] <= -i_theta.sin;
-			i.array_mult_datab[0] <= i_alpha.cos;
-			i.array_mult_dataa[1] <= i_theta.sin;
-			i.array_mult_datab[1] <= i_alpha.sin;
-			i.array_mult_dataa[2] <= a_delay[22];
-			i.array_mult_datab[2] <= i_theta.cos;
-			i.array_mult_dataa[3] <= i_theta.cos;
-			i.array_mult_datab[3] <= i_alpha.cos;
-			i.array_mult_dataa[4] <= i_theta.cos;
-			i.array_mult_datab[4] <= -i_alpha.sin;
-			i.array_mult_dataa[5] <= a_delay[22];
-			i.array_mult_datab[5] <= i_theta.sin;
-		end else begin
-			i.array_mult_dataa[5:0] <= {5{36'b0}};
-			i.array_mult_datab[5:0] <= {5{36'b0}};
-		end
-	end
+	always_ff @(posedge i.clk)
+		if (i.en)
+			if ( 8'd23<=i.count && i.count<8'd29 ) begin
+				i.array_mult_dataa[0] <= -i_theta.sin;
+				i.array_mult_datab[0] <= i_alpha.cos;
+				i.array_mult_dataa[1] <= i_theta.sin;
+				i.array_mult_datab[1] <= i_alpha.sin;
+				i.array_mult_dataa[2] <= a_delay[22];
+				i.array_mult_datab[2] <= i_theta.cos;
+				i.array_mult_dataa[3] <= i_theta.cos;
+				i.array_mult_datab[3] <= i_alpha.cos;
+				i.array_mult_dataa[4] <= i_theta.cos;
+				i.array_mult_datab[4] <= -i_alpha.sin;
+				i.array_mult_dataa[5] <= a_delay[22];
+				i.array_mult_datab[5] <= i_theta.sin;
+			end else begin
+				i.array_mult_dataa[5:0] <= {5{36'b0}};
+				i.array_mult_datab[5:0] <= {5{36'b0}};
+			end
 
 	// delay cos(theta) by 4
 	logic [5:0] [35:0] cos_theta_delay;
 	assign cos_theta_delay[0] = i_theta.cos;
-	always_ff @(posedge i.clk) begin
-		cos_theta_delay[5:1] <= cos_theta_delay[4:0];
-	end
+	always_ff @(posedge i.clk)
+		if (i.en)
+			cos_theta_delay[5:1] <= cos_theta_delay[4:0];
 
 	// delay sin(theta) by 4
 	logic [5:0] [35:0] sin_theta_delay;
 	assign sin_theta_delay[0] = i_theta.sin;
-	always_ff @(posedge i.clk) begin
-		sin_theta_delay[5:1] <= sin_theta_delay[4:0];
-	end
+	always_ff @(posedge i.clk)
+		if (i.en)
+			sin_theta_delay[5:1] <= sin_theta_delay[4:0];
 
 	// delay cos(alpha) by 4
 	logic [5:0] [35:0] cos_alpha_delay;
 	assign cos_alpha_delay[0] = i_alpha.cos;
-	always_ff @(posedge i.clk) begin
-		cos_alpha_delay[5:1] <= cos_alpha_delay[4:0];
-	end
+	always_ff @(posedge i.clk)
+		if (i.en)
+			cos_alpha_delay[5:1] <= cos_alpha_delay[4:0];
 
 	// delay sin(alpha) by 4
 	logic [5:0] [35:0] sin_alpha_delay;
 	assign sin_alpha_delay[0] = i_alpha.sin;
-	always_ff @(posedge i.clk) begin
-		sin_alpha_delay[5:1] <= sin_alpha_delay[4:0];
-	end
+	always_ff @(posedge i.clk)
+		if (i.en)
+			sin_alpha_delay[5:1] <= sin_alpha_delay[4:0];
 
 	assign i.t_matrix[0][0] = cos_theta_delay[5];
 	assign i.t_matrix[0][1] = i.array_mult_result[0];

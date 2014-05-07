@@ -128,7 +128,7 @@ set_global_assignment -name SOURCE_FILE ik_swift.qsf
 set_global_assignment -name SDC_FILE ik_swift.sdc
 set_global_assignment -name SYSTEMVERILOG_FILE ik_swift_interface.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ik_swift.sv
-set_global_assignment -name VERILOG_FILE ../../mult_36/mult_36_syn.v
+set_global_assignment -name VERILOG_FILE ../../mult_36/mult_36.v
 set_global_assignment -name SYSTEMVERILOG_FILE cholesky_block/cholesky_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE cholesky_block/cholesky_block_interface.sv
 set_global_assignment -name SYSTEMVERILOG_FILE array_div/array_div.sv

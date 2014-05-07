@@ -156,7 +156,7 @@ endmodule
 // Retrieval info: PRIVATE: new_diagram STRING "1"
 // Retrieval info: PRIVATE: optimize NUMERIC "2"
 // Retrieval info: LIBRARY: lpm lpm.lpm_components.all
-// Retrieval info: CONSTANT: LPM_HINT STRING "MAXIMIZE_SPEED=1"
+// Retrieval info: CONSTANT: LPM_HINT STRING "DEDICATED_MULTIPLIER_CIRCUITRY=NO,MAXIMIZE_SPEED=1"
 // Retrieval info: CONSTANT: LPM_PIPELINE NUMERIC "3"
 // Retrieval info: CONSTANT: LPM_REPRESENTATION STRING "SIGNED"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_MULT"
