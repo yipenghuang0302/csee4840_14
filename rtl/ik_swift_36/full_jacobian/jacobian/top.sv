@@ -10,6 +10,7 @@
 `include "../../mat_mult/mat_mult_interface.sv"
 `include "../../mat_mult/mat_mult.sv"
 `include "../../mat_mult/mult_array.sv"
+`include "../../mat_mult/mult_36_dsp/mult_36_dsp.v"
 
 `include "../../array_mult/array_mult_interface.sv"
 `include "../../array_mult/array_mult.sv"
@@ -50,9 +51,9 @@ module jacobian_top ();
 	ifc_mat_mult ifc_mat_mult (clk);
 	assign ifc_mat_mult.en = ifc_jacobian.en;
 	// delay rst for mat_mult by five
-	always_ff @(posedge clk) begin
-		ifc_mat_mult.rst <= ifc_jacobian.count == 8'd4;
-	end
+	always_ff @(posedge clk)
+		if ( ifc_jacobian.en )
+			ifc_mat_mult.rst <= ifc_jacobian.count == 8'd4;
 	assign ifc_mat_mult.mat_mode = ifc_jacobian.count<8'd90 ? 1'b1 : 1'b0;
 	assign ifc_mat_mult.dataa = ifc_jacobian.mat_mult_dataa;
 	assign ifc_mat_mult.datab = ifc_jacobian.mat_mult_datab;

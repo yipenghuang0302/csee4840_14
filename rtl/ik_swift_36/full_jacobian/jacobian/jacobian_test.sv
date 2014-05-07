@@ -71,8 +71,8 @@ class jacobian_test;
 		logic [5:0] [5:0] [35:0] jacobian_matrix
 	);
 
-		real abs_tol = 0.0001;
-		real rel_tol = 0.0001;
+		real abs_tol = 0.001;
+		real rel_tol = 0.001;
 
 		real axis_real[7][3];
 		real axis_error[7][3];
