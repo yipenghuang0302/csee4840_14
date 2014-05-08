@@ -10,6 +10,7 @@ class ik_swift_test;
 	real m_inverse [6][6];
 	real m_dls [6][6];
 	real m_delta [6];
+	real m_dh_param [6][4];
 
 	function real abs (real num); 
 		abs = (num<0) ? -num : num; 
@@ -28,6 +29,12 @@ class ik_swift_test;
 		real position [7][3];
 		real dist_to_end [6][3];
 		real error [6];
+
+		// COPY DH PARAMS
+		// we add to these numbers later
+		for ( int joint=0 ; joint<6 ; joint++ )
+			for ( int param=0 ; param<4 ; param++ )
+				m_dh_param[joint][param] = dh_param[joint][param];
 
 		// GENERATE FULL MATRIX
 		// iterate over joint index
@@ -188,6 +195,13 @@ class ik_swift_test;
 			for ( int col=0 ; col<n ; col++ )
 				m_delta[row] += m_dls[row][col] * error[col];
 
+		// ADD DELTAS BACK TO DH PARAMS
+		for ( int joint=0 ; joint<6 ; joint++ )
+			if ( joint_type[joint] == 1'b0 ) // translational
+				m_dh_param[joint][L_DISTANCE] = m_dh_param[joint][L_DISTANCE] + m_delta[joint];
+			else
+				m_dh_param[joint][THETA] = m_dh_param[joint][THETA] + m_delta[joint];
+
 	endfunction
 
 	function void check_ik_swift (
@@ -197,7 +211,8 @@ class ik_swift_test;
 		logic [5:0] [5:0] [35:0] lt_inverse,
 		logic [5:0] [5:0] [35:0] inverse,
 		logic [5:0] [5:0] [35:0] dls,
-		logic [5:0] [35:0] delta
+		logic [5:0] [35:0] delta,
+		logic [5:0] [3:0] [35:0] dh_param
 	);
 
 		real abs_tol = 0.005;
@@ -231,6 +246,10 @@ class ik_swift_test;
 		real delta_error[6];
 		real delta_percent[6];
 
+		real dh_param_real[6][4];
+		real dh_param_error[6][4];
+		real dh_param_percent[6][4];
+
 		bit passed = 1'b1;
 
 		// CHECK JACOBIAN
@@ -245,7 +264,7 @@ class ik_swift_test;
 					$write("m_jacobian=%f; dut_result=%f; jacobian_percent=%f.\n", m_jacobian[i][j], jacobian_real[i][j], jacobian_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass jacobian i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass jacobian i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
@@ -262,7 +281,7 @@ class ik_swift_test;
 					$write("m_jjt_bias=%f; dut_result=%f; jjt_bias_percent=%f.\n", m_jjt_bias[i][j], jjt_bias_real[i][j], jjt_bias_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass jjt_bias i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass jjt_bias i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
@@ -348,6 +367,23 @@ class ik_swift_test;
 			end
 			$write("m_delta=%f; dut_result=%f; delta_error=%f.\n", m_delta[i], delta_real[i], delta_error[i]);
 			$write("m_delta=%f; dut_result=%f; delta_percent=%f.\n", m_delta[i], delta_real[i], delta_percent[i]);
+		end
+
+		// CHECK DH_PARAM
+		for ( int joint=0 ; joint<n ; joint++ ) begin // param joint
+			for ( int param=0 ; param<4 ; param++ ) begin // dh param
+				dh_param_real[joint][param] = real'(longint'({{28{dh_param[joint][param][35]}}, dh_param[joint][param]}))/65536.0;
+				dh_param_error[joint][param] = abs( dh_param_real[joint][param] - m_dh_param[joint][param] );
+				dh_param_percent[joint][param] = abs( dh_param_error[joint][param] / m_dh_param[joint][param] );
+				if (dh_param_error[joint][param]>abs_tol && dh_param_percent[joint][param]>rel_tol) begin
+					$write("%t : fail dh_param joint=%d, param=%d\n", $realtime, joint, param);
+					passed = 1'b0;
+				end else begin
+					$write("%t : pass dh_param joint=%d, param=%d\n", $realtime, joint, param);
+				end
+				$write("m_dh_param=%f; dut_result=%f; dh_param_error=%f.\n", m_dh_param[joint][param], dh_param_real[joint][param], dh_param_error[joint][param]);
+				$write("m_dh_param=%f; dut_result=%f; dh_param_percent=%f.\n", m_dh_param[joint][param], dh_param_real[joint][param], dh_param_percent[joint][param]);
+			end
 		end
 
 		if (passed) begin

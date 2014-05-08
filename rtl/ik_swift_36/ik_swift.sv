@@ -3,13 +3,18 @@
 
 `timescale 1ns/1ps
 
+parameter THETA = 0;
+parameter L_OFFSET = 1;
+parameter L_DISTANCE = 2;
+parameter ALPHA = 3;
+
 module ik_swift (
 	ifc_ik_swift.ik_swift i
 );
 
 	// LOGIC GOVERNING COUNT
 	logic [7:0] count;
-	parameter MAX = 249;
+	parameter MAX = 250;
 	always_ff @(posedge i.clk) begin
 		if ( i.rst ) begin // if parallel multiplier mode, clear counter
 			count <= 8'b0;
@@ -140,5 +145,22 @@ module ik_swift (
 					ifc_mat_mult.result[0][5] + ifc_mat_mult.result[0][4] + ifc_mat_mult.result[0][3] + ifc_mat_mult.result[0][2] + ifc_mat_mult.result[0][1] + ifc_mat_mult.result[0][0]
 				};
 			endcase
+
+	// ADD BACK TO DH PARAMS
+	genvar joint;
+	generate
+		for ( joint=0 ; joint<6 ; joint++ ) begin: add_dh_param
+			always_ff @(posedge i.clk)
+				if (i.en && count==8'd248)
+					case (i.joint_type[joint])
+						1'b0: begin // translational
+							i.dh_param[joint][L_DISTANCE] <= i.dh_param[joint][L_DISTANCE] + i.delta[joint];
+						end
+						1'b1: begin // rotational
+							i.dh_param[joint][THETA] <= i.dh_param[joint][THETA] + i.delta[joint];
+						end
+					endcase
+		end
+	endgenerate
 
 endmodule
