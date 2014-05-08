@@ -44,6 +44,7 @@
 `include "../ik_swift_36/array_mult/array_mult.sv"
 
 `include "../ik_swift_36/mult_36/mult_36.v"
+`include "../ik_swift_36/mat_mult/mult_36_dsp/mult_36_dsp.v"
 // `include "../ik_swift_36/sim_models/lpm_mult.v"
 // `include "../ik_swift_36/sim_models/mult_block.v"
 // `include "../ik_swift_36/sim_models/addsub_block.v"
