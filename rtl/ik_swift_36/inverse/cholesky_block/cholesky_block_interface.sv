@@ -23,16 +23,16 @@ logic [5:0] [35:0] dividends;
 logic [35:0] divisor;
 logic [5:0] [35:0] quotients;
 
-clocking cb @(posedge clk);
-	output en;
-	output rst;
-	output count;
-
-	output matrix;
-	input lt;
-endclocking
-
-modport cholesky_block_tb (clocking cb);
+//clocking cb @(posedge clk);
+//	output en;
+//	output rst;
+//	output count;
+//
+//	output matrix;
+//	input lt;
+//endclocking
+//
+//modport cholesky_block_tb (clocking cb);
 
 // restrict directions
 modport cholesky_block(

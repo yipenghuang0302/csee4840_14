@@ -53,10 +53,10 @@
 // `include "../ik_swift_36/sim_models/altera_mf.v"
 // `include "../ik_swift_36/sim_models/220model.v"
 
-parameter THETA = 0;
-parameter L_OFFSET = 1;
-parameter L_DISTANCE = 2;
-parameter ALPHA = 3;
+//parameter THETA = 0;
+//parameter L_OFFSET = 1;
+//parameter L_DISTANCE = 2;
+//parameter ALPHA = 3;
 parameter MAX_JOINT = 6;
 
 module ik_swift_interface (
