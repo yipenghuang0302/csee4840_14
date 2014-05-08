@@ -110,7 +110,7 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 
 				// passing data to design under test happens here
 				for (int j=0; j<4; j++) begin // dh_parameter index
-					ds.cb.dh_param[i][j] <= longint'(trans.dh_data[i][j] * 65536.0);
+					ds.cb.dh_param_in[i][j] <= longint'(trans.dh_data[i][j] * 65536.0);
 				end
 
 			end
@@ -161,7 +161,7 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 					ds.cb.inverse,
 					ds.cb.dls,
 					ds.cb.delta,
-					ds.cb.dh_param
+					ds.cb.dh_param_out
 				);
 			end
 		end

@@ -35,7 +35,7 @@ module ik_swift (
 	assign i_jac.count = count;
 	assign i_jac.z = i.z;
 	assign i_jac.joint_type = i.joint_type;
-	assign i_jac.dh_param = i.dh_param;
+	assign i_jac.dh_param = i.dh_param_in;
 	full_jacobian full_jacobian (i_jac.full_jacobian);
 	// outputs
 	assign i.jacobian_matrix = i_jac.jacobian_matrix;
@@ -150,16 +150,23 @@ module ik_swift (
 	genvar joint;
 	generate
 		for ( joint=0 ; joint<6 ; joint++ ) begin: add_dh_param
-			always_ff @(posedge i.clk)
-				if (i.en && count==8'd248)
-					case (i.joint_type[joint])
-						1'b0: begin // translational
-							i.dh_param[joint][L_DISTANCE] <= i.dh_param[joint][L_DISTANCE] + i.delta[joint];
-						end
-						1'b1: begin // rotational
-							i.dh_param[joint][THETA] <= i.dh_param[joint][THETA] + i.delta[joint];
+			always_ff @(posedge i.clk) begin
+				if (i.en) begin
+					case (count)
+						8'd0: i.dh_param_out[joint] <= i.dh_param_in[joint];
+						8'd248: begin
+							case (i.joint_type[joint])
+								1'b0: begin // translational
+									i.dh_param_out[joint][L_DISTANCE] <= i.dh_param_in[joint][L_DISTANCE] + i.delta[joint];
+								end
+								1'b1: begin // rotational
+									i.dh_param_out[joint][THETA] <= i.dh_param_in[joint][THETA] + i.delta[joint];
+								end
+							endcase
 						end
 					endcase
+				end
+			end
 		end
 	endgenerate
 
