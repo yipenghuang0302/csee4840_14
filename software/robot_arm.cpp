@@ -64,10 +64,11 @@ int float_to_fixed(float num){
 void write_target(float targetx, float targety, float targetz)
 {
   ik_driver_arg_t vla;
-	vla.joint = -1;
+	vla.joint = (char)-1;
 	vla.target[0] = float_to_fixed(targetx);
 	vla.target[1] = float_to_fixed(targety);
 	vla.target[2] = float_to_fixed(targetz);
+	printf("Joint is %d targets are %d, %d, %d\n", vla.joint, vla.target[0], vla.target[1], vla.target[2]);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
@@ -82,13 +83,17 @@ void write_param(int joint, char param_type, float magnitude)
 	vla.joint = (char)joint;
 	vla.parameter = param_type;
 	if (vla.parameter == THETA || vla.parameter == ALPHA){
+
 		//Do this error checking here so we don't use floats in the kernel
-		if (magnitude < -M_PI/2 || magnitude > M_PI/2){
+		if (magnitude < -180 || magnitude > 180){
+			printf("The magnitude of param %d for joint %d is %f\n", joint, param_type, M_PI);
 			perror("Magnitude of parameter is outside acceptable range");
 			return;
 		}
-		else
-			vla.magnitude = float_to_fixed(magnitude * M_PI / 180);//Convert from degrees to radians
+		else{
+			magnitude = magnitude * (float)M_PI / 180.0;//Convert from degrees to radians
+			vla.magnitude = float_to_fixed(magnitude);
+		}
 	}
 	else
 		vla.magnitude = float_to_fixed(magnitude);
@@ -258,7 +263,6 @@ void keyboard(unsigned char key, int x, int y) {
 int main(int argc, char** argv) {
 
 	//DO THIS WHEN CONNECTING TO HARDWARE
-	/*
   static const char filename[] = "/dev/ik_driver";
 
 
@@ -266,7 +270,6 @@ int main(int argc, char** argv) {
     fprintf(stderr, "could not open %s\n", filename);
     return -1;
   }
-	*/
 
 	//Get dh params from xml file
 	std::string str = "robots/robot.xml";
@@ -275,7 +278,6 @@ int main(int argc, char** argv) {
 	robot = cfg.GetTable();
 
 	//UNCOMMENT WHEN TALKING TO HARDWARE 
-	/*
 
 	//Write target to hardware
   write_target(robot.targetx, robot.targety, robot.targetz);
@@ -287,7 +289,7 @@ int main(int argc, char** argv) {
 		write_param(i, THETA, robot.params[i].theta);
 		write_param(i, ALPHA, robot.params[i].alpha);
 	}
-	*/
+	exit(0);
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
