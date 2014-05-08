@@ -45,13 +45,13 @@
 
 `include "../ik_swift_36/mult_36/mult_36.v"
 `include "../ik_swift_36/mat_mult/mult_36_dsp/mult_36_dsp.v"
-`include "../ik_swift_36/sim_models/lpm_mult.v"
-`include "../ik_swift_36/sim_models/mult_block.v"
-`include "../ik_swift_36/sim_models/addsub_block.v"
-`include "../ik_swift_36/sim_models/pipeline_internal_fv.v"
-`include "../ik_swift_36/sim_models/dffep.v"
-`include "../ik_swift_36/sim_models/altera_mf.v"
-`include "../ik_swift_36/sim_models/220model.v"
+//`include "../ik_swift_36/sim_models/lpm_mult.v"
+//`include "../ik_swift_36/sim_models/mult_block.v"
+//`include "../ik_swift_36/sim_models/addsub_block.v"
+//`include "../ik_swift_36/sim_models/pipeline_internal_fv.v"
+//`include "../ik_swift_36/sim_models/dffep.v"
+//`include "../ik_swift_36/sim_models/altera_mf.v"
+//`include "../ik_swift_36/sim_models/220model.v"
 
 // parameter THETA = 0;
 // parameter L_OFFSET = 1;
@@ -77,6 +77,19 @@ module ik_swift_interface (
 	logic [5:0] joint_type; // The ith bit is 1 if ith joint is rotational; translational otherwise
 	logic [5:0] [35:0] target; // (x,y,z) coordinates and orientation of target position
 	logic start;
+
+	// INSTANTIATE IK_FAST TOP MODULE
+	ifc_ik_swift ifc_ik_swift (clk);
+	assign ifc_ik_swift.en = start;
+	assign ifc_ik_swift.rst = reset;
+	// INPUTS
+	// base joint's axis of rotation/translation
+	assign ifc_ik_swift.z = { 36'd0, 36'd0, 36'd65536 }; // unit vector in z direction
+	// bit vector describing type of each joint
+	assign ifc_ik_swift.joint_type = joint_type;
+	// target coordinates
+	assign ifc_ik_swift.target = target;
+	ik_swift ik_swift (ifc_ik_swift.ik_swift);
 
 	always_ff @(posedge clk) begin
 		if (reset) begin
@@ -163,19 +176,6 @@ module ik_swift_interface (
 			endcase
 		end
 	end
-
-	// INSTANTIATE IK_FAST TOP MODULE
-	ifc_ik_swift ifc_ik_swift (clk);
-	assign ifc_ik_swift.en = start;
-	assign ifc_ik_swift.rst = reset;
-	// INPUTS
-	// base joint's axis of rotation/translation
-	assign ifc_ik_swift.z = { 36'd0, 36'd0, 36'd65536 }; // unit vector in z direction
-	// bit vector describing type of each joint
-	assign ifc_ik_swift.joint_type = joint_type;
-	// target coordinates
-	assign ifc_ik_swift.target = target;
-	ik_swift ik_swift (ifc_ik_swift.ik_swift);
 
 	// OUTPUTS
 	// deltas for joint parameters
