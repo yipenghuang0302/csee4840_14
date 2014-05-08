@@ -59,9 +59,9 @@ static void write_target(u32 target[3], u8 joint_t)
 
 	iowrite8(joint_t, dev.virtbase);
 	for (i = 1; i < 4; i++){
-		curtarget = target[i];
+		curtarget = target[i-1];
 		iowrite32(curtarget, dev.virtbase+i*REG_SIZE);
-		dev.target[i] = curtarget;
+		dev.target[i-1] = curtarget;
 	}
 	dev.joint_type = joint_t;
 }
@@ -99,7 +99,7 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 			return -EINVAL;
 		if (vla.joint != -1 && vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_LENGTH)
 			return -EINVAL;
-		if (vla.joint != -1 && (vla.parameter == L_OFFSET || vla.parameter == L_LENGHT)
+		if (vla.joint != -1 && (vla.parameter == L_OFFSET || vla.parameter == L_LENGTH)
 												&& (vla.magnitude < MIN_COORD || vla.magnitude > MAX_COORD))
 			return -EINVAL;
 		if (vla.joint == -1)

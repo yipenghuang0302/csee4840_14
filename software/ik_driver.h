@@ -21,11 +21,11 @@
 
 
 //Our fractional precision in our fixed-point representation
-#define PRECISION 8 
+#define PRECISION 16 
 
-//Max and min values for any coordinates in our system
-#define MAX_COORD 64
-#define MIN_COORD -64
+//Max and min values for any coordinates in our system in fixed-point 
+#define MAX_COORD 262144
+#define MIN_COORD -262144
 
 /* DH Parameters */
 #define THETA 0				//theta_i
@@ -35,7 +35,7 @@
 #define NUM_PARAMS 4
 
 typedef struct {
-	unsigned char joint; /* Indicate which joint we're getting/setting; -1 indicates that we're setting the target */
+	signed char joint; /* Indicate which joint we're getting/setting; -1 indicates that we're setting the target */
 	unsigned char joint_type; /* The ith bit is 1 if ith joint is rotational; translational otherwise */
 	unsigned char parameter; /* Which DH param we're getting/setting */
 	signed int target[3]; /* (x,y,z) coordinates of target position */
