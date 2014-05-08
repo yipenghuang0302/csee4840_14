@@ -14,16 +14,16 @@ logic [n-1:0] [35:0] dividends;
 logic [35:0] divisor;
 logic [n-1:0] [35:0] quotients;
 
-//clocking cb @(posedge clk);
-//	output en;
-//	output rst;
-//	output dividends;
-//	output divisor;
-//
-//	input quotients;
-//endclocking
-//
-//modport array_div_tb (clocking cb);
+clocking cb @(posedge clk);
+	output en;
+	output rst;
+	output dividends;
+	output divisor;
+
+	input quotients;
+endclocking
+
+modport array_div_tb (clocking cb);
 
 // restrict directions
 modport array_div (

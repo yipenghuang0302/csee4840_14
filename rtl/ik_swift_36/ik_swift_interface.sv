@@ -42,8 +42,9 @@ clocking cb @(posedge clk);
 	output rst;
 	output z;
 	output joint_type;
-	output dh_param;
 	output target;
+
+	inout dh_param;
 
 	input jacobian_matrix;
 	input jjt_bias;
@@ -62,8 +63,9 @@ modport ik_swift (
 
 	input z,
 	input joint_type,
-	input dh_param,
 	input target,
+
+	inout dh_param,
 
 	output jacobian_matrix,
 	output jjt_bias,
