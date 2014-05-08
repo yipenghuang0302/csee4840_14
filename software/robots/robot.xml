@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<Robot name="KUKA robot KR5" targetx="9" targety="-15.28" targetz="3.2">
+<Robot name="KUKA robot KR5" targetx="3" targety="-1.28" targetz="3.2">
   <Joints>
-  <joint name="joint1" type="r" alphai="-90" ai="7.5" di="33.5" theta="0" />
-  <joint name="joint2" type="r" alphai="0" ai="27.0" di="0" theta="0" />
-  <joint name="joint3" type="r" alphai="90" ai="9.0" di="0" theta="0" />
-  <joint name="joint4" type="r" alphai="-90" ai="0" di="-29.5" theta="0" />
+  <joint name="joint1" type="r" alphai="-90" ai=".75" di="3.35" theta="0" />
+  <joint name="joint2" type="r" alphai="0" ai="2.70" di="0" theta="0" />
+  <joint name="joint3" type="r" alphai="90" ai=".90" di="0" theta="0" />
+  <joint name="joint4" type="r" alphai="-90" ai="0" di="-2.95" theta="0" />
   <joint name="joint5" type="r" alphai="90" ai="0" di="0" theta="0" />
-  <joint name="joint6" type="r" alphai="180" ai="0" di="-8.0" theta="0" />
+  <joint name="joint6" type="r" alphai="180" ai="0" di="-.80" theta="0" />
   </Joints>
 </Robot>
 
