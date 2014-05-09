@@ -16,9 +16,9 @@ module ik_swift (
 	logic [7:0] count;
 	parameter MAX = 250;
 	always_ff @(posedge i.clk) begin
-		if ( i.rst ) begin // if parallel multiplier mode, clear counter
+		if ( i.rst ) begin
 			count <= 8'b0;
-		end else if ( i.en ) begin
+		end else if ( i.en && !i.done ) begin
 			if ( count==MAX-1'b1 ) begin
 				count <= 8'b0;
 			end else begin
@@ -27,10 +27,19 @@ module ik_swift (
 		end
 	end
 
+	// LOGIC GOVERNING DONE
+	always_ff @(posedge i.clk) begin
+		if ( i.rst || !i.en ) begin // at begin, clear done
+			i.done <= 1'b0;
+		end else if ( i.en && count==8'd248 ) begin
+			i.done <= 1'b1;
+		end
+	end
+
 	// INSTANTIATE FULL JACOBIAN BLOCK
 	ifc_full_jacobian i_jac (i.clk);
 	// inputs
-	assign i_jac.en = i.en;
+	assign i_jac.en = i.en && !i.done;
 	assign i_jac.rst = i.rst;
 	assign i_jac.count = count;
 	assign i_jac.z = i.z;
@@ -44,7 +53,7 @@ module ik_swift (
 	// INSTANTIATE FULL INVERSE BLOCK
 	ifc_inverse ifc_inverse (i.clk);
 	// inputs
-	assign ifc_inverse.en = i.en;
+	assign ifc_inverse.en = i.en && !i.done;
 	assign ifc_inverse.rst = i.rst;
 	assign ifc_inverse.count = count;
 	assign ifc_inverse.matrix = i_jac.jjt_bias;
@@ -61,10 +70,10 @@ module ik_swift (
 	// shared multipliers
 	// INSTANTIATE MAT MULT
 	ifc_mat_mult ifc_mat_mult (i.clk);
-	assign ifc_mat_mult.en = i.en;
+	assign ifc_mat_mult.en = i.en && !i.done;
 	// delay rst for mat_mult by four
 	always_ff @(posedge i.clk)
-		if (i.en)
+		if (i.en && !i.done)
 			ifc_mat_mult.rst <= count==8'd28 || count==8'd98 || count==8'd214 || count==8'd227;
 
 	// two periods mat_mult in parallel mode
@@ -78,7 +87,7 @@ module ik_swift (
 
 	// INSTANTIATE ARRAY MULT
 	ifc_array_mult ifc_array_mult (i.clk);
-	assign ifc_array_mult.en = i.en;
+	assign ifc_array_mult.en = i.en && !i.done;
 	assign ifc_array_mult.rst = i.rst;
 	// Output to array multipliers
 	assign ifc_array_mult.dataa = { {6{36'b0}}, i_jac.array_mult_dataa } | ifc_inverse.array_mult_dataa;
@@ -90,7 +99,7 @@ module ik_swift (
 	// MATRIX MULTIPLY FOR JT * INVERSE
 	// MAT_MULT INPUTS
 	always_ff @(posedge i.clk)
-		if (i.en)
+		if (i.en && !i.done)
 			case (count)
 				8'd0: begin
 					dls_mat_mult_dataa <= {36{36'b0}};
@@ -133,7 +142,7 @@ module ik_swift (
 
 	// MAT_MULT OUTPUTS
 	always_ff @(posedge i.clk)
-		if (i.en)
+		if (i.en && !i.done)
 			case (count)
 				8'd240: i.dls <= ifc_mat_mult.result;
 				8'd247: i.delta <= {
@@ -151,7 +160,7 @@ module ik_swift (
 	generate
 		for ( joint=0 ; joint<6 ; joint++ ) begin: add_dh_param
 			always_ff @(posedge i.clk) begin
-				if (i.en) begin
+				if (i.en && !i.done) begin
 					case (count)
 						8'd0: i.dh_param_out[joint] <= i.dh_param_in[joint];
 						8'd248: begin

@@ -94,12 +94,12 @@ class ik_swift_test;
 			for ( int row=0 ; row<3 ; row++ )
 				position[joint][row] = full_matrix[joint-1][row][3];
 
-		$display("end effector x position: %f", position[6][0]);
-		$display("end effector y position: %f", position[6][1]);
-		$display("end effector z position: %f", position[6][2]);
-		$display("end effector x rotation: %f", axis[6][0]);
-		$display("end effector y rotation: %f", axis[6][1]);
-		$display("end effector z rotation: %f", axis[6][2]);
+		$display("end effector x target, position: %f, %f", target[0], position[6][0]);
+		$display("end effector y target, position: %f, %f", target[1], position[6][1]);
+		$display("end effector z target, position: %f, %f", target[2], position[6][2]);
+		$display("end effector x target, rotation: %f, %f", target[3], axis[6][0]);
+		$display("end effector y target, rotation: %f, %f", target[4], axis[6][1]);
+		$display("end effector z target, rotation: %f, %f", target[5], axis[6][2]);
 
 		// CALCULATE VECTOR TO END OF EFFECTOR
 		for ( int joint=0 ; joint<n ; joint++ )
@@ -128,7 +128,7 @@ class ik_swift_test;
 		// jjt_bias = jacobian * jacobian transpose;
 		for ( int row=0 ; row<n ; row++ ) // product row
 			for ( int col=0 ; col<n ; col++ ) begin // product column
-				m_jjt_bias[row][col] = row==col ? 0.00001525878*2 : 0.0; // bias term
+				m_jjt_bias[row][col] = row==col ? 0.00001525878*4 : 0.0; // bias term
 				for ( int k=0 ; k<n ; k++ ) // inner term
 					m_jjt_bias[row][col] += m_jacobian[row][k] * m_jacobian[col][k];
 			end
@@ -219,11 +219,12 @@ class ik_swift_test;
 		logic [5:0] [5:0] [35:0] inverse,
 		logic [5:0] [5:0] [35:0] dls,
 		logic [5:0] [35:0] delta,
+		logic done,
 		logic [5:0] [3:0] [35:0] dh_param
 	);
 
-		real abs_tol = 0.005;
-		real rel_tol = 0.005;
+		real abs_tol = 0.01;
+		real rel_tol = 0.01;
 
 		real jacobian_real[6][6];
 		real jacobian_error[6][6];
@@ -258,6 +259,12 @@ class ik_swift_test;
 		real dh_param_percent[6][4];
 
 		bit passed = 1'b1;
+
+		// CHECK done
+		if (done != 1'b1) begin
+			$write("%t : fail done\n", $realtime);
+			$exit();
+		end
 
 		// CHECK JACOBIAN
 		for ( int i=0 ; i<n ; i++ ) begin // jacobian matrix row

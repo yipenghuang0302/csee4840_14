@@ -45,18 +45,14 @@
 
 `include "../ik_swift_36/mult_36/mult_36.v"
 `include "../ik_swift_36/mat_mult/mult_36_dsp/mult_36_dsp.v"
-//`include "../ik_swift_36/sim_models/lpm_mult.v"
-//`include "../ik_swift_36/sim_models/mult_block.v"
-//`include "../ik_swift_36/sim_models/addsub_block.v"
-//`include "../ik_swift_36/sim_models/pipeline_internal_fv.v"
-//`include "../ik_swift_36/sim_models/dffep.v"
-//`include "../ik_swift_36/sim_models/altera_mf.v"
-//`include "../ik_swift_36/sim_models/220model.v"
+`include "../ik_swift_36/sim_models/lpm_mult.v"
+`include "../ik_swift_36/sim_models/mult_block.v"
+`include "../ik_swift_36/sim_models/addsub_block.v"
+`include "../ik_swift_36/sim_models/pipeline_internal_fv.v"
+`include "../ik_swift_36/sim_models/dffep.v"
+`include "../ik_swift_36/sim_models/altera_mf.v"
+`include "../ik_swift_36/sim_models/220model.v"
 
-// parameter THETA = 0;
-// parameter L_OFFSET = 1;
-// parameter L_DISTANCE = 2;
-// parameter ALPHA = 3;
 parameter MAX_JOINT = 6;
 
 module ik_swift_interface (
@@ -186,7 +182,7 @@ module ik_swift_interface (
 			case (address)
 
 				6'd00 : readdata <= {26'b0, joint_type};
-				6'd01 : readdata <= {31'b0, start};
+				6'd01 : readdata <= {31'b0, ifc_ik_swift.done};
 
 				6'd02 : readdata <= {28'b0, target[0][35:32]};
 				6'd03 : readdata <= target[0][31:0];

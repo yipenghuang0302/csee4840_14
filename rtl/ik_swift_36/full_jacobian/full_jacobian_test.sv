@@ -109,7 +109,7 @@ class full_jacobian_test;
 		// jjt_bias = jacobian * jacobian transpose;
 		for ( int row=0 ; row<6 ; row++ ) // product row
 			for ( int col=0 ; col<6 ; col++ ) begin // product column
-				model_jjt_bias[row][col] = row==col ? 0.00001525878*2 : 0.0; // bias term
+				model_jjt_bias[row][col] = row==col ? 0.00001525878*4 : 0.0; // bias term
 				for ( int k=0 ; k<6 ; k++ ) // inner term
 					model_jjt_bias[row][col] += model_jacobian_matrix[row][k] * model_jacobian_matrix[col][k];
 			end

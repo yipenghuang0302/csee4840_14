@@ -7,7 +7,7 @@ interface ifc_ik_swift (
 	input logic clk
 );
 
-logic en, rst;
+logic en, done, rst;
 
 // INPUTS
 // base joint's axis of rotation/translation
@@ -54,6 +54,7 @@ clocking cb @(posedge clk);
 	input inverse;
 	input dls;
 	input delta;
+	input done;
 	input dh_param_out;
 endclocking
 
@@ -75,6 +76,7 @@ modport ik_swift (
 	output inverse,
 	output dls,
 	output delta,
+	output done,
 	output dh_param_out
 );
 

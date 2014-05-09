@@ -78,12 +78,12 @@ module full_jacobian (
 		if (i.en)
 			if ( i.count==8'd111 )
 				i.jjt_bias <= i.mat_mult_result + {
-				{ 36'd2, 36'b0, 36'b0, 36'b0, 36'b0, 36'b0 },
-				{ 36'b0, 36'd2, 36'b0, 36'b0, 36'b0, 36'b0 },
-				{ 36'b0, 36'b0, 36'd2, 36'b0, 36'b0, 36'b0 },
-				{ 36'b0, 36'b0, 36'b0, 36'd2, 36'b0, 36'b0 },
-				{ 36'b0, 36'b0, 36'b0, 36'b0, 36'd2, 36'b0 },
-				{ 36'b0, 36'b0, 36'b0, 36'b0, 36'b0, 36'd2 }};
+				{ 36'd4, 36'b0, 36'b0, 36'b0, 36'b0, 36'b0 },
+				{ 36'b0, 36'd4, 36'b0, 36'b0, 36'b0, 36'b0 },
+				{ 36'b0, 36'b0, 36'd4, 36'b0, 36'b0, 36'b0 },
+				{ 36'b0, 36'b0, 36'b0, 36'd4, 36'b0, 36'b0 },
+				{ 36'b0, 36'b0, 36'b0, 36'b0, 36'd4, 36'b0 },
+				{ 36'b0, 36'b0, 36'b0, 36'b0, 36'b0, 36'd4 }};
 
 	// timing design prevents module outputs to shared multipliers colliding
 	assign i.array_mult_dataa = {3'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;
