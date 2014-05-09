@@ -94,6 +94,13 @@ class ik_swift_test;
 			for ( int row=0 ; row<3 ; row++ )
 				position[joint][row] = full_matrix[joint-1][row][3];
 
+		$display("end effector x position: %f", position[6][0]);
+		$display("end effector y position: %f", position[6][1]);
+		$display("end effector z position: %f", position[6][2]);
+		$display("end effector x rotation: %f", axis[6][0]);
+		$display("end effector y rotation: %f", axis[6][1]);
+		$display("end effector z rotation: %f", axis[6][2]);
+
 		// CALCULATE VECTOR TO END OF EFFECTOR
 		for ( int joint=0 ; joint<n ; joint++ )
 			for ( int row=0 ; row<3 ; row++ )
@@ -121,7 +128,7 @@ class ik_swift_test;
 		// jjt_bias = jacobian * jacobian transpose;
 		for ( int row=0 ; row<n ; row++ ) // product row
 			for ( int col=0 ; col<n ; col++ ) begin // product column
-				m_jjt_bias[row][col] = row==col ? 0.00001525878*64 : 0.0; // bias term
+				m_jjt_bias[row][col] = row==col ? 0.00001525878*2 : 0.0; // bias term
 				for ( int k=0 ; k<n ; k++ ) // inner term
 					m_jjt_bias[row][col] += m_jacobian[row][k] * m_jacobian[col][k];
 			end
@@ -298,7 +305,7 @@ class ik_swift_test;
 					$write("m_lt=%f; dut_result=%f; lt_percent=%f.\n", m_lt[i][j], lt_real[i][j], lt_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass cholesky i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass cholesky i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
@@ -315,7 +322,7 @@ class ik_swift_test;
 					$write("m_lt_inv=%f; dut_result=%f; lt_inverse_percent=%f.\n", m_lt_inv[i][j], lt_inverse_real[i][j], lt_inverse_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass lt_inverse i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass lt_inverse i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
@@ -332,7 +339,7 @@ class ik_swift_test;
 					$write("m_inverse=%f; dut_result=%f; inverse_percent=%f.\n", m_inverse[i][j], inverse_real[i][j], inverse_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass inverse i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass inverse i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
@@ -349,7 +356,7 @@ class ik_swift_test;
 					$write("m_dls=%f; dut_result=%f; dls_percent=%f.\n", m_dls[i][j], dls_real[i][j], dls_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass dls i=%d j=%d\n", $realtime, i, j);
+					// $write("%t : pass dls i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
@@ -361,12 +368,12 @@ class ik_swift_test;
 			delta_percent[i] = abs( delta_error[i] / m_delta[i] );
 			if (delta_error[i]>abs_tol && delta_percent[i]>rel_tol) begin
 				$write("%t : fail delta i=%d\n", $realtime, i);
+				$write("m_delta=%f; dut_result=%f; delta_error=%f.\n", m_delta[i], delta_real[i], delta_error[i]);
+				$write("m_delta=%f; dut_result=%f; delta_percent=%f.\n", m_delta[i], delta_real[i], delta_percent[i]);
 				passed = 1'b0;
 			end else begin
-				$write("%t : pass delta i=%d\n", $realtime, i);
+				// $write("%t : pass delta i=%d\n", $realtime, i);
 			end
-			$write("m_delta=%f; dut_result=%f; delta_error=%f.\n", m_delta[i], delta_real[i], delta_error[i]);
-			$write("m_delta=%f; dut_result=%f; delta_percent=%f.\n", m_delta[i], delta_real[i], delta_percent[i]);
 		end
 
 		// CHECK DH_PARAM
@@ -377,12 +384,12 @@ class ik_swift_test;
 				dh_param_percent[joint][param] = abs( dh_param_error[joint][param] / m_dh_param[joint][param] );
 				if (dh_param_error[joint][param]>abs_tol && dh_param_percent[joint][param]>rel_tol) begin
 					$write("%t : fail dh_param joint=%d, param=%d\n", $realtime, joint, param);
+					$write("m_dh_param=%f; dut_result=%f; dh_param_error=%f.\n", m_dh_param[joint][param], dh_param_real[joint][param], dh_param_error[joint][param]);
+					$write("m_dh_param=%f; dut_result=%f; dh_param_percent=%f.\n", m_dh_param[joint][param], dh_param_real[joint][param], dh_param_percent[joint][param]);
 					passed = 1'b0;
 				end else begin
-					$write("%t : pass dh_param joint=%d, param=%d\n", $realtime, joint, param);
+					// $write("%t : pass dh_param joint=%d, param=%d\n", $realtime, joint, param);
 				end
-				$write("m_dh_param=%f; dut_result=%f; dh_param_error=%f.\n", m_dh_param[joint][param], dh_param_real[joint][param], dh_param_error[joint][param]);
-				$write("m_dh_param=%f; dut_result=%f; dh_param_percent=%f.\n", m_dh_param[joint][param], dh_param_real[joint][param], dh_param_percent[joint][param]);
 			end
 		end
 

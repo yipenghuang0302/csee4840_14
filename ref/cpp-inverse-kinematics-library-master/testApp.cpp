@@ -114,7 +114,7 @@ int main()
     float speccfc = 0.001f;
 /*    des << 200.0f , 200.0f , 0.0f , 0.0f , 0.0f , 0.0f ;*/
 /*	targetx="9" targety="-15.28" targetz="3.2"*/
-    des << 9.0f , -15.28f , 3.2f , 0.0f , 0.0f , 0.0f ;
+    des << 2.0f , 2.0f , 2.0f , 0.0f , 0.0f , 0.0f ;
 
     CAlgoAbstract * pJpt = factory.GiveMeSolver(DUMPEDLEASTSQUARES,des,robot);
     pJpt->SetAdditionalParametr(speccfc);
