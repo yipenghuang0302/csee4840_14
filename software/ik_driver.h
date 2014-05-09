@@ -24,7 +24,7 @@
 */
 
 //Memory offset where we store the start_signal
-#define START_OFFSET 56
+#define START_OFFSET 4
 
 //Memory offset where we start to store dh-params
 #define PARAM_OFFSET 64
