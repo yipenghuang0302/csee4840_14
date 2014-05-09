@@ -41,8 +41,9 @@ struct joint_dev {
 	resource_size_t size;
 	void __iomem *virtbase; /* Where registers can be accessed in memory */
 	u8 joint_type; // ith bit is 1 if joint is rotational; 0 for translational
-	u32 target[3]; // Target position
-	u32 dh_params[MAX_JOINT * NUM_PARAMS]; // Every joint has 4 parameters 
+	u8 start_signal; //This is set to 1 if hw is running, 0 if sw is running
+	u64 target[3]; // Target position
+	u64 dh_params[MAX_JOINT * NUM_PARAMS]; // Every joint has 4 parameters 
 } dev;
 
 
@@ -52,15 +53,19 @@ struct joint_dev {
  * Write target position of the end effector and the bit vector for the joint types 
  * Assumes target position is in range and the device information has been set up
  */
-static void write_target(u32 target[3], u8 joint_t)
+static void write_target(u64 target[3], u8 joint_t)
 {
 	int i;
-	u32 curtarget;
+	u64 curtarget;
 
 	iowrite8(joint_t, dev.virtbase);
 	for (i = 1; i < 4; i++){
+		printk("Target %d is %lld\n", i, target[i-1]);
 		curtarget = target[i-1];
-		iowrite32(curtarget, dev.virtbase+i*REG_SIZE);
+		//Write 4 MSB (need to multiply i by 2 to skip over first 64 bits of mem)
+		iowrite32((u32)(curtarget >> 32), dev.virtbase+(i*2)*REG_SIZE);
+		//Write 32 LSB
+		iowrite32((u32)curtarget, dev.virtbase+(i*2+1)*REG_SIZE);
 		dev.target[i-1] = curtarget;
 	}
 	dev.joint_type = joint_t;
@@ -70,10 +75,17 @@ static void write_target(u32 target[3], u8 joint_t)
  * Write parameter for a given joint 
  * Assumes joint and parameter is in range and the device information has been set up
  */
-static void write_parameter(u8 joint, u8 parameter, u32 magnitude){
-	u32 mag = magnitude;
-	iowrite32(mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint)+(parameter*REG_SIZE));
+static void write_parameter(u8 joint, u8 parameter, u64 magnitude){
+	u64 mag = magnitude;
+	iowrite32((u32)(mag >> 32), dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint)+((parameter*2)*REG_SIZE));
+	iowrite32((u32)mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint)+((parameter*2+1)*REG_SIZE));
 	dev.dh_params[(joint) * NUM_PARAMS + parameter] = mag;
+}
+
+//Inform hardware that it can do an iteration of the algorithm
+static void write_start(u8 start){
+	iowrite8(start, dev.virtbase+START_OFFSET);
+	dev.start_signal = 1;
 }
 
 /*
@@ -91,19 +103,23 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
 		//Distributed checks over a bunch of if statements to avoid one huge conditional
-		if (vla.joint < -2 || vla.joint > MAX_JOINT) 
+		if (vla.joint < -3 || vla.joint > MAX_JOINT) 
 			return -EINVAL;
 		if (vla.joint == -1 && ((vla.target[0] < MIN_COORD || vla.target[0] > MAX_COORD) ||
 												   (vla.target[1] < MIN_COORD || vla.target[1] > MAX_COORD) ||
 													 (vla.target[2] < MIN_COORD || vla.target[2] > MAX_COORD)))
 			return -EINVAL;
-		if (vla.joint != -1 && vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_LENGTH)
+		if (vla.joint == -2 && vla.start_signal != 1)
 			return -EINVAL;
-		if (vla.joint != -1 && (vla.parameter == L_OFFSET || vla.parameter == L_LENGTH)
+		if (vla.joint > -1 && vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_LENGTH)
+			return -EINVAL;
+		if (vla.joint > -1 && (vla.parameter == L_OFFSET || vla.parameter == L_LENGTH)
 												&& (vla.magnitude < MIN_COORD || vla.magnitude > MAX_COORD))
 			return -EINVAL;
 		if (vla.joint == -1)
 			write_target(vla.target, vla.joint_type);
+		else if (vla.joint == -2)
+			write_start(vla.start_signal);
 		else
 			write_parameter(vla.joint, vla.parameter, vla.magnitude);
 		break;
@@ -112,11 +128,12 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		if (copy_from_user(&vla, (ik_driver_arg_t *) arg,
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
-		if (vla.joint < -2 || vla.joint > MAX_JOINT || 
-				(vla.joint != -1 && 
+		if (vla.joint < -3 || vla.joint > MAX_JOINT || 
+				(vla.joint > -1 && 
 				 (vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_LENGTH))) 
 			return -EINVAL;
-		vla.magnitude = dev.dh_params[(vla.joint)*4 + vla.parameter];
+		vla.magnitude = dev.dh_params[(vla.joint) * NUM_PARAMS + vla.parameter];
+		vla.start_signal = dev.start_signal;
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))
 			return -EACCES;
