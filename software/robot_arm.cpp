@@ -45,15 +45,16 @@ float hand[2] = {0, 0};
 full_robot robot;
 
 int ik_driver_fd;
+bool start_program;
 
 /*
  * Convert a floating point number to our fixed-point representation
  */
 
-int float_to_fixed(float num){
-	float frac = num - (int)num;
-	int decimal = (int)num << PRECISION; //Decimal part of number
-	int fraction = (1 << PRECISION) * frac;
+long long float_to_fixed(float num){
+	float frac = num - (long long)num;
+	long long decimal = ((long long)num) << PRECISION; //Decimal part of number
+	long long fraction = (1 << PRECISION) * frac;
 	//Check if we need to round up 
 	if (frac >= .5 && frac <= 1.0)
 		fraction += 1;
@@ -65,13 +66,34 @@ void write_target(float targetx, float targety, float targetz)
 {
   ik_driver_arg_t vla;
 	vla.joint = (char)-1;
+	//Get 4 MSB
 	vla.target[0] = float_to_fixed(targetx);
 	vla.target[1] = float_to_fixed(targety);
 	vla.target[2] = float_to_fixed(targetz);
-	printf("Joint is %d targets are %d, %d, %d\n", vla.joint, vla.target[0], vla.target[1], vla.target[2]);
+	printf("Joint is %d targets are %lld, %lld, %lld\n", vla.joint, vla.target[0], vla.target[1], vla.target[2]);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
+	}
+}
+
+//Tell hardware we're ready for an iteration and wait until hardware is done
+void notify_hardware(){
+	ik_driver_arg_t vla;
+	vla.start_signal = 1;
+	vla.joint = (char)-2;//Signals that we're sending a start signal
+	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
+		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
+		return;
+	}
+	//Wait for hardware to be finished
+	while (1){
+		if (ioctl(ik_driver_fd, IK_DRIVER_READ_PARAM, &vla)) {
+			perror("ioctl(IK_DRIVER_READ_PARAM) failed");
+			return; 
+		}
+		if (!vla.start_signal)
+			return;
 	}
 }
 
@@ -92,11 +114,9 @@ void write_param(int joint, char param_type, float magnitude)
 		}
 		else{
 			magnitude = magnitude * (float)M_PI / 180.0;//Convert from degrees to radians
-			vla.magnitude = float_to_fixed(magnitude);
 		}
 	}
-	else
-		vla.magnitude = float_to_fixed(magnitude);
+	vla.magnitude = float_to_fixed(magnitude);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
@@ -112,7 +132,7 @@ float read_param(int joint, char param_type){
 	vla.joint = (char)joint;
 	vla.parameter = param_type;
 	if (ioctl(ik_driver_fd, IK_DRIVER_READ_PARAM, &vla)) {
-		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
+		perror("ioctl(IK_DRIVER_READ_PARAM) failed");
 		return 0;
 	}
 
@@ -120,8 +140,13 @@ float read_param(int joint, char param_type){
 	value = vla.magnitude / pow(2,PRECISION);
 
 	//convert from radians to degrees if necessary
-	if (param_type == THETA || param_type == ALPHA)
+	if (param_type == THETA || param_type == ALPHA){
+		if (value > M_PI)
+			value -= 2 * M_PI;
+		else if (value < -M_PI)
+			value += 2 * M_PI;
 		value = value * 180 / M_PI;
+	}
 	return value;
 }
 
@@ -162,21 +187,21 @@ void arm(int index){
 		glVertex3f(robot.targetx, robot.targety, robot.targetz);
 	glEnd();
 
-
 	//Draw the links of the robot arm
 	for (int i = 0; i < MAX_JOINT; i ++){
 		glColor3f(.2*i+.5, .2*i+.1, .2*i);
-		d = robot.params[i].d;
-		a = robot.params[i].a;
-		theta = robot.params[i].theta;
-		alpha = robot.params[i].alpha;
-
-		/* Do this when talking to hardware
+		if (start_program){
+			d = robot.params[i].d;
+			a = robot.params[i].a;
+			theta = robot.params[i].theta;
+			alpha = robot.params[i].alpha;
+		}
+		else{
 			 d = read_param(i, L_OFFSET); 
 			 a = read_param(i, L_LENGTH); 
 			 theta = read_param(i, theta); 
 			 alpha = read_param(i, alpha); 
-		 */
+		}
 
 		glRotatef(theta, 0, 0, 1);
 
@@ -189,6 +214,11 @@ void arm(int index){
 		glRotatef(alpha, 1, 0, 0);
 
 	}
+	if (start_program){
+		start_program = false;
+	}
+	//Ready for next iteration
+	notify_hardware();
 }
 
 void display(void) {
@@ -289,6 +319,9 @@ int main(int argc, char** argv) {
 		write_param(i, THETA, robot.params[i].theta);
 		write_param(i, ALPHA, robot.params[i].alpha);
 	}
+
+	start_program = true;
+
 	exit(0);
 
 	glutInit(&argc, argv);
