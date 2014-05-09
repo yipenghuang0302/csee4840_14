@@ -1,38 +1,80 @@
 The following diagram is the memory model for our interface.
-Each line represents a block of 64 bits of memory. Memory addresses grow from
+Each line represents a block of 32 bits of memory. Memory addresses grow from
 top to bottom, so if *mem was a char pointer pointing to the start of our register space,
-*(mem+0) would be our joint_type value. Each variable gets its own block of 64 bits,
-except for joint_type which only requires 8 bits (the other 56 bits are unused).
+*(mem+0) would be our joint_type value. Each variable gets its own block of 32 bits,
+except for joint_type which only requires 8 bits (the other 24 bits are unused).
 
-00 (8) joint_type; (56) <empty>;
-01 (64) target[0]
-02 (64) target[1]
-03 (64) target[2]
-04 (64) target[3]
-05 (64) target[4]
-06 (64) target[5]
-07 (1) start_signal (start==1 triggers hardware to run; start==0 indicates dh_params have been updated by FPGA)
-08 (64) theta_1
-09 (64) d_1
-10 (64) a_1
-11 (64) alpha_1
-12 (64) theta_2
-13 (64) d_2
-14 (64) a_2
-15 (64) alpha_2
-16 (64) theta_3
-17 (64) d_3
-18 (64) a_3
-19 (64) alpha_3
-20 (64) theta_4
-21 (64) d_4
-22 (64) a_4
-23 (64) alpha_4
-24 (64) theta_5
-25 (64) d_5
-26 (64) a_5
-27 (64) alpha_5
-28 (64) theta_6
-29 (64) d_6
-30 (64) a_6
-31 (64) alpha_6
+(start==1 triggers hardware to run; start==0 indicates dh_params have been updated by FPGA)
+
+00 (08) joint_type;(24) <empty>;
+01 (01) start;     (31) <empty>;
+
+02 (04) target[0]; (28) <empty>;
+03 (32) target[0];
+04 (04) target[1]; (28) <empty>;
+05 (32) target[1];
+06 (04) target[2]; (28) <empty>;
+07 (32) target[2];
+08 (04) target[3]; (28) <empty>;
+09 (32) target[3];
+10 (04) target[4]; (28) <empty>;
+11 (32) target[4];
+12 (04) target[5]; (28) <empty>;
+13 (32) target[5];
+
+14 (32) <empty>;
+15 (32) <empty>;
+
+16 (04) theta_1; (28) <empty>;
+17 (32) theta_1;
+18 (04) d_1;     (28) <empty>;
+19 (32) d_1;
+20 (04) a_1;     (28) <empty>;
+21 (32) a_1;
+22 (04) alpha_1; (28) <empty>;
+23 (32) alpha_1;
+
+24 (04) theta_2; (28) <empty>;
+25 (32) theta_2;
+26 (04) d_2;     (28) <empty>;
+27 (32) d_2;
+28 (04) a_2;     (28) <empty>;
+29 (32) a_2;
+30 (04) alpha_2; (28) <empty>;
+31 (32) alpha_2;
+
+32 (04) theta_3; (28) <empty>;
+33 (32) theta_3;
+34 (04) d_3;     (28) <empty>;
+35 (32) d_3;
+36 (04) a_3;     (28) <empty>;
+37 (32) a_3;
+38 (04) alpha_3; (28) <empty>;
+39 (32) alpha_3;
+
+40 (04) theta_4; (28) <empty>;
+41 (32) theta_4;
+42 (04) d_4;     (28) <empty>;
+43 (32) d_4;
+44 (04) a_4;     (28) <empty>;
+45 (32) a_4;
+46 (04) alpha_4; (28) <empty>;
+47 (32) alpha_4;
+
+48 (04) theta_5; (28) <empty>;
+49 (32) theta_5;
+50 (04) d_5;     (28) <empty>;
+51 (32) d_5;
+52 (04) a_5;     (28) <empty>;
+53 (32) a_5;
+54 (04) alpha_5; (28) <empty>;
+55 (32) alpha_5;
+
+56 (04) theta_6; (28) <empty>;
+57 (32) theta_6;
+58 (04) d_6;     (28) <empty>;
+59 (32) d_6;
+60 (04) a_6;     (28) <empty>;
+61 (32) a_6;
+62 (04) alpha_6; (28) <empty>;
+63 (32) alpha_6;
