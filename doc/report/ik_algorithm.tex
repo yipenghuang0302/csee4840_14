@@ -1,0 +1,81 @@
+\section{Inverse Kinematics Algorithm}
+We first present an algorithm that takes as input $n$ homogenous transformation matrices $T^{i-1}_i$ for $i=1$ to $n$, and
+the current position of our end effector in three-dimensional space, which is represented as the vector $s$. 
+The output of the algorithm is the Jacobian matrix for the current system configuration. Given matrices $A$ and $B$, we use the notation
+$AB$ for matrix multiplaction and $A \times B$ for the cross-product in the following pseudocode.\\
+
+\begin{center}
+\line(1,0){450}
+\end{center}
+\begin{algorithm}[H]
+\DontPrintSemicolon
+Let $J$ be a 6 x $n$ matrix, where each column corresponds to a joint. The top three scalars of a column represent the
+position of the joint in 3-space, while the bottom three represent the oritentation of the joint in 3-space.\;
+Let $z$ be the z-axis of the coordinate frame at the base of our robot appendage\;
+\For{$i=1$ to $n$}{
+	Let $R_i$ be the 3x3 rotation block derived from $T^0_i$\;
+	Let $v_i = zR_i$ be the axis of rotation or translation for joint $i$\;
+	Let $p_i$ be a column vector composed of the top three scalars in the last column of $T^0_i$. This is the current position of joint $i$\;
+	\eIf{joint $i$ is rotational}{
+		Set column $i$ of $J$ to be $\begin{bmatrix*} (v_i \times (s - p_i)) & v_i \end{bmatrix*}^T$\;
+	}
+	{
+		Set column $i$ of $J$ to be $\begin{bmatrix*} v_i & 0 & 0 & 0 \end{bmatrix*}^T$\;
+	}
+}
+Return $J$
+\caption{Jacobian($T^0_1, T^1_2, \ldots, T^{n-1}_n, s$)\label{IR}}
+\begin{center}
+\noindent\line(1,0){450}
+\end{center}
+\end{algorithm}
+\vspace{2mm}
+
+The following algorithm describes the Jacobian Damped Least-Squares method of solving the inverse kinematics problem. 
+As input we are given a set of D-H parameters that fully define
+the initial positions of the joints of our robot appendage, as well as a three-dimensional target position for our end effector. 
+Formally, for each joint $i = 1 \ldots n$ we have D-H parameters $\theta_i, d_i, a_i, \alpha_i$, and
+we call our target vector $t$. The final output of our algorithm is a set of updated D-H parameters that fully define
+the required position of our joints such that the end effector position is sufficiently close to the target.
+Although the algorithm given applies to a general $n-$jointed robot, we will only consider robots with 6 joints in our system, leading
+to a 6x6 Jacobian matrix.
+
+
+\begin{center}
+\line(1,0){450}
+\end{center}
+\begin{algorithm}[H]
+Let $\epsilon$ be the desired accuracy of our final results\;
+\For{$i = 1$ to $n$}{
+	Calculate the homogenous transformation matrix $T^{i-1}_i$ for joint $i$ using the given D-H parameters\;
+}
+Let $T^0_n = \prod_{i=1}^n T^{i-1}_i$ be the full homogenous transformation matrix for the system\;
+Let $s$ be a column vector composed of the top three scalars in the last column of $T^0_n$. This is the current position of our end effector\;
+Let $e = t - s$ be the desired change in the position of our end effector\;
+Set $e = \begin{bmatrix*} e & 0 & 0 & 0 \end{bmatrix*}^T$ so we can use it in our Jacobian equations, which deal with 6 x 6 matrices\;
+Let $J = JACOBIAN(T^0_1, T^1_2, \ldots, T^{n-1}_n, s)$ be the Jacobian matrix for the current system configuration\;
+\While{the $l^2$ norm of $e$ is greater than $\epsilon$}{
+	Let $J^T$ be the transpose of $J$\;
+	Let $\lambda$ be a small positive constant\; 
+	Let $I$ be the identity matrix\;
+	Use row operations to determine the vector $f$ that satisfies the equation $(JJ^T+\lambda^2I)f = e$\;
+	Let $\Delta \theta = J^T f$ be a vector whose $i$th component is a change in joint $i$'s angle. Note that
+		if joint $i$ is translational along the unit vector $v_i$, then the joint ``angle" measures the distance
+			moved in the direction $v_i$ and the $i$th component in $\Delta \theta$ will be a change in $d_i$\; 
+	\For{$i = 1$ to $n$}{
+		\eIf{joint $i$ is translational}{
+			Set $d_i$ = $d_i + \Delta \theta [i]$\;
+		}
+		{
+			Set $\theta_i = \theta_i + \Delta \theta[i]$\;
+		}
+		Recalculate $T^{i-1}_i$\;
+	}
+	Recalculate $T^0_n, s, e,$ and $J$ using our updated homogenous transformation matrices\;
+}
+Return the final set of D-H parameters currently specifying the positions of our joints\;
+\begin{center}
+\line(1,0){450}
+\end{center}
+\caption{JacobianTranspose($\{\theta_1, d_1, a_1, \alpha_1\}, \ldots, \{\theta_n, d_n, a_n, \alpha_n\}, t$)}
+\end{algorithm}

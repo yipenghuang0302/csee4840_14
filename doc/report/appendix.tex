@@ -1,0 +1,11 @@
+\section{Appendix: FPGA Utilization Estimate}
+In order to estimate the area and timing costs of the accelerator, we created a table enumerating the costs of each of the custom functional units and submodules we proposed, in terms of the pipeline depth of the block, and the DSP, lookup table, and register costs of the block. These figures are based on estimates given by the Altera MegaFunction User Manual and by generating the IP designs in Quartus MegaWizard. These estimates are shown in Figure \ref{fig:bill_of_materials}.
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/bill_of_materials.eps,
+width=1.0\columnwidth}
+\caption{An estimate of area and timing costs of the accelerator submodules and custom functional units.}
+\label{fig:bill_of_materials}
+\end{figure}

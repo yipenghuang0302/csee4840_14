@@ -1,0 +1,18 @@
+\subsection{Submodule Timing Design}
+
+The FPGA has a limited number of DSPs which are used to implement multipliers, so we must time multiplex their use. We schedule the use of our functional units so that parts of the inverse kinematics algorithm can run in parallel, and so that functional units can be reused in different parts of the algorithm. By minimizing area costs, we may be able increase the precision of our numbers from 16-bit to 24-bit or even 32-bit. Larger number representations could improve convergence of the algorithm, and make the accelerator easier to use.
+
+Figure \ref{fig:schedule} shows the timing design of the accelerator. The diagram lists the functional unit hardware resources along the vertical axis, and displays which clock cycles those resources are active along the horizontal axis. The top half of the diagram shows the first ~150 clock cycles of the algorithm, which is dedicated to finding the forward kinematics Jacobian matrix. The bottom half of the diagram is the second ~150 clock cycles of the algorithm, which carries out the damped least squares algorithm.
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/schedule.eps,
+width=1.0\columnwidth}
+\caption{The timing design of the accelerator. The diagram lists the functional unit hardware resources along the vertical axis, and displays which clock cycles those resources are active along the horizontal axis. In each cell we provide a brief note on which part of the algorithm occurs in that cycle.}
+\label{fig:schedule}
+\end{figure}
+
+While it may appear that there is minimal parallelism in the damped least squares algorithm, we point out that the matrix multiplier, divider, and adder units are all parallel, SIMD-style functional units. The matrix multiplier in particular does 36 parallel multiplications at once.
+
+Once the design is implemented, we will find the longest register-to-register critical path, and pipeline those stages to increase operating frequency. We suspect these paths would occur in the divider or square root IP designs. We will also decrease the pipeline depth of non-critical paths, possibly within the multiplier units, to decrease latency. We could also further optimize the design by further increasing the degree of parallelism in the matrix multiplier.

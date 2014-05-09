@@ -1,0 +1,44 @@
+\subsection{D-H Parameter Homogeneous Transformation Block}
+
+Frames are a set of axes and coordinates that describe 3D space. Frames can be global or local. A local frame would be useful in describing the x, y, z positions of an object in space, along with the orientation (direction it is pointing) in space. Each link in a robot appendage has a frame associated with it.
+
+A moving joint that connects two links results in a change in reference frames between the two links preceding and following the joint. We can transform from one frame to the next using homogeneous transforms, which are described as 4 by 4 matrices. For background information on homogeneous transforms refer to \cite{frames}.
+
+If we use the standard D-H parameters to describe the joint, this change in frames is a homogeneous transformation shown in Figure \ref{fig:dh_transform_equation}, which when multiplied out in full is the matrix shown in Figure \ref{fig:dh_transform_matrix}. 
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/dh_transform_equation.eps,
+width=0.5\columnwidth}
+\caption{The transformation between two frames linked by a joint, using D-H parameter variables.}
+\label{fig:dh_transform_equation}
+\end{figure}
+
+Recall that revolute joints are represented as a rotation of joint angle $\alpha$ about the $Z$ axis, and prismatic joints are translations by link offset $a$ along the $Z$ axis. To align the two coordinates frames, we translate along the X axis by the link length $d$, and rotate by the X axis by the link twist $\theta$.
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/dh_transform_matrix.eps,
+width=0.4\columnwidth}
+\caption{The full matrix describing the transformation between two frames linked by a joint.}
+\label{fig:dh_transform_matrix}
+\end{figure}
+
+We can calculate this homogenous transformation using a dedicated hardware block in the FPGA. Figure \ref{fig:dh_transform_block} is the dataflow diagram for a hardware block that calculates all the elements in the transformation matrix. This submodule uses two instances of the sine cosine functional unit, which we describe later.
+
+% Figure
+\begin{figure}[ht]
+\center
+\epsfig{figure=../figures/dh_transform_block.eps,
+width=0.4\columnwidth}
+\caption{The dataflow diagram for a hardware block that calculates the elements in a homogenous transform matrix.}
+\label{fig:dh_transform_block}
+\end{figure}
+
+% The D-H transformation block would require four floating point sine or cosine pipelines and six multipliers.
+
+% For the sine and cosine functions we will use the ALTFP\_SINCOS IP block from Altera. These blocks generate a result within 35 or 36 clock cycles, and require 28 DSP blocks, 10,986 lookup tables, and 18,834 registers.
+
+% We will also consider alternative ways to compute sine and cosine.
