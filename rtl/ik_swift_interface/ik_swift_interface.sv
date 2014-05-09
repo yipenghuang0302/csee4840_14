@@ -70,8 +70,11 @@ module ik_swift_interface (
 );
 
 	// LOGIC GOVERNING MEMORY SPACE
-	logic [5:0] joint_type; // The ith bit is 1 if ith joint is rotational; translational otherwise
-	logic [5:0] [35:0] target; // (x,y,z) coordinates and orientation of target position
+	// Programmable joint_type not implemented in demo
+	// logic [5:0] joint_type; // The ith bit is 1 if ith joint is rotational; translational otherwise
+	logic [2:0] [35:0] target; // (x,y,z) coordinates and orientation of target position
+	// assign target[5:3] = {3{36'b0}}; // (x,y,z) coordinates and orientation of target position
+	
 	logic start;
 
 	// INSTANTIATE IK_FAST TOP MODULE
@@ -82,21 +85,21 @@ module ik_swift_interface (
 	// base joint's axis of rotation/translation
 	assign ifc_ik_swift.z = { 36'd0, 36'd0, 36'd65536 }; // unit vector in z direction
 	// bit vector describing type of each joint
-	assign ifc_ik_swift.joint_type = joint_type;
+	assign ifc_ik_swift.joint_type = 6'b111111;
 	// target coordinates
-	assign ifc_ik_swift.target = target;
+	assign ifc_ik_swift.target = {{108'b0}, target};
 	ik_swift ik_swift (ifc_ik_swift.ik_swift);
 
 	always_ff @(posedge clk) begin
 		if (reset) begin
-			joint_type <= {6'b0};
+			// joint_type <= {6'b0};
 			target <= {3{36'b0}};
 			start <= 1'b0;
 			ifc_ik_swift.dh_param_in <= {24{36'b0}};
 		end else if ( chipselect && write ) begin
 			case (address)
 
-				6'd00 : joint_type <= writedata[5:0]; // joint type vector
+				// 6'd00 : joint_type <= writedata[5:0]; // joint type vector
 				6'd01 : start <= writedata[0]; // start signal
 
 				6'd02 : target[0][35:32] <= writedata[3:0]; // target[0] x
@@ -105,12 +108,12 @@ module ik_swift_interface (
 				6'd05 : target[1] <= writedata; // target[1] y
 				6'd06 : target[2][35:32] <= writedata[3:0]; // target[2] z
 				6'd07 : target[2] <= writedata; // target[2] z
-				6'd08 : target[3][35:32] <= writedata[3:0]; // target[3] x
-				6'd09 : target[3] <= writedata; // target[3] x
-				6'd10 : target[4][35:32] <= writedata[3:0]; // target[4] y
-				6'd11 : target[4] <= writedata; // target[4] y
-				6'd12 : target[5][35:32] <= writedata[3:0]; // target[5] z
-				6'd13 : target[5] <= writedata; // target[5] z
+				// 6'd08 : target[3][35:32] <= writedata[3:0]; // target[3] x
+				// 6'd09 : target[3] <= writedata; // target[3] x
+				// 6'd10 : target[4][35:32] <= writedata[3:0]; // target[4] y
+				// 6'd11 : target[4] <= writedata; // target[4] y
+				// 6'd12 : target[5][35:32] <= writedata[3:0]; // target[5] z
+				// 6'd13 : target[5] <= writedata; // target[5] z
 				
 				6'd14 : ;
 				6'd15 : ;
@@ -181,7 +184,7 @@ module ik_swift_interface (
 		end else if ( chipselect ) begin
 			case (address)
 
-				6'd00 : readdata <= {26'b0, joint_type};
+				6'd00 : readdata <= {26'b0, ifc_ik_swift.joint_type};
 				6'd01 : readdata <= {31'b0, ifc_ik_swift.done};
 
 				6'd02 : readdata <= {28'b0, target[0][35:32]};
@@ -190,12 +193,12 @@ module ik_swift_interface (
 				6'd05 : readdata <= target[1][31:0];
 				6'd06 : readdata <= {28'b0, target[2][35:32]};
 				6'd07 : readdata <= target[2][31:0];
-				6'd08 : readdata <= {28'b0, target[3][35:32]};
-				6'd09 : readdata <= target[3][31:0];
-				6'd10 : readdata <= {28'b0, target[4][35:32]};
-				6'd11 : readdata <= target[4][31:0];
-				6'd12 : readdata <= {28'b0, target[5][35:32]};
-				6'd13 : readdata <= target[5][31:0];
+				// 6'd08 : readdata <= {28'b0, target[3][35:32]};
+				// 6'd09 : readdata <= target[3][31:0];
+				// 6'd10 : readdata <= {28'b0, target[4][35:32]};
+				// 6'd11 : readdata <= target[4][31:0];
+				// 6'd12 : readdata <= {28'b0, target[5][35:32]};
+				// 6'd13 : readdata <= target[5][31:0];
 				
 				6'd14 : readdata <= 36'b0;
 				6'd15 : readdata <= 36'b0;
