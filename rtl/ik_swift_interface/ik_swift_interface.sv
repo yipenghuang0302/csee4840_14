@@ -45,13 +45,13 @@
 
 `include "../ik_swift_36/mult_36/mult_36.v"
 `include "../ik_swift_36/mat_mult/mult_36_dsp/mult_36_dsp.v"
-`include "../ik_swift_36/sim_models/lpm_mult.v"
-`include "../ik_swift_36/sim_models/mult_block.v"
-`include "../ik_swift_36/sim_models/addsub_block.v"
-`include "../ik_swift_36/sim_models/pipeline_internal_fv.v"
-`include "../ik_swift_36/sim_models/dffep.v"
-`include "../ik_swift_36/sim_models/altera_mf.v"
-`include "../ik_swift_36/sim_models/220model.v"
+// `include "../ik_swift_36/sim_models/lpm_mult.v"
+// `include "../ik_swift_36/sim_models/mult_block.v"
+// `include "../ik_swift_36/sim_models/addsub_block.v"
+// `include "../ik_swift_36/sim_models/pipeline_internal_fv.v"
+// `include "../ik_swift_36/sim_models/dffep.v"
+// `include "../ik_swift_36/sim_models/altera_mf.v"
+// `include "../ik_swift_36/sim_models/220model.v"
 
 parameter MAX_JOINT = 6;
 
@@ -88,7 +88,7 @@ module ik_swift_interface (
 		if (reset) begin
 			target <= {3{36'b0}};
 			ifc_ik_swift.en <= 1'b0;
-			ifc_ik_swift.dh_param_in <= {24{36'b0}};
+			ifc_ik_swift.dh_dyn_in <= {6{36'b0}};
 		end else if ( chipselect && write ) begin
 			case (address)
 
@@ -111,59 +111,59 @@ module ik_swift_interface (
 				6'd14 : ;
 				6'd15 : ;
 
-				6'd16 : ifc_ik_swift.dh_param_in[0][THETA][35:32] <= writedata[3:0];
-				6'd17 : ifc_ik_swift.dh_param_in[0][THETA] <= writedata;
-				6'd18 : ifc_ik_swift.dh_param_in[0][L_OFFSET][35:32] <= writedata[3:0];
-				6'd19 : ifc_ik_swift.dh_param_in[0][L_OFFSET] <= writedata;
-				6'd20 : ifc_ik_swift.dh_param_in[0][L_DISTANCE][35:32] <= writedata[3:0];
-				6'd21 : ifc_ik_swift.dh_param_in[0][L_DISTANCE] <= writedata;
-				6'd22 : ifc_ik_swift.dh_param_in[0][ALPHA][35:32] <= writedata[3:0];
-				6'd23 : ifc_ik_swift.dh_param_in[0][ALPHA] <= writedata;
+				6'd16 : ifc_ik_swift.dh_dyn_in[0]/*[THETA]*/[35:32] <= writedata[3:0];
+				6'd17 : ifc_ik_swift.dh_dyn_in[0]/*[THETA]*/ <= writedata;
+				// 6'd18 : ifc_ik_swift.dh_dyn_in[0][L_OFFSET][35:32] <= writedata[3:0];
+				// 6'd19 : ifc_ik_swift.dh_dyn_in[0][L_OFFSET] <= writedata;
+				// 6'd20 : ifc_ik_swift.dh_dyn_in[0][L_DISTANCE][35:32] <= writedata[3:0];
+				// 6'd21 : ifc_ik_swift.dh_dyn_in[0][L_DISTANCE] <= writedata;
+				// 6'd22 : ifc_ik_swift.dh_dyn_in[0][ALPHA][35:32] <= writedata[3:0];
+				// 6'd23 : ifc_ik_swift.dh_dyn_in[0][ALPHA] <= writedata;
 
-				6'd24 : ifc_ik_swift.dh_param_in[1][THETA][35:32] <= writedata[3:0];
-				6'd25 : ifc_ik_swift.dh_param_in[1][THETA] <= writedata;
-				6'd26 : ifc_ik_swift.dh_param_in[1][L_OFFSET][35:32] <= writedata[3:0];
-				6'd27 : ifc_ik_swift.dh_param_in[1][L_OFFSET] <= writedata;
-				6'd28 : ifc_ik_swift.dh_param_in[1][L_DISTANCE][35:32] <= writedata[3:0];
-				6'd29 : ifc_ik_swift.dh_param_in[1][L_DISTANCE] <= writedata;
-				6'd30 : ifc_ik_swift.dh_param_in[1][ALPHA][35:32] <= writedata[3:0];
-				6'd31 : ifc_ik_swift.dh_param_in[1][ALPHA] <= writedata;
+				6'd24 : ifc_ik_swift.dh_dyn_in[1]/*[THETA]*/[35:32] <= writedata[3:0];
+				6'd25 : ifc_ik_swift.dh_dyn_in[1]/*[THETA]*/ <= writedata;
+				// 6'd26 : ifc_ik_swift.dh_dyn_in[1][L_OFFSET][35:32] <= writedata[3:0];
+				// 6'd27 : ifc_ik_swift.dh_dyn_in[1][L_OFFSET] <= writedata;
+				// 6'd28 : ifc_ik_swift.dh_dyn_in[1][L_DISTANCE][35:32] <= writedata[3:0];
+				// 6'd29 : ifc_ik_swift.dh_dyn_in[1][L_DISTANCE] <= writedata;
+				// 6'd30 : ifc_ik_swift.dh_dyn_in[1][ALPHA][35:32] <= writedata[3:0];
+				// 6'd31 : ifc_ik_swift.dh_dyn_in[1][ALPHA] <= writedata;
 
-				6'd32 : ifc_ik_swift.dh_param_in[2][THETA][35:32] <= writedata[3:0];
-				6'd33 : ifc_ik_swift.dh_param_in[2][THETA] <= writedata;
-				6'd34 : ifc_ik_swift.dh_param_in[2][L_OFFSET][35:32] <= writedata[3:0];
-				6'd35 : ifc_ik_swift.dh_param_in[2][L_OFFSET] <= writedata;
-				6'd36 : ifc_ik_swift.dh_param_in[2][L_DISTANCE][35:32] <= writedata[3:0];
-				6'd37 : ifc_ik_swift.dh_param_in[2][L_DISTANCE] <= writedata;
-				6'd38 : ifc_ik_swift.dh_param_in[2][ALPHA][35:32] <= writedata[3:0];
-				6'd39 : ifc_ik_swift.dh_param_in[2][ALPHA] <= writedata;
+				6'd32 : ifc_ik_swift.dh_dyn_in[2]/*[THETA]*/[35:32] <= writedata[3:0];
+				6'd33 : ifc_ik_swift.dh_dyn_in[2]/*[THETA]*/ <= writedata;
+				// 6'd34 : ifc_ik_swift.dh_dyn_in[2][L_OFFSET][35:32] <= writedata[3:0];
+				// 6'd35 : ifc_ik_swift.dh_dyn_in[2][L_OFFSET] <= writedata;
+				// 6'd36 : ifc_ik_swift.dh_dyn_in[2][L_DISTANCE][35:32] <= writedata[3:0];
+				// 6'd37 : ifc_ik_swift.dh_dyn_in[2][L_DISTANCE] <= writedata;
+				// 6'd38 : ifc_ik_swift.dh_dyn_in[2][ALPHA][35:32] <= writedata[3:0];
+				// 6'd39 : ifc_ik_swift.dh_dyn_in[2][ALPHA] <= writedata;
 
-				6'd40 : ifc_ik_swift.dh_param_in[3][THETA][35:32] <= writedata[3:0];
-				6'd41 : ifc_ik_swift.dh_param_in[3][THETA] <= writedata;
-				6'd42 : ifc_ik_swift.dh_param_in[3][L_OFFSET][35:32] <= writedata[3:0];
-				6'd43 : ifc_ik_swift.dh_param_in[3][L_OFFSET] <= writedata;
-				6'd44 : ifc_ik_swift.dh_param_in[3][L_DISTANCE][35:32] <= writedata[3:0];
-				6'd45 : ifc_ik_swift.dh_param_in[3][L_DISTANCE] <= writedata;
-				6'd46 : ifc_ik_swift.dh_param_in[3][ALPHA][35:32] <= writedata[3:0];
-				6'd47 : ifc_ik_swift.dh_param_in[3][ALPHA] <= writedata;
+				6'd40 : ifc_ik_swift.dh_dyn_in[3]/*[THETA]*/[35:32] <= writedata[3:0];
+				6'd41 : ifc_ik_swift.dh_dyn_in[3]/*[THETA]*/ <= writedata;
+				// 6'd42 : ifc_ik_swift.dh_dyn_in[3][L_OFFSET][35:32] <= writedata[3:0];
+				// 6'd43 : ifc_ik_swift.dh_dyn_in[3][L_OFFSET] <= writedata;
+				// 6'd44 : ifc_ik_swift.dh_dyn_in[3][L_DISTANCE][35:32] <= writedata[3:0];
+				// 6'd45 : ifc_ik_swift.dh_dyn_in[3][L_DISTANCE] <= writedata;
+				// 6'd46 : ifc_ik_swift.dh_dyn_in[3][ALPHA][35:32] <= writedata[3:0];
+				// 6'd47 : ifc_ik_swift.dh_dyn_in[3][ALPHA] <= writedata;
 
-				6'd48 : ifc_ik_swift.dh_param_in[4][THETA][35:32] <= writedata[3:0];
-				6'd49 : ifc_ik_swift.dh_param_in[4][THETA] <= writedata;
-				6'd50 : ifc_ik_swift.dh_param_in[4][L_OFFSET][35:32] <= writedata[3:0];
-				6'd51 : ifc_ik_swift.dh_param_in[4][L_OFFSET] <= writedata;
-				6'd52 : ifc_ik_swift.dh_param_in[4][L_DISTANCE][35:32] <= writedata[3:0];
-				6'd53 : ifc_ik_swift.dh_param_in[4][L_DISTANCE] <= writedata;
-				6'd54 : ifc_ik_swift.dh_param_in[4][ALPHA][35:32] <= writedata[3:0];
-				6'd55 : ifc_ik_swift.dh_param_in[4][ALPHA] <= writedata;
+				6'd48 : ifc_ik_swift.dh_dyn_in[4]/*[THETA]*/[35:32] <= writedata[3:0];
+				6'd49 : ifc_ik_swift.dh_dyn_in[4]/*[THETA]*/ <= writedata;
+				// 6'd50 : ifc_ik_swift.dh_dyn_in[4][L_OFFSET][35:32] <= writedata[3:0];
+				// 6'd51 : ifc_ik_swift.dh_dyn_in[4][L_OFFSET] <= writedata;
+				// 6'd52 : ifc_ik_swift.dh_dyn_in[4][L_DISTANCE][35:32] <= writedata[3:0];
+				// 6'd53 : ifc_ik_swift.dh_dyn_in[4][L_DISTANCE] <= writedata;
+				// 6'd54 : ifc_ik_swift.dh_dyn_in[4][ALPHA][35:32] <= writedata[3:0];
+				// 6'd55 : ifc_ik_swift.dh_dyn_in[4][ALPHA] <= writedata;
 
-				6'd56 : ifc_ik_swift.dh_param_in[5][THETA][35:32] <= writedata[3:0];
-				6'd57 : ifc_ik_swift.dh_param_in[5][THETA] <= writedata;
-				6'd58 : ifc_ik_swift.dh_param_in[5][L_OFFSET][35:32] <= writedata[3:0];
-				6'd59 : ifc_ik_swift.dh_param_in[5][L_OFFSET] <= writedata;
-				6'd60 : ifc_ik_swift.dh_param_in[5][L_DISTANCE][35:32] <= writedata[3:0];
-				6'd61 : ifc_ik_swift.dh_param_in[5][L_DISTANCE] <= writedata;
-				6'd62 : ifc_ik_swift.dh_param_in[5][ALPHA][35:32] <= writedata[3:0];
-				6'd63 : ifc_ik_swift.dh_param_in[5][ALPHA] <= writedata;
+				6'd56 : ifc_ik_swift.dh_dyn_in[5]/*[THETA]*/[35:32] <= writedata[3:0];
+				6'd57 : ifc_ik_swift.dh_dyn_in[5]/*[THETA]*/ <= writedata;
+				// 6'd58 : ifc_ik_swift.dh_dyn_in[5][L_OFFSET][35:32] <= writedata[3:0];
+				// 6'd59 : ifc_ik_swift.dh_dyn_in[5][L_OFFSET] <= writedata;
+				// 6'd60 : ifc_ik_swift.dh_dyn_in[5][L_DISTANCE][35:32] <= writedata[3:0];
+				// 6'd61 : ifc_ik_swift.dh_dyn_in[5][L_DISTANCE] <= writedata;
+				// 6'd62 : ifc_ik_swift.dh_dyn_in[5][ALPHA][35:32] <= writedata[3:0];
+				// 6'd63 : ifc_ik_swift.dh_dyn_in[5][ALPHA] <= writedata;
 
 			endcase
 		end
@@ -173,7 +173,7 @@ module ik_swift_interface (
 	// deltas for joint parameters
 	always_ff @(posedge clk) begin
 		if (reset) begin
-			readdata <= {36'b0};
+			readdata <= {32'b0};
 		end else if ( chipselect ) begin
 			case (address)
 
@@ -193,62 +193,62 @@ module ik_swift_interface (
 				// 6'd12 : readdata <= {28'b0, target[5][35:32]};
 				// 6'd13 : readdata <= target[5][31:0];
 				
-				6'd14 : readdata <= 36'b0;
-				6'd15 : readdata <= 36'b0;
+				6'd14 : readdata <= 32'b0;
+				6'd15 : readdata <= 32'b0;
 
-				6'd16 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[0][THETA][35:32]};
-				6'd17 : readdata <= ifc_ik_swift.dh_param_out[0][THETA][31:0];
-				6'd18 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[0][L_OFFSET][35:32]};
-				6'd19 : readdata <= ifc_ik_swift.dh_param_out[0][L_OFFSET][31:0];
-				6'd20 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[0][L_DISTANCE][35:32]};
-				6'd21 : readdata <= ifc_ik_swift.dh_param_out[0][L_DISTANCE][31:0];
-				6'd22 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[0][ALPHA][35:32]};
-				6'd23 : readdata <= ifc_ik_swift.dh_param_out[0][ALPHA][31:0];
+				6'd16 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[0]/*[THETA]*/[35:32]};
+				6'd17 : readdata <= ifc_ik_swift.dh_dyn_out[0]/*[THETA]*/[31:0];
+				// 6'd18 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[0][L_OFFSET][35:32]};
+				// 6'd19 : readdata <= ifc_ik_swift.dh_dyn_out[0][L_OFFSET][31:0];
+				// 6'd20 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[0][L_DISTANCE][35:32]};
+				// 6'd21 : readdata <= ifc_ik_swift.dh_dyn_out[0][L_DISTANCE][31:0];
+				// 6'd22 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[0][ALPHA][35:32]};
+				// 6'd23 : readdata <= ifc_ik_swift.dh_dyn_out[0][ALPHA][31:0];
 
-				6'd24 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[1][THETA][35:32]};
-				6'd25 : readdata <= ifc_ik_swift.dh_param_out[1][THETA][31:0];
-				6'd26 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[1][L_OFFSET][35:32]};
-				6'd27 : readdata <= ifc_ik_swift.dh_param_out[1][L_OFFSET][31:0];
-				6'd28 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[1][L_DISTANCE][35:32]};
-				6'd29 : readdata <= ifc_ik_swift.dh_param_out[1][L_DISTANCE][31:0];
-				6'd30 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[1][ALPHA][35:32]};
-				6'd31 : readdata <= ifc_ik_swift.dh_param_out[1][ALPHA][31:0];
+				6'd24 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[1]/*[THETA]*/[35:32]};
+				6'd25 : readdata <= ifc_ik_swift.dh_dyn_out[1]/*[THETA]*/[31:0];
+				// 6'd26 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[1][L_OFFSET][35:32]};
+				// 6'd27 : readdata <= ifc_ik_swift.dh_dyn_out[1][L_OFFSET][31:0];
+				// 6'd28 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[1][L_DISTANCE][35:32]};
+				// 6'd29 : readdata <= ifc_ik_swift.dh_dyn_out[1][L_DISTANCE][31:0];
+				// 6'd30 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[1][ALPHA][35:32]};
+				// 6'd31 : readdata <= ifc_ik_swift.dh_dyn_out[1][ALPHA][31:0];
 
-				6'd32 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[2][THETA][35:32]};
-				6'd33 : readdata <= ifc_ik_swift.dh_param_out[2][THETA][31:0];
-				6'd34 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[2][L_OFFSET][35:32]};
-				6'd35 : readdata <= ifc_ik_swift.dh_param_out[2][L_OFFSET][31:0];
-				6'd36 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[2][L_DISTANCE][35:32]};
-				6'd37 : readdata <= ifc_ik_swift.dh_param_out[2][L_DISTANCE][31:0];
-				6'd38 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[2][ALPHA][35:32]};
-				6'd39 : readdata <= ifc_ik_swift.dh_param_out[2][ALPHA][31:0];
+				6'd32 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[2]/*[THETA]*/[35:32]};
+				6'd33 : readdata <= ifc_ik_swift.dh_dyn_out[2]/*[THETA]*/[31:0];
+				// 6'd34 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[2][L_OFFSET][35:32]};
+				// 6'd35 : readdata <= ifc_ik_swift.dh_dyn_out[2][L_OFFSET][31:0];
+				// 6'd36 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[2][L_DISTANCE][35:32]};
+				// 6'd37 : readdata <= ifc_ik_swift.dh_dyn_out[2][L_DISTANCE][31:0];
+				// 6'd38 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[2][ALPHA][35:32]};
+				// 6'd39 : readdata <= ifc_ik_swift.dh_dyn_out[2][ALPHA][31:0];
 
-				6'd40 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[3][THETA][35:32]};
-				6'd41 : readdata <= ifc_ik_swift.dh_param_out[3][THETA][31:0];
-				6'd42 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[3][L_OFFSET][35:32]};
-				6'd43 : readdata <= ifc_ik_swift.dh_param_out[3][L_OFFSET][31:0];
-				6'd44 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[3][L_DISTANCE][35:32]};
-				6'd45 : readdata <= ifc_ik_swift.dh_param_out[3][L_DISTANCE][31:0];
-				6'd46 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[3][ALPHA][35:32]};
-				6'd47 : readdata <= ifc_ik_swift.dh_param_out[3][ALPHA][31:0];
+				6'd40 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[3]/*[THETA]*/[35:32]};
+				6'd41 : readdata <= ifc_ik_swift.dh_dyn_out[3]/*[THETA]*/[31:0];
+				// 6'd42 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[3][L_OFFSET][35:32]};
+				// 6'd43 : readdata <= ifc_ik_swift.dh_dyn_out[3][L_OFFSET][31:0];
+				// 6'd44 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[3][L_DISTANCE][35:32]};
+				// 6'd45 : readdata <= ifc_ik_swift.dh_dyn_out[3][L_DISTANCE][31:0];
+				// 6'd46 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[3][ALPHA][35:32]};
+				// 6'd47 : readdata <= ifc_ik_swift.dh_dyn_out[3][ALPHA][31:0];
 
-				6'd48 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[4][THETA][35:32]};
-				6'd49 : readdata <= ifc_ik_swift.dh_param_out[4][THETA][31:0];
-				6'd50 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[4][L_OFFSET][35:32]};
-				6'd51 : readdata <= ifc_ik_swift.dh_param_out[4][L_OFFSET][31:0];
-				6'd52 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[4][L_DISTANCE][35:32]};
-				6'd53 : readdata <= ifc_ik_swift.dh_param_out[4][L_DISTANCE][31:0];
-				6'd54 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[4][ALPHA][35:32]};
-				6'd55 : readdata <= ifc_ik_swift.dh_param_out[4][ALPHA][31:0];
+				6'd48 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[4]/*[THETA]*/[35:32]};
+				6'd49 : readdata <= ifc_ik_swift.dh_dyn_out[4]/*[THETA]*/[31:0];
+				// 6'd50 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[4][L_OFFSET][35:32]};
+				// 6'd51 : readdata <= ifc_ik_swift.dh_dyn_out[4][L_OFFSET][31:0];
+				// 6'd52 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[4][L_DISTANCE][35:32]};
+				// 6'd53 : readdata <= ifc_ik_swift.dh_dyn_out[4][L_DISTANCE][31:0];
+				// 6'd54 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[4][ALPHA][35:32]};
+				// 6'd55 : readdata <= ifc_ik_swift.dh_dyn_out[4][ALPHA][31:0];
 
-				6'd56 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[5][THETA][35:32]};
-				6'd57 : readdata <= ifc_ik_swift.dh_param_out[5][THETA][31:0];
-				6'd58 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[5][L_OFFSET][35:32]};
-				6'd59 : readdata <= ifc_ik_swift.dh_param_out[5][L_OFFSET][31:0];
-				6'd60 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[5][L_DISTANCE][35:32]};
-				6'd61 : readdata <= ifc_ik_swift.dh_param_out[5][L_DISTANCE][31:0];
-				6'd62 : readdata <= {28'b0, ifc_ik_swift.dh_param_out[5][ALPHA][35:32]};
-				6'd63 : readdata <= ifc_ik_swift.dh_param_out[5][ALPHA][31:0];
+				6'd56 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[5]/*[THETA]*/[35:32]};
+				6'd57 : readdata <= ifc_ik_swift.dh_dyn_out[5]/*[THETA]*/[31:0];
+				// 6'd58 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[5][L_OFFSET][35:32]};
+				// 6'd59 : readdata <= ifc_ik_swift.dh_dyn_out[5][L_OFFSET][31:0];
+				// 6'd60 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[5][L_DISTANCE][35:32]};
+				// 6'd61 : readdata <= ifc_ik_swift.dh_dyn_out[5][L_DISTANCE][31:0];
+				// 6'd62 : readdata <= {28'b0, ifc_ik_swift.dh_dyn_out[5][ALPHA][35:32]};
+				// 6'd63 : readdata <= ifc_ik_swift.dh_dyn_out[5][ALPHA][31:0];
 
 			endcase
 		end

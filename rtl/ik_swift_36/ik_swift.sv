@@ -44,7 +44,45 @@ module ik_swift (
 	assign i_jac.count = count;
 	assign i_jac.z = i.z;
 	assign i_jac.joint_type = i.joint_type;
-	assign i_jac.dh_param = i.dh_param_in;
+	// GENERATE DH_PARAMS
+	assign i_jac.dh_param = {
+		{
+			36'd205887,		// trans.dh_data[5][ALPHA] = 3.14159265359;
+			-36'd52429,		// trans.dh_data[5][L_DISTANCE] = -0.8;
+			36'd0,			// trans.dh_data[5][L_OFFSET] = 0.0;
+			i.dh_dyn_in[5]	// trans.dh_data[5][THETA] = 0.0;
+		},
+		{
+			36'd102944,		// trans.dh_data[4][ALPHA] = 3.14159265359/2;
+			36'd0,			// trans.dh_data[4][L_DISTANCE] = 0.0;
+			36'd0,			// trans.dh_data[4][L_OFFSET] = 0.0;
+			i.dh_dyn_in[4]	// trans.dh_data[4][THETA] = 0.0;
+		},
+		{
+			-36'd102944,	// trans.dh_data[3][ALPHA] = -3.14159265359/2;
+			-36'd193331,	// trans.dh_data[3][L_DISTANCE] = -2.95;
+			36'd0,			// trans.dh_data[3][L_OFFSET] = 0.0;
+			i.dh_dyn_in[3]	// trans.dh_data[3][THETA] = 0.0;
+		},
+		{
+			36'd102944,		// trans.dh_data[2][ALPHA] = 3.14159265359/2;
+			36'd0,			// trans.dh_data[2][L_DISTANCE] = 0.0;
+			36'd58982,		// trans.dh_data[2][L_OFFSET] = 0.9;
+			i.dh_dyn_in[2]	// trans.dh_data[2][THETA] = 0.0;
+		},
+		{
+			36'd0,			// trans.dh_data[1][ALPHA] = 0.0;
+			36'd0,			// trans.dh_data[1][L_DISTANCE] = 0.0;
+			36'd176947,		// trans.dh_data[1][L_OFFSET] = 2.7;
+			i.dh_dyn_in[1]	// trans.dh_data[1][THETA] = 0.0;
+		},
+		{
+			-36'd102944,	// trans.dh_data[0][ALPHA] = -3.14159265359/2;
+			36'd219546,		// trans.dh_data[0][L_DISTANCE] = 3.35;
+			36'd49152,		// trans.dh_data[0][L_OFFSET] = 0.75;
+			i.dh_dyn_in[0]	// trans.dh_data[0][THETA] = 0.0;
+		}
+	};
 	full_jacobian full_jacobian (i_jac.full_jacobian);
 	// outputs
 	assign i.jacobian_matrix = i_jac.jacobian_matrix;
@@ -162,14 +200,14 @@ module ik_swift (
 			always_ff @(posedge i.clk) begin
 				if (i.en && !i.done) begin
 					case (count)
-						8'd0: i.dh_param_out[joint] <= i.dh_param_in[joint];
+						8'd0: i.dh_dyn_out[joint] <= i.dh_dyn_in[joint];
 						8'd248: begin
 							case (i.joint_type[joint])
 								1'b0: begin // translational
-									i.dh_param_out[joint][L_DISTANCE] <= i.dh_param_in[joint][L_DISTANCE] + i.delta[joint];
+									i.dh_dyn_out[joint]/*[L_DISTANCE]*/ <= i.dh_dyn_in[joint]/*[L_DISTANCE]*/ + i.delta[joint];
 								end
 								1'b1: begin // rotational
-									i.dh_param_out[joint][THETA] <= i.dh_param_in[joint][THETA] + i.delta[joint];
+									i.dh_dyn_out[joint]/*[THETA]*/ <= i.dh_dyn_in[joint]/*[THETA]*/ + i.delta[joint];
 								end
 							endcase
 						end

@@ -13,8 +13,8 @@ class ik_swift_transaction;
 	real target_fraction [6];
 	real target_data [6];
 
-	rand logic [6][4][30:0] dh_increment;
-	real dh_fraction [6][4];
+	rand logic [6]/*[4]*/[30:0] dh_increment;
+	real dh_fraction [6]/*[4]*/;
 	real dh_data [6][4];
 
 endclass
@@ -124,9 +124,9 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 				$display("l_offset a = %f", trans.dh_data[joint][L_OFFSET]);
 				$display("l_distance d = %f", trans.dh_data[joint][L_DISTANCE]);
 				$display("alpha = %f", trans.dh_data[joint][ALPHA]);
-				for ( int param=0 ; param<4 ; param++ ) begin // dh param
-					ds.cb.dh_param_in[joint][param] <= longint'(trans.dh_data[joint][param] * 65536.0);
-				end
+				// for ( int param=0 ; param<4 ; param++ ) begin // dh param
+				ds.cb.dh_dyn_in[joint]/*[param]*/ <= longint'(trans.dh_data[joint][THETA] * 65536.0);
+				// end
 			end
 
 			// CONVERGENCE TESTING
@@ -153,23 +153,23 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 						ds.cb.dls,
 						ds.cb.delta,
 						ds.cb.done,
-						ds.cb.dh_param_out
+						ds.cb.dh_dyn_out
 					);
 
 					ds.cb.en <= 1'b0;
 					repeat (120) @(ds.cb);
 
 					for ( int joint=0 ; joint<6 ; joint++ ) begin // joint index
-						for ( int param=0 ; param<4 ; param++ ) begin // dh param
-							trans.dh_data[joint][param] = real'(longint'({{28{ds.cb.dh_param_out[joint][param][35]}}, ds.cb.dh_param_out[joint][param]}))/65536.0;
-							if (param==ALPHA || param==THETA) begin
-								while (trans.dh_data[joint][param]>3.141592653589793238462643383279502884197)
-									trans.dh_data[joint][param] = trans.dh_data[joint][param] - 2*3.141592653589793238462643383279502884197;
-								while (trans.dh_data[joint][param]<-3.141592653589793238462643383279502884197)
-									trans.dh_data[joint][param] = trans.dh_data[joint][param] + 2*3.141592653589793238462643383279502884197;
-							end
-							ds.cb.dh_param_in[joint][param] <= longint'(trans.dh_data[joint][param] * 65536.0);
-						end
+						// for ( int param=0 ; param<4 ; param++ ) begin // dh param
+						trans.dh_data[joint][THETA] = real'(longint'({{28{ds.cb.dh_dyn_out[joint]/*[param]*/[35]}}, ds.cb.dh_dyn_out[joint]/*[param]*/}))/65536.0;
+						// if (param==ALPHA || param==THETA) begin
+						while (trans.dh_data[joint][THETA]>3.141592653589793238462643383279502884197)
+							trans.dh_data[joint][THETA] = trans.dh_data[joint][THETA] - 2*3.141592653589793238462643383279502884197;
+						while (trans.dh_data[joint][THETA]<-3.141592653589793238462643383279502884197)
+							trans.dh_data[joint][THETA] = trans.dh_data[joint][THETA] + 2*3.141592653589793238462643383279502884197;
+						// end
+						ds.cb.dh_dyn_in[joint]/*[param]*/ <= longint'(trans.dh_data[joint][THETA] * 65536.0);
+						// end
 					end
 
 				// end // end one solution cycle

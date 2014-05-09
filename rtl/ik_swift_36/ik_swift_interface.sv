@@ -15,7 +15,7 @@ logic [2:0] [35:0] z;
 // bit vector describing type of each joint
 logic [5:0] joint_type;
 // dh joint parameters
-logic [5:0] [3:0] [35:0] dh_param_in;
+logic [5:0] [35:0] dh_dyn_in;
 // target coordinates
 logic [5:0] [35:0] target;
 
@@ -37,14 +37,14 @@ logic [5:0] [35:0] delta;
 
 // OUTPUTS
 // dh joint parameters
-logic [5:0] [3:0] [35:0] dh_param_out;
+logic [5:0] [35:0] dh_dyn_out;
 
 // clocking cb @(posedge clk);
 // 	output en;
 // 	output rst;
 // 	output z;
 // 	output joint_type;
-// 	output dh_param_in;
+// 	output dh_dyn_in;
 // 	output target;
 // 
 // 	input jacobian_matrix;
@@ -55,7 +55,7 @@ logic [5:0] [3:0] [35:0] dh_param_out;
 // 	input dls;
 // 	input delta;
 // 	input done;
-// 	input dh_param_out;
+// 	input dh_dyn_out;
 // endclocking
 // 
 // modport ik_swift_tb (clocking cb);
@@ -67,7 +67,7 @@ modport ik_swift (
 	input z,
 	input joint_type,
 	input target,
-	input dh_param_in,
+	input dh_dyn_in,
 
 	output jacobian_matrix,
 	output jjt_bias,
@@ -77,7 +77,7 @@ modport ik_swift (
 	output dls,
 	output delta,
 	output done,
-	output dh_param_out
+	output dh_dyn_out
 );
 
 endinterface

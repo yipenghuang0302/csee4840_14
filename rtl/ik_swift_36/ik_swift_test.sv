@@ -220,7 +220,7 @@ class ik_swift_test;
 		logic [5:0] [5:0] [35:0] dls,
 		logic [5:0] [35:0] delta,
 		logic done,
-		logic [5:0] [3:0] [35:0] dh_param
+		logic [5:0] /*[3:0]*/ [35:0] dh_dyn_out
 	);
 
 		real abs_tol = 0.01;
@@ -254,9 +254,9 @@ class ik_swift_test;
 		real delta_error[6];
 		real delta_percent[6];
 
-		real dh_param_real[6][4];
-		real dh_param_error[6][4];
-		real dh_param_percent[6][4];
+		real dh_dyn_out_real[6]; //[4];
+		real dh_dyn_out_error[6]; //[4];
+		real dh_dyn_out_percent[6]; //[4];
 
 		bit passed = 1'b1;
 
@@ -383,21 +383,21 @@ class ik_swift_test;
 			end
 		end
 
-		// CHECK DH_PARAM
+		// CHECK DH_DYN_OUT
 		for ( int joint=0 ; joint<n ; joint++ ) begin // param joint
-			for ( int param=0 ; param<4 ; param++ ) begin // dh param
-				dh_param_real[joint][param] = real'(longint'({{28{dh_param[joint][param][35]}}, dh_param[joint][param]}))/65536.0;
-				dh_param_error[joint][param] = abs( dh_param_real[joint][param] - m_dh_param[joint][param] );
-				dh_param_percent[joint][param] = abs( dh_param_error[joint][param] / m_dh_param[joint][param] );
-				if (dh_param_error[joint][param]>abs_tol && dh_param_percent[joint][param]>rel_tol) begin
-					$write("%t : fail dh_param joint=%d, param=%d\n", $realtime, joint, param);
-					$write("m_dh_param=%f; dut_result=%f; dh_param_error=%f.\n", m_dh_param[joint][param], dh_param_real[joint][param], dh_param_error[joint][param]);
-					$write("m_dh_param=%f; dut_result=%f; dh_param_percent=%f.\n", m_dh_param[joint][param], dh_param_real[joint][param], dh_param_percent[joint][param]);
-					passed = 1'b0;
-				end else begin
-					// $write("%t : pass dh_param joint=%d, param=%d\n", $realtime, joint, param);
-				end
+			// for ( int param=0 ; param<4 ; param++ ) begin // dh param
+			dh_dyn_out_real[joint]/*[param]*/ = real'(longint'({{28{dh_dyn_out[joint]/*[param]*/[35]}}, dh_dyn_out[joint]/*[param]*/}))/65536.0;
+			dh_dyn_out_error[joint]/*[param]*/ = abs( dh_dyn_out_real[joint]/*[param]*/ - m_dh_param[joint][THETA] );
+			dh_dyn_out_percent[joint]/*[param]*/ = abs( dh_dyn_out_error[joint]/*[param]*/ / m_dh_param[joint][THETA] );
+			if (dh_dyn_out_error[joint]/*[param]*/>abs_tol && dh_dyn_out_percent[joint]/*[param]*/>rel_tol) begin
+				$write("%t : fail dh_dyn_out joint=%d\n", $realtime, joint);
+				passed = 1'b0;
+			end else begin
+				$write("%t : pass dh_dyn_out joint=%d\n", $realtime, joint);
 			end
+			$write("m_dh_param=%f; dut_result=%f; dh_dyn_out_error=%f.\n", m_dh_param[joint][THETA], dh_dyn_out_real[joint]/*[param]*/, dh_dyn_out_error[joint]/*[param]*/);
+			$write("m_dh_param=%f; dut_result=%f; dh_dyn_out_percent=%f.\n", m_dh_param[joint][THETA], dh_dyn_out_real[joint]/*[param]*/, dh_dyn_out_percent[joint]/*[param]*/);
+			// end
 		end
 
 		if (passed) begin
