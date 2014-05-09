@@ -39,26 +39,26 @@ logic [5:0] [35:0] delta;
 // dh joint parameters
 logic [5:0] [3:0] [35:0] dh_param_out;
 
-clocking cb @(posedge clk);
-	output en;
-	output rst;
-	output z;
-	output joint_type;
-	output dh_param_in;
-	output target;
-
-	input jacobian_matrix;
-	input jjt_bias;
-	input lt;
-	input lt_inverse;
-	input inverse;
-	input dls;
-	input delta;
-	input done;
-	input dh_param_out;
-endclocking
-
-modport ik_swift_tb (clocking cb);
+// clocking cb @(posedge clk);
+// 	output en;
+// 	output rst;
+// 	output z;
+// 	output joint_type;
+// 	output dh_param_in;
+// 	output target;
+// 
+// 	input jacobian_matrix;
+// 	input jjt_bias;
+// 	input lt;
+// 	input lt_inverse;
+// 	input inverse;
+// 	input dls;
+// 	input delta;
+// 	input done;
+// 	input dh_param_out;
+// endclocking
+// 
+// modport ik_swift_tb (clocking cb);
 
 // restrict directions
 modport ik_swift (

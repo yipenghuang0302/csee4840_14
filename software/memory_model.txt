@@ -6,7 +6,7 @@ except for joint_type which only requires 8 bits (the other 24 bits are unused).
 
 (start==1 triggers hardware to run; start==0 indicates dh_params have been updated by FPGA)
 
-00 (08) joint_type;(24) <empty>;
+00 (06) joint_type;(26) <empty>;
 01 (01) start;     (31) <empty>;
 
 02 (04) target[0]; (28) <empty>;
@@ -27,54 +27,54 @@ except for joint_type which only requires 8 bits (the other 24 bits are unused).
 
 16 (04) theta_1; (28) <empty>;
 17 (32) theta_1;
-18 (04) d_1;     (28) <empty>;
-19 (32) d_1;
-20 (04) a_1;     (28) <empty>;
-21 (32) a_1;
+18 (04) offset_1;     (28) <empty>;
+19 (32) offset_1;
+20 (04) distance_1;     (28) <empty>;
+21 (32) distance_1;
 22 (04) alpha_1; (28) <empty>;
 23 (32) alpha_1;
 
 24 (04) theta_2; (28) <empty>;
 25 (32) theta_2;
-26 (04) d_2;     (28) <empty>;
-27 (32) d_2;
-28 (04) a_2;     (28) <empty>;
-29 (32) a_2;
+26 (04) offset_2;     (28) <empty>;
+27 (32) offset_2;
+28 (04) distance_2;     (28) <empty>;
+29 (32) distance_2;
 30 (04) alpha_2; (28) <empty>;
 31 (32) alpha_2;
 
 32 (04) theta_3; (28) <empty>;
 33 (32) theta_3;
-34 (04) d_3;     (28) <empty>;
-35 (32) d_3;
-36 (04) a_3;     (28) <empty>;
-37 (32) a_3;
+34 (04) offset_3;     (28) <empty>;
+35 (32) offset_3;
+36 (04) distance_3;     (28) <empty>;
+37 (32) distance_3;
 38 (04) alpha_3; (28) <empty>;
 39 (32) alpha_3;
 
 40 (04) theta_4; (28) <empty>;
 41 (32) theta_4;
-42 (04) d_4;     (28) <empty>;
-43 (32) d_4;
-44 (04) a_4;     (28) <empty>;
-45 (32) a_4;
+42 (04) offset_4;     (28) <empty>;
+43 (32) offset_4;
+44 (04) distance_4;     (28) <empty>;
+45 (32) distance_4;
 46 (04) alpha_4; (28) <empty>;
 47 (32) alpha_4;
 
 48 (04) theta_5; (28) <empty>;
 49 (32) theta_5;
-50 (04) d_5;     (28) <empty>;
-51 (32) d_5;
-52 (04) a_5;     (28) <empty>;
-53 (32) a_5;
+50 (04) offset_5;     (28) <empty>;
+51 (32) offset_5;
+52 (04) distance_5;     (28) <empty>;
+53 (32) distance_5;
 54 (04) alpha_5; (28) <empty>;
 55 (32) alpha_5;
 
 56 (04) theta_6; (28) <empty>;
 57 (32) theta_6;
-58 (04) d_6;     (28) <empty>;
-59 (32) d_6;
-60 (04) a_6;     (28) <empty>;
-61 (32) a_6;
+58 (04) offset_6;     (28) <empty>;
+59 (32) offset_6;
+60 (04) distance_6;     (28) <empty>;
+61 (32) distance_6;
 62 (04) alpha_6; (28) <empty>;
 63 (32) alpha_6;

@@ -7,7 +7,7 @@
 `include "array_div.sv"
 `include "bench.sv"
 
-`include "div_52/div_52.v"
+`include "div_48/div_48.v"
 
 `include "../../sim_models/220model.v"
 

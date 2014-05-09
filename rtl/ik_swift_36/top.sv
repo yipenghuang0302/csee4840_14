@@ -32,7 +32,7 @@
 `include "inverse/lt_block/lt_block.sv"
 `include "inverse/array_div/array_div_interface.sv"
 `include "inverse/array_div/array_div.sv"
-`include "inverse/array_div/div_52/div_52.v"
+`include "inverse/array_div/div_48/div_48.v"
 
 `include "mat_mult/mat_mult_interface.sv"
 `include "mat_mult/mat_mult.sv"

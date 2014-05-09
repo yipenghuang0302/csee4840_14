@@ -30,8 +30,8 @@ program array_div_tb (ifc_array_div.array_div_tb ds);
 		for (int i=0; i<n; i++) begin // product row
 			trans.fraction_dividends[i] = real'(trans.increment_dividends[i]) / 2147483648.0;
 			trans.fraction_divisor = real'(trans.increment_divisor) / 2147483648.0;
-			trans.dividends[i] = -524288.0 + trans.fraction_dividends[i] * 2 * 524288.0;
-			trans.divisor = -524288.0 + trans.fraction_divisor * 2 * 524288.0;
+			trans.dividends[i] = -262144.0 + trans.fraction_dividends[i] * 2 * 262144.0;
+			trans.divisor = -262144.0 + trans.fraction_divisor * 2 * 262144.0;
 			// $display("i=%d", i);
 			// $display("fraction_dividends = %f, dividends = %f", trans.fraction_dividends[i], trans.dividends[i]);
 			// $display("fraction_divisor = %f, divisor = %f", trans.fraction_divisor, trans.divisor);

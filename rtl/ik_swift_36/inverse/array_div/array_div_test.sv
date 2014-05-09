@@ -35,8 +35,8 @@ class array_div_test;
 		logic [5:0] [35:0] dut_result
 	);
 
-		real abs_tol = 0.0001;
-		real rel_tol = 0.0001;
+		real abs_tol = 0.001;
+		real rel_tol = 0.001;
 		real real_result[6];
 		real error[6];
 		real percent[6];

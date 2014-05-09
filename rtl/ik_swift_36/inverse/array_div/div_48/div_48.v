@@ -4,7 +4,7 @@
 // MODULE: LPM_DIVIDE 
 
 // ============================================================
-// File Name: div_52.v
+// File Name: div_48.v
 // Megafunction Name(s):
 // 			LPM_DIVIDE
 //
@@ -36,7 +36,7 @@
 // synopsys translate_off
 `timescale 1 ps / 1 ps
 // synopsys translate_on
-module div_52 (
+module div_48 (
 	clken,
 	clock,
 	denom,
@@ -47,14 +47,14 @@ module div_52 (
 	input	  clken;
 	input	  clock;
 	input	[35:0]  denom;
-	input	[51:0]  numer;
-	output	[51:0]  quotient;
+	input	[47:0]  numer;
+	output	[47:0]  quotient;
 	output	[35:0]  remain;
 
 	wire [35:0] sub_wire0;
-	wire [51:0] sub_wire1;
+	wire [47:0] sub_wire1;
 	wire [35:0] remain = sub_wire0[35:0];
-	wire [51:0] quotient = sub_wire1[51:0];
+	wire [47:0] quotient = sub_wire1[47:0];
 
 	lpm_divide	LPM_DIVIDE_component (
 				.clock (clock),
@@ -71,7 +71,7 @@ module div_52 (
 		LPM_DIVIDE_component.lpm_pipeline = 5,
 		LPM_DIVIDE_component.lpm_type = "LPM_DIVIDE",
 		LPM_DIVIDE_component.lpm_widthd = 36,
-		LPM_DIVIDE_component.lpm_widthn = 52;
+		LPM_DIVIDE_component.lpm_widthn = 48;
 
 
 endmodule
@@ -93,24 +93,24 @@ endmodule
 // Retrieval info: CONSTANT: LPM_PIPELINE NUMERIC "5"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "LPM_DIVIDE"
 // Retrieval info: CONSTANT: LPM_WIDTHD NUMERIC "36"
-// Retrieval info: CONSTANT: LPM_WIDTHN NUMERIC "52"
+// Retrieval info: CONSTANT: LPM_WIDTHN NUMERIC "48"
 // Retrieval info: USED_PORT: clken 0 0 0 0 INPUT NODEFVAL "clken"
 // Retrieval info: USED_PORT: clock 0 0 0 0 INPUT NODEFVAL "clock"
 // Retrieval info: USED_PORT: denom 0 0 36 0 INPUT NODEFVAL "denom[35..0]"
-// Retrieval info: USED_PORT: numer 0 0 52 0 INPUT NODEFVAL "numer[51..0]"
-// Retrieval info: USED_PORT: quotient 0 0 52 0 OUTPUT NODEFVAL "quotient[51..0]"
+// Retrieval info: USED_PORT: numer 0 0 48 0 INPUT NODEFVAL "numer[47..0]"
+// Retrieval info: USED_PORT: quotient 0 0 48 0 OUTPUT NODEFVAL "quotient[47..0]"
 // Retrieval info: USED_PORT: remain 0 0 36 0 OUTPUT NODEFVAL "remain[35..0]"
 // Retrieval info: CONNECT: @clken 0 0 0 0 clken 0 0 0 0
 // Retrieval info: CONNECT: @clock 0 0 0 0 clock 0 0 0 0
 // Retrieval info: CONNECT: @denom 0 0 36 0 denom 0 0 36 0
-// Retrieval info: CONNECT: @numer 0 0 52 0 numer 0 0 52 0
-// Retrieval info: CONNECT: quotient 0 0 52 0 @quotient 0 0 52 0
+// Retrieval info: CONNECT: @numer 0 0 48 0 numer 0 0 48 0
+// Retrieval info: CONNECT: quotient 0 0 48 0 @quotient 0 0 48 0
 // Retrieval info: CONNECT: remain 0 0 36 0 @remain 0 0 36 0
-// Retrieval info: GEN_FILE: TYPE_NORMAL div_52.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL div_52.inc FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL div_52.cmp FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL div_52.bsf FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL div_52_inst.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL div_52_bb.v FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL div_52_syn.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL div_48.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL div_48.inc FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL div_48.cmp FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL div_48.bsf FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL div_48_inst.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL div_48_bb.v FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL div_48_syn.v TRUE
 // Retrieval info: LIB_FILE: lpm

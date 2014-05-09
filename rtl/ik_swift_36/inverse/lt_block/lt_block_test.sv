@@ -73,13 +73,13 @@ class lt_block_test;
 					$write("m_lt_inv=%f; dut_result=%f; lt_inverse_percent=%f.\n", m_lt_inv[i][j], lt_inverse_real[i][j], lt_inverse_percent[i][j]);
 					passed = 1'b0;
 				end else begin
-					// $write("%t : pass lt_inverse i=%d j=%d\n", $realtime, i, j);
+					$write("%t : pass lt_inverse i=%d j=%d\n", $realtime, i, j);
 				end
 			end
 		end
 
 		if (passed) begin
-			// $display("%t : pass \n", $realtime);
+			$display("%t : pass \n", $realtime);
 		end else begin
 			// $exit();
 		end

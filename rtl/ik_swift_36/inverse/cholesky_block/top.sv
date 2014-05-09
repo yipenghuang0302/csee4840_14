@@ -22,7 +22,7 @@
 
 `include "../array_div/array_div_interface.sv"
 `include "../array_div/array_div.sv"
-`include "../array_div/div_52/div_52.v"
+`include "../array_div/div_48/div_48.v"
 `include "../../sim_models/220model.v"
 
 module cholesky_block_top ();

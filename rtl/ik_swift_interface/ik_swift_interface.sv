@@ -35,7 +35,7 @@
 `include "../ik_swift_36/inverse/lt_block/lt_block.sv"
 `include "../ik_swift_36/inverse/array_div/array_div_interface.sv"
 `include "../ik_swift_36/inverse/array_div/array_div.sv"
-`include "../ik_swift_36/inverse/array_div/div_52/div_52.v"
+`include "../ik_swift_36/inverse/array_div/div_48/div_48.v"
 
 `include "../ik_swift_36/mat_mult/mat_mult_interface.sv"
 `include "../ik_swift_36/mat_mult/mat_mult.sv"
@@ -69,19 +69,13 @@ module ik_swift_interface (
 	output logic [31:0] readdata
 );
 
-	// LOGIC GOVERNING MEMORY SPACE
-	// Programmable joint_type not implemented in demo
-	// logic [5:0] joint_type; // The ith bit is 1 if ith joint is rotational; translational otherwise
+	// REGISTERS
 	logic [2:0] [35:0] target; // (x,y,z) coordinates and orientation of target position
-	// assign target[5:3] = {3{36'b0}}; // (x,y,z) coordinates and orientation of target position
-	
-	logic start;
 
 	// INSTANTIATE IK_FAST TOP MODULE
 	ifc_ik_swift ifc_ik_swift (clk);
-	assign ifc_ik_swift.en = start;
-	assign ifc_ik_swift.rst = reset;
 	// INPUTS
+	assign ifc_ik_swift.rst = reset;
 	// base joint's axis of rotation/translation
 	assign ifc_ik_swift.z = { 36'd0, 36'd0, 36'd65536 }; // unit vector in z direction
 	// bit vector describing type of each joint
@@ -92,15 +86,14 @@ module ik_swift_interface (
 
 	always_ff @(posedge clk) begin
 		if (reset) begin
-			// joint_type <= {6'b0};
 			target <= {3{36'b0}};
-			start <= 1'b0;
+			ifc_ik_swift.en <= 1'b0;
 			ifc_ik_swift.dh_param_in <= {24{36'b0}};
 		end else if ( chipselect && write ) begin
 			case (address)
 
 				// 6'd00 : joint_type <= writedata[5:0]; // joint type vector
-				6'd01 : start <= writedata[0]; // start signal
+				6'd01 : ifc_ik_swift.en <= writedata[0]; // start signal
 
 				6'd02 : target[0][35:32] <= writedata[3:0]; // target[0] x
 				6'd03 : target[0] <= writedata; // target[0] x
