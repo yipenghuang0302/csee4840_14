@@ -15,7 +15,7 @@ logic [2:0] [35:0] z;
 // bit vector describing type of each joint
 logic [5:0] joint_type;
 // dh joint parameters
-logic [5:0] [3:0] [35:0] dh_param;
+logic [5:0] [3:0] [35:0] dh_param_in;
 // target coordinates
 logic [5:0] [35:0] target;
 
@@ -32,20 +32,20 @@ logic [5:0] [5:0] [35:0] lt_inverse;
 logic [5:0] [5:0] [35:0] inverse;
 // damped least squares matrix
 logic [5:0] [5:0] [35:0] dls;
-
-// OUTPUTS
 // deltas for joint parameters
 logic [5:0] [35:0] delta;
 
-<<<<<<< HEAD
+// OUTPUTS
+// dh joint parameters
+logic [5:0] [3:0] [35:0] dh_param_out;
+
 clocking cb @(posedge clk);
 	output en;
 	output rst;
 	output z;
 	output joint_type;
+	output dh_param_in;
 	output target;
-
-	inout dh_param;
 
 	input jacobian_matrix;
 	input jjt_bias;
@@ -54,29 +54,10 @@ clocking cb @(posedge clk);
 	input inverse;
 	input dls;
 	input delta;
+	input dh_param_out;
 endclocking
 
 modport ik_swift_tb (clocking cb);
-=======
-//clocking cb @(posedge clk);
-//	output en;
-//	output rst;
-//	output z;
-//	output joint_type;
-//	output dh_param;
-//	output target;
-//
-//	input jacobian_matrix;
-//	input jjt_bias;
-//	input lt;
-//	input lt_inverse;
-//	input inverse;
-//	input dls;
-//	input delta;
-//endclocking
-//
-//modport ik_swift_tb (clocking cb);
->>>>>>> d6b22d63816db83e9d51557b28a48380da50f8f5
 
 // restrict directions
 modport ik_swift (
@@ -85,8 +66,7 @@ modport ik_swift (
 	input z,
 	input joint_type,
 	input target,
-
-	inout dh_param,
+	input dh_param_in,
 
 	output jacobian_matrix,
 	output jjt_bias,
@@ -94,7 +74,8 @@ modport ik_swift (
 	output lt_inverse,
 	output inverse,
 	output dls,
-	output delta
+	output delta,
+	output dh_param_out
 );
 
 endinterface

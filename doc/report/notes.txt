@@ -7,3 +7,31 @@ Complete listings of every file you wrote for the project. Include C source, Sys
 Include all of this in a single .pdf file (don't print it out) and email it to me on the due date.
 Also create a .tar.gz file (see the online documentation for the `tar' program to see how to create such a file. Briefly, create a file called `myfile' with the names of all the files you want to include in the archive and run tar zcf project.tar.gz `cat myfiles` to create the archive.) that just includes the files necessary to build your project, such as I did for the labs. Also email this to me by the due date.
 
+
+
+1. a single PDF file of your whole report, including a listing of
+   all source code.
+
+   Do remember to include all the sections listed on the webpage.
+
+   Do not turn in a paper copy of your report; it will be too big.
+
+   Only include source files (C, SystemVerilog) you wrote or
+   modified.  Do not include any automatically-generated files in your
+   report.
+
+2. A .tar.gz file of your entire project.  This should be in a form
+   where I could compile and/or download your project as needed
+   and therefore will include some automatically-generated files,
+   including the all-important .sof file that can be downloaded
+   to the board.
+
+   However, before you make this (potentially enormous) tarball,
+   run the following to remove unnecessary generated files:
+
+   rm -rf db incremental_db *.rpt *.done *.summary *.smsg *.pin *.qdf *.pof
+
+3. A PDF of your presentation.  I'll put them on the class website.
+
+Name these based on your project's short name (from the website).  E.g.,
+the "RSR" group shoud submit RSR.pdf, RSR.tar.gz, and RSR-presentation.pdf
