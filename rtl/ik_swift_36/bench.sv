@@ -83,46 +83,46 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 			// RANDOMIZE DH_PARAMS
 			// GENERATE DH_PARAMS
 			trans.dh_data[0][THETA] = 0.0;
-			trans.dh_data[0][L_OFFSET] = 0.75;
-			trans.dh_data[0][L_DISTANCE] = 3.35;
+			trans.dh_data[0][A_PARAM] = 0.75;
+			trans.dh_data[0][D_PARAM] = 3.35;
 			trans.dh_data[0][ALPHA] = -3.14159265359/2;
 
 			trans.dh_data[1][THETA] = 0.0;
-			trans.dh_data[1][L_OFFSET] = 2.7;
-			trans.dh_data[1][L_DISTANCE] = 0.0;
+			trans.dh_data[1][A_PARAM] = 2.7;
+			trans.dh_data[1][D_PARAM] = 0.0;
 			trans.dh_data[1][ALPHA] = 0.0;
 
 			trans.dh_data[2][THETA] = 0.0;
-			trans.dh_data[2][L_OFFSET] = 0.9;
-			trans.dh_data[2][L_DISTANCE] = 0.0;
+			trans.dh_data[2][A_PARAM] = 0.9;
+			trans.dh_data[2][D_PARAM] = 0.0;
 			trans.dh_data[2][ALPHA] = 3.14159265359/2;
 
 			trans.dh_data[3][THETA] = 0.0;
-			trans.dh_data[3][L_OFFSET] = 0.0;
-			trans.dh_data[3][L_DISTANCE] = -2.95;
+			trans.dh_data[3][A_PARAM] = 0.0;
+			trans.dh_data[3][D_PARAM] = -2.95;
 			trans.dh_data[3][ALPHA] = -3.14159265359/2;
 
 			trans.dh_data[4][THETA] = 0.0;
-			trans.dh_data[4][L_OFFSET] = 0.0;
-			trans.dh_data[4][L_DISTANCE] = 0.0;
+			trans.dh_data[4][A_PARAM] = 0.0;
+			trans.dh_data[4][D_PARAM] = 0.0;
 			trans.dh_data[4][ALPHA] = 3.14159265359/2;
 
 			trans.dh_data[5][THETA] = 0.0;
-			trans.dh_data[5][L_OFFSET] = 0.0;
-			trans.dh_data[5][L_DISTANCE] = -0.8;
+			trans.dh_data[5][A_PARAM] = 0.0;
+			trans.dh_data[5][D_PARAM] = -0.8;
 			trans.dh_data[5][ALPHA] = 3.14159265359;
 			for ( int joint=0 ; joint<6 ; joint++ ) begin // joint index
 				// for ( int param=0 ; param<4 ; param++ ) begin // dh param
 				// 	trans.dh_fraction[joint][param] = real'(trans.dh_increment[joint][param]) / 2147483648.0;
 				// end
 				// trans.dh_data[joint][THETA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[joint][THETA] * 2 * 3.141592653589793238462643383279502884197;
-				// trans.dh_data[joint][L_OFFSET] = -4.0 + trans.dh_fraction[joint][L_OFFSET] * 2 * 4.0;
-				// trans.dh_data[joint][L_DISTANCE] = -4.0 + trans.dh_fraction[joint][L_DISTANCE] * 2 * 4.0;
+				// trans.dh_data[joint][A_PARAM] = -4.0 + trans.dh_fraction[joint][A_PARAM] * 2 * 4.0;
+				// trans.dh_data[joint][D_PARAM] = -4.0 + trans.dh_fraction[joint][D_PARAM] * 2 * 4.0;
 				// trans.dh_data[joint][ALPHA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[joint][ALPHA] * 2 * 3.141592653589793238462643383279502884197;
 				$display("joint index = %d", joint);
 				$display("theta = %f", trans.dh_data[joint][THETA]);
-				$display("l_offset a = %f", trans.dh_data[joint][L_OFFSET]);
-				$display("l_distance d = %f", trans.dh_data[joint][L_DISTANCE]);
+				$display("a = %f", trans.dh_data[joint][A_PARAM]);
+				$display("d = %f", trans.dh_data[joint][D_PARAM]);
 				$display("alpha = %f", trans.dh_data[joint][ALPHA]);
 				// for ( int param=0 ; param<4 ; param++ ) begin // dh param
 				ds.cb.dh_dyn_in[joint]/*[param]*/ <= longint'(trans.dh_data[joint][THETA] * 65536.0);

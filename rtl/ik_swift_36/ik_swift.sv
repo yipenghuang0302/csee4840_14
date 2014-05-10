@@ -4,8 +4,8 @@
 `timescale 1ns/1ps
 
 parameter THETA = 0;
-parameter L_OFFSET = 1;
-parameter L_DISTANCE = 2;
+parameter A_PARAM = 1;
+parameter D_PARAM = 2;
 parameter ALPHA = 3;
 
 module ik_swift (
@@ -48,38 +48,38 @@ module ik_swift (
 	assign i_jac.dh_param = {
 		{
 			36'd205887,		// trans.dh_data[5][ALPHA] = 3.14159265359;
-			-36'd52429,		// trans.dh_data[5][L_DISTANCE] = -0.8;
-			36'd0,			// trans.dh_data[5][L_OFFSET] = 0.0;
+			-36'd52429,		// trans.dh_data[5][D_PARAM] = -0.8;
+			36'd0,			// trans.dh_data[5][A_PARAM] = 0.0;
 			i.dh_dyn_in[5]	// trans.dh_data[5][THETA] = 0.0;
 		},
 		{
 			36'd102944,		// trans.dh_data[4][ALPHA] = 3.14159265359/2;
-			36'd0,			// trans.dh_data[4][L_DISTANCE] = 0.0;
-			36'd0,			// trans.dh_data[4][L_OFFSET] = 0.0;
+			36'd0,			// trans.dh_data[4][D_PARAM] = 0.0;
+			36'd0,			// trans.dh_data[4][A_PARAM] = 0.0;
 			i.dh_dyn_in[4]	// trans.dh_data[4][THETA] = 0.0;
 		},
 		{
 			-36'd102944,	// trans.dh_data[3][ALPHA] = -3.14159265359/2;
-			-36'd193331,	// trans.dh_data[3][L_DISTANCE] = -2.95;
-			36'd0,			// trans.dh_data[3][L_OFFSET] = 0.0;
+			-36'd193331,	// trans.dh_data[3][D_PARAM] = -2.95;
+			36'd0,			// trans.dh_data[3][A_PARAM] = 0.0;
 			i.dh_dyn_in[3]	// trans.dh_data[3][THETA] = 0.0;
 		},
 		{
 			36'd102944,		// trans.dh_data[2][ALPHA] = 3.14159265359/2;
-			36'd0,			// trans.dh_data[2][L_DISTANCE] = 0.0;
-			36'd58982,		// trans.dh_data[2][L_OFFSET] = 0.9;
+			36'd0,			// trans.dh_data[2][D_PARAM] = 0.0;
+			36'd58982,		// trans.dh_data[2][A_PARAM] = 0.9;
 			i.dh_dyn_in[2]	// trans.dh_data[2][THETA] = 0.0;
 		},
 		{
 			36'd0,			// trans.dh_data[1][ALPHA] = 0.0;
-			36'd0,			// trans.dh_data[1][L_DISTANCE] = 0.0;
-			36'd176947,		// trans.dh_data[1][L_OFFSET] = 2.7;
+			36'd0,			// trans.dh_data[1][D_PARAM] = 0.0;
+			36'd176947,		// trans.dh_data[1][A_PARAM] = 2.7;
 			i.dh_dyn_in[1]	// trans.dh_data[1][THETA] = 0.0;
 		},
 		{
 			-36'd102944,	// trans.dh_data[0][ALPHA] = -3.14159265359/2;
-			36'd219546,		// trans.dh_data[0][L_DISTANCE] = 3.35;
-			36'd49152,		// trans.dh_data[0][L_OFFSET] = 0.75;
+			36'd219546,		// trans.dh_data[0][D_PARAM] = 3.35;
+			36'd49152,		// trans.dh_data[0][A_PARAM] = 0.75;
 			i.dh_dyn_in[0]	// trans.dh_data[0][THETA] = 0.0;
 		}
 	};
@@ -204,7 +204,7 @@ module ik_swift (
 						8'd248: begin
 							case (i.joint_type[joint])
 								1'b0: begin // translational
-									i.dh_dyn_out[joint]/*[L_DISTANCE]*/ <= i.dh_dyn_in[joint]/*[L_DISTANCE]*/ + i.delta[joint];
+									i.dh_dyn_out[joint]/*[D_PARAM]*/ <= i.dh_dyn_in[joint]/*[D_PARAM]*/ + i.delta[joint];
 								end
 								1'b1: begin // rotational
 									i.dh_dyn_out[joint]/*[THETA]*/ <= i.dh_dyn_in[joint]/*[THETA]*/ + i.delta[joint];

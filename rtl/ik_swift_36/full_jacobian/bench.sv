@@ -2,8 +2,8 @@
 `include "full_jacobian_test.sv"
 
 parameter THETA = 0;
-parameter L_OFFSET = 1;
-parameter L_DISTANCE = 2;
+parameter A_PARAM = 1;
+parameter D_PARAM = 2;
 parameter ALPHA = 3;
 
 class full_jacobian_transaction;
@@ -50,14 +50,14 @@ program full_jacobian_tb (ifc_full_jacobian.full_jacobian_tb ds);
 				end
 
 				trans.dh_data[i][THETA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][THETA] * 2 * 3.141592653589793238462643383279502884197;
-				trans.dh_data[i][L_OFFSET] = -4.0 + trans.dh_fraction[i][L_OFFSET] * 2 * 4.0;
-				trans.dh_data[i][L_DISTANCE] = -4.0 + trans.dh_fraction[i][L_DISTANCE] * 2 * 4.0;
+				trans.dh_data[i][A_PARAM] = -4.0 + trans.dh_fraction[i][A_PARAM] * 2 * 4.0;
+				trans.dh_data[i][D_PARAM] = -4.0 + trans.dh_fraction[i][D_PARAM] * 2 * 4.0;
 				trans.dh_data[i][ALPHA] = -3.141592653589793238462643383279502884197 + trans.dh_fraction[i][ALPHA] * 2 * 3.141592653589793238462643383279502884197;
 
 				$display("joint index = %d", i);
 				$display("theta = %f", trans.dh_data[i][THETA]);
-				$display("l_offset a = %f", trans.dh_data[i][L_OFFSET]);
-				$display("l_distance d = %f", trans.dh_data[i][L_DISTANCE]);
+				$display("a = %f", trans.dh_data[i][A_PARAM]);
+				$display("d = %f", trans.dh_data[i][D_PARAM]);
 				$display("alpha = %f", trans.dh_data[i][ALPHA]);
 
 				// passing data to design under test happens here

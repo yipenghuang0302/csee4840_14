@@ -8,8 +8,8 @@ module full_mat (
 );
 
 	parameter THETA = 0;
-	parameter L_OFFSET = 1;
-	parameter L_DISTANCE = 2;
+	parameter A_PARAM = 1;
+	parameter D_PARAM = 2;
 	parameter ALPHA = 3;
 
 	// each transformation matrix
@@ -29,8 +29,8 @@ module full_mat (
 	always_ff @(posedge i.clk)
 		if (i.en)
 			if ( 8'd0 <= i.count && i.count < 8'd6 ) begin
-				ifc_t_block.a <= i.dh_param[i.count][L_OFFSET];
-				ifc_t_block.d <= i.dh_param[i.count][L_DISTANCE];
+				ifc_t_block.a <= i.dh_param[i.count][A_PARAM];
+				ifc_t_block.d <= i.dh_param[i.count][D_PARAM];
 				ifc_t_block.alpha <= i.dh_param[i.count][ALPHA];
 				ifc_t_block.theta <= i.dh_param[i.count][THETA];
 			end else begin

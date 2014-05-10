@@ -44,15 +44,15 @@ class ik_swift_test;
 			t_matrix[0][0] =  $cos(dh_param[joint][THETA]);
 			t_matrix[0][1] = -$sin(dh_param[joint][THETA]) * $cos(dh_param[joint][ALPHA]);
 			t_matrix[0][2] =  $sin(dh_param[joint][THETA]) * $sin(dh_param[joint][ALPHA]);
-			t_matrix[0][3] =  $cos(dh_param[joint][THETA]) * dh_param[joint][L_OFFSET];
+			t_matrix[0][3] =  $cos(dh_param[joint][THETA]) * dh_param[joint][A_PARAM];
 			t_matrix[1][0] =  $sin(dh_param[joint][THETA]);
 			t_matrix[1][1] =  $cos(dh_param[joint][THETA]) * $cos(dh_param[joint][ALPHA]);
 			t_matrix[1][2] = -$cos(dh_param[joint][THETA]) * $sin(dh_param[joint][ALPHA]);
-			t_matrix[1][3] =  $sin(dh_param[joint][THETA]) * dh_param[joint][L_OFFSET];
+			t_matrix[1][3] =  $sin(dh_param[joint][THETA]) * dh_param[joint][A_PARAM];
 			t_matrix[2][0] = 0.0;
 			t_matrix[2][1] = $sin(dh_param[joint][ALPHA]);
 			t_matrix[2][2] = $cos(dh_param[joint][ALPHA]);
-			t_matrix[2][3] = dh_param[joint][L_DISTANCE];
+			t_matrix[2][3] = dh_param[joint][D_PARAM];
 			t_matrix[3][0] = 0.0;
 			t_matrix[3][1] = 0.0;
 			t_matrix[3][2] = 0.0;
@@ -205,7 +205,7 @@ class ik_swift_test;
 		// ADD DELTAS BACK TO DH PARAMS
 		for ( int joint=0 ; joint<6 ; joint++ )
 			if ( joint_type[joint] == 1'b0 ) // translational
-				m_dh_param[joint][L_DISTANCE] = m_dh_param[joint][L_DISTANCE] + m_delta[joint];
+				m_dh_param[joint][D_PARAM] = m_dh_param[joint][D_PARAM] + m_delta[joint];
 			else
 				m_dh_param[joint][THETA] = m_dh_param[joint][THETA] + m_delta[joint];
 
