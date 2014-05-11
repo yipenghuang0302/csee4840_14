@@ -223,8 +223,8 @@ class ik_swift_test;
 		logic [5:0] /*[3:0]*/ [20:0] dh_dyn_out
 	);
 
-		real abs_tol = 0.01;
-		real rel_tol = 0.01;
+		real abs_tol = 0.05;
+		real rel_tol = 0.05;
 
 		real jacobian_real[6][6];
 		real jacobian_error[6][6];
