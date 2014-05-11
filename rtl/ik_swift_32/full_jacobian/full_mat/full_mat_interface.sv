@@ -10,7 +10,7 @@ interface ifc_full_mat (
 logic en, rst;
 logic [7:0] count;
 
-logic [5:0] [3:0] [35:0] dh_param;
+logic [5:0] [3:0] [20:0] dh_param;
 
 // shared multipliers
 logic [5:0] [35:0] array_mult_result;

@@ -8,8 +8,8 @@ module sincos (
 );
 
 	// pipeline delay registers for sin
-	logic [26:0] angle_delay_1;
-	logic [26:0] angle_delay_2;
+	logic [20:0] angle_delay_1;
+	logic [20:0] angle_delay_2;
 
 	always_ff @(posedge i.clk)
 		if (i.en) begin
