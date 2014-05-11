@@ -128,10 +128,21 @@ module ik_swift (
 	assign ifc_array_mult.en = i.en && !i.done;
 	assign ifc_array_mult.rst = i.rst;
 	// Output to array multipliers
-	assign ifc_array_mult.dataa = { {6{36'b0}}, i_jac.array_mult_dataa } | ifc_inverse.array_mult_dataa;
-	assign ifc_array_mult.datab = { {6{36'b0}}, i_jac.array_mult_datab } | ifc_inverse.array_mult_datab;
+	genvar index;
+	generate
+		for ( index=0 ; index<9; index++ ) begin
+			assign ifc_array_mult.dataa[index] =
+				{{9{i_jac.array_mult_dataa[index][26]}}, i_jac.array_mult_dataa[index]} |
+				ifc_inverse.array_mult_dataa[index];
+			assign ifc_array_mult.datab[index] =
+				{{9{i_jac.array_mult_datab[index][26]}}, i_jac.array_mult_datab[index]} |
+				ifc_inverse.array_mult_datab[index];
+			assign i_jac.array_mult_result[index] = ifc_array_mult.result[index][26:0];
+		end
+	endgenerate
+	assign ifc_array_mult.dataa[14:9] = ifc_inverse.array_mult_dataa[14:9]; // exclusive use
+	assign ifc_array_mult.datab[14:9] = ifc_inverse.array_mult_datab[14:9]; // exclusive use
 	array_mult array_mult (ifc_array_mult.array_mult);
-	assign i_jac.array_mult_result = ifc_array_mult.result[8:0];
 	assign ifc_inverse.array_mult_result = ifc_array_mult.result;
 
 	// MATRIX MULTIPLY FOR JT * INVERSE
@@ -159,13 +170,13 @@ module ik_swift (
 					dls_mat_mult_dataa <= ifc_mat_mult.result; // DLS matrix
 					dls_mat_mult_datab <= {6{
 						// axis of rotation / translation for joints 1...6
-						i.target[5] - i_jac.axis[6][2], // k unit vector
-						i.target[4] - i_jac.axis[6][1], // j unit vector
-						i.target[3] - i_jac.axis[6][0], // i unit vector
+						i.target[5] - {{9{i_jac.axis[6][2][26]}}, i_jac.axis[6][2]}, // k unit vector
+						i.target[4] - {{9{i_jac.axis[6][1][26]}}, i_jac.axis[6][1]}, // j unit vector
+						i.target[3] - {{9{i_jac.axis[6][0][26]}}, i_jac.axis[6][0]}, // i unit vector
 						// multiplied results of transformation matrices
-						i.target[2] - i_jac.full_matrix[5][2][3], // z coordinate
-						i.target[1] - i_jac.full_matrix[5][1][3], // y coordinate
-						i.target[0] - i_jac.full_matrix[5][0][3] // x coordinate
+						i.target[2] - {{9{i_jac.full_matrix[5][2][3][26]}}, i_jac.full_matrix[5][2][3]}, // z coordinate
+						i.target[1] - {{9{i_jac.full_matrix[5][1][3][26]}}, i_jac.full_matrix[5][1][3]}, // y coordinate
+						i.target[0] - {{9{i_jac.full_matrix[5][0][3][26]}}, i_jac.full_matrix[5][0][3]} // x coordinate
 					}};
 				end
 				8'd247: begin
