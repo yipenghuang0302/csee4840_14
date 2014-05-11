@@ -53,7 +53,7 @@ class full_mat_test;
 	endfunction
 
 	function void check_full_mat (
-		logic [5:0] [3:0] [3:0] [35:0] full_mat
+		logic [5:0] [3:0] [3:0] [26:0] full_mat
 	);
 
 		real abs_tol = 0.01;
@@ -67,7 +67,7 @@ class full_mat_test;
 		for ( int joint=0 ; joint<6 ; joint++ ) begin
 			for ( int i=0 ; i<4 ; i++ ) begin // full matrix row
 				for ( int j=0 ; j<4 ; j++ ) begin // full matrix column
-					real_result[i][j] = real'(longint'({{28{full_mat[joint][i][j][35]}}, full_mat[joint][i][j]}))/65536.0;
+					real_result[i][j] = real'(int'({{5{full_mat[joint][i][j][26]}}, full_mat[joint][i][j]}))/65536.0;
 					error[i][j] = abs( real_result[i][j] - model_full_matrix[joint][i][j] );
 					percent[i][j] = abs( error[i][j] / model_full_matrix[joint][i][j] );
 					if (error[i][j]>abs_tol && percent[i][j]>rel_tol) begin

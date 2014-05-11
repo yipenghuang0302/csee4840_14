@@ -16,11 +16,11 @@ logic [20:0] d;
 logic [20:0] alpha;
 logic [20:0] theta;
 
-logic [5:0] [35:0] array_mult_result;
-logic [5:0] [35:0] array_mult_dataa;
-logic [5:0] [35:0] array_mult_datab;
+logic [5:0] [26:0] array_mult_result;
+logic [5:0] [26:0] array_mult_dataa;
+logic [5:0] [26:0] array_mult_datab;
 
-logic [3:0] [3:0] [35:0] t_matrix;
+logic [3:0] [3:0] [26:0] t_matrix;
 
 // clocking cb @(posedge clk);
 // 	output en;

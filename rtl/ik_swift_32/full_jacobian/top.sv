@@ -79,9 +79,14 @@ module full_jacobian_top ();
 	ifc_array_mult ifc_array_mult (clk);
 	assign ifc_array_mult.en = ifc_full_jacobian.en;
 	assign ifc_array_mult.rst = ifc_full_jacobian.rst;
-	assign ifc_array_mult.dataa[8:0] = ifc_full_jacobian.array_mult_dataa;
-	assign ifc_array_mult.datab[8:0] = ifc_full_jacobian.array_mult_datab;
+	genvar index;
+	generate
+		for ( index=0 ; index<9; index++ ) begin
+			assign ifc_array_mult.dataa[index] = {{9{ifc_full_jacobian.array_mult_dataa[index][26]}}, ifc_full_jacobian.array_mult_dataa[index]};
+			assign ifc_array_mult.datab[index] = {{9{ifc_full_jacobian.array_mult_datab[index][26]}}, ifc_full_jacobian.array_mult_datab[index]};
+			assign ifc_full_jacobian.array_mult_result[index] = ifc_array_mult.result[index][26:0];
+		end
+	endgenerate
 	array_mult array_mult (ifc_array_mult.array_mult);
-	assign ifc_full_jacobian.array_mult_result = ifc_array_mult.result[8:0];
 
 endmodule

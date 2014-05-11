@@ -66,8 +66,8 @@ class jacobian_test;
 	endfunction
 
 	function void check_jacobian (
-		logic [6:0] [2:0] [35:0] axis,
-		logic [5:0] [2:0] [35:0] dist_to_end,
+		logic [6:0] [2:0] [26:0] axis,
+		logic [5:0] [2:0] [26:0] dist_to_end,
 		logic [5:0] [5:0] [35:0] jacobian_matrix
 	);
 
@@ -91,7 +91,7 @@ class jacobian_test;
 		// CHECK AXIS
 		for ( int joint=0 ; joint<7 ; joint++ ) begin // axis joint
 			for ( int coord=0 ; coord<3 ; coord++ ) begin // axis coordinate
-				axis_real[joint][coord] = real'(longint'({{28{axis[joint][coord][35]}}, axis[joint][coord]}))/65536.0;
+				axis_real[joint][coord] = real'(int'({{5{axis[joint][coord][26]}}, axis[joint][coord]}))/65536.0;
 				axis_error[joint][coord] = abs( axis_real[joint][coord] - model_axis[joint][coord] );
 				axis_percent[joint][coord] = abs( axis_error[joint][coord] / model_axis[joint][coord] );
 				if (axis_error[joint][coord]>abs_tol && axis_percent[joint][coord]>rel_tol) begin
@@ -108,7 +108,7 @@ class jacobian_test;
 		// CHECK DIST_TO_END
 		for ( int joint=0 ; joint<6 ; joint++ ) begin // dist_to_end joint
 			for ( int coord=0 ; coord<3 ; coord++ ) begin // dist_to_end coordinate
-				dist_to_end_real[joint][coord] = real'(longint'({{28{dist_to_end[joint][coord][35]}}, dist_to_end[joint][coord]}))/65536.0;
+				dist_to_end_real[joint][coord] = real'(int'({{5{dist_to_end[joint][coord][26]}}, dist_to_end[joint][coord]}))/65536.0;
 				dist_to_end_error[joint][coord] = abs( dist_to_end_real[joint][coord] - model_dist_to_end[joint][coord] );
 				dist_to_end_percent[joint][coord] = abs( dist_to_end_error[joint][coord] / model_dist_to_end[joint][coord] );
 				if (dist_to_end_error[joint][coord]>abs_tol && dist_to_end_percent[joint][coord]>rel_tol) begin
@@ -140,7 +140,7 @@ class jacobian_test;
 		end
 
 		if (passed) begin
-			// $display("%t : pass \n", $realtime);
+			$display("%t : pass \n", $realtime);
 		end else begin
 			// $exit();
 		end

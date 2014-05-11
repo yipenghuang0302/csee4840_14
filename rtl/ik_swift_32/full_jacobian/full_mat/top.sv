@@ -69,17 +69,28 @@ module full_mat_top ();
 		if (ifc_full_mat.en)
 			ifc_mat_mult.rst <= ifc_full_mat.count == 8'd4;
 	assign ifc_mat_mult.mat_mode = 1'b1;
-	assign ifc_mat_mult.dataa = ifc_full_mat.mat_mult_dataa;
-	assign ifc_mat_mult.datab = ifc_full_mat.mat_mult_datab;
+	genvar index, jndex;
+	generate
+		for ( index=0 ; index<6; index++ ) begin
+			for ( jndex=0 ; jndex<6; jndex++ ) begin
+				assign ifc_mat_mult.dataa[index][jndex] = {{9{ifc_full_mat.mat_mult_dataa[index][jndex][26]}}, ifc_full_mat.mat_mult_dataa[index][jndex]};
+				assign ifc_mat_mult.datab[index][jndex] = {{9{ifc_full_mat.mat_mult_datab[index][jndex][26]}}, ifc_full_mat.mat_mult_datab[index][jndex]};
+				assign ifc_full_mat.mat_mult_result[index][jndex] = ifc_mat_mult.result[index][jndex][26:0];
+			end
+		end
+	endgenerate
 	mat_mult mat_mult (ifc_mat_mult.mat_mult);
-	assign ifc_full_mat.mat_mult_result = ifc_mat_mult.result;
 
 	ifc_array_mult ifc_array_mult (clk);
 	assign ifc_array_mult.en = ifc_full_mat.en;
 	assign ifc_array_mult.rst = ifc_full_mat.rst;
-	assign ifc_array_mult.dataa[5:0] = ifc_full_mat.array_mult_dataa;
-	assign ifc_array_mult.datab[5:0] = ifc_full_mat.array_mult_datab;
+	generate
+		for ( index=0 ; index<6; index++ ) begin
+			assign ifc_array_mult.dataa[index] = {{9{ifc_full_mat.array_mult_dataa[index][26]}}, ifc_full_mat.array_mult_dataa[index]};
+			assign ifc_array_mult.datab[index] = {{9{ifc_full_mat.array_mult_datab[index][26]}}, ifc_full_mat.array_mult_datab[index]};
+			assign ifc_full_mat.array_mult_result[index] = ifc_array_mult.result[index][26:0];
+		end
+	endgenerate
 	array_mult array_mult (ifc_array_mult.array_mult);
-	assign ifc_full_mat.array_mult_result = ifc_array_mult.result[5:0];
 
 endmodule

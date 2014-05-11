@@ -11,7 +11,7 @@ logic en, done, rst;
 
 // INPUTS
 // base joint's axis of rotation/translation
-logic [2:0] [35:0] z;
+logic [2:0] [17:0] z;
 // bit vector describing type of each joint
 logic [5:0] joint_type;
 // dh joint parameters

@@ -16,7 +16,14 @@ module full_jacobian (
 	assign ifc_full_mat.dh_param = i.dh_param;
 	// shared multipliers
 	assign ifc_full_mat.array_mult_result = i.array_mult_result[5:0];
-	assign ifc_full_mat.mat_mult_result = i.mat_mult_result;
+	genvar index, jndex;
+	generate
+		for ( index=0 ; index<6; index++ ) begin
+			for ( jndex=0 ; jndex<6; jndex++ ) begin
+				assign ifc_full_mat.mat_mult_result[index][jndex] = i.mat_mult_result[index][jndex][26:0];
+			end
+		end
+	endgenerate
 	full_mat full_mat (ifc_full_mat.full_mat);
 	// outputs
 	assign i.full_matrix = ifc_full_mat.full_matrix;
@@ -86,9 +93,21 @@ module full_jacobian (
 				{ 36'b0, 36'b0, 36'b0, 36'b0, 36'b0, 36'd4 }};
 
 	// timing design prevents module outputs to shared multipliers colliding
-	assign i.array_mult_dataa = {3'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;
-	assign i.array_mult_datab = {3'b0,ifc_full_mat.array_mult_datab} | ifc_jacobian.array_mult_datab;
-	assign i.mat_mult_dataa = ifc_full_mat.mat_mult_dataa | ifc_jacobian.mat_mult_dataa | jjt_dataa;
-	assign i.mat_mult_datab = ifc_full_mat.mat_mult_datab | ifc_jacobian.mat_mult_datab | jjt_datab;
+	assign i.array_mult_dataa = {81'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;
+	assign i.array_mult_datab = {81'b0,ifc_full_mat.array_mult_datab} | ifc_jacobian.array_mult_datab;
+	generate
+		for ( index=0 ; index<6; index++ ) begin
+			for ( jndex=0 ; jndex<6; jndex++ ) begin
+				assign i.mat_mult_dataa[index][jndex] =
+					{{9{ifc_full_mat.mat_mult_dataa[index][jndex][26]}}, ifc_full_mat.mat_mult_dataa[index][jndex]} |
+					{{9{ifc_jacobian.mat_mult_dataa[index][jndex][26]}}, ifc_jacobian.mat_mult_dataa[index][jndex]} |
+					jjt_dataa[index][jndex];
+				assign i.mat_mult_datab[index][jndex] =
+					{{9{ifc_full_mat.mat_mult_datab[index][jndex][26]}}, ifc_full_mat.mat_mult_datab[index][jndex]} |
+					{{9{ifc_jacobian.mat_mult_datab[index][jndex][26]}}, ifc_jacobian.mat_mult_datab[index][jndex]} |
+					jjt_datab[index][jndex];
+			end
+		end
+	endgenerate
 
 endmodule

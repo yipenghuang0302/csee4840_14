@@ -70,7 +70,7 @@ program full_jacobian_tb (ifc_full_jacobian.full_jacobian_tb ds);
 			// GENERATE Z BASIS VECTOR
 			for ( int z=0 ; z<3 ; z++ ) begin // z index
 				trans.z_fraction[z] = real'(trans.z_increment[z]) / 2147483648.0;
-				trans.z_data[z] = -4.0 + trans.z_fraction[z] * 2 * 4.0;
+				trans.z_data[z] = -1.0 + trans.z_fraction[z] * 2 * 1.0;
 				$display("z = %d", z);
 				$display("data = %f", trans.z_data[z]);
 				ds.cb.z[z] <= int'(trans.z_data[z] * 65536.0);

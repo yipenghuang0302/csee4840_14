@@ -42,9 +42,14 @@ module t_block_top ();
 	ifc_array_mult ifc_array_mult (clk);
 	assign ifc_array_mult.en = ifc_t_block.en;
 	assign ifc_array_mult.rst = ifc_t_block.rst;
-	assign ifc_array_mult.dataa[5:0] = ifc_t_block.array_mult_dataa;
-	assign ifc_array_mult.datab[5:0] = ifc_t_block.array_mult_datab;
+	genvar index;
+	generate
+		for ( index=0 ; index<6; index++ ) begin
+			assign ifc_array_mult.dataa[index] = {{9{ifc_t_block.array_mult_dataa[index][26]}}, ifc_t_block.array_mult_dataa[index]};
+			assign ifc_array_mult.datab[index] = {{9{ifc_t_block.array_mult_datab[index][26]}}, ifc_t_block.array_mult_datab[index]};
+			assign ifc_t_block.array_mult_result[index] = ifc_array_mult.result[index][26:0];
+		end
+	endgenerate
 	array_mult array_mult (ifc_array_mult.array_mult);
-	assign ifc_t_block.array_mult_result = ifc_array_mult.result[5:0];
 
 endmodule

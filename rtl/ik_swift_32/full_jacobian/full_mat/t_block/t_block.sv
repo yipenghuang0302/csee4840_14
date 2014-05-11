@@ -42,21 +42,21 @@ module t_block (
 	always_ff @(posedge i.clk)
 		if (i.en)
 			if ( 8'd23<=i.count && i.count<8'd29 ) begin
-				i.array_mult_dataa[0] <= {{15{neg_sin_theta[20]}}, neg_sin_theta};
-				i.array_mult_datab[0] <= {{15{i_alpha.cos[20]}}, i_alpha.cos};
-				i.array_mult_dataa[1] <= {{15{i_theta.sin[20]}}, i_theta.sin};
-				i.array_mult_datab[1] <= {{15{i_alpha.sin[20]}}, i_alpha.sin};
-				i.array_mult_dataa[2] <= {{15{a_delay[22][20]}}, a_delay[22]};
-				i.array_mult_datab[2] <= {{15{i_theta.cos[20]}}, i_theta.cos};
-				i.array_mult_dataa[3] <= {{15{i_theta.cos[20]}}, i_theta.cos};
-				i.array_mult_datab[3] <= {{15{i_alpha.cos[20]}}, i_alpha.cos};
-				i.array_mult_dataa[4] <= {{15{i_theta.cos[20]}}, i_theta.cos};
-				i.array_mult_datab[4] <= {{15{neg_sin_alpha[20]}}, neg_sin_alpha};
-				i.array_mult_dataa[5] <= {{15{a_delay[22][20]}}, a_delay[22]};
-				i.array_mult_datab[5] <= {{15{i_theta.sin[20]}}, i_theta.sin};
+				i.array_mult_dataa[0] <= {{6{neg_sin_theta[20]}}, neg_sin_theta};
+				i.array_mult_datab[0] <= {{6{i_alpha.cos[20]}}, i_alpha.cos};
+				i.array_mult_dataa[1] <= {{6{i_theta.sin[20]}}, i_theta.sin};
+				i.array_mult_datab[1] <= {{6{i_alpha.sin[20]}}, i_alpha.sin};
+				i.array_mult_dataa[2] <= {{6{a_delay[22][20]}}, a_delay[22]};
+				i.array_mult_datab[2] <= {{6{i_theta.cos[20]}}, i_theta.cos};
+				i.array_mult_dataa[3] <= {{6{i_theta.cos[20]}}, i_theta.cos};
+				i.array_mult_datab[3] <= {{6{i_alpha.cos[20]}}, i_alpha.cos};
+				i.array_mult_dataa[4] <= {{6{i_theta.cos[20]}}, i_theta.cos};
+				i.array_mult_datab[4] <= {{6{neg_sin_alpha[20]}}, neg_sin_alpha};
+				i.array_mult_dataa[5] <= {{6{a_delay[22][20]}}, a_delay[22]};
+				i.array_mult_datab[5] <= {{6{i_theta.sin[20]}}, i_theta.sin};
 			end else begin
-				i.array_mult_dataa[5:0] <= {5{36'b0}};
-				i.array_mult_datab[5:0] <= {5{36'b0}};
+				i.array_mult_dataa[5:0] <= {5{27'b0}};
+				i.array_mult_datab[5:0] <= {5{27'b0}};
 			end
 
 	// delay cos(theta) by 4
@@ -87,24 +87,24 @@ module t_block (
 		if (i.en)
 			sin_alpha_delay[5:1] <= sin_alpha_delay[4:0];
 
-	assign i.t_matrix[0][0] = {{15{cos_theta_delay[5][20]}}, cos_theta_delay[5]};
+	assign i.t_matrix[0][0] = {{6{cos_theta_delay[5][20]}}, cos_theta_delay[5]};
 	assign i.t_matrix[0][1] = i.array_mult_result[0];
 	assign i.t_matrix[0][2] = i.array_mult_result[1];
 	assign i.t_matrix[0][3] = i.array_mult_result[2];
 
-	assign i.t_matrix[1][0] = {{15{sin_theta_delay[5][20]}}, sin_theta_delay[5]};
+	assign i.t_matrix[1][0] = {{6{sin_theta_delay[5][20]}}, sin_theta_delay[5]};
 	assign i.t_matrix[1][1] = i.array_mult_result[3];
 	assign i.t_matrix[1][2] = i.array_mult_result[4];
 	assign i.t_matrix[1][3] = i.array_mult_result[5];
 
-	assign i.t_matrix[2][0] = 36'b0;
-	assign i.t_matrix[2][1] = {{15{sin_alpha_delay[5][20]}}, sin_alpha_delay[5]};
-	assign i.t_matrix[2][2] = {{15{cos_alpha_delay[5][20]}}, cos_alpha_delay[5]};
-	assign i.t_matrix[2][3] = {{15{d_delay[27][20]}}, d_delay[27]};
+	assign i.t_matrix[2][0] = 27'b0;
+	assign i.t_matrix[2][1] = {{6{sin_alpha_delay[5][20]}}, sin_alpha_delay[5]};
+	assign i.t_matrix[2][2] = {{6{cos_alpha_delay[5][20]}}, cos_alpha_delay[5]};
+	assign i.t_matrix[2][3] = {{6{d_delay[27][20]}}, d_delay[27]};
 
-	assign i.t_matrix[3][0] = 36'b0;
-	assign i.t_matrix[3][1] = 36'b0;
-	assign i.t_matrix[3][2] = 36'b0;
-	assign i.t_matrix[3][3] = 36'd65536;
+	assign i.t_matrix[3][0] = 27'b0;
+	assign i.t_matrix[3][1] = 27'b0;
+	assign i.t_matrix[3][2] = 27'b0;
+	assign i.t_matrix[3][3] = 27'd65536;
 
 endmodule

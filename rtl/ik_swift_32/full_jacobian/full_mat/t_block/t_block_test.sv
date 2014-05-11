@@ -65,7 +65,7 @@ class t_block_test;
 	endfunction
 
 	function void check_t_block (
-		logic [3:0] [3:0] [35:0] dut_t_mat
+		logic [3:0] [3:0] [26:0] dut_t_mat
 	);
 
 		real abs_tol = 0.02;
@@ -80,7 +80,7 @@ class t_block_test;
 		for ( int i=0 ; i<4 ; i++ ) begin
 			for ( int j=0 ; j<4 ; j++ ) begin
 
-				real_t_mat[i][j] = real'(longint'({{28{dut_t_mat[i][j][35]}}, dut_t_mat[i][j]}))/65536.0;
+				real_t_mat[i][j] = real'(int'({{5{dut_t_mat[i][j][26]}}, dut_t_mat[i][j]}))/65536.0;
 				error[i][j] = abs( real_t_mat[i][j] - m_mat[0][i][j] );
 				percent[i][j] = abs( error[i][j] / m_mat[0][i][j] );
 

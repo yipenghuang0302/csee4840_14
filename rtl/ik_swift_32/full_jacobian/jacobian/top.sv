@@ -55,17 +55,28 @@ module jacobian_top ();
 		if ( ifc_jacobian.en )
 			ifc_mat_mult.rst <= ifc_jacobian.count == 8'd4;
 	assign ifc_mat_mult.mat_mode = ifc_jacobian.count<8'd90 ? 1'b1 : 1'b0;
-	assign ifc_mat_mult.dataa = ifc_jacobian.mat_mult_dataa;
-	assign ifc_mat_mult.datab = ifc_jacobian.mat_mult_datab;
+	genvar index, jndex;
+	generate
+		for ( index=0 ; index<6; index++ ) begin
+			for ( jndex=0 ; jndex<6; jndex++ ) begin
+				assign ifc_mat_mult.dataa[index][jndex] = {{9{ifc_jacobian.mat_mult_dataa[index][jndex][26]}}, ifc_jacobian.mat_mult_dataa[index][jndex]};
+				assign ifc_mat_mult.datab[index][jndex] = {{9{ifc_jacobian.mat_mult_datab[index][jndex][26]}}, ifc_jacobian.mat_mult_datab[index][jndex]};
+				assign ifc_jacobian.mat_mult_result[index][jndex] = ifc_mat_mult.result[index][jndex];
+			end
+		end
+	endgenerate
 	mat_mult mat_mult (ifc_mat_mult.mat_mult);
-	assign ifc_jacobian.mat_mult_result = ifc_mat_mult.result;
 
 	ifc_array_mult ifc_array_mult (clk);
 	assign ifc_array_mult.en = ifc_jacobian.en;
 	assign ifc_array_mult.rst = ifc_jacobian.rst;
-	assign ifc_array_mult.dataa[8:0] = ifc_jacobian.array_mult_dataa;
-	assign ifc_array_mult.datab[8:0] = ifc_jacobian.array_mult_datab;
+	generate
+		for ( index=0 ; index<9; index++ ) begin
+			assign ifc_array_mult.dataa[index] = {{9{ifc_jacobian.array_mult_dataa[index][26]}}, ifc_jacobian.array_mult_dataa[index]};
+			assign ifc_array_mult.datab[index] = {{9{ifc_jacobian.array_mult_datab[index][26]}}, ifc_jacobian.array_mult_datab[index]};
+			assign ifc_jacobian.array_mult_result[index] = ifc_array_mult.result[index][26:0];
+		end
+	endgenerate
 	array_mult array_mult (ifc_array_mult.array_mult);
-	assign ifc_jacobian.array_mult_result = ifc_array_mult.result[8:0];
 
 endmodule

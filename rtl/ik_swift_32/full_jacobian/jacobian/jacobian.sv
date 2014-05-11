@@ -49,18 +49,18 @@ module jacobian (
 				i.array_mult_dataa[7] <= i.full_matrix[joint][2][1];
 				i.array_mult_dataa[8] <= i.full_matrix[joint][2][2];
 
-				i.array_mult_datab[0] <= i.z[0];
-				i.array_mult_datab[1] <= i.z[1];
-				i.array_mult_datab[2] <= i.z[2];
-				i.array_mult_datab[3] <= i.z[0];
-				i.array_mult_datab[4] <= i.z[1];
-				i.array_mult_datab[5] <= i.z[2];
-				i.array_mult_datab[6] <= i.z[0];
-				i.array_mult_datab[7] <= i.z[1];
-				i.array_mult_datab[8] <= i.z[2];
+				i.array_mult_datab[0] <= {{9{i.z[0][17]}}, i.z[0]};
+				i.array_mult_datab[1] <= {{9{i.z[1][17]}}, i.z[1]};
+				i.array_mult_datab[2] <= {{9{i.z[2][17]}}, i.z[2]};
+				i.array_mult_datab[3] <= {{9{i.z[0][17]}}, i.z[0]};
+				i.array_mult_datab[4] <= {{9{i.z[1][17]}}, i.z[1]};
+				i.array_mult_datab[5] <= {{9{i.z[2][17]}}, i.z[2]};
+				i.array_mult_datab[6] <= {{9{i.z[0][17]}}, i.z[0]};
+				i.array_mult_datab[7] <= {{9{i.z[1][17]}}, i.z[1]};
+				i.array_mult_datab[8] <= {{9{i.z[2][17]}}, i.z[2]};
 			end else begin
-				i.array_mult_dataa <= {9{36'b0}};
-				i.array_mult_datab <= {9{36'b0}};
+				i.array_mult_dataa <= {9{27'b0}};
+				i.array_mult_datab <= {9{27'b0}};
 			end
 
 	// LOGIC GOVERNING ARRAY MULT OUTPUT
@@ -78,7 +78,12 @@ module jacobian (
 				i.axis[joint+1][1] <= i.axis[joint+1][1] + i.array_mult_result[5];
 				i.axis[joint+1][2] <= i.axis[joint+1][2] + i.array_mult_result[8];
 			end
-		i.axis[0] <= i.z;
+		i.axis[0] <= {
+			{{9{i.z[2][17]}}, i.z[2]},
+			{{9{i.z[1][17]}}, i.z[1]},
+			{{9{i.z[0][17]}}, i.z[0]}
+		};
+
 	end
 
 	// LOGIC GOVERNING dist_to_end[0]/2/3/4/5/6 (dist_to_end of joint)
@@ -101,7 +106,11 @@ module jacobian (
 				i.dist_to_end[5][1] <= i.full_matrix[5][1][3] - i.full_matrix[4][1][3];
 				i.dist_to_end[5][2] <= i.full_matrix[5][2][3] - i.full_matrix[4][2][3];
 			end
-	assign i.dist_to_end[0] = {i.full_matrix[5][2][3], i.full_matrix[5][1][3], i.full_matrix[5][0][3]};
+	assign i.dist_to_end[0] = {
+		i.full_matrix[5][2][3],
+		i.full_matrix[5][1][3],
+		i.full_matrix[5][0][3]
+	};
 
 	// LOGIC GOVERNING MAT MULT INPUT
 	// LOGIC GOVERNING dataa/datab (multiplications for cross-products)
@@ -109,8 +118,8 @@ module jacobian (
 		if (i.en)
 			case (i.count)
 				8'd0: begin
-					i.mat_mult_dataa <= {36{36'b0}};
-					i.mat_mult_datab <= {36{36'b0}};
+					i.mat_mult_dataa <= {36{27'b0}};
+					i.mat_mult_datab <= {36{27'b0}};
 				end
 				8'd91: begin
 					i.mat_mult_dataa <= {
@@ -131,8 +140,8 @@ module jacobian (
 					};
 				end
 				8'd98: begin // clear
-					i.mat_mult_dataa <= {36'b0};
-					i.mat_mult_datab <= {36'b0};
+					i.mat_mult_dataa <= {36{27'b0}};
+					i.mat_mult_datab <= {36{27'b0}};
 				end
 				default: begin
 					i.mat_mult_dataa <= i.mat_mult_dataa;
@@ -152,13 +161,13 @@ module jacobian (
 							i.jacobian_matrix[0][col] <= i.mat_mult_result[5-col][5] - i.mat_mult_result[5-col][4];
 							i.jacobian_matrix[1][col] <= i.mat_mult_result[5-col][3] - i.mat_mult_result[5-col][2];
 							i.jacobian_matrix[2][col] <= i.mat_mult_result[5-col][1] - i.mat_mult_result[5-col][0];
-							i.jacobian_matrix[3][col] <= i.axis[col][0];
-							i.jacobian_matrix[4][col] <= i.axis[col][1];
-							i.jacobian_matrix[5][col] <= i.axis[col][2];
+							i.jacobian_matrix[3][col] <= {{9{i.axis[col][0][26]}}, i.axis[col][0]};
+							i.jacobian_matrix[4][col] <= {{9{i.axis[col][1][26]}}, i.axis[col][1]};
+							i.jacobian_matrix[5][col] <= {{9{i.axis[col][2][26]}}, i.axis[col][2]};
 						end else if ( i.joint_type[col]==1'b0 ) begin
-							i.jacobian_matrix[0][col] <= i.axis[col][0];
-							i.jacobian_matrix[1][col] <= i.axis[col][1];
-							i.jacobian_matrix[2][col] <= i.axis[col][2];
+							i.jacobian_matrix[0][col] <= {{9{i.axis[col][0][26]}}, i.axis[col][0]};
+							i.jacobian_matrix[1][col] <= {{9{i.axis[col][1][26]}}, i.axis[col][1]};
+							i.jacobian_matrix[2][col] <= {{9{i.axis[col][2][26]}}, i.axis[col][2]};
 							i.jacobian_matrix[3][col] <= 36'b0;
 							i.jacobian_matrix[4][col] <= 36'b0;
 							i.jacobian_matrix[5][col] <= 36'b0;
