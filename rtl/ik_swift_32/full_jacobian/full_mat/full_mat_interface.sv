@@ -23,6 +23,7 @@ logic [5:0] [5:0] [26:0] mat_mult_dataa;
 logic [5:0] [5:0] [26:0] mat_mult_datab;
 
 // multiplied results of transformation matrices
+<<<<<<< HEAD
 logic [5:0] [3:0] [3:0] [26:0] full_matrix;
 
 // clocking cb @(posedge clk);
@@ -34,6 +35,19 @@ logic [5:0] [3:0] [3:0] [26:0] full_matrix;
 // endclocking
 // 
 // modport full_mat_tb (clocking cb);
+=======
+logic [5:0] [3:0] [3:0] [35:0] full_matrix;
+
+//clocking cb @(posedge clk);
+//	output en;
+//	output rst;
+//	output dh_param;
+//
+//	input full_matrix;
+//endclocking
+//
+//modport full_mat_tb (clocking cb);
+>>>>>>> aff203867f9513be6e51b08b57f40d361151a813
 
 // restrict directions
 modport full_mat (

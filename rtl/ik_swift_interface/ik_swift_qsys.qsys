@@ -87,14 +87,16 @@
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
   <parameter name="AUTO_DEVICE" value="5CSXFC6D6F31C6" />
  </module>
- <module kind="ik_swift" version="1.0" enabled="1" name="ik_swift_0" />
+ <module kind="ik_swift" version="1.0" enabled="1" name="ik_swift_0">
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
+ </module>
  <module kind="clock_source" version="13.1" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
- <module kind="altera_hps" version="13.1" enabled="1" name="hps_0">
+ <module kind="altera_hps" version="13.1.1" enabled="1" name="hps_0">
   <parameter name="MEM_VENDOR" value="Micron" />
   <parameter name="MEM_FORMAT" value="DISCRETE" />
   <parameter name="RDIMM_CONFIG" value="0000000000000000" />
@@ -372,7 +374,7 @@
   <parameter name="TIMING_BOARD_AC_SKEW" value="0.03" />
   <parameter name="TIMING_BOARD_AC_TO_CK_SKEW" value="0.0" />
   <parameter name="RATE" value="Full" />
-  <parameter name="MEM_CLK_FREQ" value="300.0" />
+  <parameter name="MEM_CLK_FREQ" value="400.0" />
   <parameter name="USE_MEM_CLK_FREQ" value="false" />
   <parameter name="FORCE_DQS_TRACKING" value="AUTO" />
   <parameter name="FORCE_SHADOW_REGS" value="AUTO" />
