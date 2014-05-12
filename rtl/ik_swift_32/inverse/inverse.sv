@@ -14,8 +14,6 @@ module inverse (
 	assign ifc_cholesky_block.rst = i.rst;
 	assign ifc_cholesky_block.count = i.count;
 	assign ifc_cholesky_block.matrix = i.matrix;
-	 // shared multiplier
-	assign ifc_cholesky_block.array_mult_result = i.array_mult_result;
 	cholesky_block cholesky_block (ifc_cholesky_block.cholesky_block);
 	// outputs
 	assign i.lt = ifc_cholesky_block.lt;
@@ -28,8 +26,6 @@ module inverse (
 	assign ifc_lt_block.count = i.count;
 	// lower triangular matrix from cholesky block
 	assign ifc_lt_block.lt = ifc_cholesky_block.lt;
-	 // shared multiplier
-	assign ifc_lt_block.array_mult_result = i.array_mult_result;
 	lt_block lt_block (ifc_lt_block.lt_block_dut);
 	// outputs
 	assign i.lt_inverse = ifc_lt_block.lt_inverse;
@@ -48,8 +44,14 @@ module inverse (
 
 	// SHARED ARRAY MULT
 	// timing design prevents module outputs to shared multipliers colliding
-	assign i.array_mult_dataa = ifc_cholesky_block.array_mult_dataa | ifc_lt_block.array_mult_dataa;
-	assign i.array_mult_datab = ifc_cholesky_block.array_mult_datab | ifc_lt_block.array_mult_datab;
+	assign i.array_mult_dataa =
+		ifc_cholesky_block.array_mult_dataa |
+		ifc_lt_block.array_mult_dataa;
+	assign i.array_mult_datab =
+		ifc_cholesky_block.array_mult_datab |
+		ifc_lt_block.array_mult_datab;
+	assign ifc_cholesky_block.array_mult_result = i.array_mult_result;
+	assign ifc_lt_block.array_mult_result = i.array_mult_result;
 
 	// MATRIX MULTIPLY FOR L^-T * L^-1
 	// MAT_MULT INPUTS

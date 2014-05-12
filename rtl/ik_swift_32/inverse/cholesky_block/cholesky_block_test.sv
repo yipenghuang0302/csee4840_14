@@ -33,8 +33,8 @@ class cholesky_block_test;
 		logic [5:0] [5:0] [35:0] lt
 	);
 
-		real abs_tol = 0.001;
-		real rel_tol = 0.001;
+		real abs_tol = 0.01;
+		real rel_tol = 0.01;
 
 		real lt_real[6][6];
 		real lt_error[6][6];

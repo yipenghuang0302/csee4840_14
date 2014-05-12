@@ -38,7 +38,7 @@ program inverse_tb (ifc_inverse.inverse_tb ds);
 			for ( int row=0 ; row<trans.n ; row++ ) begin // row index
 				for ( int col=0 ; col<trans.n ; col++ ) begin // col index
 					trans.j_fraction[row][col] = real'(trans.j_increment[row][col]) / 2147483648.0;
-					trans.j_data[row][col] = -256.0 + trans.j_fraction[row][col] * 2 * 256.0;
+					trans.j_data[row][col] = -16.0 + trans.j_fraction[row][col] * 2 * 16.0;
 				end
 			end
 

@@ -14,8 +14,8 @@
 
 `include "../array_mult/array_mult_interface.sv"
 `include "../array_mult/array_mult.sv"
+`include "../array_mult/mult_27/mult_27.v"
 
-`include "../mult_36/mult_36.v"
 `include "../sim_models/lpm_mult.v"
 `include "../sim_models/mult_block.v"
 `include "../sim_models/addsub_block.v"
@@ -33,7 +33,7 @@
 `include "full_mat/t_block/sincos/mult_21_coeff_26561/mult_21_coeff_26561.v"
 `include "full_mat/t_block/sincos/mult_21_coeff_83443/mult_21_coeff_83443.v"
 `include "full_mat/t_block/sincos/mult_21_coeff_14746/mult_21_coeff_14746.v"
-`include "../mult_21/mult_21.v"
+`include "full_mat/t_block/sincos/mult_21/mult_21.v"
 
 `include "jacobian/jacobian_interface.sv"
 `include "jacobian/jacobian.sv"
@@ -79,14 +79,9 @@ module full_jacobian_top ();
 	ifc_array_mult ifc_array_mult (clk);
 	assign ifc_array_mult.en = ifc_full_jacobian.en;
 	assign ifc_array_mult.rst = ifc_full_jacobian.rst;
-	genvar index;
-	generate
-		for ( index=0 ; index<9; index++ ) begin
-			assign ifc_array_mult.dataa[index] = {{9{ifc_full_jacobian.array_mult_dataa[index][26]}}, ifc_full_jacobian.array_mult_dataa[index]};
-			assign ifc_array_mult.datab[index] = {{9{ifc_full_jacobian.array_mult_datab[index][26]}}, ifc_full_jacobian.array_mult_datab[index]};
-			assign ifc_full_jacobian.array_mult_result[index] = ifc_array_mult.result[index][26:0];
-		end
-	endgenerate
+	assign ifc_array_mult.dataa = ifc_full_jacobian.array_mult_dataa;
+	assign ifc_array_mult.datab = ifc_full_jacobian.array_mult_datab;
 	array_mult array_mult (ifc_array_mult.array_mult);
+	assign ifc_full_jacobian.array_mult_result = ifc_array_mult.result[8:0];
 
 endmodule

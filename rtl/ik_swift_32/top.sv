@@ -21,7 +21,7 @@
 `include "full_jacobian/full_mat/t_block/sincos/mult_21_coeff_26561/mult_21_coeff_26561.v"
 `include "full_jacobian/full_mat/t_block/sincos/mult_21_coeff_83443/mult_21_coeff_83443.v"
 `include "full_jacobian/full_mat/t_block/sincos/mult_21_coeff_14746/mult_21_coeff_14746.v"
-`include "mult_21/mult_21.v"
+`include "full_jacobian/full_mat/t_block/sincos/mult_21/mult_21.v"
 
 `include "inverse/inverse_interface.sv"
 `include "inverse/inverse.sv"
@@ -41,8 +41,8 @@
 `include "mat_mult/mult_36_dsp/mult_36_dsp.v"
 `include "array_mult/array_mult_interface.sv"
 `include "array_mult/array_mult.sv"
+`include "array_mult/mult_27/mult_27.v"
 
-`include "mult_36/mult_36.v"
 `include "sim_models/lpm_mult.v"
 `include "sim_models/mult_block.v"
 `include "sim_models/addsub_block.v"
