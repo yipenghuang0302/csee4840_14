@@ -10,10 +10,10 @@
 `include "sin.sv"
 `include "cos.sv"
 
-`include "../../../../mult_21/mult_21.v"
 `include "mult_21_coeff_26561/mult_21_coeff_26561.v"
 `include "mult_21_coeff_83443/mult_21_coeff_83443.v"
 `include "mult_21_coeff_14746/mult_21_coeff_14746.v"
+`include "mult_21/mult_21.v"
 
 `include "../../../../sim_models/lpm_mult.v"
 `include "../../../../sim_models/mult_block.v"

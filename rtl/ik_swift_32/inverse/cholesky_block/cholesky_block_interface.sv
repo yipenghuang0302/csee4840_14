@@ -14,9 +14,9 @@ logic [5:0] [5:0] [35:0] matrix;
 logic [5:0] [5:0] [35:0] lt;
 
 // shared array_mult
-logic [14:0] [35:0] array_mult_dataa;
-logic [14:0] [35:0] array_mult_datab;
-logic [14:0] [35:0] array_mult_result;
+logic [14:0] [26:0] array_mult_dataa;
+logic [14:0] [26:0] array_mult_datab;
+logic [14:0] [26:0] array_mult_result;
 
 // shared array_div
 logic [5:0] [35:0] dividends;

@@ -25,7 +25,7 @@ class array_mult_test;
 	endfunction
 
 	function void check_array_mult (
-		logic [14:0] [35:0] dut_result
+		logic [14:0] [26:0] dut_result
 	);
 
 		real abs_tol = 0.00004;
@@ -36,7 +36,7 @@ class array_mult_test;
 		bit passed = 1'b1;
 
 		for (int i=0; i<n; i++) begin // product row
-			real_result[i] = real'(longint'({{28{dut_result[i][35]}}, dut_result[i]}))/65536.0;
+			real_result[i] = real'(int'({{5{dut_result[i][26]}}, dut_result[i]}))/65536.0;
 			error[i] = abs( real_result[i] - model_result[0][i] );
 				percent[i] = error[i] / model_result[0][i];
 			if ( error[i]>abs_tol && percent[i]>rel_tol ) begin
@@ -48,7 +48,7 @@ class array_mult_test;
 		end
 
 		if (passed) begin
-			// $display("%t : pass \n", $realtime);
+			$display("%t : pass \n", $realtime);
 		end else begin
 			// $exit();
 		end

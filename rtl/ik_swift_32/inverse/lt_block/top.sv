@@ -9,7 +9,8 @@
 
 `include "../../array_mult/array_mult_interface.sv"
 `include "../../array_mult/array_mult.sv"
-`include "../../mult_36/mult_36.v"
+`include "../../array_mult/mult_27/mult_27.v"
+
 `include "../../sim_models/lpm_mult.v"
 `include "../../sim_models/mult_block.v"
 `include "../../sim_models/addsub_block.v"

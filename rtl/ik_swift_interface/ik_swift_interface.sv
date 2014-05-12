@@ -24,7 +24,7 @@
 `include "../ik_swift_32/full_jacobian/full_mat/t_block/sincos/mult_21_coeff_26561/mult_21_coeff_26561.v"
 `include "../ik_swift_32/full_jacobian/full_mat/t_block/sincos/mult_21_coeff_83443/mult_21_coeff_83443.v"
 `include "../ik_swift_32/full_jacobian/full_mat/t_block/sincos/mult_21_coeff_14746/mult_21_coeff_14746.v"
-`include "../ik_swift_32/mult_21/mult_21.v"
+`include "../ik_swift_32/full_jacobian/full_mat/t_block/sincos/mult_21/mult_21.v"
 
 `include "../ik_swift_32/inverse/inverse_interface.sv"
 `include "../ik_swift_32/inverse/inverse.sv"
@@ -41,11 +41,12 @@
 `include "../ik_swift_32/mat_mult/mat_mult_interface.sv"
 `include "../ik_swift_32/mat_mult/mat_mult.sv"
 `include "../ik_swift_32/mat_mult/mult_array.sv"
+`include "../ik_swift_32/mat_mult/mult_36_dsp/mult_36_dsp.v"
+
 `include "../ik_swift_32/array_mult/array_mult_interface.sv"
 `include "../ik_swift_32/array_mult/array_mult.sv"
+`include "../ik_swift_32/array_mult/mult_27/mult_27.v"
 
-`include "../ik_swift_32/mult_36/mult_36.v"
-`include "../ik_swift_32/mat_mult/mult_36_dsp/mult_36_dsp.v"
 // `include "../ik_swift_32/sim_models/lpm_mult.v"
 // `include "../ik_swift_32/sim_models/mult_block.v"
 // `include "../ik_swift_32/sim_models/addsub_block.v"
@@ -78,7 +79,7 @@ module ik_swift_interface (
 	// INPUTS
 	assign ifc_ik_swift.rst = reset;
 	// base joint's axis of rotation/translation
-	assign ifc_ik_swift.z = { 36'd0, 36'd0, 36'd65536 }; // unit vector in z direction
+	assign ifc_ik_swift.z = { 18'd0, 18'd0, 18'd65536 }; // unit vector in z direction
 	// bit vector describing type of each joint
 	assign ifc_ik_swift.joint_type = 6'b111111;
 	// target coordinates
@@ -89,7 +90,7 @@ module ik_swift_interface (
 		if (reset) begin
 			target <= {3{36'b0}};
 			ifc_ik_swift.en <= 1'b0;
-			ifc_ik_swift.dh_dyn_in <= {6{36'b0}};
+			ifc_ik_swift.dh_dyn_in <= {6{21'b0}};
 		end else if ( chipselect && write ) begin
 			case (address)
 

@@ -7,7 +7,7 @@
 `include "array_mult.sv"
 `include "bench.sv"
 
-`include "../mult_36/mult_36.v"
+`include "mult_27/mult_27.v"
 
 `include "../sim_models/lpm_mult.v"
 `include "../sim_models/mult_block.v"

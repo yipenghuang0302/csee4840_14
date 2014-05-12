@@ -37,7 +37,7 @@ program lt_block_tb (ifc_lt_block.lt_block_tb ds);
 			for ( int row=0 ; row<trans.n ; row++ ) begin // row index
 				for ( int col=0 ; col<trans.n ; col++ ) begin // col index
 					trans.lt_fraction[row][col] = real'(trans.lt_increment[row][col]) / 2147483648.0;
-					trans.lt_data[row][col] = -2048.0 + trans.lt_fraction[row][col] * 2 * 2048.0;
+					trans.lt_data[row][col] = -1024.0 + trans.lt_fraction[row][col] * 2 * 1024.0;
 
 					// but lt matrix, so blank out top right
 					if ( row<col ) trans.lt_data[row][col] = 0.0;

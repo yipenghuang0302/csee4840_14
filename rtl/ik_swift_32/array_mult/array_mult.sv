@@ -9,13 +9,13 @@ module array_mult (
 
 	parameter n = 15;
 
-	logic [n-1:0] [71:0] mult_result;
-	logic [n-1:0] [35:0] mult_round;
+	logic [n-1:0] [53:0] mult_result;
+	logic [n-1:0] [26:0] mult_round;
 
 	genvar index;
 	generate
-		for ( index=n-1 ; index>=0 ; index-- ) begin: mult_36_row
-			mult_36 mult_36_inst (
+		for ( index=n-1 ; index>=0 ; index-- ) begin: mult_27_row
+			mult_27 mult_27_inst (
 				.clken(i.en),
 				.clock(i.clk),
 				.dataa(i.dataa[index]),
@@ -24,7 +24,7 @@ module array_mult (
 			);
 			always_ff @(posedge i.clk)
 				if (i.en)
-					mult_round[index] <= mult_result[index][15] ? mult_result[index][51:16] + 1'b1 : mult_result[index][51:16];
+					mult_round[index] <= mult_result[index][15] ? mult_result[index][42:16] + 1'b1 : mult_result[index][42:16];
 		end
 	endgenerate
 

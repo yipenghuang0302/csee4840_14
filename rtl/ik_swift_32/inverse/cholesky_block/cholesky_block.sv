@@ -182,52 +182,52 @@ module cholesky_block (
 		if (i.en)
 			case (i.count)
 				8'd124: begin
-		 			i.array_mult_dataa[0] <= i.quotients[1]; // A_11 = A_11 - L_10 * L_01 = A_11 - L_10 * L_10
-					i.array_mult_dataa[1] <= i.quotients[2]; // A_21 = A_21 - L_20 * L_01 = A_21 - L_20 * L_10
-					i.array_mult_dataa[2] <= i.quotients[2]; // A_22 = A_22 - L_20 * L_02 = A_22 - L_20 * L_20
-					i.array_mult_dataa[3] <= i.quotients[3]; // A_31 = A_31 - L_30 * L_01 = A_31 - L_30 * L_10
-					i.array_mult_dataa[4] <= i.quotients[3]; // A_32 = A_32 - L_30 * L_02 = A_32 - L_30 * L_20
-					i.array_mult_dataa[5] <= i.quotients[3]; // A_33 = A_33 - L_30 * L_03 = A_33 - L_30 * L_30
-					i.array_mult_dataa[6] <= i.quotients[4]; // A_41 = A_41 - L_40 * L_01 = A_41 - L_40 * L_10
-					i.array_mult_dataa[7] <= i.quotients[4]; // A_42 = A_42 - L_40 * L_02 = A_42 - L_40 * L_20
-					i.array_mult_dataa[8] <= i.quotients[4]; // A_43 = A_43 - L_40 * L_03 = A_43 - L_40 * L_30
-					i.array_mult_dataa[9] <= i.quotients[4]; // A_44 = A_44 - L_40 * L_04 = A_44 - L_40 * L_40
-					i.array_mult_dataa[10] <= i.quotients[5]; // A_51 = A_51 - L_50 * L_01 = A_51 - L_50 * L_10
-					i.array_mult_dataa[11] <= i.quotients[5]; // A_52 = A_52 - L_50 * L_02 = A_52 - L_50 * L_20
-					i.array_mult_dataa[12] <= i.quotients[5]; // A_53 = A_53 - L_50 * L_03 = A_53 - L_50 * L_30
-					i.array_mult_dataa[13] <= i.quotients[5]; // A_54 = A_54 - L_50 * L_04 = A_54 - L_50 * L_40
-					i.array_mult_dataa[14] <= i.quotients[5]; // A_55 = A_55 - L_50 * L_05 = A_55 - L_50 * L_50
+		 			i.array_mult_dataa[0] <= i.quotients[1][26:0]; // A_11 = A_11 - L_10 * L_01 = A_11 - L_10 * L_10
+					i.array_mult_dataa[1] <= i.quotients[2][26:0]; // A_21 = A_21 - L_20 * L_01 = A_21 - L_20 * L_10
+					i.array_mult_dataa[2] <= i.quotients[2][26:0]; // A_22 = A_22 - L_20 * L_02 = A_22 - L_20 * L_20
+					i.array_mult_dataa[3] <= i.quotients[3][26:0]; // A_31 = A_31 - L_30 * L_01 = A_31 - L_30 * L_10
+					i.array_mult_dataa[4] <= i.quotients[3][26:0]; // A_32 = A_32 - L_30 * L_02 = A_32 - L_30 * L_20
+					i.array_mult_dataa[5] <= i.quotients[3][26:0]; // A_33 = A_33 - L_30 * L_03 = A_33 - L_30 * L_30
+					i.array_mult_dataa[6] <= i.quotients[4][26:0]; // A_41 = A_41 - L_40 * L_01 = A_41 - L_40 * L_10
+					i.array_mult_dataa[7] <= i.quotients[4][26:0]; // A_42 = A_42 - L_40 * L_02 = A_42 - L_40 * L_20
+					i.array_mult_dataa[8] <= i.quotients[4][26:0]; // A_43 = A_43 - L_40 * L_03 = A_43 - L_40 * L_30
+					i.array_mult_dataa[9] <= i.quotients[4][26:0]; // A_44 = A_44 - L_40 * L_04 = A_44 - L_40 * L_40
+					i.array_mult_dataa[10] <= i.quotients[5][26:0]; // A_51 = A_51 - L_50 * L_01 = A_51 - L_50 * L_10
+					i.array_mult_dataa[11] <= i.quotients[5][26:0]; // A_52 = A_52 - L_50 * L_02 = A_52 - L_50 * L_20
+					i.array_mult_dataa[12] <= i.quotients[5][26:0]; // A_53 = A_53 - L_50 * L_03 = A_53 - L_50 * L_30
+					i.array_mult_dataa[13] <= i.quotients[5][26:0]; // A_54 = A_54 - L_50 * L_04 = A_54 - L_50 * L_40
+					i.array_mult_dataa[14] <= i.quotients[5][26:0]; // A_55 = A_55 - L_50 * L_05 = A_55 - L_50 * L_50
 				end
 				8'd142: begin
-					i.array_mult_dataa[0] <= i.quotients[2]; // A_22 = A_22 - L_21 * L_12 = A_22 - L_21 * L_21
-					i.array_mult_dataa[1] <= i.quotients[3]; // A_32 = A_32 - L_31 * L_12 = A_32 - L_31 * L_21
-					i.array_mult_dataa[2] <= i.quotients[3]; // A_33 = A_33 - L_31 * L_13 = A_33 - L_31 * L_31
-					i.array_mult_dataa[3] <= i.quotients[4]; // A_42 = A_42 - L_41 * L_12 = A_42 - L_41 * L_21
-					i.array_mult_dataa[4] <= i.quotients[4]; // A_43 = A_43 - L_41 * L_13 = A_43 - L_41 * L_31
-					i.array_mult_dataa[5] <= i.quotients[4]; // A_44 = A_44 - L_41 * L_14 = A_44 - L_41 * L_41
-					i.array_mult_dataa[6] <= i.quotients[5]; // A_52 = A_52 - L_51 * L_12 = A_52 - L_51 * L_21
-					i.array_mult_dataa[7] <= i.quotients[5]; // A_53 = A_53 - L_51 * L_13 = A_53 - L_51 * L_31
-					i.array_mult_dataa[8] <= i.quotients[5]; // A_54 = A_54 - L_51 * L_14 = A_54 - L_51 * L_41
-					i.array_mult_dataa[9] <= i.quotients[5]; // A_55 = A_55 - L_51 * L_15 = A_55 - L_51 * L_51
+					i.array_mult_dataa[0] <= i.quotients[2][26:0]; // A_22 = A_22 - L_21 * L_12 = A_22 - L_21 * L_21
+					i.array_mult_dataa[1] <= i.quotients[3][26:0]; // A_32 = A_32 - L_31 * L_12 = A_32 - L_31 * L_21
+					i.array_mult_dataa[2] <= i.quotients[3][26:0]; // A_33 = A_33 - L_31 * L_13 = A_33 - L_31 * L_31
+					i.array_mult_dataa[3] <= i.quotients[4][26:0]; // A_42 = A_42 - L_41 * L_12 = A_42 - L_41 * L_21
+					i.array_mult_dataa[4] <= i.quotients[4][26:0]; // A_43 = A_43 - L_41 * L_13 = A_43 - L_41 * L_31
+					i.array_mult_dataa[5] <= i.quotients[4][26:0]; // A_44 = A_44 - L_41 * L_14 = A_44 - L_41 * L_41
+					i.array_mult_dataa[6] <= i.quotients[5][26:0]; // A_52 = A_52 - L_51 * L_12 = A_52 - L_51 * L_21
+					i.array_mult_dataa[7] <= i.quotients[5][26:0]; // A_53 = A_53 - L_51 * L_13 = A_53 - L_51 * L_31
+					i.array_mult_dataa[8] <= i.quotients[5][26:0]; // A_54 = A_54 - L_51 * L_14 = A_54 - L_51 * L_41
+					i.array_mult_dataa[9] <= i.quotients[5][26:0]; // A_55 = A_55 - L_51 * L_15 = A_55 - L_51 * L_51
 				end
 				8'd160: begin
-					i.array_mult_dataa[0] <= i.quotients[3]; // A_33 = A_33 - L_32 * L_23 = A_33 - L_32 * L_32
-					i.array_mult_dataa[1] <= i.quotients[4]; // A_43 = A_43 - L_42 * L_23 = A_43 - L_42 * L_32
-					i.array_mult_dataa[2] <= i.quotients[4]; // A_44 = A_44 - L_42 * L_24 = A_44 - L_42 * L_42
-					i.array_mult_dataa[3] <= i.quotients[5]; // A_53 = A_53 - L_52 * L_23 = A_53 - L_52 * L_32
-					i.array_mult_dataa[4] <= i.quotients[5]; // A_54 = A_54 - L_52 * L_24 = A_54 - L_52 * L_42
-					i.array_mult_dataa[5] <= i.quotients[5]; // A_55 = A_55 - L_52 * L_25 = A_55 - L_52 * L_52 
+					i.array_mult_dataa[0] <= i.quotients[3][26:0]; // A_33 = A_33 - L_32 * L_23 = A_33 - L_32 * L_32
+					i.array_mult_dataa[1] <= i.quotients[4][26:0]; // A_43 = A_43 - L_42 * L_23 = A_43 - L_42 * L_32
+					i.array_mult_dataa[2] <= i.quotients[4][26:0]; // A_44 = A_44 - L_42 * L_24 = A_44 - L_42 * L_42
+					i.array_mult_dataa[3] <= i.quotients[5][26:0]; // A_53 = A_53 - L_52 * L_23 = A_53 - L_52 * L_32
+					i.array_mult_dataa[4] <= i.quotients[5][26:0]; // A_54 = A_54 - L_52 * L_24 = A_54 - L_52 * L_42
+					i.array_mult_dataa[5] <= i.quotients[5][26:0]; // A_55 = A_55 - L_52 * L_25 = A_55 - L_52 * L_52 
 				end
 				8'd178: begin
-					i.array_mult_dataa[0] <= i.quotients[4]; // A_44 = A_44 - L_43 * L_34 = A_44 - L_43 * L_43
-					i.array_mult_dataa[1] <= i.quotients[5]; // A_54 = A_54 - L_53 * L_34 = A_54 - L_53 * L_43
-					i.array_mult_dataa[2] <= i.quotients[5]; // A_55 = A_55 - L_53 * L_35 = A_55 - L_53 * L_53
+					i.array_mult_dataa[0] <= i.quotients[4][26:0]; // A_44 = A_44 - L_43 * L_34 = A_44 - L_43 * L_43
+					i.array_mult_dataa[1] <= i.quotients[5][26:0]; // A_54 = A_54 - L_53 * L_34 = A_54 - L_53 * L_43
+					i.array_mult_dataa[2] <= i.quotients[5][26:0]; // A_55 = A_55 - L_53 * L_35 = A_55 - L_53 * L_53
 				end
 				8'd196: begin
-					i.array_mult_dataa[0] <= i.quotients[5]; // A_55 = A_55 - L_54 * L_45 = A_55 - L_54 * L_54
+					i.array_mult_dataa[0] <= i.quotients[5][26:0]; // A_55 = A_55 - L_54 * L_45 = A_55 - L_54 * L_54
 				end
 				default: begin
-					i.array_mult_dataa <= {15{36'b0}};
+					i.array_mult_dataa <= {15{27'b0}};
 				end
 			endcase
 
@@ -237,52 +237,52 @@ module cholesky_block (
 		if (i.en)
 			case (i.count)
 				8'd124: begin
-		 			i.array_mult_datab[0] <= i.quotients[1]; // A_11 = A_11 - L_10 * L_01 = A_11 - L_10 * L_10
-					i.array_mult_datab[1] <= i.quotients[1]; // A_21 = A_21 - L_20 * L_01 = A_21 - L_20 * L_10
-					i.array_mult_datab[2] <= i.quotients[2]; // A_22 = A_22 - L_20 * L_02 = A_22 - L_20 * L_20
-					i.array_mult_datab[3] <= i.quotients[1]; // A_31 = A_31 - L_30 * L_01 = A_31 - L_30 * L_10
-					i.array_mult_datab[4] <= i.quotients[2]; // A_32 = A_32 - L_30 * L_02 = A_32 - L_30 * L_20
-					i.array_mult_datab[5] <= i.quotients[3]; // A_33 = A_33 - L_30 * L_03 = A_33 - L_30 * L_30
-					i.array_mult_datab[6] <= i.quotients[1]; // A_41 = A_41 - L_40 * L_01 = A_41 - L_40 * L_10
-					i.array_mult_datab[7] <= i.quotients[2]; // A_42 = A_42 - L_40 * L_02 = A_42 - L_40 * L_20
-					i.array_mult_datab[8] <= i.quotients[3]; // A_43 = A_43 - L_40 * L_03 = A_43 - L_40 * L_30
-					i.array_mult_datab[9] <= i.quotients[4]; // A_44 = A_44 - L_40 * L_04 = A_44 - L_40 * L_40
-					i.array_mult_datab[10] <= i.quotients[1]; // A_51 = A_51 - L_50 * L_01 = A_51 - L_50 * L_10
-					i.array_mult_datab[11] <= i.quotients[2]; // A_52 = A_52 - L_50 * L_02 = A_52 - L_50 * L_20
-					i.array_mult_datab[12] <= i.quotients[3]; // A_53 = A_53 - L_50 * L_03 = A_53 - L_50 * L_30
-					i.array_mult_datab[13] <= i.quotients[4]; // A_54 = A_54 - L_50 * L_04 = A_54 - L_50 * L_40
-					i.array_mult_datab[14] <= i.quotients[5]; // A_55 = A_55 - L_50 * L_05 = A_55 - L_50 * L_50
+		 			i.array_mult_datab[0] <= i.quotients[1][26:0]; // A_11 = A_11 - L_10 * L_01 = A_11 - L_10 * L_10
+					i.array_mult_datab[1] <= i.quotients[1][26:0]; // A_21 = A_21 - L_20 * L_01 = A_21 - L_20 * L_10
+					i.array_mult_datab[2] <= i.quotients[2][26:0]; // A_22 = A_22 - L_20 * L_02 = A_22 - L_20 * L_20
+					i.array_mult_datab[3] <= i.quotients[1][26:0]; // A_31 = A_31 - L_30 * L_01 = A_31 - L_30 * L_10
+					i.array_mult_datab[4] <= i.quotients[2][26:0]; // A_32 = A_32 - L_30 * L_02 = A_32 - L_30 * L_20
+					i.array_mult_datab[5] <= i.quotients[3][26:0]; // A_33 = A_33 - L_30 * L_03 = A_33 - L_30 * L_30
+					i.array_mult_datab[6] <= i.quotients[1][26:0]; // A_41 = A_41 - L_40 * L_01 = A_41 - L_40 * L_10
+					i.array_mult_datab[7] <= i.quotients[2][26:0]; // A_42 = A_42 - L_40 * L_02 = A_42 - L_40 * L_20
+					i.array_mult_datab[8] <= i.quotients[3][26:0]; // A_43 = A_43 - L_40 * L_03 = A_43 - L_40 * L_30
+					i.array_mult_datab[9] <= i.quotients[4][26:0]; // A_44 = A_44 - L_40 * L_04 = A_44 - L_40 * L_40
+					i.array_mult_datab[10] <= i.quotients[1][26:0]; // A_51 = A_51 - L_50 * L_01 = A_51 - L_50 * L_10
+					i.array_mult_datab[11] <= i.quotients[2][26:0]; // A_52 = A_52 - L_50 * L_02 = A_52 - L_50 * L_20
+					i.array_mult_datab[12] <= i.quotients[3][26:0]; // A_53 = A_53 - L_50 * L_03 = A_53 - L_50 * L_30
+					i.array_mult_datab[13] <= i.quotients[4][26:0]; // A_54 = A_54 - L_50 * L_04 = A_54 - L_50 * L_40
+					i.array_mult_datab[14] <= i.quotients[5][26:0]; // A_55 = A_55 - L_50 * L_05 = A_55 - L_50 * L_50
 				end
 				8'd142: begin
-					i.array_mult_datab[0] <= i.quotients[2]; // A_22 = A_22 - L_21 * L_12 = A_22 - L_21 * L_21
-					i.array_mult_datab[1] <= i.quotients[2]; // A_32 = A_32 - L_31 * L_12 = A_32 - L_31 * L_21
-					i.array_mult_datab[2] <= i.quotients[3]; // A_33 = A_33 - L_31 * L_13 = A_33 - L_31 * L_31
-					i.array_mult_datab[3] <= i.quotients[2]; // A_42 = A_42 - L_41 * L_12 = A_42 - L_41 * L_21
-					i.array_mult_datab[4] <= i.quotients[3]; // A_43 = A_43 - L_41 * L_13 = A_43 - L_41 * L_31
-					i.array_mult_datab[5] <= i.quotients[4]; // A_44 = A_44 - L_41 * L_14 = A_44 - L_41 * L_41
-					i.array_mult_datab[6] <= i.quotients[2]; // A_52 = A_52 - L_51 * L_12 = A_52 - L_51 * L_21
-					i.array_mult_datab[7] <= i.quotients[3]; // A_53 = A_53 - L_51 * L_13 = A_53 - L_51 * L_31
-					i.array_mult_datab[8] <= i.quotients[4]; // A_54 = A_54 - L_51 * L_14 = A_54 - L_51 * L_41
-					i.array_mult_datab[9] <= i.quotients[5]; // A_55 = A_55 - L_51 * L_15 = A_55 - L_51 * L_51
+					i.array_mult_datab[0] <= i.quotients[2][26:0]; // A_22 = A_22 - L_21 * L_12 = A_22 - L_21 * L_21
+					i.array_mult_datab[1] <= i.quotients[2][26:0]; // A_32 = A_32 - L_31 * L_12 = A_32 - L_31 * L_21
+					i.array_mult_datab[2] <= i.quotients[3][26:0]; // A_33 = A_33 - L_31 * L_13 = A_33 - L_31 * L_31
+					i.array_mult_datab[3] <= i.quotients[2][26:0]; // A_42 = A_42 - L_41 * L_12 = A_42 - L_41 * L_21
+					i.array_mult_datab[4] <= i.quotients[3][26:0]; // A_43 = A_43 - L_41 * L_13 = A_43 - L_41 * L_31
+					i.array_mult_datab[5] <= i.quotients[4][26:0]; // A_44 = A_44 - L_41 * L_14 = A_44 - L_41 * L_41
+					i.array_mult_datab[6] <= i.quotients[2][26:0]; // A_52 = A_52 - L_51 * L_12 = A_52 - L_51 * L_21
+					i.array_mult_datab[7] <= i.quotients[3][26:0]; // A_53 = A_53 - L_51 * L_13 = A_53 - L_51 * L_31
+					i.array_mult_datab[8] <= i.quotients[4][26:0]; // A_54 = A_54 - L_51 * L_14 = A_54 - L_51 * L_41
+					i.array_mult_datab[9] <= i.quotients[5][26:0]; // A_55 = A_55 - L_51 * L_15 = A_55 - L_51 * L_51
 				end
 				8'd160: begin
-					i.array_mult_datab[0] <= i.quotients[3]; // A_33 = A_33 - L_32 * L_23 = A_33 - L_32 * L_32
-					i.array_mult_datab[1] <= i.quotients[3]; // A_43 = A_43 - L_42 * L_23 = A_43 - L_42 * L_32
-					i.array_mult_datab[2] <= i.quotients[4]; // A_44 = A_44 - L_42 * L_24 = A_44 - L_42 * L_42
-					i.array_mult_datab[3] <= i.quotients[3]; // A_53 = A_53 - L_52 * L_23 = A_53 - L_52 * L_32
-					i.array_mult_datab[4] <= i.quotients[4]; // A_54 = A_54 - L_52 * L_24 = A_54 - L_52 * L_42
-					i.array_mult_datab[5] <= i.quotients[5]; // A_55 = A_55 - L_52 * L_25 = A_55 - L_52 * L_52 
+					i.array_mult_datab[0] <= i.quotients[3][26:0]; // A_33 = A_33 - L_32 * L_23 = A_33 - L_32 * L_32
+					i.array_mult_datab[1] <= i.quotients[3][26:0]; // A_43 = A_43 - L_42 * L_23 = A_43 - L_42 * L_32
+					i.array_mult_datab[2] <= i.quotients[4][26:0]; // A_44 = A_44 - L_42 * L_24 = A_44 - L_42 * L_42
+					i.array_mult_datab[3] <= i.quotients[3][26:0]; // A_53 = A_53 - L_52 * L_23 = A_53 - L_52 * L_32
+					i.array_mult_datab[4] <= i.quotients[4][26:0]; // A_54 = A_54 - L_52 * L_24 = A_54 - L_52 * L_42
+					i.array_mult_datab[5] <= i.quotients[5][26:0]; // A_55 = A_55 - L_52 * L_25 = A_55 - L_52 * L_52 
 				end
 				8'd178: begin
-					i.array_mult_datab[0] <= i.quotients[4]; // A_44 = A_44 - L_43 * L_34 = A_44 - L_43 * L_43
-					i.array_mult_datab[1] <= i.quotients[4]; // A_54 = A_54 - L_53 * L_34 = A_54 - L_53 * L_43
-					i.array_mult_datab[2] <= i.quotients[5]; // A_55 = A_55 - L_53 * L_35 = A_55 - L_53 * L_53
+					i.array_mult_datab[0] <= i.quotients[4][26:0]; // A_44 = A_44 - L_43 * L_34 = A_44 - L_43 * L_43
+					i.array_mult_datab[1] <= i.quotients[4][26:0]; // A_54 = A_54 - L_53 * L_34 = A_54 - L_53 * L_43
+					i.array_mult_datab[2] <= i.quotients[5][26:0]; // A_55 = A_55 - L_53 * L_35 = A_55 - L_53 * L_53
 				end
 				8'd196: begin
-					i.array_mult_datab[0] <= i.quotients[5]; // A_55 = A_55 - L_54 * L_45 = A_55 - L_54 * L_54
+					i.array_mult_datab[0] <= i.quotients[5][26:0]; // A_55 = A_55 - L_54 * L_45 = A_55 - L_54 * L_54
 				end
 				default: begin
-					i.array_mult_datab <= {15{36'b0}};
+					i.array_mult_datab <= {15{27'b0}};
 				end
 			endcase
 
@@ -295,49 +295,49 @@ module cholesky_block (
 					temp <= i.matrix;
 				end
 				8'd129: begin
-					temp[1][1] <= temp[1][1] - i.array_mult_result[0]; // A_11 = A_11 - L_10 * L_01 = A_11 - L_10 * L_10
-					temp[2][1] <= temp[2][1] - i.array_mult_result[1]; // A_21 = A_21 - L_20 * L_01 = A_21 - L_20 * L_10
-					temp[2][2] <= temp[2][2] - i.array_mult_result[2]; // A_22 = A_22 - L_20 * L_02 = A_22 - L_20 * L_20
-					temp[3][1] <= temp[3][1] - i.array_mult_result[3]; // A_31 = A_31 - L_30 * L_01 = A_31 - L_30 * L_10
-					temp[3][2] <= temp[3][2] - i.array_mult_result[4]; // A_32 = A_32 - L_30 * L_02 = A_32 - L_30 * L_20
-					temp[3][3] <= temp[3][3] - i.array_mult_result[5]; // A_33 = A_33 - L_30 * L_03 = A_33 - L_30 * L_30
-					temp[4][1] <= temp[4][1] - i.array_mult_result[6]; // A_41 = A_41 - L_40 * L_01 = A_41 - L_40 * L_10
-					temp[4][2] <= temp[4][2] - i.array_mult_result[7]; // A_42 = A_42 - L_40 * L_02 = A_42 - L_40 * L_20
-					temp[4][3] <= temp[4][3] - i.array_mult_result[8]; // A_43 = A_43 - L_40 * L_03 = A_43 - L_40 * L_30
-					temp[4][4] <= temp[4][4] - i.array_mult_result[9]; // A_44 = A_44 - L_40 * L_04 = A_44 - L_40 * L_40
-					temp[5][1] <= temp[5][1] - i.array_mult_result[10]; // A_51 = A_51 - L_50 * L_01 = A_51 - L_50 * L_10
-					temp[5][2] <= temp[5][2] - i.array_mult_result[11]; // A_52 = A_52 - L_50 * L_02 = A_52 - L_50 * L_20
-					temp[5][3] <= temp[5][3] - i.array_mult_result[12]; // A_53 = A_53 - L_50 * L_03 = A_53 - L_50 * L_30
-					temp[5][4] <= temp[5][4] - i.array_mult_result[13]; // A_54 = A_54 - L_50 * L_04 = A_54 - L_50 * L_40
-					temp[5][5] <= temp[5][5] - i.array_mult_result[14]; // A_55 = A_55 - L_50 * L_05 = A_55 - L_50 * L_50
+					temp[1][1] <= temp[1][1] - {{9{i.array_mult_result[0][26]}}, i.array_mult_result[0]}; // A_11 = A_11 - L_10 * L_01 = A_11 - L_10 * L_10
+					temp[2][1] <= temp[2][1] - {{9{i.array_mult_result[1][26]}}, i.array_mult_result[1]}; // A_21 = A_21 - L_20 * L_01 = A_21 - L_20 * L_10
+					temp[2][2] <= temp[2][2] - {{9{i.array_mult_result[2][26]}}, i.array_mult_result[2]}; // A_22 = A_22 - L_20 * L_02 = A_22 - L_20 * L_20
+					temp[3][1] <= temp[3][1] - {{9{i.array_mult_result[3][26]}}, i.array_mult_result[3]}; // A_31 = A_31 - L_30 * L_01 = A_31 - L_30 * L_10
+					temp[3][2] <= temp[3][2] - {{9{i.array_mult_result[4][26]}}, i.array_mult_result[4]}; // A_32 = A_32 - L_30 * L_02 = A_32 - L_30 * L_20
+					temp[3][3] <= temp[3][3] - {{9{i.array_mult_result[5][26]}}, i.array_mult_result[5]}; // A_33 = A_33 - L_30 * L_03 = A_33 - L_30 * L_30
+					temp[4][1] <= temp[4][1] - {{9{i.array_mult_result[6][26]}}, i.array_mult_result[6]}; // A_41 = A_41 - L_40 * L_01 = A_41 - L_40 * L_10
+					temp[4][2] <= temp[4][2] - {{9{i.array_mult_result[7][26]}}, i.array_mult_result[7]}; // A_42 = A_42 - L_40 * L_02 = A_42 - L_40 * L_20
+					temp[4][3] <= temp[4][3] - {{9{i.array_mult_result[8][26]}}, i.array_mult_result[8]}; // A_43 = A_43 - L_40 * L_03 = A_43 - L_40 * L_30
+					temp[4][4] <= temp[4][4] - {{9{i.array_mult_result[9][26]}}, i.array_mult_result[9]}; // A_44 = A_44 - L_40 * L_04 = A_44 - L_40 * L_40
+					temp[5][1] <= temp[5][1] - {{9{i.array_mult_result[10][26]}}, i.array_mult_result[10]}; // A_51 = A_51 - L_50 * L_01 = A_51 - L_50 * L_10
+					temp[5][2] <= temp[5][2] - {{9{i.array_mult_result[11][26]}}, i.array_mult_result[11]}; // A_52 = A_52 - L_50 * L_02 = A_52 - L_50 * L_20
+					temp[5][3] <= temp[5][3] - {{9{i.array_mult_result[12][26]}}, i.array_mult_result[12]}; // A_53 = A_53 - L_50 * L_03 = A_53 - L_50 * L_30
+					temp[5][4] <= temp[5][4] - {{9{i.array_mult_result[13][26]}}, i.array_mult_result[13]}; // A_54 = A_54 - L_50 * L_04 = A_54 - L_50 * L_40
+					temp[5][5] <= temp[5][5] - {{9{i.array_mult_result[14][26]}}, i.array_mult_result[14]}; // A_55 = A_55 - L_50 * L_05 = A_55 - L_50 * L_50
 				end
 				8'd147: begin
-					temp[2][2] <= temp[2][2] - i.array_mult_result[0]; // A_22 = A_22 - L_21 * L_12 = A_22 - L_21 * L_21
-					temp[3][2] <= temp[3][2] - i.array_mult_result[1]; // A_32 = A_32 - L_31 * L_12 = A_32 - L_31 * L_21
-					temp[3][3] <= temp[3][3] - i.array_mult_result[2]; // A_33 = A_33 - L_31 * L_13 = A_33 - L_31 * L_31
-					temp[4][2] <= temp[4][2] - i.array_mult_result[3]; // A_42 = A_42 - L_41 * L_12 = A_42 - L_41 * L_21
-					temp[4][3] <= temp[4][3] - i.array_mult_result[4]; // A_43 = A_43 - L_41 * L_13 = A_43 - L_41 * L_31
-					temp[4][4] <= temp[4][4] - i.array_mult_result[5]; // A_44 = A_44 - L_41 * L_14 = A_44 - L_41 * L_41
-					temp[5][2] <= temp[5][2] - i.array_mult_result[6]; // A_52 = A_52 - L_51 * L_12 = A_52 - L_51 * L_21
-					temp[5][3] <= temp[5][3] - i.array_mult_result[7]; // A_53 = A_53 - L_51 * L_13 = A_53 - L_51 * L_31
-					temp[5][4] <= temp[5][4] - i.array_mult_result[8]; // A_54 = A_54 - L_51 * L_14 = A_54 - L_51 * L_41
-					temp[5][5] <= temp[5][5] - i.array_mult_result[9]; // A_55 = A_55 - L_51 * L_15 = A_55 - L_51 * L_51
+					temp[2][2] <= temp[2][2] - {{9{i.array_mult_result[0][26]}}, i.array_mult_result[0]}; // A_22 = A_22 - L_21 * L_12 = A_22 - L_21 * L_21
+					temp[3][2] <= temp[3][2] - {{9{i.array_mult_result[1][26]}}, i.array_mult_result[1]};  // A_32 = A_32 - L_31 * L_12 = A_32 - L_31 * L_21
+					temp[3][3] <= temp[3][3] - {{9{i.array_mult_result[2][26]}}, i.array_mult_result[2]}; // A_33 = A_33 - L_31 * L_13 = A_33 - L_31 * L_31
+					temp[4][2] <= temp[4][2] - {{9{i.array_mult_result[3][26]}}, i.array_mult_result[3]}; // A_42 = A_42 - L_41 * L_12 = A_42 - L_41 * L_21
+					temp[4][3] <= temp[4][3] - {{9{i.array_mult_result[4][26]}}, i.array_mult_result[4]}; // A_43 = A_43 - L_41 * L_13 = A_43 - L_41 * L_31
+					temp[4][4] <= temp[4][4] - {{9{i.array_mult_result[5][26]}}, i.array_mult_result[5]}; // A_44 = A_44 - L_41 * L_14 = A_44 - L_41 * L_41
+					temp[5][2] <= temp[5][2] - {{9{i.array_mult_result[6][26]}}, i.array_mult_result[6]}; // A_52 = A_52 - L_51 * L_12 = A_52 - L_51 * L_21
+					temp[5][3] <= temp[5][3] - {{9{i.array_mult_result[7][26]}}, i.array_mult_result[7]}; // A_53 = A_53 - L_51 * L_13 = A_53 - L_51 * L_31
+					temp[5][4] <= temp[5][4] - {{9{i.array_mult_result[8][26]}}, i.array_mult_result[8]}; // A_54 = A_54 - L_51 * L_14 = A_54 - L_51 * L_41
+					temp[5][5] <= temp[5][5] - {{9{i.array_mult_result[9][26]}}, i.array_mult_result[9]}; // A_55 = A_55 - L_51 * L_15 = A_55 - L_51 * L_51
 				end
 				8'd165: begin
-					temp[3][3] <= temp[3][3] - i.array_mult_result[0]; // A_33 = A_33 - L_32 * L_23 = A_33 - L_32 * L_32
-					temp[4][3] <= temp[4][3] - i.array_mult_result[1]; // A_43 = A_43 - L_42 * L_23 = A_43 - L_42 * L_32
-					temp[4][4] <= temp[4][4] - i.array_mult_result[2]; // A_44 = A_44 - L_42 * L_24 = A_44 - L_42 * L_42
-					temp[5][3] <= temp[5][3] - i.array_mult_result[3]; // A_53 = A_53 - L_52 * L_23 = A_53 - L_52 * L_32
-					temp[5][4] <= temp[5][4] - i.array_mult_result[4]; // A_54 = A_54 - L_52 * L_24 = A_54 - L_52 * L_42
-					temp[5][5] <= temp[5][5] - i.array_mult_result[5]; // A_55 = A_55 - L_52 * L_25 = A_55 - L_52 * L_52 
+					temp[3][3] <= temp[3][3] - {{9{i.array_mult_result[0][26]}}, i.array_mult_result[0]}; // A_33 = A_33 - L_32 * L_23 = A_33 - L_32 * L_32
+					temp[4][3] <= temp[4][3] - {{9{i.array_mult_result[1][26]}}, i.array_mult_result[1]}; // A_43 = A_43 - L_42 * L_23 = A_43 - L_42 * L_32
+					temp[4][4] <= temp[4][4] - {{9{i.array_mult_result[2][26]}}, i.array_mult_result[2]}; // A_44 = A_44 - L_42 * L_24 = A_44 - L_42 * L_42
+					temp[5][3] <= temp[5][3] - {{9{i.array_mult_result[3][26]}}, i.array_mult_result[3]}; // A_53 = A_53 - L_52 * L_23 = A_53 - L_52 * L_32
+					temp[5][4] <= temp[5][4] - {{9{i.array_mult_result[4][26]}}, i.array_mult_result[4]}; // A_54 = A_54 - L_52 * L_24 = A_54 - L_52 * L_42
+					temp[5][5] <= temp[5][5] - {{9{i.array_mult_result[5][26]}}, i.array_mult_result[5]}; // A_55 = A_55 - L_52 * L_25 = A_55 - L_52 * L_52 
 				end
 				8'd183: begin
-					temp[4][4] <= temp[4][4] - i.array_mult_result[0]; // A_44 = A_44 - L_43 * L_34 = A_44 - L_43 * L_43
-					temp[5][4] <= temp[5][4] - i.array_mult_result[1]; // A_54 = A_54 - L_53 * L_34 = A_54 - L_53 * L_43
-					temp[5][5] <= temp[5][5] - i.array_mult_result[2]; // A_55 = A_55 - L_53 * L_35 = A_55 - L_53 * L_53
+					temp[4][4] <= temp[4][4] - {{9{i.array_mult_result[0][26]}}, i.array_mult_result[0]}; // A_44 = A_44 - L_43 * L_34 = A_44 - L_43 * L_43
+					temp[5][4] <= temp[5][4] - {{9{i.array_mult_result[1][26]}}, i.array_mult_result[1]}; // A_54 = A_54 - L_53 * L_34 = A_54 - L_53 * L_43
+					temp[5][5] <= temp[5][5] - {{9{i.array_mult_result[2][26]}}, i.array_mult_result[2]}; // A_55 = A_55 - L_53 * L_35 = A_55 - L_53 * L_53
 				end
 				8'd201: begin
-					temp[5][5] <= temp[5][5] - i.array_mult_result[0]; // A_55 = A_55 - L_54 * L_45 = A_55 - L_54 * L_54
+					temp[5][5] <= temp[5][5] - {{9{i.array_mult_result[0][26]}}, i.array_mult_result[0]}; // A_55 = A_55 - L_54 * L_45 = A_55 - L_54 * L_54
 				end
 				default: begin
 				end

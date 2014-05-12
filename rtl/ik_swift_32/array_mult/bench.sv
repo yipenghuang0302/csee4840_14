@@ -36,18 +36,18 @@ program array_mult_tb (ifc_array_mult.array_mult_tb ds);
 		repeat (env.max_transactions) begin
 			trans.randomize();
 
-			//wrap input numbers to -64 ~ 64
+			//wrap input numbers to -32 ~ 32
 			for (int i=0; i<n; i++) begin // product row
 				trans.fraction_a[i] = real'(trans.increment_a[i]) / 2147483648.0;
 				trans.fraction_b[i] = real'(trans.increment_b[i]) / 2147483648.0;
-				trans.dataa[i] = -512.0 + trans.fraction_a[i] * 2 * 512.0;
-				trans.datab[i] = -512.0 + trans.fraction_b[i] * 2 * 512.0;
+				trans.dataa[i] = -32.0 + trans.fraction_a[i] * 2 * 32.0;
+				trans.datab[i] = -32.0 + trans.fraction_b[i] * 2 * 32.0;
 				// $display("i=%d", i);
 				// $display("fraction_a = %f, dataa = %f", trans.fraction_a[i], trans.dataa[i]);
 				// $display("fraction_b = %f, datab = %f", trans.fraction_b[i], trans.datab[i]);
 				// passing data to design under test happens here
-				ds.cb.dataa[i] <= longint'(trans.dataa[i] * 65536.0);
-				ds.cb.datab[i] <= longint'(trans.datab[i] * 65536.0);
+				ds.cb.dataa[i] <= int'(trans.dataa[i] * 65536.0);
+				ds.cb.datab[i] <= int'(trans.datab[i] * 65536.0);
 			end
 
 			ds.cb.en <= trans.en;

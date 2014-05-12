@@ -128,22 +128,11 @@ module ik_swift (
 	assign ifc_array_mult.en = i.en && !i.done;
 	assign ifc_array_mult.rst = i.rst;
 	// Output to array multipliers
-	genvar index;
-	generate
-		for ( index=0 ; index<9; index++ ) begin
-			assign ifc_array_mult.dataa[index] =
-				{{9{i_jac.array_mult_dataa[index][26]}}, i_jac.array_mult_dataa[index]} |
-				ifc_inverse.array_mult_dataa[index];
-			assign ifc_array_mult.datab[index] =
-				{{9{i_jac.array_mult_datab[index][26]}}, i_jac.array_mult_datab[index]} |
-				ifc_inverse.array_mult_datab[index];
-			assign i_jac.array_mult_result[index] = ifc_array_mult.result[index][26:0];
-		end
-	endgenerate
-	assign ifc_array_mult.dataa[14:9] = ifc_inverse.array_mult_dataa[14:9]; // exclusive use
-	assign ifc_array_mult.datab[14:9] = ifc_inverse.array_mult_datab[14:9]; // exclusive use
-	array_mult array_mult (ifc_array_mult.array_mult);
+	assign ifc_array_mult.dataa = { {6{27'b0}}, i_jac.array_mult_dataa } | ifc_inverse.array_mult_dataa;
+	assign ifc_array_mult.datab = { {6{27'b0}}, i_jac.array_mult_datab } | ifc_inverse.array_mult_datab;
+	assign i_jac.array_mult_result = ifc_array_mult.result[8:0];
 	assign ifc_inverse.array_mult_result = ifc_array_mult.result;
+	array_mult array_mult (ifc_array_mult.array_mult);
 
 	// MATRIX MULTIPLY FOR JT * INVERSE
 	// MAT_MULT INPUTS

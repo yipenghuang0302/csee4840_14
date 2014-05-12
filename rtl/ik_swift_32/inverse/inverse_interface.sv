@@ -29,10 +29,10 @@ logic [5:0] [5:0] [35:0] mat_mult_datab;
 logic [5:0] [5:0] [35:0] mat_mult_result;
 
 // Output to array multipliers
-logic [14:0] [35:0] array_mult_dataa;
-logic [14:0] [35:0] array_mult_datab;
+logic [14:0] [26:0] array_mult_dataa;
+logic [14:0] [26:0] array_mult_datab;
 // Input from array multipliers
-logic [14:0] [35:0] array_mult_result;
+logic [14:0] [26:0] array_mult_result;
 
 // clocking cb @(posedge clk);
 // 	output en;
