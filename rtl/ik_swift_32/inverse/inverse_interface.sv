@@ -13,20 +13,20 @@ logic en, rst;
 logic [7:0] count;
 
 // Matrix that needs to be inversed
-logic [5:0][5:0][35:0] matrix;
+logic [5:0] [5:0] [26:0] matrix;
 
 // LT decomposition of given matrix
-logic [5:0][5:0][35:0] lt;
+logic [5:0] [5:0] [26:0] lt;
 // LT inverse
-logic [5:0][5:0][35:0] lt_inverse;
+logic [5:0] [5:0] [26:0] lt_inverse;
 // Inverse of given matrix
-logic [5:0][5:0][35:0] inverse;
+logic [5:0] [5:0] [26:0] inverse;
 
 // Output to matrix multipliers
-logic [5:0] [5:0] [35:0] mat_mult_dataa;
-logic [5:0] [5:0] [35:0] mat_mult_datab;
+logic [5:0] [5:0] [26:0] mat_mult_dataa;
+logic [5:0] [5:0] [26:0] mat_mult_datab;
 // Input from matrix multipliers
-logic [5:0] [5:0] [35:0] mat_mult_result;
+logic [5:0] [5:0] [26:0] mat_mult_result;
 
 // Output to array multipliers
 logic [14:0] [26:0] array_mult_dataa;

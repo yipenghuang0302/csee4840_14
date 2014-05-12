@@ -41,7 +41,7 @@ program jacobian_tb (ifc_jacobian.jacobian_tb ds);
 				for ( int row=0 ; row<4 ; row++ ) begin // row index
 					for ( int col=0 ; col<4 ; col++ ) begin // col index
 						trans.full_mat_fraction[joint][row][col] = real'(trans.full_mat_increment[joint][row][col]) / 2147483648.0;
-						trans.full_mat_data[joint][row][col] = -256.0 + trans.full_mat_fraction[joint][row][col] * 2 * 256.0;
+						trans.full_mat_data[joint][row][col] = -16.0 + trans.full_mat_fraction[joint][row][col] * 2 * 16.0;
 						// $display("joint, row, col = %d", joint, row, col);
 						// $display("data = %f", trans.full_mat_data[joint][row][col]);
 						ds.cb.full_matrix[joint][row][col] <= int'(trans.full_mat_data[joint][row][col] * 65536.0);

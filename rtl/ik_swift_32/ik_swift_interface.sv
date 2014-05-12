@@ -17,23 +17,23 @@ logic [5:0] joint_type;
 // dh joint parameters
 logic [5:0] [20:0] dh_dyn_in;
 // target coordinates
-logic [5:0] [35:0] target;
+logic [5:0] [26:0] target;
 
 // TEST OUTPUTS
 // jacobian
-logic [5:0] [5:0] [35:0] jacobian_matrix;
+logic [5:0] [5:0] [26:0] jacobian_matrix;
 // jacobian * jacobian transpose + bias
-logic [5:0] [5:0] [35:0] jjt_bias;
+logic [5:0] [5:0] [26:0] jjt_bias;
 // LT decomposition of given matrix
-logic [5:0] [5:0] [35:0] lt;
+logic [5:0] [5:0] [26:0] lt;
 // inverse of LT matrix
-logic [5:0] [5:0] [35:0] lt_inverse;
+logic [5:0] [5:0] [26:0] lt_inverse;
 // inverse of given matrix
-logic [5:0] [5:0] [35:0] inverse;
+logic [5:0] [5:0] [26:0] inverse;
 // damped least squares matrix
-logic [5:0] [5:0] [35:0] dls;
+logic [5:0] [5:0] [26:0] dls;
 // deltas for joint parameters
-logic [5:0] [35:0] delta;
+logic [5:0] [26:0] delta;
 
 // OUTPUTS
 // dh joint parameters

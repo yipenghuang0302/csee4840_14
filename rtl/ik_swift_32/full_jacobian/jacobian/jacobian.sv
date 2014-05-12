@@ -161,16 +161,16 @@ module jacobian (
 							i.jacobian_matrix[0][col] <= i.mat_mult_result[5-col][5] - i.mat_mult_result[5-col][4];
 							i.jacobian_matrix[1][col] <= i.mat_mult_result[5-col][3] - i.mat_mult_result[5-col][2];
 							i.jacobian_matrix[2][col] <= i.mat_mult_result[5-col][1] - i.mat_mult_result[5-col][0];
-							i.jacobian_matrix[3][col] <= {{9{i.axis[col][0][26]}}, i.axis[col][0]};
-							i.jacobian_matrix[4][col] <= {{9{i.axis[col][1][26]}}, i.axis[col][1]};
-							i.jacobian_matrix[5][col] <= {{9{i.axis[col][2][26]}}, i.axis[col][2]};
+							i.jacobian_matrix[3][col] <= i.axis[col][0];
+							i.jacobian_matrix[4][col] <= i.axis[col][1];
+							i.jacobian_matrix[5][col] <= i.axis[col][2];
 						end else if ( i.joint_type[col]==1'b0 ) begin
-							i.jacobian_matrix[0][col] <= {{9{i.axis[col][0][26]}}, i.axis[col][0]};
-							i.jacobian_matrix[1][col] <= {{9{i.axis[col][1][26]}}, i.axis[col][1]};
-							i.jacobian_matrix[2][col] <= {{9{i.axis[col][2][26]}}, i.axis[col][2]};
-							i.jacobian_matrix[3][col] <= 36'b0;
-							i.jacobian_matrix[4][col] <= 36'b0;
-							i.jacobian_matrix[5][col] <= 36'b0;
+							i.jacobian_matrix[0][col] <= i.axis[col][0];
+							i.jacobian_matrix[1][col] <= i.axis[col][1];
+							i.jacobian_matrix[2][col] <= i.axis[col][2];
+							i.jacobian_matrix[3][col] <= 27'b0;
+							i.jacobian_matrix[4][col] <= 27'b0;
+							i.jacobian_matrix[5][col] <= 27'b0;
 						end
 		end // end col loop
 	endgenerate

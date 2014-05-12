@@ -30,14 +30,14 @@ program array_div_tb (ifc_array_div.array_div_tb ds);
 		for (int i=0; i<n; i++) begin // product row
 			trans.fraction_dividends[i] = real'(trans.increment_dividends[i]) / 2147483648.0;
 			trans.fraction_divisor = real'(trans.increment_divisor) / 2147483648.0;
-			trans.dividends[i] = -262144.0 + trans.fraction_dividends[i] * 2 * 262144.0;
-			trans.divisor = -262144.0 + trans.fraction_divisor * 2 * 262144.0;
+			trans.dividends[i] = -64.0 + trans.fraction_dividends[i] * 2 * 64.0;
+			trans.divisor = -64.0 + trans.fraction_divisor * 2 * 64.0;
 			// $display("i=%d", i);
 			// $display("fraction_dividends = %f, dividends = %f", trans.fraction_dividends[i], trans.dividends[i]);
 			// $display("fraction_divisor = %f, divisor = %f", trans.fraction_divisor, trans.divisor);
 			// passing data to design under test happens here
-			ds.cb.dividends[i] <= longint'(trans.dividends[i] * 65536.0);
-			ds.cb.divisor <= longint'(trans.divisor * 65536.0);
+			ds.cb.dividends[i] <= int'(trans.dividends[i] * 65536.0);
+			ds.cb.divisor <= int'(trans.divisor * 65536.0);
 		end
 
 		ds.cb.en <= 1'b1;

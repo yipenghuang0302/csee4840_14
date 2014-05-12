@@ -44,7 +44,7 @@ program lt_block_tb (ifc_lt_block.lt_block_tb ds);
 
 					// $display("row, col = %d", row, col);
 					// $display("data = %f", trans.lt_data[row][col]);
-					ds.cb.lt[row][col] <= longint'(trans.lt_data[row][col] * 65536.0);
+					ds.cb.lt[row][col] <= int'(trans.lt_data[row][col] * 65536.0);
 				end
 			end
 

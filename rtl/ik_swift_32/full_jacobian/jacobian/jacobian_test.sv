@@ -68,7 +68,7 @@ class jacobian_test;
 	function void check_jacobian (
 		logic [6:0] [2:0] [26:0] axis,
 		logic [5:0] [2:0] [26:0] dist_to_end,
-		logic [5:0] [5:0] [35:0] jacobian_matrix
+		logic [5:0] [5:0] [26:0] jacobian_matrix
 	);
 
 		real abs_tol = 0.001;
@@ -125,7 +125,7 @@ class jacobian_test;
 		// CHECK JACOBIAN
 		for ( int i=0 ; i<6 ; i++ ) begin // full matrix row
 			for ( int j=0 ; j<6 ; j++ ) begin // full matrix column
-				jacobian_real[i][j] = real'(longint'({{28{jacobian_matrix[i][j][35]}}, jacobian_matrix[i][j]}))/65536.0;
+				jacobian_real[i][j] = real'(int'({{5{jacobian_matrix[i][j][26]}}, jacobian_matrix[i][j]}))/65536.0;
 				jacobian_error[i][j] = abs( jacobian_real[i][j] - model_jacobian_matrix[i][j] );
 				jacobian_percent[i][j] = abs( jacobian_error[i][j] / model_jacobian_matrix[i][j] );
 				if (jacobian_error[i][j]>abs_tol && jacobian_percent[i][j]>rel_tol) begin

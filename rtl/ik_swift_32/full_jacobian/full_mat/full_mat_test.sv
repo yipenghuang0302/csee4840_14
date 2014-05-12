@@ -72,10 +72,12 @@ class full_mat_test;
 					percent[i][j] = abs( error[i][j] / model_full_matrix[joint][i][j] );
 					if (error[i][j]>abs_tol && percent[i][j]>rel_tol) begin
 						$write("%t : fail full_mat joint=%d i=%d j=%d\n", $realtime, joint, i, j);
-						$write("model_full_matrix=%f; dut_result=%f; error=%f.\n", model_full_matrix[joint][i][j], real_result[i][j], error[i][j]);
-						$write("model_full_matrix=%f; dut_result=%f; percent=%f.\n", model_full_matrix[joint][i][j], real_result[i][j], percent[i][j]);
+						// $write("model_full_matrix=%f; dut_result=%f; error=%f.\n", model_full_matrix[joint][i][j], real_result[i][j], error[i][j]);
+						// $write("model_full_matrix=%f; dut_result=%f; percent=%f.\n", model_full_matrix[joint][i][j], real_result[i][j], percent[i][j]);
 						passed = 1'b0;
 					end
+					$write("model_full_matrix=%f; dut_result=%f; error=%f.\n", model_full_matrix[joint][i][j], real_result[i][j], error[i][j]);
+					$write("model_full_matrix=%f; dut_result=%f; percent=%f.\n", model_full_matrix[joint][i][j], real_result[i][j], percent[i][j]);
 				end
 			end
 		end

@@ -9,9 +9,9 @@ module mat_mult (
 
 	parameter n = 6;
 
-	logic [n-1:0] [n-1:0] [35:0] mult_array_dataa;
-	logic [n-1:0] [n-1:0] [35:0] mult_array_datab;
-	logic [n-1:0] [n-1:0] [35:0] mult_array_result;
+	logic [n-1:0] [n-1:0] [26:0] mult_array_dataa;
+	logic [n-1:0] [n-1:0] [26:0] mult_array_datab;
+	logic [n-1:0] [n-1:0] [26:0] mult_array_result;
 
 	mult_array #(n) mult_array (
 		.clk(i.clk),
@@ -70,14 +70,14 @@ module mat_mult (
 							mult_array_datab <= {6{i.datab[0][5], i.datab[0][4], i.datab[0][3], i.datab[0][2], i.datab[0][1], i.datab[0][0]}};
 						end
 						default: begin
-							mult_array_dataa <= {36{36'b0}};
-							mult_array_datab <= {36{36'b0}};
+							mult_array_dataa <= {36{27'b0}};
+							mult_array_datab <= {36{27'b0}};
 						end
 					endcase
 				end
 				default: begin
-					mult_array_dataa <= {36{36'b0}};
-					mult_array_datab <= {36{36'b0}};
+					mult_array_dataa <= {36{27'b0}};
+					mult_array_datab <= {36{27'b0}};
 				end
 			endcase
 
@@ -88,7 +88,7 @@ module mat_mult (
 			for ( jndex=n-1 ; jndex>=0 ; jndex-- ) begin: adder_col
 				always_ff @(posedge i.clk) begin
 					if ( i.rst ) begin
-						i.result[index][jndex] <= 36'b0;
+						i.result[index][jndex] <= 27'b0;
 					end else if (i.en) begin
 						if ( i.mat_mode ) begin // matrix multiplier mode
 							if ( i.en && (count==4'd5) ) begin

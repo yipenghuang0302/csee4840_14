@@ -58,7 +58,7 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 				// trans.z_data[z] = -4.0 + trans.z_fraction[z] * 2 * 4.0;
 				$display("z = %d", z);
 				$display("data = %f", trans.z_data[z]);
-				ds.cb.z[z] <= longint'(trans.z_data[z] * 65536.0);
+				ds.cb.z[z] <= int'(trans.z_data[z] * 65536.0);
 			end
 
 			// RANDOMIZE TARGET COORDINATE VECTOR
@@ -77,7 +77,7 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 				trans.target_data[5] = 0.0;
 				$display("target coordinate = %d", index);
 				$display("data = %f", trans.target_data[index]);
-				ds.cb.target[index] <= longint'(trans.target_data[index] * 65536.0);
+				ds.cb.target[index] <= int'(trans.target_data[index] * 65536.0);
 			end
 
 			// RANDOMIZE DH_PARAMS
@@ -125,7 +125,7 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 				$display("d = %f", trans.dh_data[joint][D_PARAM]);
 				$display("alpha = %f", trans.dh_data[joint][ALPHA]);
 				// for ( int param=0 ; param<4 ; param++ ) begin // dh param
-				ds.cb.dh_dyn_in[joint]/*[param]*/ <= longint'(trans.dh_data[joint][THETA] * 65536.0);
+				ds.cb.dh_dyn_in[joint]/*[param]*/ <= int'(trans.dh_data[joint][THETA] * 65536.0);
 				// end
 			end
 
@@ -168,7 +168,7 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 						while (trans.dh_data[joint][THETA]<-3.141592653589793238462643383279502884197)
 							trans.dh_data[joint][THETA] = trans.dh_data[joint][THETA] + 2*3.141592653589793238462643383279502884197;
 						// end
-						ds.cb.dh_dyn_in[joint]/*[param]*/ <= longint'(trans.dh_data[joint][THETA] * 65536.0);
+						ds.cb.dh_dyn_in[joint]/*[param]*/ <= int'(trans.dh_data[joint][THETA] * 65536.0);
 						// end
 					end
 

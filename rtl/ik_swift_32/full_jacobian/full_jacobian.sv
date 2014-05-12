@@ -16,14 +16,7 @@ module full_jacobian (
 	assign ifc_full_mat.dh_param = i.dh_param;
 	// shared multipliers
 	assign ifc_full_mat.array_mult_result = i.array_mult_result[5:0];
-	genvar index, jndex;
-	generate
-		for ( index=0 ; index<6; index++ ) begin: full_mat_row
-			for ( jndex=0 ; jndex<6; jndex++ ) begin: full_mat_col
-				assign ifc_full_mat.mat_mult_result[index][jndex] = i.mat_mult_result[index][jndex][26:0];
-			end
-		end
-	endgenerate
+	assign ifc_full_mat.mat_mult_result = i.mat_mult_result;
 	full_mat full_mat (ifc_full_mat.full_mat);
 	// outputs
 	assign i.full_matrix = ifc_full_mat.full_matrix;
@@ -48,16 +41,16 @@ module full_jacobian (
 	assign i.jacobian_matrix = ifc_jacobian.jacobian_matrix;
 
 	// MATRIX MULTIPLY FOR JJT JACOBIAN * JACOBIAN TRANSPOSE
-	logic [5:0] [5:0] [35:0] jjt_dataa;
-	logic [5:0] [5:0] [35:0] jjt_datab;
+	logic [5:0] [5:0] [26:0] jjt_dataa;
+	logic [5:0] [5:0] [26:0] jjt_datab;
 
 	// MAT_MULT INPUTS
 	always_ff @(posedge i.clk)
 		if (i.en)
 			case (i.count)
 				8'd0: begin
-					jjt_dataa <= {36{36'b0}};
-					jjt_datab <= {36{36'b0}};
+					jjt_dataa <= {36{27'b0}};
+					jjt_datab <= {36{27'b0}};
 				end
 				8'd99: begin
 					jjt_dataa <= i.jacobian_matrix;
@@ -71,8 +64,8 @@ module full_jacobian (
 					};
 				end
 				8'd111: begin
-					jjt_dataa <= {36{36'b0}};
-					jjt_datab <= {36{36'b0}};
+					jjt_dataa <= {36{27'b0}};
+					jjt_datab <= {36{27'b0}};
 				end
 				default: begin
 					jjt_dataa <= jjt_dataa;
@@ -85,29 +78,17 @@ module full_jacobian (
 		if (i.en)
 			if ( i.count==8'd111 )
 				i.jjt_bias <= i.mat_mult_result + {
-				{ 36'd4, 36'b0, 36'b0, 36'b0, 36'b0, 36'b0 },
-				{ 36'b0, 36'd4, 36'b0, 36'b0, 36'b0, 36'b0 },
-				{ 36'b0, 36'b0, 36'd4, 36'b0, 36'b0, 36'b0 },
-				{ 36'b0, 36'b0, 36'b0, 36'd4, 36'b0, 36'b0 },
-				{ 36'b0, 36'b0, 36'b0, 36'b0, 36'd4, 36'b0 },
-				{ 36'b0, 36'b0, 36'b0, 36'b0, 36'b0, 36'd4 }};
+				{ 27'd4, 27'b0, 27'b0, 27'b0, 27'b0, 27'b0 },
+				{ 27'b0, 27'd4, 27'b0, 27'b0, 27'b0, 27'b0 },
+				{ 27'b0, 27'b0, 27'd4, 27'b0, 27'b0, 27'b0 },
+				{ 27'b0, 27'b0, 27'b0, 27'd4, 27'b0, 27'b0 },
+				{ 27'b0, 27'b0, 27'b0, 27'b0, 27'd4, 27'b0 },
+				{ 27'b0, 27'b0, 27'b0, 27'b0, 27'b0, 27'd4 }};
 
 	// timing design prevents module outputs to shared multipliers colliding
 	assign i.array_mult_dataa = {81'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;
 	assign i.array_mult_datab = {81'b0,ifc_full_mat.array_mult_datab} | ifc_jacobian.array_mult_datab;
-	generate
-		for ( index=0 ; index<6; index++ ) begin: result_row
-			for ( jndex=0 ; jndex<6; jndex++ ) begin: result_col
-				assign i.mat_mult_dataa[index][jndex] =
-					{{9{ifc_full_mat.mat_mult_dataa[index][jndex][26]}}, ifc_full_mat.mat_mult_dataa[index][jndex]} |
-					{{9{ifc_jacobian.mat_mult_dataa[index][jndex][26]}}, ifc_jacobian.mat_mult_dataa[index][jndex]} |
-					jjt_dataa[index][jndex];
-				assign i.mat_mult_datab[index][jndex] =
-					{{9{ifc_full_mat.mat_mult_datab[index][jndex][26]}}, ifc_full_mat.mat_mult_datab[index][jndex]} |
-					{{9{ifc_jacobian.mat_mult_datab[index][jndex][26]}}, ifc_jacobian.mat_mult_datab[index][jndex]} |
-					jjt_datab[index][jndex];
-			end
-		end
-	endgenerate
+	assign i.mat_mult_dataa = ifc_full_mat.mat_mult_dataa | ifc_jacobian.mat_mult_dataa | jjt_dataa;
+	assign i.mat_mult_datab = ifc_full_mat.mat_mult_datab | ifc_jacobian.mat_mult_datab | jjt_datab;
 
 endmodule

@@ -49,7 +49,7 @@ class lt_block_test;
 	endfunction
 
 	function void check_lt_block (
-		logic [5:0] [5:0] [35:0] lt_inverse
+		logic [5:0] [5:0] [26:0] lt_inverse
 	);
 
 		real abs_tol = 0.01;
@@ -64,7 +64,7 @@ class lt_block_test;
 		// CHECK lt_inverse
 		for ( int i=0 ; i<n ; i++ ) begin // lt_inverse row
 			for ( int j=0 ; j<n ; j++ ) begin // lt_inverse column
-				lt_inverse_real[i][j] = real'(longint'({{28{lt_inverse[i][j][35]}}, lt_inverse[i][j]}))/65536.0;
+				lt_inverse_real[i][j] = real'(int'({{5{lt_inverse[i][j][26]}}, lt_inverse[i][j]}))/65536.0;
 				lt_inverse_error[i][j] = abs( lt_inverse_real[i][j] - m_lt_inv[i][j] );
 				lt_inverse_percent[i][j] = abs( lt_inverse_error[i][j] / m_lt_inv[i][j] );
 				if (lt_inverse_error[i][j]>abs_tol && lt_inverse_percent[i][j]>rel_tol) begin

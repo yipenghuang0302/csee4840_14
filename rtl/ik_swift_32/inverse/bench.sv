@@ -51,7 +51,7 @@ program inverse_tb (ifc_inverse.inverse_tb ds);
 					end
 					// $display("row, col = %d", row, col);
 					// $display("data = %f", trans.matrix_data[row][col]);
-					ds.cb.matrix[row][col] <= longint'(trans.matrix_data[row][col] * 65536.0);
+					ds.cb.matrix[row][col] <= int'(trans.matrix_data[row][col] * 65536.0);
 				end
 			end
 

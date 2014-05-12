@@ -9,7 +9,7 @@
 
 `include "../../array_mult/array_mult_interface.sv"
 `include "../../array_mult/array_mult.sv"
-`include "../../array_mult/mult_27/mult_27.v"
+`include "../../mult_27/mult_27.v"
 
 `include "../../sim_models/lpm_mult.v"
 `include "../../sim_models/mult_block.v"
@@ -19,7 +19,7 @@
 
 `include "../array_div/array_div_interface.sv"
 `include "../array_div/array_div.sv"
-`include "../array_div/div_48/div_48.v"
+`include "../array_div/div_43/div_43.v"
 `include "../../sim_models/220model.v"
 
 module lt_block_top ();

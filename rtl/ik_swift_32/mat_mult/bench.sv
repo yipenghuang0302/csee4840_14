@@ -3,7 +3,7 @@
 
 class mat_mult_transaction;
 	rand logic en;
-	bit mat_mode = 1'b0;
+	bit mat_mode = 1'b1;
 	rand logic [6][6][30:0] increment_a;
 	rand logic [6][6][30:0] increment_b;
 endclass
@@ -39,14 +39,14 @@ program mat_mult_tb (ifc_mat_mult.mat_mult_tb ds);
 		repeat (env.max_transactions) begin
 			trans.randomize();
 
-			//wrap input numbers to -256 ~ 256
+			//wrap input numbers to -32 ~ 32
 			for (int i=0; i<n; i++) begin // product row
 				for (int j=0; j<n; j++) begin // product column
 					fraction_a[i][j] = real'(trans.increment_a[i][j]) / 2147483648.0;
 					fraction_b[i][j] = real'(trans.increment_b[i][j]) / 2147483648.0;
 
-					dataa[i][j] = -256.0 + fraction_a[i][j] * 2 * 256.0;
-					datab[i][j] = -256.0 + fraction_b[i][j] * 2 * 256.0;
+					dataa[i][j] = -2.0 + fraction_a[i][j] * 2 * 2.0;
+					datab[i][j] = -2.0 + fraction_b[i][j] * 2 * 2.0;
 
 					// $display("i=%d, j=%d", i, j);
 					// $display("fraction_a = %f, dataa = %f", fraction_a[i][j], dataa[i][j]);

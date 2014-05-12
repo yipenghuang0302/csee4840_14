@@ -28,7 +28,7 @@ logic [6:0] [2:0] [26:0] axis;
 logic [5:0] [2:0] [26:0] dist_to_end;
 
 // Jacobian
-logic [5:0] [5:0] [35:0] jacobian_matrix;
+logic [5:0] [5:0] [26:0] jacobian_matrix;
 
 // Output to array multipliers
 logic [8:0] [26:0] array_mult_dataa;
@@ -39,7 +39,7 @@ logic [8:0] [26:0] array_mult_result;
 logic [5:0] [5:0] [26:0] mat_mult_dataa;
 logic [5:0] [5:0] [26:0] mat_mult_datab;
 // Input from matrix multipliers
-logic [5:0] [5:0] [35:0] mat_mult_result;
+logic [5:0] [5:0] [26:0] mat_mult_result;
 
 // clocking cb @(posedge clk);
 // 	output en, rst;

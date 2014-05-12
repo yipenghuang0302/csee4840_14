@@ -102,8 +102,8 @@ module ik_swift (
 	assign i.inverse = ifc_inverse.inverse;
 
 	// MATRIX MULTIPLY FOR JT * INVERSE
-	logic [5:0] [5:0] [35:0] dls_mat_mult_dataa;
-	logic [5:0] [5:0] [35:0] dls_mat_mult_datab;
+	logic [5:0] [5:0] [26:0] dls_mat_mult_dataa;
+	logic [5:0] [5:0] [26:0] dls_mat_mult_datab;
 
 	// shared multipliers
 	// INSTANTIATE MAT MULT
@@ -140,8 +140,8 @@ module ik_swift (
 		if (i.en && !i.done)
 			case (count)
 				8'd0: begin
-					dls_mat_mult_dataa <= {36{36'b0}};
-					dls_mat_mult_datab <= {36{36'b0}};
+					dls_mat_mult_dataa <= {36{27'b0}};
+					dls_mat_mult_datab <= {36{27'b0}};
 				end
 				8'd228: begin
 					dls_mat_mult_dataa <= {
@@ -159,18 +159,18 @@ module ik_swift (
 					dls_mat_mult_dataa <= ifc_mat_mult.result; // DLS matrix
 					dls_mat_mult_datab <= {6{
 						// axis of rotation / translation for joints 1...6
-						i.target[5] - {{9{i_jac.axis[6][2][26]}}, i_jac.axis[6][2]}, // k unit vector
-						i.target[4] - {{9{i_jac.axis[6][1][26]}}, i_jac.axis[6][1]}, // j unit vector
-						i.target[3] - {{9{i_jac.axis[6][0][26]}}, i_jac.axis[6][0]}, // i unit vector
+						i.target[5] - i_jac.axis[6][2], // k unit vector
+						i.target[4] - i_jac.axis[6][1], // j unit vector
+						i.target[3] - i_jac.axis[6][0], // i unit vector
 						// multiplied results of transformation matrices
-						i.target[2] - {{9{i_jac.full_matrix[5][2][3][26]}}, i_jac.full_matrix[5][2][3]}, // z coordinate
-						i.target[1] - {{9{i_jac.full_matrix[5][1][3][26]}}, i_jac.full_matrix[5][1][3]}, // y coordinate
-						i.target[0] - {{9{i_jac.full_matrix[5][0][3][26]}}, i_jac.full_matrix[5][0][3]} // x coordinate
+						i.target[2] - i_jac.full_matrix[5][2][3], // z coordinate
+						i.target[1] - i_jac.full_matrix[5][1][3], // y coordinate
+						i.target[0] - i_jac.full_matrix[5][0][3] // x coordinate
 					}};
 				end
 				8'd247: begin
-					dls_mat_mult_dataa <= {36{36'b0}};
-					dls_mat_mult_datab <= {36{36'b0}};
+					dls_mat_mult_dataa <= {36{27'b0}};
+					dls_mat_mult_datab <= {36{27'b0}};
 				end
 				default: begin
 					dls_mat_mult_dataa <= dls_mat_mult_dataa;

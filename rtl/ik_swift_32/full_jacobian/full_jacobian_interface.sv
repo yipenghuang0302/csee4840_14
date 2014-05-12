@@ -21,13 +21,13 @@ logic [5:0] [3:0] [20:0] dh_param;
 
 // shared multipliers
 logic [8:0] [26:0] array_mult_result;
-logic [5:0] [5:0] [35:0] mat_mult_result;
+logic [5:0] [5:0] [26:0] mat_mult_result;
 
 // shared multipliers
 logic [8:0] [26:0] array_mult_dataa;
 logic [8:0] [26:0] array_mult_datab;
-logic [5:0] [5:0] [35:0] mat_mult_dataa;
-logic [5:0] [5:0] [35:0] mat_mult_datab;
+logic [5:0] [5:0] [26:0] mat_mult_dataa;
+logic [5:0] [5:0] [26:0] mat_mult_datab;
 
 // multiplied results of transformation matrices
 logic [5:0] [3:0] [3:0] [26:0] full_matrix;
@@ -39,10 +39,10 @@ logic [6:0] [2:0] [26:0] axis;
 logic [5:0] [2:0] [26:0] dist_to_end;
 
 // jacobian
-logic [5:0] [5:0] [35:0] jacobian_matrix;
+logic [5:0] [5:0] [26:0] jacobian_matrix;
 
 // jacobian * jacobian transpose + bias
-logic [5:0] [5:0] [35:0] jjt_bias;
+logic [5:0] [5:0] [26:0] jjt_bias;
 
 // clocking cb @(posedge clk);
 // 	output en;

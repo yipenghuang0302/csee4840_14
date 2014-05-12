@@ -10,9 +10,9 @@ interface ifc_mat_mult (
 parameter n = 6;
 
 logic en, rst, mat_mode;
-logic [5:0] [5:0] [35:0] dataa;
-logic [5:0] [5:0] [35:0] datab;
-logic [5:0] [5:0] [35:0] result;
+logic [5:0] [5:0] [26:0] dataa;
+logic [5:0] [5:0] [26:0] datab;
+logic [5:0] [5:0] [26:0] result;
 
 // clocking cb @(posedge clk);
 // 	output en;

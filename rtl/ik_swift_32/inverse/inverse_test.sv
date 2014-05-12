@@ -71,9 +71,9 @@ class inverse_test;
 	endfunction
 
 	function void check_inverse (
-		logic [5:0] [5:0] [35:0] lt,
-		logic [5:0] [5:0] [35:0] lt_inverse,
-		logic [5:0] [5:0] [35:0] inverse
+		logic [5:0] [5:0] [26:0] lt,
+		logic [5:0] [5:0] [26:0] lt_inverse,
+		logic [5:0] [5:0] [26:0] inverse
 	);
 
 		real abs_tol = 0.01;
@@ -96,7 +96,7 @@ class inverse_test;
 		// CHECK cholesky
 		for ( int i=0 ; i<n ; i++ ) begin // cholesky row
 			for ( int j=0 ; j<n ; j++ ) begin // cholesky column
-				lt_real[i][j] = real'(longint'({{28{lt[i][j][35]}}, lt[i][j]}))/65536.0;
+				lt_real[i][j] = real'(int'({{5{lt[i][j][26]}}, lt[i][j]}))/65536.0;
 				lt_error[i][j] = abs( lt_real[i][j] - m_lt[i][j] );
 				lt_percent[i][j] = abs( lt_error[i][j] / m_lt[i][j] );
 				if (lt_error[i][j]>abs_tol && lt_percent[i][j]>rel_tol) begin
@@ -113,7 +113,7 @@ class inverse_test;
 		// CHECK lt_inverse
 		for ( int i=0 ; i<n ; i++ ) begin // lt_inverse row
 			for ( int j=0 ; j<n ; j++ ) begin // lt_inverse column
-				lt_inverse_real[i][j] = real'(longint'({{28{lt_inverse[i][j][35]}}, lt_inverse[i][j]}))/65536.0;
+				lt_inverse_real[i][j] = real'(int'({{5{lt_inverse[i][j][26]}}, lt_inverse[i][j]}))/65536.0;
 				lt_inverse_error[i][j] = abs( lt_inverse_real[i][j] - m_lt_inv[i][j] );
 				lt_inverse_percent[i][j] = abs( lt_inverse_error[i][j] / m_lt_inv[i][j] );
 				if (lt_inverse_error[i][j]>abs_tol && lt_inverse_percent[i][j]>rel_tol) begin
@@ -130,7 +130,7 @@ class inverse_test;
 		// CHECK inverse
 		for ( int i=0 ; i<n ; i++ ) begin // inverse row
 			for ( int j=0 ; j<n ; j++ ) begin // inverse column
-				inverse_real[i][j] = real'(longint'({{28{inverse[i][j][35]}}, inverse[i][j]}))/65536.0;
+				inverse_real[i][j] = real'(int'({{5{inverse[i][j][26]}}, inverse[i][j]}))/65536.0;
 				inverse_error[i][j] = abs( inverse_real[i][j] - m_inverse[i][j] );
 				inverse_percent[i][j] = abs( inverse_error[i][j] / m_inverse[i][j] );
 				if (inverse_error[i][j]>abs_tol && inverse_percent[i][j]>rel_tol) begin

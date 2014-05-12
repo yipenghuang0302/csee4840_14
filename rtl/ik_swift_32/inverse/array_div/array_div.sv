@@ -9,21 +9,21 @@ module array_div (
 
 	parameter n = 6;
 
-	logic [n-1:0] [47:0] quotient;
-	logic [n-1:0] [35:0] remain;
+	logic [n-1:0] [42:0] quotient;
+	logic [n-1:0] [26:0] remain;
 
 	genvar index;
 	generate
-		for ( index=n-1 ; index>=0 ; index-- ) begin: div_48_row
-			div_48	div_48_inst (
+		for ( index=n-1 ; index>=0 ; index-- ) begin: div_43_row
+			div_43	div_43_inst (
 				.clken( i.en ),
 				.clock( i.clk ),
 				.denom ( i.divisor ),
-				.numer ( {i.dividends[index],12'b0} ),
+				.numer ( {i.dividends[index],16'b0} ),
 				.quotient ( quotient[index] ),
 				.remain ( remain[index] )
 				);
-			assign i.quotients[index] = {quotient[index][31:0], 4'b0};
+			assign i.quotients[index] = quotient[index][26:0];
 		end
 	endgenerate
 

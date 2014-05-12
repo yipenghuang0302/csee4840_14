@@ -4,12 +4,12 @@ class mat_mult_test;
 	int n = 6;
 
 	// if testing in parallel multiplier mode
-	int pipeline_depth = 7;
-	real model_result[7][6][6];
+	// int pipeline_depth = 7;
+	// real model_result[7][6][6];
 
 	// if testing in matrix multiplier mode
-	// int pipeline_depth = 2;
-	// real model_result[2][6][6];
+	int pipeline_depth = 2;
+	real model_result[2][6][6];
 
 	function real abs (real num); 
 	   abs = (num<0) ? -num : num; 
@@ -41,11 +41,11 @@ class mat_mult_test;
 	endfunction
 
 	function void check_mat_mult (
-		logic [5:0] [5:0] [35:0] dut_result
+		logic [5:0] [5:0] [26:0] dut_result
 	);
 
 		real abs_tol = 0.00002;
-		real rel_tol = 0.0001;
+		real rel_tol = 0.001;
 		real real_result[6][6];
 		real error[6][6];
 		real percent[6][6];
@@ -53,7 +53,7 @@ class mat_mult_test;
 
 		for (int i=0; i<n; i++) begin // product row
 			for (int j=0; j<n; j++) begin // product column
-				real_result[i][j] = real'(longint'({{28{dut_result[i][j][35]}}, dut_result[i][j]}))/65536.0;
+				real_result[i][j] = real'(int'({{5{dut_result[i][j][26]}}, dut_result[i][j]}))/65536.0;
 				error[i][j] = abs( real_result[i][j] - model_result[0][i][j] );
  				percent[i][j] = error[i][j] / model_result[0][i][j];
 				// if (error[i][j]>abs_tol) begin

@@ -1,12 +1,12 @@
-// megafunction wizard: %LPM_MULT%
+// megafunction wizard: %LPM_DIVIDE%
 // GENERATION: STANDARD
 // VERSION: WM1.0
-// MODULE: lpm_mult 
+// MODULE: LPM_DIVIDE 
 
 // ============================================================
-// File Name: mult_21.v
+// File Name: div_43.v
 // Megafunction Name(s):
-// 			lpm_mult
+// 			LPM_DIVIDE
 //
 // Simulation Library Files(s):
 // 			lpm
@@ -36,38 +36,42 @@
 // synopsys translate_off
 `timescale 1 ps / 1 ps
 // synopsys translate_on
-module mult_21 (
+module div_43 (
 	clken,
 	clock,
-	dataa,
-	datab,
-	result);
+	denom,
+	numer,
+	quotient,
+	remain);
 
 	input	  clken;
 	input	  clock;
-	input	[20:0]  dataa;
-	input	[20:0]  datab;
-	output	[41:0]  result;
+	input	[26:0]  denom;
+	input	[42:0]  numer;
+	output	[42:0]  quotient;
+	output	[26:0]  remain;
 
-	wire [41:0] sub_wire0;
-	wire [41:0] result = sub_wire0[41:0];
+	wire [26:0] sub_wire0;
+	wire [42:0] sub_wire1;
+	wire [26:0] remain = sub_wire0[26:0];
+	wire [42:0] quotient = sub_wire1[42:0];
 
-	lpm_mult	lpm_mult_component (
+	lpm_divide	LPM_DIVIDE_component (
 				.clock (clock),
-				.datab (datab),
 				.clken (clken),
-				.dataa (dataa),
-				.result (sub_wire0),
-				.aclr (1'b0),
-				.sum (1'b0));
+				.denom (denom),
+				.numer (numer),
+				.remain (sub_wire0),
+				.quotient (sub_wire1),
+				.aclr (1'b0));
 	defparam
-		lpm_mult_component.lpm_hint = "DEDICATED_MULTIPLIER_CIRCUITRY=YES,MAXIMIZE_SPEED=1",
-		lpm_mult_component.lpm_pipeline = 3,
-		lpm_mult_component.lpm_representation = "SIGNED",
-		lpm_mult_component.lpm_type = "LPM_MULT",
-		lpm_mult_component.lpm_widtha = 21,
-		lpm_mult_component.lpm_widthb = 21,
-		lpm_mult_component.lpm_widthp = 42;
+		LPM_DIVIDE_component.lpm_drepresentation = "SIGNED",
+		LPM_DIVIDE_component.lpm_hint = "MAXIMIZE_SPEED=6,LPM_REMAINDERPOSITIVE=FALSE",
+		LPM_DIVIDE_component.lpm_nrepresentation = "SIGNED",
+		LPM_DIVIDE_component.lpm_pipeline = 5,
+		LPM_DIVIDE_component.lpm_type = "LPM_DIVIDE",
+		LPM_DIVIDE_component.lpm_widthd = 27,
+		LPM_DIVIDE_component.lpm_widthn = 43;
 
 
 endmodule

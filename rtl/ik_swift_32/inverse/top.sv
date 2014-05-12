@@ -9,8 +9,8 @@
 
 `include "cholesky_block/cholesky_block_interface.sv"
 `include "cholesky_block/cholesky_block.sv"
-`include "cholesky_block/sqrt_52/sqrt_52_interface.sv"
-`include "cholesky_block/sqrt_52/sqrt_52.v"
+`include "cholesky_block/sqrt_43/sqrt_43_interface.sv"
+`include "cholesky_block/sqrt_43/sqrt_43.v"
 `include "../sim_models/altera_mf.v"
 
 `include "lt_block/lt_block_interface.sv"
@@ -18,17 +18,15 @@
 
 `include "array_div/array_div_interface.sv"
 `include "array_div/array_div.sv"
-`include "array_div/div_48/div_48.v"
+`include "array_div/div_43/div_43.v"
 `include "../sim_models/220model.v"
 
 `include "../mat_mult/mat_mult_interface.sv"
 `include "../mat_mult/mat_mult.sv"
 `include "../mat_mult/mult_array.sv"
-`include "../mat_mult/mult_36_dsp/mult_36_dsp.v"
-
 `include "../array_mult/array_mult_interface.sv"
 `include "../array_mult/array_mult.sv"
-`include "../array_mult/mult_27/mult_27.v"
+`include "../mult_27/mult_27.v"
 
 `include "../sim_models/lpm_mult.v"
 `include "../sim_models/mult_block.v"

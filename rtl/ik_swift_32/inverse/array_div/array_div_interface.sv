@@ -10,9 +10,9 @@ interface ifc_array_div (
 parameter n = 6;
 
 logic en, rst;
-logic [n-1:0] [35:0] dividends;
-logic [35:0] divisor;
-logic [n-1:0] [35:0] quotients;
+logic [n-1:0] [26:0] dividends;
+logic [26:0] divisor;
+logic [n-1:0] [26:0] quotients;
 
 // clocking cb @(posedge clk);
 // 	output en;

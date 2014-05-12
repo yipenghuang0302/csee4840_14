@@ -59,8 +59,8 @@ module inverse (
 		if (i.en)
 			case (i.count)
 				8'd0: begin
-					i.mat_mult_dataa <= {36{36'b0}};
-					i.mat_mult_datab <= {36{36'b0}};
+					i.mat_mult_dataa <= {36{27'b0}};
+					i.mat_mult_datab <= {36{27'b0}};
 				end
 				8'd215: begin
 					i.mat_mult_dataa <= {
@@ -74,8 +74,8 @@ module inverse (
 					i.mat_mult_datab <= i.lt_inverse;
 				end
 				8'd227: begin
-					i.mat_mult_dataa <= {36{36'b0}};
-					i.mat_mult_datab <= {36{36'b0}};
+					i.mat_mult_dataa <= {36{27'b0}};
+					i.mat_mult_datab <= {36{27'b0}};
 				end
 				default: begin
 					i.mat_mult_dataa <= i.mat_mult_dataa;

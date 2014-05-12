@@ -30,7 +30,7 @@ class cholesky_block_test;
 	endfunction
 
 	function void check_cholesky_block (
-		logic [5:0] [5:0] [35:0] lt
+		logic [5:0] [5:0] [26:0] lt
 	);
 
 		real abs_tol = 0.01;
@@ -45,7 +45,7 @@ class cholesky_block_test;
 		// CHECK cholesky_block
 		for ( int i=0 ; i<n ; i++ ) begin // cholesky row
 			for ( int j=0 ; j<n ; j++ ) begin // cholesky column
-				lt_real[i][j] = real'(longint'({{28{lt[i][j][35]}}, lt[i][j]}))/65536.0;
+				lt_real[i][j] = real'(int'({{5{lt[i][j][26]}}, lt[i][j]}))/65536.0;
 				lt_error[i][j] = abs( lt_real[i][j] - model_lt[i][j] );
 				lt_percent[i][j] = abs( lt_error[i][j] / model_lt[i][j] );
 				if (lt_error[i][j]>abs_tol && lt_percent[i][j]>rel_tol) begin

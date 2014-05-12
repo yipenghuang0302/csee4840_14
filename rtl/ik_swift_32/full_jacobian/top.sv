@@ -10,11 +10,9 @@
 `include "../mat_mult/mat_mult_interface.sv"
 `include "../mat_mult/mat_mult.sv"
 `include "../mat_mult/mult_array.sv"
-`include "../mat_mult/mult_36_dsp/mult_36_dsp.v"
-
 `include "../array_mult/array_mult_interface.sv"
 `include "../array_mult/array_mult.sv"
-`include "../array_mult/mult_27/mult_27.v"
+`include "../mult_27/mult_27.v"
 
 `include "../sim_models/lpm_mult.v"
 `include "../sim_models/mult_block.v"

@@ -212,13 +212,13 @@ class ik_swift_test;
 	endfunction
 
 	function void check_ik_swift (
-		logic [5:0] [5:0] [35:0] jacobian_matrix,
-		logic [5:0] [5:0] [35:0] jjt_bias,
-		logic [5:0] [5:0] [35:0] lt,
-		logic [5:0] [5:0] [35:0] lt_inverse,
-		logic [5:0] [5:0] [35:0] inverse,
-		logic [5:0] [5:0] [35:0] dls,
-		logic [5:0] [35:0] delta,
+		logic [5:0] [5:0] [26:0] jacobian_matrix,
+		logic [5:0] [5:0] [26:0] jjt_bias,
+		logic [5:0] [5:0] [26:0] lt,
+		logic [5:0] [5:0] [26:0] lt_inverse,
+		logic [5:0] [5:0] [26:0] inverse,
+		logic [5:0] [5:0] [26:0] dls,
+		logic [5:0] [26:0] delta,
 		logic done,
 		logic [5:0] /*[3:0]*/ [20:0] dh_dyn_out
 	);
@@ -269,7 +269,7 @@ class ik_swift_test;
 		// CHECK JACOBIAN
 		for ( int i=0 ; i<n ; i++ ) begin // jacobian matrix row
 			for ( int j=0 ; j<n ; j++ ) begin // jacobian matrix column
-				jacobian_real[i][j] = real'(longint'({{28{jacobian_matrix[i][j][35]}}, jacobian_matrix[i][j]}))/65536.0;
+				jacobian_real[i][j] = real'(int'({{5{jacobian_matrix[i][j][26]}}, jacobian_matrix[i][j]}))/65536.0;
 				jacobian_error[i][j] = abs( jacobian_real[i][j] - m_jacobian[i][j] );
 				jacobian_percent[i][j] = abs( jacobian_error[i][j] / m_jacobian[i][j] );
 				if (jacobian_error[i][j]>abs_tol && jacobian_percent[i][j]>rel_tol) begin
@@ -286,7 +286,7 @@ class ik_swift_test;
 		// CHECK JJT
 		for ( int i=0 ; i<n ; i++ ) begin // jjt row
 			for ( int j=0 ; j<n ; j++ ) begin // jjt column
-				jjt_bias_real[i][j] = real'(longint'({{28{jjt_bias[i][j][35]}}, jjt_bias[i][j]}))/65536.0;
+				jjt_bias_real[i][j] = real'(int'({{5{jjt_bias[i][j][26]}}, jjt_bias[i][j]}))/65536.0;
 				jjt_bias_error[i][j] = abs( jjt_bias_real[i][j] - m_jjt_bias[i][j] );
 				jjt_bias_percent[i][j] = abs( jjt_bias_error[i][j] / m_jjt_bias[i][j] );
 				if (jjt_bias_error[i][j]>abs_tol && jjt_bias_percent[i][j]>rel_tol) begin
@@ -303,7 +303,7 @@ class ik_swift_test;
 		// CHECK CHOLESKY
 		for ( int i=0 ; i<n ; i++ ) begin // cholesky row
 			for ( int j=0 ; j<n ; j++ ) begin // cholesky column
-				lt_real[i][j] = real'(longint'({{28{lt[i][j][35]}}, lt[i][j]}))/65536.0;
+				lt_real[i][j] = real'(int'({{5{lt[i][j][26]}}, lt[i][j]}))/65536.0;
 				lt_error[i][j] = abs( lt_real[i][j] - m_lt[i][j] );
 				lt_percent[i][j] = abs( lt_error[i][j] / m_lt[i][j] );
 				if (lt_error[i][j]>abs_tol && lt_percent[i][j]>rel_tol) begin
@@ -320,7 +320,7 @@ class ik_swift_test;
 		// CHECK LT_INVERSE
 		for ( int i=0 ; i<n ; i++ ) begin // lt_inverse row
 			for ( int j=0 ; j<n ; j++ ) begin // lt_inverse column
-				lt_inverse_real[i][j] = real'(longint'({{28{lt_inverse[i][j][35]}}, lt_inverse[i][j]}))/65536.0;
+				lt_inverse_real[i][j] = real'(int'({{5{lt_inverse[i][j][26]}}, lt_inverse[i][j]}))/65536.0;
 				lt_inverse_error[i][j] = abs( lt_inverse_real[i][j] - m_lt_inv[i][j] );
 				lt_inverse_percent[i][j] = abs( lt_inverse_error[i][j] / m_lt_inv[i][j] );
 				if (lt_inverse_error[i][j]>abs_tol && lt_inverse_percent[i][j]>rel_tol) begin
@@ -337,7 +337,7 @@ class ik_swift_test;
 		// CHECK INVERSE
 		for ( int i=0 ; i<n ; i++ ) begin // inverse row
 			for ( int j=0 ; j<n ; j++ ) begin // inverse column
-				inverse_real[i][j] = real'(longint'({{28{inverse[i][j][35]}}, inverse[i][j]}))/65536.0;
+				inverse_real[i][j] = real'(int'({{5{inverse[i][j][26]}}, inverse[i][j]}))/65536.0;
 				inverse_error[i][j] = abs( inverse_real[i][j] - m_inverse[i][j] );
 				inverse_percent[i][j] = abs( inverse_error[i][j] / m_inverse[i][j] );
 				if (inverse_error[i][j]>abs_tol && inverse_percent[i][j]>rel_tol) begin
@@ -354,7 +354,7 @@ class ik_swift_test;
 		// CHECK DLS
 		for ( int i=0 ; i<n ; i++ ) begin // dls row
 			for ( int j=0 ; j<n ; j++ ) begin // dls column
-				dls_real[i][j] = real'(longint'({{28{dls[i][j][35]}}, dls[i][j]}))/65536.0;
+				dls_real[i][j] = real'(int'({{5{dls[i][j][26]}}, dls[i][j]}))/65536.0;
 				dls_error[i][j] = abs( dls_real[i][j] - m_dls[i][j] );
 				dls_percent[i][j] = abs( dls_error[i][j] / m_dls[i][j] );
 				if (dls_error[i][j]>abs_tol && dls_percent[i][j]>rel_tol) begin
@@ -370,7 +370,7 @@ class ik_swift_test;
 
 		// CHECK DELTA
 		for ( int i=0 ; i<n ; i++ ) begin // delta row
-			delta_real[i] = real'(longint'({{28{delta[i][35]}}, delta[i]}))/65536.0;
+			delta_real[i] = real'(int'({{5{delta[i][26]}}, delta[i]}))/65536.0;
 			delta_error[i] = abs( delta_real[i] - m_delta[i] );
 			delta_percent[i] = abs( delta_error[i] / m_delta[i] );
 			if (delta_error[i]>abs_tol && delta_percent[i]>rel_tol) begin

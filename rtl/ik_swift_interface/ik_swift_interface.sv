@@ -30,22 +30,20 @@
 `include "../ik_swift_32/inverse/inverse.sv"
 `include "../ik_swift_32/inverse/cholesky_block/cholesky_block_interface.sv"
 `include "../ik_swift_32/inverse/cholesky_block/cholesky_block.sv"
-`include "../ik_swift_32/inverse/cholesky_block/sqrt_52/sqrt_52_interface.sv"
-`include "../ik_swift_32/inverse/cholesky_block/sqrt_52/sqrt_52.v"
+`include "../ik_swift_32/inverse/cholesky_block/sqrt_43/sqrt_43_interface.sv"
+`include "../ik_swift_32/inverse/cholesky_block/sqrt_43/sqrt_43.v"
 `include "../ik_swift_32/inverse/lt_block/lt_block_interface.sv"
 `include "../ik_swift_32/inverse/lt_block/lt_block.sv"
 `include "../ik_swift_32/inverse/array_div/array_div_interface.sv"
 `include "../ik_swift_32/inverse/array_div/array_div.sv"
-`include "../ik_swift_32/inverse/array_div/div_48/div_48.v"
+`include "../ik_swift_32/inverse/array_div/div_43/div_43.v"
 
 `include "../ik_swift_32/mat_mult/mat_mult_interface.sv"
 `include "../ik_swift_32/mat_mult/mat_mult.sv"
 `include "../ik_swift_32/mat_mult/mult_array.sv"
-`include "../ik_swift_32/mat_mult/mult_36_dsp/mult_36_dsp.v"
-
 `include "../ik_swift_32/array_mult/array_mult_interface.sv"
 `include "../ik_swift_32/array_mult/array_mult.sv"
-`include "../ik_swift_32/array_mult/mult_27/mult_27.v"
+`include "../ik_swift_32/mult_27/mult_27.v"
 
 // `include "../ik_swift_32/sim_models/lpm_mult.v"
 // `include "../ik_swift_32/sim_models/mult_block.v"
@@ -72,7 +70,7 @@ module ik_swift_interface (
 );
 
 	// REGISTERS
-	logic [2:0] [35:0] target; // (x,y,z) coordinates and orientation of target position
+	logic [2:0] [26:0] target; // (x,y,z) coordinates and orientation of target position
 
 	// INSTANTIATE IK_FAST TOP MODULE
 	ifc_ik_swift ifc_ik_swift (clk);
@@ -83,7 +81,7 @@ module ik_swift_interface (
 	// bit vector describing type of each joint
 	assign ifc_ik_swift.joint_type = 6'b111111;
 	// target coordinates
-	assign ifc_ik_swift.target = {{108'b0}, target};
+	assign ifc_ik_swift.target = {{81'b0}, target};
 	ik_swift ik_swift (ifc_ik_swift.ik_swift);
 
 	always_ff @(posedge clk) begin

@@ -9,7 +9,7 @@
 
 `include "../../../array_mult/array_mult_interface.sv"
 `include "../../../array_mult/array_mult.sv"
-`include "../../../array_mult/mult_27/mult_27.v"
+`include "../../../mult_27/mult_27.v"
 
 `include "../../../sim_models/lpm_mult.v"
 `include "../../../sim_models/mult_block.v"
@@ -45,6 +45,6 @@ module t_block_top ();
 	assign ifc_array_mult.dataa = ifc_t_block.array_mult_dataa;
 	assign ifc_array_mult.datab = ifc_t_block.array_mult_datab;
 	array_mult array_mult (ifc_array_mult.array_mult);
-	assign ifc_t_block.array_mult_result = ifc_array_mult.result;
+	assign ifc_t_block.array_mult_result = ifc_array_mult.result[5:0];
 
 endmodule

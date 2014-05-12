@@ -61,7 +61,7 @@ module mult_27 (
 				.aclr (1'b0),
 				.sum (1'b0));
 	defparam
-		lpm_mult_component.lpm_hint = "DEDICATED_MULTIPLIER_CIRCUITRY=NO,MAXIMIZE_SPEED=1",
+		lpm_mult_component.lpm_hint = "DEDICATED_MULTIPLIER_CIRCUITRY=YES,MAXIMIZE_SPEED=1",
 		lpm_mult_component.lpm_pipeline = 3,
 		lpm_mult_component.lpm_representation = "SIGNED",
 		lpm_mult_component.lpm_type = "LPM_MULT",

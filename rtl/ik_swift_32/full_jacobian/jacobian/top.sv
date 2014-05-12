@@ -10,11 +10,9 @@
 `include "../../mat_mult/mat_mult_interface.sv"
 `include "../../mat_mult/mat_mult.sv"
 `include "../../mat_mult/mult_array.sv"
-`include "../../mat_mult/mult_36_dsp/mult_36_dsp.v"
-
 `include "../../array_mult/array_mult_interface.sv"
 `include "../../array_mult/array_mult.sv"
-`include "../../array_mult/mult_27/mult_27.v"
+`include "../../mult_27/mult_27.v"
 
 `include "../../sim_models/lpm_mult.v"
 `include "../../sim_models/mult_block.v"
@@ -55,17 +53,10 @@ module jacobian_top ();
 		if ( ifc_jacobian.en )
 			ifc_mat_mult.rst <= ifc_jacobian.count == 8'd4;
 	assign ifc_mat_mult.mat_mode = ifc_jacobian.count<8'd90 ? 1'b1 : 1'b0;
-	genvar index, jndex;
-	generate
-		for ( index=0 ; index<6; index++ ) begin
-			for ( jndex=0 ; jndex<6; jndex++ ) begin
-				assign ifc_mat_mult.dataa[index][jndex] = {{9{ifc_jacobian.mat_mult_dataa[index][jndex][26]}}, ifc_jacobian.mat_mult_dataa[index][jndex]};
-				assign ifc_mat_mult.datab[index][jndex] = {{9{ifc_jacobian.mat_mult_datab[index][jndex][26]}}, ifc_jacobian.mat_mult_datab[index][jndex]};
-				assign ifc_jacobian.mat_mult_result[index][jndex] = ifc_mat_mult.result[index][jndex];
-			end
-		end
-	endgenerate
+	assign ifc_mat_mult.dataa = ifc_jacobian.mat_mult_dataa;
+	assign ifc_mat_mult.datab = ifc_jacobian.mat_mult_datab;
 	mat_mult mat_mult (ifc_mat_mult.mat_mult);
+	assign ifc_jacobian.mat_mult_result = ifc_mat_mult.result;
 
 	ifc_array_mult ifc_array_mult (clk);
 	assign ifc_array_mult.en = ifc_jacobian.en;
