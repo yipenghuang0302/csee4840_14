@@ -40,10 +40,6 @@ struct joint_dev {
 	resource_size_t start; /* Address of start of registers */
 	resource_size_t size;
 	void __iomem *virtbase; /* Where registers can be accessed in memory */
-	u8 joint_type; // ith bit is 1 if joint is rotational; 0 for translational
-	u8 start_signal; //This is set to 1 if hw is running, 0 if sw is running
-	u64 target[3]; // Target position
-	u64 dh_params[MAX_JOINT * NUM_PARAMS]; // Every joint has 4 parameters 
 } dev;
 
 
@@ -53,39 +49,36 @@ struct joint_dev {
  * Write target position of the end effector and the bit vector for the joint types 
  * Assumes target position is in range and the device information has been set up
  */
-static void write_target(u64 target[3], u8 joint_t)
+static void write_target(u32 target[3], u8 joint_t)
 {
 	int i;
-	u64 curtarget;
+	u32 curtarget;
 
 	iowrite8(joint_t, dev.virtbase);
 	for (i = 1; i < 4; i++){
-		printk("Target %d is %lld\n", i, target[i-1]);
+		printk("Target %d is %d\n", i, target[i-1]);
 		curtarget = target[i-1];
 		//Write 4 MSB (need to multiply i by 2 to skip over first 64 bits of mem)
-		iowrite32((u32)(curtarget >> 32), dev.virtbase+(i*2)*REG_SIZE);
+		//iowrite32((u32)(curtarget >> 32), dev.virtbase+(i*2)*REG_SIZE);
 		//Write 32 LSB
-		iowrite32((u32)curtarget, dev.virtbase+(i*2+1)*REG_SIZE);
-		dev.target[i-1] = curtarget;
+		iowrite32(curtarget, dev.virtbase+(i*2)*REG_SIZE);
 	}
-	dev.joint_type = joint_t;
 }
 
 /*
  * Write parameter for a given joint 
  * Assumes joint is in range and the device information has been set up
  */
-static void write_parameter(u8 joint,  u64 magnitude){
-	u64 mag = magnitude;
-	iowrite32((u32)(mag >> 32), dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint));
-	iowrite32((u32)mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint)+REG_SIZE);
-	dev.dh_params[(joint) * NUM_PARAMS] = mag;
+static void write_parameter(u8 joint,  u32 magnitude){
+	u32 mag = magnitude;
+	//iowrite32((u32)(mag >> 32), dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint));
+	iowrite32(mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint));
+	printk("In the kernel, the magnitude is %d\n", magnitude);
 }
 
 //Inform hardware that it can do an iteration of the algorithm
-static void write_start(u8 start){
-	iowrite8(start, dev.virtbase+START_OFFSET);
-	dev.start_signal = 1;
+static void write_start(u32 start){
+	iowrite32(start, dev.virtbase+START_OFFSET);
 }
 
 /*
@@ -109,7 +102,7 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 												   (vla.target[1] < MIN_COORD || vla.target[1] > MAX_COORD) ||
 													 (vla.target[2] < MIN_COORD || vla.target[2] > MAX_COORD)))
 			return -EINVAL;
-		if (vla.joint == -2 && vla.start_signal != 1)
+		if (vla.joint == -2 && vla.start_signal != 1 && vla.start_signal != 0)
 			return -EINVAL;
 		if (vla.joint == -1)
 			write_target(vla.target, vla.joint_type);
@@ -120,13 +113,17 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		break;
 
 	case IK_DRIVER_READ_PARAM:
+
 		if (copy_from_user(&vla, (ik_driver_arg_t *) arg,
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
+		printk("The value (according to the kernel) is %d\n", ioread32(dev.virtbase + PARAM_OFFSET + (JOINT_OFFSET * vla.joint))); 
+		printk("The start signal is %d\n", ioread8(dev.virtbase+START_OFFSET));
 		if (vla.joint < -3 || vla.joint > MAX_JOINT) 
 			return -EINVAL;
-		vla.magnitude = dev.dh_params[(vla.joint) * NUM_PARAMS];
-		vla.start_signal = dev.start_signal;
+		printk("The offset of this joint %d magnitude is %d\n", vla.joint, PARAM_OFFSET + (JOINT_OFFSET * vla.joint));
+		vla.magnitude = ioread32(dev.virtbase + PARAM_OFFSET + (JOINT_OFFSET * vla.joint)); 
+		vla.done_signal = ioread32(dev.virtbase+START_OFFSET);
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))
 			return -EACCES;
