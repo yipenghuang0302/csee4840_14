@@ -18,8 +18,8 @@ module full_jacobian (
 	assign ifc_full_mat.array_mult_result = i.array_mult_result[5:0];
 	genvar index, jndex;
 	generate
-		for ( index=0 ; index<6; index++ ) begin
-			for ( jndex=0 ; jndex<6; jndex++ ) begin
+		for ( index=0 ; index<6; index++ ) begin: full_mat_row
+			for ( jndex=0 ; jndex<6; jndex++ ) begin: full_mat_col
 				assign ifc_full_mat.mat_mult_result[index][jndex] = i.mat_mult_result[index][jndex][26:0];
 			end
 		end
@@ -96,8 +96,8 @@ module full_jacobian (
 	assign i.array_mult_dataa = {81'b0,ifc_full_mat.array_mult_dataa} | ifc_jacobian.array_mult_dataa;
 	assign i.array_mult_datab = {81'b0,ifc_full_mat.array_mult_datab} | ifc_jacobian.array_mult_datab;
 	generate
-		for ( index=0 ; index<6; index++ ) begin
-			for ( jndex=0 ; jndex<6; jndex++ ) begin
+		for ( index=0 ; index<6; index++ ) begin: result_row
+			for ( jndex=0 ; jndex<6; jndex++ ) begin: result_col
 				assign i.mat_mult_dataa[index][jndex] =
 					{{9{ifc_full_mat.mat_mult_dataa[index][jndex][26]}}, ifc_full_mat.mat_mult_dataa[index][jndex]} |
 					{{9{ifc_jacobian.mat_mult_dataa[index][jndex][26]}}, ifc_jacobian.mat_mult_dataa[index][jndex]} |
