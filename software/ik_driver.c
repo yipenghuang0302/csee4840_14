@@ -73,13 +73,13 @@ static void write_target(u64 target[3], u8 joint_t)
 
 /*
  * Write parameter for a given joint 
- * Assumes joint and parameter is in range and the device information has been set up
+ * Assumes joint is in range and the device information has been set up
  */
-static void write_parameter(u8 joint, u8 parameter, u64 magnitude){
+static void write_parameter(u8 joint,  u64 magnitude){
 	u64 mag = magnitude;
-	iowrite32((u32)(mag >> 32), dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint)+((parameter*2)*REG_SIZE));
-	iowrite32((u32)mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint)+((parameter*2+1)*REG_SIZE));
-	dev.dh_params[(joint) * NUM_PARAMS + parameter] = mag;
+	iowrite32((u32)(mag >> 32), dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint));
+	iowrite32((u32)mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint)+REG_SIZE);
+	dev.dh_params[(joint) * NUM_PARAMS] = mag;
 }
 
 //Inform hardware that it can do an iteration of the algorithm
@@ -111,28 +111,21 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 			return -EINVAL;
 		if (vla.joint == -2 && vla.start_signal != 1)
 			return -EINVAL;
-		if (vla.joint > -1 && vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_LENGTH)
-			return -EINVAL;
-		if (vla.joint > -1 && (vla.parameter == L_OFFSET || vla.parameter == L_LENGTH)
-												&& (vla.magnitude < MIN_COORD || vla.magnitude > MAX_COORD))
-			return -EINVAL;
 		if (vla.joint == -1)
 			write_target(vla.target, vla.joint_type);
 		else if (vla.joint == -2)
 			write_start(vla.start_signal);
 		else
-			write_parameter(vla.joint, vla.parameter, vla.magnitude);
+			write_parameter(vla.joint,  vla.magnitude);
 		break;
 
 	case IK_DRIVER_READ_PARAM:
 		if (copy_from_user(&vla, (ik_driver_arg_t *) arg,
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
-		if (vla.joint < -3 || vla.joint > MAX_JOINT || 
-				(vla.joint > -1 && 
-				 (vla.parameter != THETA && vla.parameter != ALPHA && vla.parameter != L_OFFSET && vla.parameter != L_LENGTH))) 
+		if (vla.joint < -3 || vla.joint > MAX_JOINT) 
 			return -EINVAL;
-		vla.magnitude = dev.dh_params[(vla.joint) * NUM_PARAMS + vla.parameter];
+		vla.magnitude = dev.dh_params[(vla.joint) * NUM_PARAMS];
 		vla.start_signal = dev.start_signal;
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))

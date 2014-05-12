@@ -50,7 +50,6 @@ typedef struct {
 	unsigned char start_signal; /* Tell hardware when we're ready for an iteration of the algorithm */
 	signed char joint; /* Indicate which joint we're getting/setting; -1 indicates that we're setting the target */
 	unsigned char joint_type; /* The ith bit is 1 if ith joint is rotational; translational otherwise */
-	unsigned char parameter; /* Which DH param we're getting/setting */
 	signed long long target[3]; /* (x,y,z) coordinates of target position  (32 MSB)*/
 	signed long long magnitude; /* 32 LSB of magnitude */
 } ik_driver_arg_t;

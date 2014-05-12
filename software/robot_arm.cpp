@@ -97,24 +97,20 @@ void notify_hardware(){
 	}
 }
 
-//Write a dh param for a specific joint to the device, converting from degrees to radians
-//if applicable
-void write_param(int joint, char param_type, float magnitude)
+//Write a THETA param for a specific joint to the device, converting from degrees to radians
+void write_param(int joint, float magnitude)
 {
   ik_driver_arg_t vla;
 	vla.joint = (char)joint;
-	vla.parameter = param_type;
-	if (vla.parameter == THETA || vla.parameter == ALPHA){
 
-		//Do this error checking here so we don't use floats in the kernel
-		if (magnitude < -180 || magnitude > 180){
-			printf("The magnitude of param %d for joint %d is %f\n", joint, param_type, M_PI);
-			perror("Magnitude of parameter is outside acceptable range");
-			return;
-		}
-		else{
-			magnitude = magnitude * (float)M_PI / 180.0;//Convert from degrees to radians
-		}
+	//Do this error checking here so we don't use floats in the kernel
+	if (magnitude < -180 || magnitude > 180){
+		printf("The magnitude of theta for joint %d is %f\n", joint, M_PI);
+		perror("Magnitude of parameter is outside acceptable range");
+		return;
+	}
+	else{
+		magnitude = magnitude * (float)M_PI / 180.0;//Convert from degrees to radians
 	}
 	vla.magnitude = float_to_fixed(magnitude);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
@@ -124,13 +120,12 @@ void write_param(int joint, char param_type, float magnitude)
 }
 
 //Read a specific dh param for a specific joint from the hardware
-float read_param(int joint, char param_type){
+float read_param(int joint){
 	ik_driver_arg_t vla;
 	float value;
 
 	//Get param
 	vla.joint = (char)joint;
-	vla.parameter = param_type;
 	if (ioctl(ik_driver_fd, IK_DRIVER_READ_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_READ_PARAM) failed");
 		return 0;
@@ -139,14 +134,12 @@ float read_param(int joint, char param_type){
 	//Convert from fixed to float
 	value = vla.magnitude / pow(2,PRECISION);
 
-	//convert from radians to degrees if necessary
-	if (param_type == THETA || param_type == ALPHA){
-		if (value > M_PI)
-			value -= 2 * M_PI;
-		else if (value < -M_PI)
-			value += 2 * M_PI;
-		value = value * 180 / M_PI;
-	}
+	//convert from radians to degrees
+	if (value > M_PI)
+		value -= 2 * M_PI;
+	else if (value < -M_PI)
+		value += 2 * M_PI;
+	value = value * 180 / M_PI;
 	return value;
 }
 
@@ -187,20 +180,21 @@ void arm(int index){
 		glVertex3f(robot.targetx, robot.targety, robot.targetz);
 	glEnd();
 
+
 	//Draw the links of the robot arm
 	for (int i = 0; i < MAX_JOINT; i ++){
 		glColor3f(.2*i+.5, .2*i+.1, .2*i);
+
+		//These dh params won't change over the course of the algorithm
+		d = robot.params[i].d;
+		a = robot.params[i].a;
+		alpha = robot.params[i].alpha;
+
 		if (start_program){
-			d = robot.params[i].d;
-			a = robot.params[i].a;
 			theta = robot.params[i].theta;
-			alpha = robot.params[i].alpha;
 		}
 		else{
-			 d = read_param(i, L_OFFSET); 
-			 a = read_param(i, L_LENGTH); 
-			 theta = read_param(i, theta); 
-			 alpha = read_param(i, alpha); 
+			 theta = read_param(i); 
 		}
 
 		glRotatef(theta, 0, 0, 1);
@@ -310,14 +304,11 @@ int main(int argc, char** argv) {
 	//UNCOMMENT WHEN TALKING TO HARDWARE 
 
 	//Write target to hardware
-  write_target(robot.targetx, robot.targety, robot.targetz);
+	write_target(robot.targetx, robot.targety, robot.targetz);
 
-	//Inform hardware of initial configuration
+	//Inform hardware of initial theta configuration
 	for (int i = 0; i < MAX_JOINT; i ++){
-		write_param(i, L_OFFSET, robot.params[i].d);
-		write_param(i, L_LENGTH, robot.params[i].a);
-		write_param(i, THETA, robot.params[i].theta);
-		write_param(i, ALPHA, robot.params[i].alpha);
+		write_param(i, robot.params[i].theta);
 	}
 
 	start_program = true;
