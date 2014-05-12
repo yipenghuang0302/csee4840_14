@@ -2,71 +2,13 @@ set_global_assignment -entity "ik_swift_qsys" -library "ik_swift_qsys" -name IP_
 set_global_assignment -entity "ik_swift_qsys" -library "ik_swift_qsys" -name IP_TOOL_VERSION "13.1.1"
 set_global_assignment -entity "ik_swift_qsys" -library "ik_swift_qsys" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "ik_swift_qsys" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../ik_swift_qsys.sopcinfo"]
-set_global_assignment -entity "ik_swift_qsys" -library "ik_swift_qsys" -name SLD_INFO "QSYS_NAME ik_swift_qsys HAS_SOPCINFO 1 GENERATION_ID 1399851641"
+set_global_assignment -entity "ik_swift_qsys" -library "ik_swift_qsys" -name SLD_INFO "QSYS_NAME ik_swift_qsys HAS_SOPCINFO 1 GENERATION_ID 1399860148"
 set_global_assignment -library "ik_swift_qsys" -name MISC_FILE [file join $::quartus(qip_path) "../../ik_swift_qsys.cmp"]
 set_global_assignment -library "ik_swift_qsys" -name SLD_FILE [file join $::quartus(qip_path) "ik_swift_qsys.regmap"]
 set_global_assignment -library "ik_swift_qsys" -name MISC_FILE [file join $::quartus(qip_path) "ik_swift_qsys_hps_0_hps.svd"]
 set_global_assignment -library "ik_swift_qsys" -name SLD_FILE [file join $::quartus(qip_path) "ik_swift_qsys.debuginfo"]
 set_global_assignment -name SYNTHESIS_ONLY_QIP ON
 set_global_assignment -library "ik_swift_qsys" -name MISC_FILE [file join $::quartus(qip_path) "../../ik_swift_qsys.qsys"]
-set_instance_assignment -name HPS_LOCATION PIN_P19A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_TX_CLK[0]
-set_instance_assignment -name HPS_LOCATION PIN_P19B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_TXD0[0]
-set_instance_assignment -name HPS_LOCATION PIN_P19A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_TXD1[0]
-set_instance_assignment -name HPS_LOCATION PIN_P19B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_TXD2[0]
-set_instance_assignment -name HPS_LOCATION PIN_P20A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_TXD3[0]
-set_instance_assignment -name HPS_LOCATION PIN_P20B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_RXD0[0]
-set_instance_assignment -name HPS_LOCATION PIN_P20A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_MDIO[0]
-set_instance_assignment -name HPS_LOCATION PIN_P20B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_MDC[0]
-set_instance_assignment -name HPS_LOCATION PIN_P21A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_RX_CTL[0]
-set_instance_assignment -name HPS_LOCATION PIN_P21B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_TX_CTL[0]
-set_instance_assignment -name HPS_LOCATION PIN_P21A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_RX_CLK[0]
-set_instance_assignment -name HPS_LOCATION PIN_P21B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_RXD1[0]
-set_instance_assignment -name HPS_LOCATION PIN_P22A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_RXD2[0]
-set_instance_assignment -name HPS_LOCATION PIN_P22B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_emac1_inst_RXD3[0]
-set_instance_assignment -name HPS_LOCATION PIN_P22B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_qspi_inst_IO0[0]
-set_instance_assignment -name HPS_LOCATION PIN_P23A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_qspi_inst_IO1[0]
-set_instance_assignment -name HPS_LOCATION PIN_P23B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_qspi_inst_IO2[0]
-set_instance_assignment -name HPS_LOCATION PIN_P23A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_qspi_inst_IO3[0]
-set_instance_assignment -name HPS_LOCATION PIN_P23B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_qspi_inst_SS0[0]
-set_instance_assignment -name HPS_LOCATION PIN_P24A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_qspi_inst_CLK[0]
-set_instance_assignment -name HPS_LOCATION PIN_P25A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_sdio_inst_CMD[0]
-set_instance_assignment -name HPS_LOCATION PIN_P25A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_sdio_inst_D0[0]
-set_instance_assignment -name HPS_LOCATION PIN_P25B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_sdio_inst_D1[0]
-set_instance_assignment -name HPS_LOCATION PIN_P27B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_sdio_inst_CLK[0]
-set_instance_assignment -name HPS_LOCATION PIN_P27A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_sdio_inst_D2[0]
-set_instance_assignment -name HPS_LOCATION PIN_P27B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_sdio_inst_D3[0]
-set_instance_assignment -name HPS_LOCATION PIN_P28B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_D0[0]
-set_instance_assignment -name HPS_LOCATION PIN_P28A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_D1[0]
-set_instance_assignment -name HPS_LOCATION PIN_P28B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_D2[0]
-set_instance_assignment -name HPS_LOCATION PIN_P29A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_D3[0]
-set_instance_assignment -name HPS_LOCATION PIN_P29B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_D4[0]
-set_instance_assignment -name HPS_LOCATION PIN_P29A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_D5[0]
-set_instance_assignment -name HPS_LOCATION PIN_P29B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_D6[0]
-set_instance_assignment -name HPS_LOCATION PIN_P30A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_D7[0]
-set_instance_assignment -name HPS_LOCATION PIN_P30A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_CLK[0]
-set_instance_assignment -name HPS_LOCATION PIN_P30B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_STP[0]
-set_instance_assignment -name HPS_LOCATION PIN_P31A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_DIR[0]
-set_instance_assignment -name HPS_LOCATION PIN_P31B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_usb1_inst_NXT[0]
-set_instance_assignment -name HPS_LOCATION PIN_P16B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_spim0_inst_CLK[0]
-set_instance_assignment -name HPS_LOCATION PIN_P16A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_spim0_inst_MOSI[0]
-set_instance_assignment -name HPS_LOCATION PIN_P16B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_spim0_inst_MISO[0]
-set_instance_assignment -name HPS_LOCATION PIN_P17A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_spim0_inst_SS0[0]
-set_instance_assignment -name HPS_LOCATION PIN_P17B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_spim1_inst_CLK[0]
-set_instance_assignment -name HPS_LOCATION PIN_P18A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_spim1_inst_MOSI[0]
-set_instance_assignment -name HPS_LOCATION PIN_P18B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_spim1_inst_MISO[0]
-set_instance_assignment -name HPS_LOCATION PIN_P18A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_spim1_inst_SS0[0]
-set_instance_assignment -name HPS_LOCATION PIN_P14B0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_uart0_inst_RX[0]
-set_instance_assignment -name HPS_LOCATION PIN_P14A1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_uart0_inst_TX[0]
-set_instance_assignment -name HPS_LOCATION PIN_P14B1T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_i2c1_inst_SDA[0]
-set_instance_assignment -name HPS_LOCATION PIN_P15A0T -entity ik_swift_qsys_hps_0 -to hps_io|border|hps_io_i2c1_inst_SCL[0]
-set_instance_assignment -name HPS_LOCATION HPSPERIPHERALEMAC_X77_Y39_N111 -entity ik_swift_qsys_hps_0_hps_io_border -to emac1_inst
-set_instance_assignment -name HPS_LOCATION HPSPERIPHERALQSPI_X87_Y58_N111 -entity ik_swift_qsys_hps_0_hps_io_border -to qspi_inst
-set_instance_assignment -name HPS_LOCATION HPSPERIPHERALSDMMC_X87_Y39_N111 -entity ik_swift_qsys_hps_0_hps_io_border -to sdio_inst
-set_instance_assignment -name HPS_LOCATION HPSPERIPHERALUSB_X55_Y39_N111 -entity ik_swift_qsys_hps_0_hps_io_border -to usb1_inst
-set_instance_assignment -name HPS_LOCATION HPSPERIPHERALSPIMASTER_X87_Y55_N111 -entity ik_swift_qsys_hps_0_hps_io_border -to spim0_inst
-set_instance_assignment -name HPS_LOCATION HPSPERIPHERALSPIMASTER_X87_Y53_N111 -entity ik_swift_qsys_hps_0_hps_io_border -to spim1_inst
-set_instance_assignment -name HPS_LOCATION HPSPERIPHERALUART_X87_Y45_N111 -entity ik_swift_qsys_hps_0_hps_io_border -to uart0_inst
-set_instance_assignment -name HPS_LOCATION HPSPERIPHERALI2C_X87_Y65_N111 -entity ik_swift_qsys_hps_0_hps_io_border -to i2c1_inst
 set_instance_assignment -name hps_partition on -entity ik_swift_qsys_hps_0_hps_io_border -library ik_swift_qsys
 set_instance_assignment -name HPS_LOCATION HPSINTERFACECLOCKSRESETS_X52_Y78_N111 -entity ik_swift_qsys_hps_0_fpga_interfaces -to clocks_resets
 set_instance_assignment -name HPS_LOCATION HPSINTERFACEDBGAPB_X52_Y80_N111 -entity ik_swift_qsys_hps_0_fpga_interfaces -to debug_apb
@@ -76,13 +18,11 @@ set_instance_assignment -name HPS_LOCATION HPSINTERFACEFPGA2HPS_X52_Y45_N111 -en
 set_instance_assignment -name HPS_LOCATION HPSINTERFACEHPS2FPGALIGHTWEIGHT_X52_Y43_N111 -entity ik_swift_qsys_hps_0_fpga_interfaces -to hps2fpga_light_weight
 set_instance_assignment -name HPS_LOCATION HPSINTERFACEHPS2FPGA_X52_Y47_N111 -entity ik_swift_qsys_hps_0_fpga_interfaces -to hps2fpga
 set_instance_assignment -name HPS_LOCATION HPSINTERFACEFPGA2SDRAM_X52_Y53_N111 -entity ik_swift_qsys_hps_0_fpga_interfaces -to f2sdram
-set_instance_assignment -name HPS_LOCATION HPSINTERFACEINTERRUPTS_X52_Y40_N111 -entity ik_swift_qsys_hps_0_fpga_interfaces -to interrupts
 
 set_global_assignment -library "ik_swift_qsys" -name VERILOG_FILE [file join $::quartus(qip_path) "ik_swift_qsys.v"]
 set_global_assignment -library "ik_swift_qsys" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_reset_controller.v"]
 set_global_assignment -library "ik_swift_qsys" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_reset_synchronizer.v"]
 set_global_assignment -library "ik_swift_qsys" -name SDC_FILE [file join $::quartus(qip_path) "submodules/altera_reset_controller.sdc"]
-set_global_assignment -library "ik_swift_qsys" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/ik_swift_qsys_irq_mapper.sv"]
 set_global_assignment -library "ik_swift_qsys" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/ik_swift_qsys_mm_interconnect_0.v"]
 set_global_assignment -library "ik_swift_qsys" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_merlin_arbitrator.sv"]
 set_global_assignment -library "ik_swift_qsys" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/ik_swift_qsys_mm_interconnect_0_rsp_xbar_mux.sv"]
@@ -179,9 +119,6 @@ set_global_assignment -library "ik_swift_qsys" -name SDC_FILE [file join $::quar
 set_global_assignment -entity "altera_reset_controller" -library "ik_swift_qsys" -name IP_TOOL_NAME "altera_reset_controller"
 set_global_assignment -entity "altera_reset_controller" -library "ik_swift_qsys" -name IP_TOOL_VERSION "13.1"
 set_global_assignment -entity "altera_reset_controller" -library "ik_swift_qsys" -name IP_TOOL_ENV "Qsys"
-set_global_assignment -entity "ik_swift_qsys_irq_mapper" -library "ik_swift_qsys" -name IP_TOOL_NAME "altera_irq_mapper"
-set_global_assignment -entity "ik_swift_qsys_irq_mapper" -library "ik_swift_qsys" -name IP_TOOL_VERSION "13.1"
-set_global_assignment -entity "ik_swift_qsys_irq_mapper" -library "ik_swift_qsys" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -entity "ik_swift_qsys_mm_interconnect_0" -library "ik_swift_qsys" -name IP_TOOL_NAME "altera_merlin_interconnect_wrapper"
 set_global_assignment -entity "ik_swift_qsys_mm_interconnect_0" -library "ik_swift_qsys" -name IP_TOOL_VERSION "13.1"
 set_global_assignment -entity "ik_swift_qsys_mm_interconnect_0" -library "ik_swift_qsys" -name IP_TOOL_ENV "Qsys"

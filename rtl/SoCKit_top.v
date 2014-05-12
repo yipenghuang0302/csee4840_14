@@ -586,7 +586,7 @@ module SoCKit_top(
       hps_reset_counter <= hps_reset_counter + 1;
    end        
       
-   ik_swift_qsys u0 (
+   ik_swift_hps u0 (
             .clk_clk                               (OSC_50_B4A),                      //                 clk.clk
             .reset_reset_n                         (hps_fpga_reset_n),                 //                 reset.reset_n
             .memory_mem_a                          (memory_mem_a),                    //                 memory.mem_a
