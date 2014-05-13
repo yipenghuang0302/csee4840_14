@@ -5,7 +5,6 @@
 #include <string>
 
 #include "SharedTypes.h"
-#include "config.h"
 
 enum Token {
     INT, FLOAT, SPACE, END , VAR , ERROR

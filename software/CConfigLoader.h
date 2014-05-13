@@ -3,7 +3,6 @@
 
 #include "xml_help/pugixml.hpp"
 #include "SharedTypes.h"
-#include "config.h"
 
 class CConfigLoader
 {

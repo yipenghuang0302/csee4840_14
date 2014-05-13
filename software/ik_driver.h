@@ -13,16 +13,6 @@
 //in 32 bit (4 byte) registers 
 #define REG_SIZE 4
 
-/* Before we changed to 64 bit stuff
-
-//Memory offset where we start to store dh-params
-#define PARAM_OFFSET 16
-
-//All dh-params for a single joint take up 16 bytes
-#define JOINT_OFFSET 16
-
-*/
-
 //Memory offset where we store the start_signal
 #define START_OFFSET 4
 
@@ -51,8 +41,8 @@ typedef struct {
 	unsigned int done_signal; /* Tell hardware when we're ready for an iteration of the algorithm */
 	signed char joint; /* Indicate which joint we're getting/setting; -1 indicates that we're setting the target */
 	unsigned char joint_type; /* The ith bit is 1 if ith joint is rotational; translational otherwise */
-	signed int target[3]; /* (x,y,z) coordinates of target position  (32 MSB)*/
-	signed int magnitude; /* 32 LSB of magnitude */
+	signed int target[3]; /* (x,y,z) coordinates of target position */
+	signed int magnitude; 
 } ik_driver_arg_t;
 
 /* ioctls and their arguments */

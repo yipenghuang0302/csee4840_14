@@ -55,11 +55,8 @@ static void write_target(u32 target[3])
 	u32 curtarget;
 
 	for (i = 1; i < 4; i++){
-		printk("Target %d is %d\n", i, target[i-1]);
 		curtarget = target[i-1];
 		//Write 4 MSB (need to multiply i by 2 to skip over first 64 bits of mem)
-		//iowrite32((u32)(curtarget >> 32), dev.virtbase+(i*2)*REG_SIZE);
-		//Write 32 LSB
 		iowrite32(curtarget, dev.virtbase+(i*2)*REG_SIZE);
 	}
 }
@@ -70,9 +67,7 @@ static void write_target(u32 target[3])
  */
 static void write_parameter(u8 joint,  u32 magnitude){
 	u32 mag = magnitude;
-	//iowrite32((u32)(mag >> 32), dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint));
 	iowrite32(mag, dev.virtbase+PARAM_OFFSET+(JOINT_OFFSET * joint));
-	printk("In the kernel, the magnitude is %d\n", magnitude);
 }
 
 //Inform hardware that it can do an iteration of the algorithm
@@ -116,12 +111,10 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		if (copy_from_user(&vla, (ik_driver_arg_t *) arg,
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
-		printk("The value (according to the kernel) is %d\n", ioread32(dev.virtbase + PARAM_OFFSET + (JOINT_OFFSET * vla.joint))); 
 		if (vla.joint < -3 || vla.joint > MAX_JOINT) 
 			return -EINVAL;
 		vla.magnitude = ioread32(dev.virtbase + PARAM_OFFSET + (JOINT_OFFSET * vla.joint)); 
 		vla.done_signal = ioread32(dev.virtbase+START_OFFSET);
-		printk("The joint type bit vector is %d\n", ioread32(dev.virtbase));
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))
 			return -EACCES;

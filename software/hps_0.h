@@ -21,7 +21,7 @@
  */
 
 /*
- * Macros for device 'vga_led_0', class 'vga_led'
+ * Macros for device 'ik_driver_0', class 'ik_driver'
  * The macros are prefixed with 'IK_DRIVER_0_'.
  * The prefix is the slave descriptor.
  */

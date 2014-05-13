@@ -23,37 +23,15 @@
 #include "ik_driver.h"
 
 
-// GLUI Live-Variables (Global Variables)
-// We initilize them here, but they are modified by GLUI in reaction to the user
-float arm1Rotate[16] = {
-		1.0, 0.0, 0.0, 0.0,
-		0.0, 1.0, 0.0, 0.0,
-		0.0, 0.0, 1.0, 0.0,
-		0.0, 0.0, 0.0, 1.0 };
-float arm2Rotate[16] = {
-		1.0, 0.0, 0.0, 0.0,
-		0.0, 1.0, 0.0, 0.0,
-		0.0, 0.0, 1.0, 0.0,
-		0.0, 0.0, 0.0, 1.0 };
-float armTranslate[2] = {0.0, 0.0};
-float rotateX[2] = {0, 0};
-float rotate2[2] = {0, 0};
-float rotateY[2] = {0, 0};
 float rotateZ[2] = {0, 0};
-
-float hand[2] = {0, 0};
-
 full_robot robot;
-
 int count = 0;
-
 int ik_driver_fd;
 bool start_program;
 
 /*
  * Convert a floating point number to our fixed-point representation
  */
-
 int float_to_fixed(float num){
 	float frac = num - (int)num;
 	int decimal = ((int)num) << PRECISION; //Decimal part of number
@@ -69,11 +47,9 @@ void write_target(float targetx, float targety, float targetz)
 {
 	ik_driver_arg_t vla;
 	vla.joint = (char)-1;
-	//Get 4 MSB
 	vla.target[0] = float_to_fixed(targetx);
 	vla.target[1] = float_to_fixed(targety);
 	vla.target[2] = float_to_fixed(targetz);
-	printf("Joint is %d targets are %d, %d, %d\n", vla.joint, vla.target[0], vla.target[1], vla.target[2]);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
@@ -95,7 +71,6 @@ void notify_hardware(){
 			perror("ioctl(IK_DRIVER_READ_PARAM) failed");
 			return; 
 		}
-		printf("In the while, the magnitude of joint 1 is %d\n", vla.magnitude);
 		if (vla.done_signal == 1){
 			vla.start_signal = 0;
 			vla.joint = (char)-2;
@@ -116,7 +91,6 @@ void write_param(int joint, float magnitude)
 
 	//Do this error checking here so we don't use floats in the kernel
 	if (magnitude < -180 || magnitude > 180){
-		printf("The magnitude of theta for joint %d is %f\n", joint, magnitude);
 		perror("Magnitude of parameter is outside acceptable range");
 		exit(1);
 	}
@@ -124,14 +98,13 @@ void write_param(int joint, float magnitude)
 		magnitude = magnitude * (float)M_PI / 180.0;//Convert from degrees to radians
 	}
 	vla.magnitude = float_to_fixed(magnitude);
-	printf("Magnitude for joint %d before writing is %d\n", joint, vla.magnitude);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
 	}
 }
 
-//Read a specific dh param for a specific joint from the hardware
+//Read a theta for a specific joint from the hardware
 float read_param(int joint){
 	ik_driver_arg_t vla;
 	float value;
@@ -142,12 +115,10 @@ float read_param(int joint){
 		perror("ioctl(IK_DRIVER_READ_PARAM) failed");
 		return 0;
 	}
-	printf("The value before conversion for joint %d is %d\n", joint, vla.magnitude);
 
 	//Convert from fixed to float
 	value = vla.magnitude / pow(2,PRECISION);
 
-	//printf("The value before wraparound for joint %d is %f\n", joint, value);
 	//Perform wraparound if necessary
 	while (value > M_PI)
 		value -= 2 * M_PI;
@@ -168,7 +139,6 @@ void arm(int index){
 
 	//Draw a base for the whole arm so we can rotate our viewing of the arm
 	glRotatef(rotateZ[index], 0, 0, 1);
-
 
 	//Draw the target for the end effector
 	glBegin(GL_LINES);
@@ -192,7 +162,6 @@ void arm(int index){
 		else{
 			 theta = read_param(i); 
 		}
-		printf("Joint %d: %f\n", i, theta);
 
 		glRotatef(theta, 0, 0, 1);
 
@@ -213,13 +182,15 @@ void arm(int index){
 	usleep(5000);
 	count++;
 	notify_hardware();
+
+	//Get new target after 80 cycles of algorithm
 	if (count == 80){	
 		srand(time(NULL));
 		robot.targetx = rand() % 7 - 4;
 		robot.targety = rand() % 7 - 4;
 		robot.targetz = rand() % 7 - 4;
-		//Write target to hardware
 
+		//Write target to hardware
 		write_target(robot.targetx, robot.targety, robot.targetz);
 		count = 0;
 	}
@@ -239,12 +210,9 @@ void display(void) {
 	// Perform the camera viewing transformation
 	gluLookAt(0.0f, 0.0f, -10.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f, 0.0f);
 
-	
 	glPushMatrix();
 	glRotatef(-90, 1, 0, 0);//Now z-axis points straight up, x points to left, and y is pointing into screen
 	glScalef(.9, .9, .9);
-
-
 
 	//Draw the arm
 	arm(0);
@@ -297,9 +265,7 @@ void keyboard(unsigned char key, int x, int y) {
 
 int main(int argc, char** argv) {
 
-	//DO THIS WHEN CONNECTING TO HARDWARE
   static const char filename[] = "/dev/ik_driver";
-
 
   if ( (ik_driver_fd = open(filename, O_RDWR)) == -1) {
     fprintf(stderr, "could not open %s\n", filename);
@@ -312,49 +278,20 @@ int main(int argc, char** argv) {
 	if(!cfg.LoadXml()) return 1;
 	robot = cfg.GetTable();
 
+	//Write random target to hardware
 	srand(time(NULL));
 	robot.targetx = rand() % 8 - 4;
 	robot.targety = rand() % 8 - 4;
 	robot.targetz = rand() % 8 - 4;
-	//Write target to hardware
 
 	write_target(robot.targetx, robot.targety, robot.targetz);
-	for (int i = 0; i < MAX_JOINT; i ++){
-		printf("Theta is %f\n", robot.params[i].theta);
-	}
 
 	//Inform hardware of initial theta configuration
 	for (int i = 0; i < MAX_JOINT; i ++){
 		write_param(i, robot.params[i].theta);
 	}
 
-
 	start_program = true;
-	/*
-
-	float theta;
-	while(1){
-		for (int i = 0; i < MAX_JOINT; i ++){
-
-			//These dh params won't change over the course of the algorithm
-			if (start_program){
-				theta = robot.params[i].theta;
-			}
-			else{
-				 theta = read_param(i); 
-			}
-			
-			printf("Joint %d: %f\n", i, theta);
-
-		}
-		if (start_program){
-			start_program = false;
-		}
-		//Ready for next iteration
-		notify_hardware();
-	}
-	exit(0);
-	*/
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
