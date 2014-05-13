@@ -18,6 +18,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <math.h>
+#include <time.h>
 #include "CConfigLoader.h"
 #include "ik_driver.h"
 
@@ -43,6 +44,8 @@ float rotateZ[2] = {0, 0};
 float hand[2] = {0, 0};
 
 full_robot robot;
+
+int count = 0;
 
 int ik_driver_fd;
 bool start_program;
@@ -82,11 +85,6 @@ void notify_hardware(){
 	ik_driver_arg_t vla;
 	vla.start_signal = 1;
 	vla.joint = (char)-2;//Signals that we're sending a start signal
-	if (ioctl(ik_driver_fd, IK_DRIVER_READ_PARAM, &vla)) {
-		perror("ioctl(IK_DRIVER_READ_PARAM) failed");
-		return; 
-	}
-	printf("Are we done before the loop: %d\n", vla.done_signal);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
@@ -97,7 +95,7 @@ void notify_hardware(){
 			perror("ioctl(IK_DRIVER_READ_PARAM) failed");
 			return; 
 		}
-		printf("Are we done in the loop: %d\n", vla.done_signal);
+		printf("In the while, the magnitude of joint 1 is %d\n", vla.magnitude);
 		if (vla.done_signal == 1){
 			vla.start_signal = 0;
 			vla.joint = (char)-2;
@@ -170,29 +168,6 @@ void arm(int index){
 
 	//Draw a base for the whole arm so we can rotate our viewing of the arm
 	glRotatef(rotateZ[index], 0, 0, 1);
-	glBegin(GL_TRIANGLE_STRIP);
-		glVertex3f(1.5,-3, 0);	//1
-		glVertex3f(-1.5,-3, 0);	//5
-		glVertex3f(1.5, 3, 0);	//3
-		glVertex3f(-1.5, 3,0 );	//4
-		glVertex3f(1.5, 3, -2);	//5
-		glVertex3f(-1.5, 3, -2);	//6
-		glVertex3f(1.5,-3, -2);	//7
-		glVertex3f(-1.5,-3, -2);	//8
-		glVertex3f(1.5,-3, 0);	//9
-		glVertex3f(-1.5,-3, 0); 	//1-3
-	glEnd();
-	glBegin(GL_QUADS);
-		glVertex3f(1.5, -3, 0);	//1
-		glVertex3f(1.5, -3, -2); 	//5
-		glVertex3f(1.5, 3, -2);	//3
-		glVertex3f(1.5, 3, 0);	//4 
-
-		glVertex3f(-1.5, -3, 0);	//1
-		glVertex3f(-1.5, -3, -2);	//5
-		glVertex3f(-1.5, 3, -2);	//3
-		glVertex3f(-1.5, 3, 0);	//4
-	glEnd();
 
 
 	//Draw the target for the end effector
@@ -235,7 +210,20 @@ void arm(int index){
 		start_program = false;
 	}
 	//Ready for next iteration
+	usleep(5000);
+	count++;
 	notify_hardware();
+	if (count == 80){	
+		srand(time(NULL));
+		robot.targetx = rand() % 7 - 4;
+		robot.targety = rand() % 7 - 4;
+		robot.targetz = rand() % 7 - 4;
+		//Write target to hardware
+
+		write_target(robot.targetx, robot.targety, robot.targetz);
+		count = 0;
+	}
+	
 }
 
 void display(void) {
@@ -324,9 +312,12 @@ int main(int argc, char** argv) {
 	if(!cfg.LoadXml()) return 1;
 	robot = cfg.GetTable();
 
-	//UNCOMMENT WHEN TALKING TO HARDWARE 
-
+	srand(time(NULL));
+	robot.targetx = rand() % 8 - 4;
+	robot.targety = rand() % 8 - 4;
+	robot.targetz = rand() % 8 - 4;
 	//Write target to hardware
+
 	write_target(robot.targetx, robot.targety, robot.targetz);
 	for (int i = 0; i < MAX_JOINT; i ++){
 		printf("Theta is %f\n", robot.params[i].theta);

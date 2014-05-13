@@ -49,12 +49,11 @@ struct joint_dev {
  * Write target position of the end effector and the bit vector for the joint types 
  * Assumes target position is in range and the device information has been set up
  */
-static void write_target(u32 target[3], u8 joint_t)
+static void write_target(u32 target[3])
 {
 	int i;
 	u32 curtarget;
 
-	iowrite8(joint_t, dev.virtbase);
 	for (i = 1; i < 4; i++){
 		printk("Target %d is %d\n", i, target[i-1]);
 		curtarget = target[i-1];
@@ -105,7 +104,7 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		if (vla.joint == -2 && vla.start_signal != 1 && vla.start_signal != 0)
 			return -EINVAL;
 		if (vla.joint == -1)
-			write_target(vla.target, vla.joint_type);
+			write_target(vla.target);
 		else if (vla.joint == -2)
 			write_start(vla.start_signal);
 		else
@@ -118,12 +117,11 @@ static long ik_driver_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 				   sizeof(ik_driver_arg_t)))
 			return -EACCES;
 		printk("The value (according to the kernel) is %d\n", ioread32(dev.virtbase + PARAM_OFFSET + (JOINT_OFFSET * vla.joint))); 
-		printk("The start signal is %d\n", ioread8(dev.virtbase+START_OFFSET));
 		if (vla.joint < -3 || vla.joint > MAX_JOINT) 
 			return -EINVAL;
-		printk("The offset of this joint %d magnitude is %d\n", vla.joint, PARAM_OFFSET + (JOINT_OFFSET * vla.joint));
 		vla.magnitude = ioread32(dev.virtbase + PARAM_OFFSET + (JOINT_OFFSET * vla.joint)); 
 		vla.done_signal = ioread32(dev.virtbase+START_OFFSET);
+		printk("The joint type bit vector is %d\n", ioread32(dev.virtbase));
 		if (copy_to_user((ik_driver_arg_t *) arg, &vla,
 				 sizeof(ik_driver_arg_t)))
 			return -EACCES;
