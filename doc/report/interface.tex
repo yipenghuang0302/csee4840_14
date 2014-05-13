@@ -12,9 +12,11 @@ user with the following components:
 		\hline
 		Field & Comments \\
 		\hline
-		\texttt{unsigned char start\_signal} & signal for HW to run an iteration of the algorithm\\
+		\texttt{unsigned int start\_signal} & signal for HW to run an iteration of the algorithm\\
 		\hline
-		\texttt{signed long long target[3]} &  The x,y,z, coordinates of the target position 
+		\texttt{unsigned int done\_signal} & signal for SW to run an iteration of the openGL display loop\\
+		\hline
+		\texttt{signed int target[3]} &  The x,y,z, coordinates of the target position 
 																						for our end-effector \\
 		\hline
 		\texttt{signed char joint} &  Indicate which joint we're getting/setting\\
@@ -22,21 +24,19 @@ user with the following components:
 		\texttt{unsigned char joint\_type} & The $i$th bit is 1 if the $i$th joint is rotational, 
 																					0 for translational \\
 		\hline
-		\texttt{unsigned char parameter} & THETA,L\_OFFSET,L\_DISTANCE,ALPHA \\
-			\hline
-		\texttt{unsigned long long magnitude} & ~\\
+		\texttt{unsigned int magnitude} & ~\\
 		\hline
 	\end{tabular}
 \end{center}
 After displaying the most recent configuration of the robot appendage, the software will set
 \texttt{start\_signal} to 1 to notify the hardware to run another iteration of the algorithm. The
-software will then spin until this variable is set to 0, indicating that the D-H parameters have been
+software will then spin until \texttt{done\_signal} is set to 1, indicating that the D-H parameters have been
 updated and the appendage needs to be redisplayed.
 The \texttt{joint} field represents which joint we're referring to 
 (we have a total of \texttt{MAX\_JOINT} joints), the \texttt{joint\_type}
-field keeps track of the type of every joint in system, the \texttt{parameter} field
-is a constant signifying which D-H parameter we're reading or writing, 
-and the \texttt{magnitude} field holds the value of that D-H parameter.
+field keeps track of the type of every joint in system,  
+and the \texttt{magnitude} field holds the value of the theta parameter for the joint in question (all other parameters are hard coded
+		into the hardware).
 We also use the \texttt{joint} field to indicate when we're setting non-joint values. If
 $\texttt{joint} = -1$, then we're setting the \texttt{target} value, and if $\texttt{joint} = -2$,
 then we're setting the \texttt{start\_signal} value.
@@ -50,24 +50,11 @@ struct joint_dev{
 	resource_size_t start; /* Address of start of registers */
 	resource_size_t size; /* Size of registers */
 	void __iomem *virtbase; /* Pointer to registers */
-	u8 joint_type; /* ith bit is 1 if ith joint is rotational, 0 for translational */
-	u8 start_signal; /* This is set to 1 if HW is running, 0 if SW is running */
-	u64 target[3]; /* Target position */
-	u64 dh_params[MAX_JOINT * NUM_PARAMS] /* Every joint has 4 parameters */
 } dev;
 \end{verbatim}
 
-The \texttt{joint\_type} and \texttt{target} fields mirror the same fields in the 
-user-level struct and are only set once during the configuration
-stage of our pipeline. The \texttt{start\_signal} field also mirrors the same field in the user-level
-struct, but it is constantly updated over the course of of the algorithm.
-The \texttt{dh\_params} array in the given struct will be used to read and 
-write magnitudes for various D-H parameters in the 
-given configuration. For example, the magnitude of the third joint's 
-theta parameter would be stored at \texttt{dh\_params[2*NUM\_PARAMS + THETA]}. Note that
-since the only parameters that our algorithm modifies are $\theta_i$ and 
-$d_i$ for joint $i$, these are the only components of our struct that
-will be modified after the start of our algorithm.
+We chose to have a fairly bare struct, as all of our interactions with the registers occur with ioreads and iowrites that interact
+directly with memory.
 
 \subsection{Top-Level Hardware Interface}
 
