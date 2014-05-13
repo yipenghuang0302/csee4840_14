@@ -51,10 +51,10 @@ bool start_program;
  * Convert a floating point number to our fixed-point representation
  */
 
-long long float_to_fixed(float num){
-	float frac = num - (long long)num;
-	long long decimal = ((long long)num) << PRECISION; //Decimal part of number
-	long long fraction = (1 << PRECISION) * frac;
+int float_to_fixed(float num){
+	float frac = num - (int)num;
+	int decimal = ((int)num) << PRECISION; //Decimal part of number
+	int fraction = (1 << PRECISION) * frac;
 	//Check if we need to round up 
 	if (frac >= .5 && frac <= 1.0)
 		fraction += 1;
@@ -64,13 +64,13 @@ long long float_to_fixed(float num){
 //Write the target for the end effector to the device
 void write_target(float targetx, float targety, float targetz)
 {
-  ik_driver_arg_t vla;
+	ik_driver_arg_t vla;
 	vla.joint = (char)-1;
 	//Get 4 MSB
 	vla.target[0] = float_to_fixed(targetx);
 	vla.target[1] = float_to_fixed(targety);
 	vla.target[2] = float_to_fixed(targetz);
-	printf("Joint is %d targets are %lld, %lld, %lld\n", vla.joint, vla.target[0], vla.target[1], vla.target[2]);
+	printf("Joint is %d targets are %d, %d, %d\n", vla.joint, vla.target[0], vla.target[1], vla.target[2]);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
@@ -82,6 +82,11 @@ void notify_hardware(){
 	ik_driver_arg_t vla;
 	vla.start_signal = 1;
 	vla.joint = (char)-2;//Signals that we're sending a start signal
+	if (ioctl(ik_driver_fd, IK_DRIVER_READ_PARAM, &vla)) {
+		perror("ioctl(IK_DRIVER_READ_PARAM) failed");
+		return; 
+	}
+	printf("Are we done before the loop: %d\n", vla.done_signal);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
@@ -92,31 +97,36 @@ void notify_hardware(){
 			perror("ioctl(IK_DRIVER_READ_PARAM) failed");
 			return; 
 		}
-		if (!vla.start_signal)
+		printf("Are we done in the loop: %d\n", vla.done_signal);
+		if (vla.done_signal == 1){
+			vla.start_signal = 0;
+			vla.joint = (char)-2;
+			if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
+				perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
+				return;
+			}
 			return;
+		}
 	}
 }
 
-//Write a dh param for a specific joint to the device, converting from degrees to radians
-//if applicable
-void write_param(int joint, char param_type, float magnitude)
+//Write a THETA param for a specific joint to the device, converting from degrees to radians
+void write_param(int joint, float magnitude)
 {
   ik_driver_arg_t vla;
 	vla.joint = (char)joint;
-	vla.parameter = param_type;
-	if (vla.parameter == THETA || vla.parameter == ALPHA){
 
-		//Do this error checking here so we don't use floats in the kernel
-		if (magnitude < -180 || magnitude > 180){
-			printf("The magnitude of param %d for joint %d is %f\n", joint, param_type, M_PI);
-			perror("Magnitude of parameter is outside acceptable range");
-			return;
-		}
-		else{
-			magnitude = magnitude * (float)M_PI / 180.0;//Convert from degrees to radians
-		}
+	//Do this error checking here so we don't use floats in the kernel
+	if (magnitude < -180 || magnitude > 180){
+		printf("The magnitude of theta for joint %d is %f\n", joint, magnitude);
+		perror("Magnitude of parameter is outside acceptable range");
+		exit(1);
+	}
+	else{
+		magnitude = magnitude * (float)M_PI / 180.0;//Convert from degrees to radians
 	}
 	vla.magnitude = float_to_fixed(magnitude);
+	printf("Magnitude for joint %d before writing is %d\n", joint, vla.magnitude);
 	if (ioctl(ik_driver_fd, IK_DRIVER_WRITE_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_WRITE_PARAM) failed");
 		return;
@@ -124,29 +134,33 @@ void write_param(int joint, char param_type, float magnitude)
 }
 
 //Read a specific dh param for a specific joint from the hardware
-float read_param(int joint, char param_type){
+float read_param(int joint){
 	ik_driver_arg_t vla;
 	float value;
 
 	//Get param
 	vla.joint = (char)joint;
-	vla.parameter = param_type;
 	if (ioctl(ik_driver_fd, IK_DRIVER_READ_PARAM, &vla)) {
 		perror("ioctl(IK_DRIVER_READ_PARAM) failed");
 		return 0;
 	}
+	printf("The value before conversion for joint %d is %d\n", joint, vla.magnitude);
 
 	//Convert from fixed to float
 	value = vla.magnitude / pow(2,PRECISION);
 
-	//convert from radians to degrees if necessary
-	if (param_type == THETA || param_type == ALPHA){
-		if (value > M_PI)
-			value -= 2 * M_PI;
-		else if (value < -M_PI)
-			value += 2 * M_PI;
-		value = value * 180 / M_PI;
-	}
+	//printf("The value before wraparound for joint %d is %f\n", joint, value);
+	//Perform wraparound if necessary
+	while (value > M_PI)
+		value -= 2 * M_PI;
+	while (value < -M_PI)
+		value += 2 * M_PI;
+	
+	//convert from radians to degrees
+	value = value * 180 / M_PI;
+
+	write_param(joint, value);	
+
 	return value;
 }
 
@@ -187,21 +201,23 @@ void arm(int index){
 		glVertex3f(robot.targetx, robot.targety, robot.targetz);
 	glEnd();
 
+
 	//Draw the links of the robot arm
 	for (int i = 0; i < MAX_JOINT; i ++){
 		glColor3f(.2*i+.5, .2*i+.1, .2*i);
+
+		//These dh params won't change over the course of the algorithm
+		d = robot.params[i].d;
+		a = robot.params[i].a;
+		alpha = robot.params[i].alpha;
+
 		if (start_program){
-			d = robot.params[i].d;
-			a = robot.params[i].a;
 			theta = robot.params[i].theta;
-			alpha = robot.params[i].alpha;
 		}
 		else{
-			 d = read_param(i, L_OFFSET); 
-			 a = read_param(i, L_LENGTH); 
-			 theta = read_param(i, theta); 
-			 alpha = read_param(i, alpha); 
+			 theta = read_param(i); 
 		}
+		printf("Joint %d: %f\n", i, theta);
 
 		glRotatef(theta, 0, 0, 1);
 
@@ -214,6 +230,7 @@ void arm(int index){
 		glRotatef(alpha, 1, 0, 0);
 
 	}
+	glutPostRedisplay();
 	if (start_program){
 		start_program = false;
 	}
@@ -237,7 +254,7 @@ void display(void) {
 	
 	glPushMatrix();
 	glRotatef(-90, 1, 0, 0);//Now z-axis points straight up, x points to left, and y is pointing into screen
-	glScalef(.1, .1, .1);
+	glScalef(.9, .9, .9);
 
 
 
@@ -310,19 +327,43 @@ int main(int argc, char** argv) {
 	//UNCOMMENT WHEN TALKING TO HARDWARE 
 
 	//Write target to hardware
-  write_target(robot.targetx, robot.targety, robot.targetz);
-
-	//Inform hardware of initial configuration
+	write_target(robot.targetx, robot.targety, robot.targetz);
 	for (int i = 0; i < MAX_JOINT; i ++){
-		write_param(i, L_OFFSET, robot.params[i].d);
-		write_param(i, L_LENGTH, robot.params[i].a);
-		write_param(i, THETA, robot.params[i].theta);
-		write_param(i, ALPHA, robot.params[i].alpha);
+		printf("Theta is %f\n", robot.params[i].theta);
 	}
 
-	start_program = true;
+	//Inform hardware of initial theta configuration
+	for (int i = 0; i < MAX_JOINT; i ++){
+		write_param(i, robot.params[i].theta);
+	}
 
+
+	start_program = true;
+	/*
+
+	float theta;
+	while(1){
+		for (int i = 0; i < MAX_JOINT; i ++){
+
+			//These dh params won't change over the course of the algorithm
+			if (start_program){
+				theta = robot.params[i].theta;
+			}
+			else{
+				 theta = read_param(i); 
+			}
+			
+			printf("Joint %d: %f\n", i, theta);
+
+		}
+		if (start_program){
+			start_program = false;
+		}
+		//Ready for next iteration
+		notify_hardware();
+	}
 	exit(0);
+	*/
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
