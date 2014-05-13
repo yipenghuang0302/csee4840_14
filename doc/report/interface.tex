@@ -2,29 +2,44 @@
 
 \subsection{Software Driver}
 
-We will design a ``joint" peripheral through which the software and hardware components of our system will interact. 
-The driver for the joint peripheral will provide an ioctl that copies a struct to and from the user with the following components:
+We designed a ``joint" peripheral through which the software and 
+hardware components of our system interact. 
+The driver for the joint peripheral provides an ioctl that copies a struct to and from the 
+user with the following components:
 
 \begin{center}
 	\begin{tabular}{|c|c|}
 		\hline
 		Field & Comments \\
 		\hline
-		\texttt{unsigned char target[3]} &  The x,y,z, coordinates of the target position for our end-effector \\
-			\hline
-		\texttt{unsigned char joint} &  0,1,...,JOINT\_DOF-1 \\
-			\hline
-		\texttt{unsigned char joint\_type} & The $i$th bit is 1 if the $i$th joint is rotational, 0 for translational \\
-			\hline
+		\texttt{unsigned char start\_signal} & signal for HW to run an iteration of the algorithm\\
+		\hline
+		\texttt{signed long long target[3]} &  The x,y,z, coordinates of the target position 
+																						for our end-effector \\
+		\hline
+		\texttt{signed char joint} &  Indicate which joint we're getting/setting\\
+		\hline
+		\texttt{unsigned char joint\_type} & The $i$th bit is 1 if the $i$th joint is rotational, 
+																					0 for translational \\
+		\hline
 		\texttt{unsigned char parameter} & THETA,L\_OFFSET,L\_DISTANCE,ALPHA \\
 			\hline
-		\texttt{unsigned short magnitude} & ~\\
+		\texttt{unsigned long long magnitude} & ~\\
 		\hline
 	\end{tabular}
 \end{center}
-The \texttt{joint} field represents which joint we're referring to (we have a total of \texttt{JOINT\_DOF} joints), the \texttt{joint\_type}
+After displaying the most recent configuration of the robot appendage, the software will set
+\texttt{start\_signal} to 1 to notify the hardware to run another iteration of the algorithm. The
+software will then spin until this variable is set to 0, indicating that the D-H parameters have been
+updated and the appendage needs to be redisplayed.
+The \texttt{joint} field represents which joint we're referring to 
+(we have a total of \texttt{MAX\_JOINT} joints), the \texttt{joint\_type}
 field keeps track of the type of every joint in system, the \texttt{parameter} field
-is a constant signifying which D-H parameter we're reading or writing, and the magnitude field holds the value of that D-H parameter.
+is a constant signifying which D-H parameter we're reading or writing, 
+and the \texttt{magnitude} field holds the value of that D-H parameter.
+We also use the \texttt{joint} field to indicate when we're setting non-joint values. If
+$\texttt{joint} = -1$, then we're setting the \texttt{target} value, and if $\texttt{joint} = -2$,
+then we're setting the \texttt{start\_signal} value.
 
 \subsection{Hardware Register Set}
 
@@ -32,18 +47,26 @@ The registers used by the device driver are represented with the following struc
 
 \begin{verbatim}
 struct joint_dev{
-	struct resource res;		/* Resource: our registers */
+	resource_size_t start; /* Address of start of registers */
+	resource_size_t size; /* Size of registers */
 	void __iomem *virtbase; /* Pointer to registers */
 	u8 joint_type; /* ith bit is 1 if ith joint is rotational, 0 for translational */
-	u16 target[3]; /* Target position */
-	u16 dh_params[JOINT_DOF * 4] /* Every joint has 4 parameters */
+	u8 start_signal; /* This is set to 1 if HW is running, 0 if SW is running */
+	u64 target[3]; /* Target position */
+	u64 dh_params[MAX_JOINT * NUM_PARAMS] /* Every joint has 4 parameters */
 } dev;
 \end{verbatim}
 
-The \texttt{joint\_type} and \texttt{target} fields mirror the same fields in the user-level struct and are only set once during the configuration
-stage of our pipeline. The \texttt{dh\_params} array in the given struct will be used to read and write magnitudes for various D-H parameters in the 
-given configuration. For example, the magnitude of the third joint's theta parameter would be stored at \texttt{dh\_params[2*4 + THETA]}. Note that
-since the only parameters that our algorithm modifies are $\theta_i$ and $d_i$ for joint $i$, these are the only components of our struct that
+The \texttt{joint\_type} and \texttt{target} fields mirror the same fields in the 
+user-level struct and are only set once during the configuration
+stage of our pipeline. The \texttt{start\_signal} field also mirrors the same field in the user-level
+struct, but it is constantly updated over the course of of the algorithm.
+The \texttt{dh\_params} array in the given struct will be used to read and 
+write magnitudes for various D-H parameters in the 
+given configuration. For example, the magnitude of the third joint's 
+theta parameter would be stored at \texttt{dh\_params[2*NUM\_PARAMS + THETA]}. Note that
+since the only parameters that our algorithm modifies are $\theta_i$ and 
+$d_i$ for joint $i$, these are the only components of our struct that
 will be modified after the start of our algorithm.
 
 \subsection{Top-Level Hardware Interface}

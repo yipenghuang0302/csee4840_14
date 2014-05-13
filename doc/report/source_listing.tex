@@ -1,6 +1,7 @@
 \section{Source Listings}
 Complete listings of every file you wrote for the project. Include C source, SystemVerilog source, and things such as .mhs files. Don't include any file that was generated automatically.
 
+\subsection{Hardware}
 \begin{verbatim}
 SoCKit_top : top-level file
   ik_interface
@@ -13,4 +14,23 @@ SoCKit_top : top-level file
         lt_inverse
       mat_mult
       array_mult
+\end{verbatim}
+
+\subsection{Software}
+\begin{verbatim}
+CConfigLoader.h
+CConfigLoader.cpp
+config.h
+lexer.cpp
+lexer.h
+SharedTypes.h
+robot_arm.cpp
+xml_help
+	pugiconfig.hpp
+	pugixml.cpp
+	pugixml.hpp
+ik_driver.c
+ik_driver.h
+robots
+	robot.xml
 \end{verbatim}
