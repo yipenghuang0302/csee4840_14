@@ -1,0 +1,906 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML><HEAD>
+<TITLE>Fitter Partition Statistics</TITLE>
+
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.layout-latest.css">
+<link rel="stylesheet" type="text/css" href="css/override.css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.layout-latest.js"></script>
+
+
+</HEAD>
+
+<BODY>
+<TABLE>
+<thead><TR  bgcolor="#BFBFBF">
+<TH>Statistic</TH>
+<TH>Top</TH>
+<TH>ik_swift_hps_hps_0_hps_io_border:border</TH>
+<TH>sld_hub:auto_hub</TH>
+<TH>hard_block:auto_generated_inst</TH>
+</TR>
+</thead><tbody><TR >
+<TD >Logic utilization (ALMs needed / total ALMs on device)</TD>
+<TD >24278 / 41910 ( 58 % )</TD>
+<TD >0 / 41910 ( 0 % )</TD>
+<TD >57 / 41910 ( < 1 % )</TD>
+<TD >0 / 41910 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >ALMs needed [=A-B+C]</TD>
+<TD >24278</TD>
+<TD >0</TD>
+<TD >57</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;[A] ALMs used in final placement [=a+b+c+d]</TD>
+<TD >23875 / 41910 ( 57 % )</TD>
+<TD >0 / 41910 ( 0 % )</TD>
+<TD >65 / 41910 ( < 1 % )</TD>
+<TD >0 / 41910 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[a] ALMs used for LUT logic and registers</TD>
+<TD >6730</TD>
+<TD >0</TD>
+<TD >29</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[b] ALMs used for LUT logic</TD>
+<TD >10674</TD>
+<TD >0</TD>
+<TD >25</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[c] ALMs used for registers</TD>
+<TD >6471</TD>
+<TD >0</TD>
+<TD >11</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[d] ALMs used for memory (up to half of total ALMs)</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;[B] Estimate of ALMs recoverable by dense packing</TD>
+<TD >1094 / 41910 ( 3 % )</TD>
+<TD >0 / 41910 ( 0 % )</TD>
+<TD >8 / 41910 ( < 1 % )</TD>
+<TD >0 / 41910 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;[C] Estimate of ALMs unavailable [=a+b+c+d]</TD>
+<TD >1497 / 41910 ( 4 % )</TD>
+<TD >0 / 41910 ( 0 % )</TD>
+<TD >0 / 41910 ( 0 % )</TD>
+<TD >0 / 41910 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[a] Due to location constrained logic</TD>
+<TD >131</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[b] Due to LAB-wide signal conflicts</TD>
+<TD >308</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[c] Due to LAB input limits</TD>
+<TD >1058</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[d] Due to virtual I/Os</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Difficulty packing design</TD>
+<TD >Low</TD>
+<TD >Low</TD>
+<TD >Low</TD>
+<TD >Low</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Total LABs:&nbsp; partially or completely used</TD>
+<TD >3704 / 4191 ( 88 % )</TD>
+<TD >0 / 4191 ( 0 % )</TD>
+<TD >10 / 4191 ( < 1 % )</TD>
+<TD >0 / 4191 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Logic LABs</TD>
+<TD >3704</TD>
+<TD >0</TD>
+<TD >10</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Memory LABs (up to half of total LABs)</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Combinational ALUT usage for logic</TD>
+<TD >32158</TD>
+<TD >0</TD>
+<TD >93</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- 7 input functions</TD>
+<TD >14</TD>
+<TD >0</TD>
+<TD >1</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- 6 input functions</TD>
+<TD >1896</TD>
+<TD >0</TD>
+<TD >11</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- 5 input functions</TD>
+<TD >2468</TD>
+<TD >0</TD>
+<TD >22</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- 4 input functions</TD>
+<TD >8135</TD>
+<TD >0</TD>
+<TD >15</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- <=3 input functions</TD>
+<TD >19645</TD>
+<TD >0</TD>
+<TD >44</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Combinational ALUT usage for route-throughs</TD>
+<TD >8636</TD>
+<TD >0</TD>
+<TD >9</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Memory ALUT usage</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- 64-address deep</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- 32-address deep</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Dedicated logic registers</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- By type:</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- Primary logic registers</TD>
+<TD >26401 / 83820 ( 31 % )</TD>
+<TD >0 / 83820 ( 0 % )</TD>
+<TD >78 / 83820 ( < 1 % )</TD>
+<TD >0 / 83820 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- Secondary logic registers</TD>
+<TD >1341 / 83820 ( 2 % )</TD>
+<TD >0 / 83820 ( 0 % )</TD>
+<TD >4 / 83820 ( < 1 % )</TD>
+<TD >0 / 83820 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- By function:</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- Design implementation registers</TD>
+<TD >26756</TD>
+<TD >0</TD>
+<TD >78</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- Routing optimization registers</TD>
+<TD >986</TD>
+<TD >0</TD>
+<TD >4</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Virtual pins</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >I/O pins</TD>
+<TD >220</TD>
+<TD >68</TD>
+<TD >0</TD>
+<TD >1</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >I/O registers</TD>
+<TD >50</TD>
+<TD >176</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Total block memory bits</TD>
+<TD >2665</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Total block memory implementation bits</TD>
+<TD >194560</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >JTAG</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >M10K block</TD>
+<TD >19 / 553 ( 3 % )</TD>
+<TD >0 / 553 ( 0 % )</TD>
+<TD >0 / 553 ( 0 % )</TD>
+<TD >0 / 553 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >DSP block</TD>
+<TD >59 / 112 ( 52 % )</TD>
+<TD >0 / 112 ( 0 % )</TD>
+<TD >0 / 112 ( 0 % )</TD>
+<TD >0 / 112 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >DLL</TD>
+<TD >0 / 4 ( 0 % )</TD>
+<TD >1 / 4 ( 25 % )</TD>
+<TD >0 / 4 ( 0 % )</TD>
+<TD >0 / 4 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Clock enable block</TD>
+<TD >2 / 116 ( 1 % )</TD>
+<TD >0 / 116 ( 0 % )</TD>
+<TD >0 / 116 ( 0 % )</TD>
+<TD >4 / 116 ( 3 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Impedance control block</TD>
+<TD >0 / 4 ( 0 % )</TD>
+<TD >1 / 4 ( 25 % )</TD>
+<TD >0 / 4 ( 0 % )</TD>
+<TD >0 / 4 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Double data rate I/O output circuitry</TD>
+<TD >0 / 1325 ( 0 % )</TD>
+<TD >186 / 1325 ( 14 % )</TD>
+<TD >0 / 1325 ( 0 % )</TD>
+<TD >0 / 1325 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Double data rate I/O input circuitry</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >32 / 400 ( 8 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Double data rate I/O output circuitry</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >66 / 400 ( 16 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Double data rate I/O output enable circuitry</TD>
+<TD >0 / 425 ( 0 % )</TD>
+<TD >40 / 425 ( 9 % )</TD>
+<TD >0 / 425 ( 0 % )</TD>
+<TD >0 / 425 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Impedance logic block</TD>
+<TD >0 / 8 ( 0 % )</TD>
+<TD >2 / 8 ( 25 % )</TD>
+<TD >0 / 8 ( 0 % )</TD>
+<TD >0 / 8 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >DQS pin delay chain</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >4 / 25 ( 16 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >DQS pin enable control</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >4 / 25 ( 16 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Delay chain</TD>
+<TD >0 / 1300 ( 0 % )</TD>
+<TD >124 / 1300 ( 9 % )</TD>
+<TD >0 / 1300 ( 0 % )</TD>
+<TD >0 / 1300 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Pin configuration</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >40 / 400 ( 10 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >DQS pin configuration</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >4 / 25 ( 16 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Signal Splitter</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >5 / 400 ( 1 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Leveling delay chain</TD>
+<TD >0 / 36 ( 0 % )</TD>
+<TD >6 / 36 ( 16 % )</TD>
+<TD >0 / 36 ( 0 % )</TD>
+<TD >0 / 36 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Clock Phase Select</TD>
+<TD >0 / 175 ( 0 % )</TD>
+<TD >26 / 175 ( 14 % )</TD>
+<TD >0 / 175 ( 0 % )</TD>
+<TD >0 / 175 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Read FIFO Read Clock Select Block</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >32 / 400 ( 8 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >LFIFO</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >4 / 25 ( 16 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS SDRAM PLL</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS EMAC peripheral</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >1 / 2 ( 50 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS I2C peripheral</TD>
+<TD >0 / 4 ( 0 % )</TD>
+<TD >1 / 4 ( 25 % )</TD>
+<TD >0 / 4 ( 0 % )</TD>
+<TD >0 / 4 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS SDMMC peripheral</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS QSPI peripheral</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS SPI Master peripheral</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >2 / 2 ( 100 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS UART peripheral</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >1 / 2 ( 50 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS USB peripheral</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >1 / 2 ( 50 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS DBG APB interface</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Fractional PLL</TD>
+<TD >0 / 6 ( 0 % )</TD>
+<TD >0 / 6 ( 0 % )</TD>
+<TD >0 / 6 ( 0 % )</TD>
+<TD >1 / 6 ( 16 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Hard Memory Controller</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >1 / 2 ( 50 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS boot from FPGA interface</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS clock resets interface</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >FPGA-to-HPS interface</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS FPGA-to-SDRAM interface</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS-to-FPGA interface</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS-to-FPGA lightweight interface</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >HPS TPIU trace interface</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >0 / 1 ( 0 % )</TD>
+<TD >1 / 1 ( 100 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >IR FIFO USERDES Block</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >32 / 400 ( 8 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+<TD >0 / 400 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Hard Memory PHY</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >1 / 2 ( 50 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+<TD >0 / 2 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >PLL Output Counter</TD>
+<TD >0 / 54 ( 0 % )</TD>
+<TD >0 / 54 ( 0 % )</TD>
+<TD >0 / 54 ( 0 % )</TD>
+<TD >1 / 54 ( 1 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >PLL Reconfiguration Block</TD>
+<TD >0 / 6 ( 0 % )</TD>
+<TD >0 / 6 ( 0 % )</TD>
+<TD >0 / 6 ( 0 % )</TD>
+<TD >1 / 6 ( 16 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >PLL Reference Clock Select Block</TD>
+<TD >0 / 6 ( 0 % )</TD>
+<TD >0 / 6 ( 0 % )</TD>
+<TD >0 / 6 ( 0 % )</TD>
+<TD >1 / 6 ( 16 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >VFIFO</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >4 / 25 ( 16 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+<TD >0 / 25 ( 0 % )</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Connections</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Input Connections</TD>
+<TD >28487</TD>
+<TD >73</TD>
+<TD >120</TD>
+<TD >64</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Registered Input Connections</TD>
+<TD >27788</TD>
+<TD >0</TD>
+<TD >88</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Output Connections</TD>
+<TD >172</TD>
+<TD >101</TD>
+<TD >247</TD>
+<TD >28224</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Registered Output Connections</TD>
+<TD >25</TD>
+<TD >0</TD>
+<TD >246</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Internal Connections</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Total Connections</TD>
+<TD >231582</TD>
+<TD >5193</TD>
+<TD >851</TD>
+<TD >28334</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Registered Connections</TD>
+<TD >97501</TD>
+<TD >100</TD>
+<TD >660</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >External Connections</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Top</TD>
+<TD >180</TD>
+<TD >54</TD>
+<TD >252</TD>
+<TD >28173</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- ik_swift_hps_hps_0_hps_io_border:border</TD>
+<TD >54</TD>
+<TD >120</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- sld_hub:auto_hub</TD>
+<TD >252</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >115</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- hard_block:auto_generated_inst</TD>
+<TD >28173</TD>
+<TD >0</TD>
+<TD >115</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Partition Interface</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Input Ports</TD>
+<TD >69</TD>
+<TD >13</TD>
+<TD >15</TD>
+<TD >68</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Output Ports</TD>
+<TD >103</TD>
+<TD >49</TD>
+<TD >33</TD>
+<TD >107</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Bidir Ports</TD>
+<TD >150</TD>
+<TD >60</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Registered Ports</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Registered Input Ports</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >2</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Registered Output Ports</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >22</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >Port Connectivity</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Input Ports driven by GND</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >5</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Output Ports driven by GND</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >1</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Input Ports driven by VCC</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Output Ports driven by VCC</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Input Ports with no Source</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >1</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Output Ports with no Source</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >0</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Input Ports with no Fanout</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >2</TD>
+<TD >17</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >&nbsp;&nbsp;&nbsp;&nbsp;-- Output Ports with no Fanout</TD>
+<TD >0</TD>
+<TD >0</TD>
+<TD >22</TD>
+<TD >0</TD>
+</TR>
+</tbody></TABLE>
+
+<noscript>JavaScript must be enabled to view the report.</noscript>
+</BODY>
+</HTML>

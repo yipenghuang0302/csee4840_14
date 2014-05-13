@@ -1,0 +1,1752 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML><HEAD>
+<TITLE>Multiplexer Restructuring Statistics (Restructuring Performed)</TITLE>
+
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.layout-latest.css">
+<link rel="stylesheet" type="text/css" href="css/override.css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.layout-latest.js"></script>
+
+
+</HEAD>
+
+<BODY>
+<TABLE>
+<thead><TR  bgcolor="#BFBFBF">
+<TH>Multiplexer Inputs</TH>
+<TH>Bus Width</TH>
+<TH>Baseline Area</TH>
+<TH>Area if Restructured</TH>
+<TH>Saving if Restructured</TH>
+<TH>Registered</TH>
+<TH>Example Multiplexer Output</TH>
+</TR>
+</thead><tbody><TR >
+<TD >6:1</TD>
+<TD >108 bits</TD>
+<TD >432 LEs</TD>
+<TD >108 LEs</TD>
+<TD >324 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[0][0][19]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >8 bits</TD>
+<TD >16 LEs</TD>
+<TD >0 LEs</TD>
+<TD >16 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|count[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >126 bits</TD>
+<TD >252 LEs</TD>
+<TD >126 LEs</TD>
+<TD >126 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|i.dh_dyn_out[0][13]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >9:1</TD>
+<TD >27 bits</TD>
+<TD >162 LEs</TD>
+<TD >81 LEs</TD>
+<TD >81 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.array_mult_dataa[6][5]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >9:1</TD>
+<TD >188 bits</TD>
+<TD >1128 LEs</TD>
+<TD >752 LEs</TD>
+<TD >376 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.array_mult_dataa[1][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >8:1</TD>
+<TD >28 bits</TD>
+<TD >140 LEs</TD>
+<TD >112 LEs</TD>
+<TD >28 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.array_mult_dataa[7][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >256:1</TD>
+<TD >676 bits</TD>
+<TD >114920 LEs</TD>
+<TD >676 LEs</TD>
+<TD >114244 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|full_mat:full_mat|i.mat_mult_dataa[0][1][25]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >256:1</TD>
+<TD >258 bits</TD>
+<TD >43860 LEs</TD>
+<TD >258 LEs</TD>
+<TD >43602 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|full_mat:full_mat|i.mat_mult_dataa[2][3][18]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >256:1</TD>
+<TD >253 bits</TD>
+<TD >43010 LEs</TD>
+<TD >759 LEs</TD>
+<TD >42251 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|full_mat:full_mat|i.mat_mult_datab[1][3][25]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >128:1</TD>
+<TD >38 bits</TD>
+<TD >3230 LEs</TD>
+<TD >0 LEs</TD>
+<TD >3230 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|full_mat:full_mat|i.mat_mult_dataa[3][3][20]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >256:1</TD>
+<TD >918 bits</TD>
+<TD >156060 LEs</TD>
+<TD >0 LEs</TD>
+<TD >156060 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jjt_datab[0][0][1]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.dividends[3][2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >27 bits</TD>
+<TD >81 LEs</TD>
+<TD >54 LEs</TD>
+<TD >27 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.dividends[4][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >27 bits</TD>
+<TD >108 LEs</TD>
+<TD >108 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.dividends[5][19]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >101:1</TD>
+<TD >27 bits</TD>
+<TD >1809 LEs</TD>
+<TD >1296 LEs</TD>
+<TD >513 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|ifc_sqrt_43.radical[22]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >135 bits</TD>
+<TD >270 LEs</TD>
+<TD >135 LEs</TD>
+<TD >135 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|temp[4][1][16]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >26 bits</TD>
+<TD >52 LEs</TD>
+<TD >0 LEs</TD>
+<TD >52 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[1][0][13]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >26 bits</TD>
+<TD >52 LEs</TD>
+<TD >0 LEs</TD>
+<TD >52 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[2][1][12]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >26 bits</TD>
+<TD >52 LEs</TD>
+<TD >0 LEs</TD>
+<TD >52 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[3][2][18]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >26 bits</TD>
+<TD >52 LEs</TD>
+<TD >0 LEs</TD>
+<TD >52 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[4][3][14]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >26 bits</TD>
+<TD >52 LEs</TD>
+<TD >0 LEs</TD>
+<TD >52 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[5][4][23]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.array_mult_dataa[6][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >108 bits</TD>
+<TD >216 LEs</TD>
+<TD >216 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|temp[3][2][13]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >25 bits</TD>
+<TD >75 LEs</TD>
+<TD >50 LEs</TD>
+<TD >25 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[2][0][3]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >2 bits</TD>
+<TD >6 LEs</TD>
+<TD >4 LEs</TD>
+<TD >2 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[2][0][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >25 bits</TD>
+<TD >75 LEs</TD>
+<TD >50 LEs</TD>
+<TD >25 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[3][1][4]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >2 bits</TD>
+<TD >6 LEs</TD>
+<TD >4 LEs</TD>
+<TD >2 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[3][1][1]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >25 bits</TD>
+<TD >75 LEs</TD>
+<TD >50 LEs</TD>
+<TD >25 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[4][2][24]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >2 bits</TD>
+<TD >6 LEs</TD>
+<TD >4 LEs</TD>
+<TD >2 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[4][2][1]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >25 bits</TD>
+<TD >75 LEs</TD>
+<TD >50 LEs</TD>
+<TD >25 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[5][3][2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >2 bits</TD>
+<TD >6 LEs</TD>
+<TD >4 LEs</TD>
+<TD >2 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[5][3][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >27 bits</TD>
+<TD >81 LEs</TD>
+<TD >54 LEs</TD>
+<TD >27 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.array_mult_dataa[3][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >81 bits</TD>
+<TD >243 LEs</TD>
+<TD >162 LEs</TD>
+<TD >81 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|temp[4][3][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >24 bits</TD>
+<TD >96 LEs</TD>
+<TD >48 LEs</TD>
+<TD >48 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[3][0][3]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >3 bits</TD>
+<TD >12 LEs</TD>
+<TD >12 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[3][0][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >24 bits</TD>
+<TD >96 LEs</TD>
+<TD >48 LEs</TD>
+<TD >48 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[4][1][20]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >3 bits</TD>
+<TD >12 LEs</TD>
+<TD >12 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[4][1][2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >24 bits</TD>
+<TD >96 LEs</TD>
+<TD >48 LEs</TD>
+<TD >48 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[5][2][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >3 bits</TD>
+<TD >12 LEs</TD>
+<TD >12 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[5][2][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >27 bits</TD>
+<TD >108 LEs</TD>
+<TD >108 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.array_mult_dataa[0][23]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >27 bits</TD>
+<TD >108 LEs</TD>
+<TD >54 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.array_mult_dataa[1][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >54 bits</TD>
+<TD >216 LEs</TD>
+<TD >216 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|temp[5][4][25]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >7:1</TD>
+<TD >23 bits</TD>
+<TD >92 LEs</TD>
+<TD >92 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[4][0][16]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >7:1</TD>
+<TD >4 bits</TD>
+<TD >16 LEs</TD>
+<TD >16 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[4][0][1]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >7:1</TD>
+<TD >23 bits</TD>
+<TD >92 LEs</TD>
+<TD >92 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[5][1][18]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >7:1</TD>
+<TD >4 bits</TD>
+<TD >16 LEs</TD>
+<TD >16 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[5][1][2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >7:1</TD>
+<TD >27 bits</TD>
+<TD >108 LEs</TD>
+<TD >108 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|temp[5][5][20]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >8:1</TD>
+<TD >22 bits</TD>
+<TD >110 LEs</TD>
+<TD >110 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[5][0][17]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >8:1</TD>
+<TD >5 bits</TD>
+<TD >25 LEs</TD>
+<TD >25 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.lt_inverse[5][0][4]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >8:1</TD>
+<TD >81 bits</TD>
+<TD >405 LEs</TD>
+<TD >405 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|Mux246</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >81 bits</TD>
+<TD >324 LEs</TD>
+<TD >81 LEs</TD>
+<TD >243 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[2][0][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >18 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[1][0][12]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >18 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[2][0][7]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >18 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[3][0][17]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >18 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[4][0][5]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >18 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[5][0][17]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >18 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[6][0][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >256:1</TD>
+<TD >891 bits</TD>
+<TD >151470 LEs</TD>
+<TD >0 LEs</TD>
+<TD >151470 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.mat_mult_datab[1][0][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >256:1</TD>
+<TD >3 bits</TD>
+<TD >510 LEs</TD>
+<TD >12 LEs</TD>
+<TD >498 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|joint[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >162 bits</TD>
+<TD >324 LEs</TD>
+<TD >162 LEs</TD>
+<TD >162 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_dataa[1][2][15]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >108 bits</TD>
+<TD >432 LEs</TD>
+<TD >108 LEs</TD>
+<TD >324 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[1][4][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >27 bits</TD>
+<TD >270 LEs</TD>
+<TD >135 LEs</TD>
+<TD >135 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|Mux134</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >162 bits</TD>
+<TD >324 LEs</TD>
+<TD >162 LEs</TD>
+<TD >162 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_dataa[2][2][15]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >108 bits</TD>
+<TD >432 LEs</TD>
+<TD >108 LEs</TD>
+<TD >324 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[2][4][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >27 bits</TD>
+<TD >270 LEs</TD>
+<TD >135 LEs</TD>
+<TD >135 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|Mux107</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >162 bits</TD>
+<TD >324 LEs</TD>
+<TD >162 LEs</TD>
+<TD >162 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_dataa[3][2][15]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >108 bits</TD>
+<TD >432 LEs</TD>
+<TD >108 LEs</TD>
+<TD >324 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[3][4][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >27 bits</TD>
+<TD >270 LEs</TD>
+<TD >135 LEs</TD>
+<TD >135 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|Mux80</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >26 bits</TD>
+<TD >52 LEs</TD>
+<TD >52 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.dividends[2][3]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.array_mult_datab[6][14]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.array_mult_datab[7][18]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.array_mult_datab[8][6]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >81 bits</TD>
+<TD >243 LEs</TD>
+<TD >162 LEs</TD>
+<TD >81 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.array_mult_dataa[6][20]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >81 bits</TD>
+<TD >243 LEs</TD>
+<TD >162 LEs</TD>
+<TD >81 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.array_mult_datab[6][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >26 bits</TD>
+<TD >78 LEs</TD>
+<TD >52 LEs</TD>
+<TD >26 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.dividends[1][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >54 bits</TD>
+<TD >162 LEs</TD>
+<TD >108 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.array_mult_datab[3][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >270 bits</TD>
+<TD >1080 LEs</TD>
+<TD >1080 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.array_mult_datab[3][4]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >26 bits</TD>
+<TD >104 LEs</TD>
+<TD >104 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|lt_block:lt_block|i.dividends[0][2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >27 bits</TD>
+<TD >108 LEs</TD>
+<TD >54 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|cholesky_block:cholesky_block|i.array_mult_datab[1][3]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >9:1</TD>
+<TD >21 bits</TD>
+<TD >126 LEs</TD>
+<TD >84 LEs</TD>
+<TD >42 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|full_mat:full_mat|ifc_t_block.theta[1]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >256:1</TD>
+<TD >567 bits</TD>
+<TD >96390 LEs</TD>
+<TD >0 LEs</TD>
+<TD >96390 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|inverse:inverse|i.mat_mult_dataa[1][2][4]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[0][1][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >54 bits</TD>
+<TD >108 LEs</TD>
+<TD >0 LEs</TD>
+<TD >108 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[4][1][3]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[3][1][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[2][1][22]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[1][1][13]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >54 bits</TD>
+<TD >540 LEs</TD>
+<TD >270 LEs</TD>
+<TD >270 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|Mux296</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[0][0][24]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >81 bits</TD>
+<TD >162 LEs</TD>
+<TD >0 LEs</TD>
+<TD >162 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[5][0][11]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[4][0][8]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[3][0][7]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[2][0][22]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[1][0][22]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[1][3][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[3][3][12]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[2][3][24]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[0][3][22]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >54 bits</TD>
+<TD >540 LEs</TD>
+<TD >270 LEs</TD>
+<TD >270 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|Mux323</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >162 bits</TD>
+<TD >324 LEs</TD>
+<TD >0 LEs</TD>
+<TD >324 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_dataa[4][5][11]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >162 bits</TD>
+<TD >648 LEs</TD>
+<TD >162 LEs</TD>
+<TD >486 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[4][5][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >27 bits</TD>
+<TD >270 LEs</TD>
+<TD >135 LEs</TD>
+<TD >135 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|Mux53</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[0][2][20]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >108 bits</TD>
+<TD >216 LEs</TD>
+<TD >0 LEs</TD>
+<TD >216 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[5][2][10]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[3][2][4]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[2][2][23]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[1][2][12]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[1][5][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[3][5][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[2][5][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[0][5][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >54 bits</TD>
+<TD >540 LEs</TD>
+<TD >270 LEs</TD>
+<TD >270 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|Mux269</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >81 bits</TD>
+<TD >162 LEs</TD>
+<TD >81 LEs</TD>
+<TD >81 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_dataa[0][2][25]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >135 bits</TD>
+<TD >540 LEs</TD>
+<TD >135 LEs</TD>
+<TD >405 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[0][3][26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >27 bits</TD>
+<TD >270 LEs</TD>
+<TD >135 LEs</TD>
+<TD >135 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|Mux161</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >162 bits</TD>
+<TD >324 LEs</TD>
+<TD >162 LEs</TD>
+<TD >162 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_dataa[5][2][22]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >108 bits</TD>
+<TD >432 LEs</TD>
+<TD >108 LEs</TD>
+<TD >324 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[5][1][0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >27 bits</TD>
+<TD >270 LEs</TD>
+<TD >135 LEs</TD>
+<TD >135 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|Mux26</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >61 bits</TD>
+<TD >183 LEs</TD>
+<TD >0 LEs</TD>
+<TD >183 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[6][2][2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >61 bits</TD>
+<TD >183 LEs</TD>
+<TD >0 LEs</TD>
+<TD >183 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[5][0][24]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >61 bits</TD>
+<TD >183 LEs</TD>
+<TD >0 LEs</TD>
+<TD >183 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[4][2][17]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >61 bits</TD>
+<TD >183 LEs</TD>
+<TD >0 LEs</TD>
+<TD >183 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[3][0][22]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >61 bits</TD>
+<TD >183 LEs</TD>
+<TD >0 LEs</TD>
+<TD >183 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[2][2][21]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >61 bits</TD>
+<TD >183 LEs</TD>
+<TD >0 LEs</TD>
+<TD >183 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|full_jacobian:full_jacobian|jacobian:jacobian|i.axis[1][2][1]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[0][4][1]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[1][4][9]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[2][4][9]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[3][4][25]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >54 bits</TD>
+<TD >108 LEs</TD>
+<TD >0 LEs</TD>
+<TD >108 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|dls_mat_mult_datab[5][4][21]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >27 bits</TD>
+<TD >108 LEs</TD>
+<TD >27 LEs</TD>
+<TD >81 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[2][1][25]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >18 bits</TD>
+<TD >36 LEs</TD>
+<TD >18 LEs</TD>
+<TD >18 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|dr_info[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >2 bits</TD>
+<TD >4 LEs</TD>
+<TD >2 LEs</TD>
+<TD >2 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|dr_debug[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >4 bits</TD>
+<TD >8 LEs</TD>
+<TD >4 LEs</TD>
+<TD >4 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|header_out_bit_counter[3]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >3 bits</TD>
+<TD >6 LEs</TD>
+<TD >3 LEs</TD>
+<TD >3 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|read_data_bit_counter[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >8 bits</TD>
+<TD >16 LEs</TD>
+<TD >0 LEs</TD>
+<TD >16 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|bypass_bit_counter[7]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >3 bits</TD>
+<TD >6 LEs</TD>
+<TD >3 LEs</TD>
+<TD >3 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|write_data_bit_counter[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >4 bits</TD>
+<TD >8 LEs</TD>
+<TD >4 LEs</TD>
+<TD >4 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|header_in_bit_counter[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >4 bits</TD>
+<TD >12 LEs</TD>
+<TD >8 LEs</TD>
+<TD >4 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|unshifted_byteenable[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >7 bits</TD>
+<TD >14 LEs</TD>
+<TD >14 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|valid_write_data_length_byte_counter[2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >12 bits</TD>
+<TD >24 LEs</TD>
+<TD >12 LEs</TD>
+<TD >12 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|valid_write_data_length_byte_counter[12]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >8 bits</TD>
+<TD >32 LEs</TD>
+<TD >16 LEs</TD>
+<TD >16 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|counter[11]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >8 bits</TD>
+<TD >32 LEs</TD>
+<TD >16 LEs</TD>
+<TD >16 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|counter[6]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >7:1</TD>
+<TD >7 bits</TD>
+<TD >28 LEs</TD>
+<TD >28 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_packets_to_bytes:p2b|out_data[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >9 bits</TD>
+<TD >27 LEs</TD>
+<TD >9 LEs</TD>
+<TD >18 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|scan_length_byte_counter[2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >10 bits</TD>
+<TD >30 LEs</TD>
+<TD >0 LEs</TD>
+<TD >30 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|scan_length_byte_counter[12]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >8:1</TD>
+<TD >8 bits</TD>
+<TD >40 LEs</TD>
+<TD >0 LEs</TD>
+<TD >40 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|address[31]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >8:1</TD>
+<TD >8 bits</TD>
+<TD >40 LEs</TD>
+<TD >0 LEs</TD>
+<TD >40 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|address[16]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >8:1</TD>
+<TD >8 bits</TD>
+<TD >40 LEs</TD>
+<TD >0 LEs</TD>
+<TD >40 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|address[8]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >8:1</TD>
+<TD >6 bits</TD>
+<TD >30 LEs</TD>
+<TD >6 LEs</TD>
+<TD >24 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|address[6]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >3 bits</TD>
+<TD >9 LEs</TD>
+<TD >6 LEs</TD>
+<TD >3 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|padded_bit_counter[2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >5 bits</TD>
+<TD >15 LEs</TD>
+<TD >10 LEs</TD>
+<TD >5 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|padded_bit_counter[7]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >12:1</TD>
+<TD >2 bits</TD>
+<TD >16 LEs</TD>
+<TD >4 LEs</TD>
+<TD >12 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|current_byte[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >13:1</TD>
+<TD >5 bits</TD>
+<TD >40 LEs</TD>
+<TD >25 LEs</TD>
+<TD >15 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|dr_data_out[4]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >18:1</TD>
+<TD >7 bits</TD>
+<TD >84 LEs</TD>
+<TD >35 LEs</TD>
+<TD >49 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|out_data[1]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >4 bits</TD>
+<TD >8 LEs</TD>
+<TD >8 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|decoded_read_data_length[14]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >4 bits</TD>
+<TD >8 LEs</TD>
+<TD >8 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|decoded_read_data_length[10]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >4 bits</TD>
+<TD >8 LEs</TD>
+<TD >8 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|decoded_write_data_length[14]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >4 bits</TD>
+<TD >8 LEs</TD>
+<TD >8 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|decoded_write_data_length[7]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >2 bits</TD>
+<TD >6 LEs</TD>
+<TD >4 LEs</TD>
+<TD >2 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|read_state</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >2 bits</TD>
+<TD >8 LEs</TD>
+<TD >6 LEs</TD>
+<TD >2 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|write_state</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >2 bits</TD>
+<TD >8 LEs</TD>
+<TD >4 LEs</TD>
+<TD >4 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|write_state</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >15:1</TD>
+<TD >2 bits</TD>
+<TD >20 LEs</TD>
+<TD >8 LEs</TD>
+<TD >12 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|state</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >16:1</TD>
+<TD >2 bits</TD>
+<TD >20 LEs</TD>
+<TD >8 LEs</TD>
+<TD >12 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_master_0:master_0|altera_avalon_packets_to_master:transacto|packets_to_master:p2m|state</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >27 bits</TD>
+<TD >108 LEs</TD>
+<TD >27 LEs</TD>
+<TD >81 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|i.result[3][1][25]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >2 bits</TD>
+<TD >4 LEs</TD>
+<TD >4 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:ik_swift_0_avalon_slave_0_translator|wait_latency_counter[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >21 bits</TD>
+<TD >42 LEs</TD>
+<TD >0 LEs</TD>
+<TD >42 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ifc_ik_swift.dh_dyn_in[5][13]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >21 bits</TD>
+<TD >42 LEs</TD>
+<TD >0 LEs</TD>
+<TD >42 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ifc_ik_swift.dh_dyn_in[4][18]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >21 bits</TD>
+<TD >42 LEs</TD>
+<TD >0 LEs</TD>
+<TD >42 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ifc_ik_swift.dh_dyn_in[3][2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >21 bits</TD>
+<TD >42 LEs</TD>
+<TD >0 LEs</TD>
+<TD >42 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ifc_ik_swift.dh_dyn_in[2][12]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >21 bits</TD>
+<TD >42 LEs</TD>
+<TD >0 LEs</TD>
+<TD >42 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ifc_ik_swift.dh_dyn_in[1][15]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >21 bits</TD>
+<TD >42 LEs</TD>
+<TD >0 LEs</TD>
+<TD >42 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ifc_ik_swift.dh_dyn_in[0][3]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|target[2][4]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|target[1][4]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >27 bits</TD>
+<TD >54 LEs</TD>
+<TD >0 LEs</TD>
+<TD >54 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|target[0][11]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >4 bits</TD>
+<TD >8 LEs</TD>
+<TD >8 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|ik_swift:ik_swift|mat_mult:mat_mult|count[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >6 bits</TD>
+<TD >12 LEs</TD>
+<TD >12 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:ik_swift_0_avalon_slave_0_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor|burst_uncompress_byte_counter[7]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >26 bits</TD>
+<TD >52 LEs</TD>
+<TD >0 LEs</TD>
+<TD >52 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_mm_interconnect_0:mm_interconnect_0|altera_merlin_axi_master_ni:hps_0_h2f_lw_axi_master_agent|altera_merlin_address_alignment:align_address_to_size|address_burst[26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >66:1</TD>
+<TD >19 bits</TD>
+<TD >836 LEs</TD>
+<TD >114 LEs</TD>
+<TD >722 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|readdata[3]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >25:1</TD>
+<TD >7 bits</TD>
+<TD >112 LEs</TD>
+<TD >42 LEs</TD>
+<TD >70 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_interface:ik_swift_0|readdata[26]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >2 bits</TD>
+<TD >4 LEs</TD>
+<TD >4 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:burst_adapter|altera_merlin_burst_adapter_full:altera_merlin_burst_adapter_full.the_ba|source0_data[34]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >5 bits</TD>
+<TD >10 LEs</TD>
+<TD >10 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:burst_adapter|altera_merlin_burst_adapter_full:altera_merlin_burst_adapter_full.the_ba|nxt_uncomp_subburst_byte_cnt[2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >4 bits</TD>
+<TD >8 LEs</TD>
+<TD >8 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:ik_swift_0_avalon_slave_0_translator_avalon_universal_slave_0_agent_rsp_fifo|mem</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >2 bits</TD>
+<TD >4 LEs</TD>
+<TD >4 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_mm_interconnect_0:mm_interconnect_0|ik_swift_hps_mm_interconnect_0_id_router:id_router|src_channel[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >6 bits</TD>
+<TD >12 LEs</TD>
+<TD >12 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_mm_interconnect_0:mm_interconnect_0|altera_merlin_axi_master_ni:hps_0_h2f_lw_axi_master_agent|Selector4</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >6 bits</TD>
+<TD >12 LEs</TD>
+<TD >12 LEs</TD>
+<TD >0 LEs</TD>
+<TD >No</TD>
+<TD >|SoCKit_top|ik_swift_hps:u0|ik_swift_hps_mm_interconnect_0:mm_interconnect_0|altera_merlin_axi_master_ni:hps_0_h2f_lw_axi_master_agent|Selector10</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >2 bits</TD>
+<TD >4 LEs</TD>
+<TD >2 LEs</TD>
+<TD >2 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|hub_minor_ver_reg[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >3:1</TD>
+<TD >2 bits</TD>
+<TD >4 LEs</TD>
+<TD >2 LEs</TD>
+<TD >2 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|hub_minor_ver_reg[1]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >4:1</TD>
+<TD >5 bits</TD>
+<TD >10 LEs</TD>
+<TD >10 LEs</TD>
+<TD >0 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|mixer_addr_reg[2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >5:1</TD>
+<TD >5 bits</TD>
+<TD >15 LEs</TD>
+<TD >10 LEs</TD>
+<TD >5 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg|word_counter[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >6:1</TD>
+<TD >3 bits</TD>
+<TD >12 LEs</TD>
+<TD >3 LEs</TD>
+<TD >9 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|irsr_reg[2]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >34:1</TD>
+<TD >4 bits</TD>
+<TD >88 LEs</TD>
+<TD >60 LEs</TD>
+<TD >28 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|design_hash_reg[0]</TD>
+</TR>
+</tbody><tbody><TR >
+<TD >20:1</TD>
+<TD >4 bits</TD>
+<TD >52 LEs</TD>
+<TD >36 LEs</TD>
+<TD >16 LEs</TD>
+<TD >Yes</TD>
+<TD >|SoCKit_top|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg|WORD_SR[0]</TD>
+</TR>
+</tbody></TABLE>
+
+<noscript>JavaScript must be enabled to view the report.</noscript>
+</BODY>
+</HTML>

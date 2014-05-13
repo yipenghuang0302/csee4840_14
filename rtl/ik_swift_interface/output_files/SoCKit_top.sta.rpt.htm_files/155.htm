@@ -1,0 +1,1194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML><HEAD>
+<TITLE>Input Transition Times</TITLE>
+
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.layout-latest.css">
+<link rel="stylesheet" type="text/css" href="css/override.css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.layout-latest.js"></script>
+
+
+</HEAD>
+
+<BODY>
+<TABLE>
+<thead><TR  bgcolor="#BFBFBF">
+<TH>Pin</TH>
+<TH>I/O Standard</TH>
+<TH>10-90 Rise Time</TH>
+<TH>90-10 Fall Time</TH>
+</TR>
+</thead><tbody><TR  bgcolor="#FFFFFF">
+<TD >AUD_ADCDAT</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_CLKIN_n[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_CLKIN_n[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_CLKIN_p[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_CLKIN_p[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_CLK_IN0</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >IRDA_RXD</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >KEY[0]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >KEY[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >KEY[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >KEY[3]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >OSC_50_B3B</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >OSC_50_B5B</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >OSC_50_B8A</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >PCIE_PERST_n</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >PCIE_WAKE_n</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >RESET_n</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >TEMP_DOUT</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >USB_B2_CLK</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >USB_OE_n</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >USB_RD_n</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >USB_RESET_n</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >USB_WR_n</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >AUD_ADCLRCK</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >AUD_BCLK</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >AUD_DACLRCK</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >AUD_I2C_SDAT</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_D[0]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_D[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_D[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_D[3]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_n[0]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_n[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_n[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_n[3]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_n[4]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_n[5]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_n[6]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_n[7]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_n[8]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_n[9]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_n[10]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_n[11]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_n[12]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_n[13]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_n[14]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_n[15]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_n[16]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_p[0]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_p[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_p[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_p[3]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_p[4]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_p[5]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_p[6]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_p[7]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_p[8]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_p[9]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_p[10]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_p[11]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_p[12]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_p[13]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_p[14]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_RX_p[15]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_RX_p[16]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_SDA</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_n[0]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_n[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_n[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_n[3]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_n[4]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_n[5]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_n[6]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_n[7]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_n[8]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_n[9]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_n[10]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_n[11]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_n[12]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_n[13]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_n[14]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_n[15]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_n[16]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_p[0]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_p[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_p[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_p[3]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_p[4]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_p[5]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_p[6]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_p[7]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_p[8]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_p[9]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_p[10]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_p[11]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_p[12]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_p[13]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_p[14]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >HSMC_TX_p[15]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >HSMC_TX_p[16]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >SI5338_SCL</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >SI5338_SDA</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >USB_B2_DATA[0]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >USB_B2_DATA[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >USB_B2_DATA[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >USB_B2_DATA[3]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >USB_B2_DATA[4]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >USB_B2_DATA[5]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >USB_B2_DATA[6]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >USB_B2_DATA[7]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >USB_SCL</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >USB_SDA</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[0]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[1]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[2]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[3]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[4]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[5]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[6]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[7]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[8]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[9]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[10]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[11]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[12]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[13]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[14]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[15]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[16]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[17]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[18]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[19]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[20]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[21]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[22]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[23]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[24]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[25]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[26]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[27]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[28]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[29]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dq[30]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dq[31]</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dqs[0]</TD>
+<TD >Differential 1.5-V SSTL Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dqs[1]</TD>
+<TD >Differential 1.5-V SSTL Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dqs[2]</TD>
+<TD >Differential 1.5-V SSTL Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dqs[3]</TD>
+<TD >Differential 1.5-V SSTL Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dqs_n[0]</TD>
+<TD >Differential 1.5-V SSTL Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dqs_n[1]</TD>
+<TD >Differential 1.5-V SSTL Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >memory_mem_dqs_n[2]</TD>
+<TD >Differential 1.5-V SSTL Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_mem_dqs_n[3]</TD>
+<TD >Differential 1.5-V SSTL Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_emac1_inst_MDIO</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_qspi_inst_IO0</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_qspi_inst_IO1</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_qspi_inst_IO2</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_qspi_inst_IO3</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_sdio_inst_CMD</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_sdio_inst_D0</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_sdio_inst_D1</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_sdio_inst_D2</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_sdio_inst_D3</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_usb1_inst_D0</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_usb1_inst_D1</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_usb1_inst_D2</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_usb1_inst_D3</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_usb1_inst_D4</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_usb1_inst_D5</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_usb1_inst_D6</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_usb1_inst_D7</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_i2c1_inst_SDA</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_i2c1_inst_SCL</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_gpio_inst_GPIO00</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >SW[0]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >SW[1]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >SW[2]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >SW[3]</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_emac1_inst_RXD0</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_emac1_inst_RXD1</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_emac1_inst_RXD2</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_emac1_inst_RXD3</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_emac1_inst_RX_CLK</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_emac1_inst_RX_CTL</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_spim0_inst_MISO</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_spim1_inst_MISO</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_uart0_inst_RX</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_usb1_inst_CLK</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >hps_io_hps_io_usb1_inst_DIR</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >hps_io_hps_io_usb1_inst_NXT</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >memory_oct_rzqin</TD>
+<TD >SSTL-15 Class I</TD>
+<TD >1200 ps</TD>
+<TD >1200 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >OSC_50_B4A</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >altera_reserved_tms</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#FFFFFF">
+<TD >altera_reserved_tck</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody><tbody><TR  bgcolor="#EDEDED">
+<TD >altera_reserved_tdi</TD>
+<TD >2.5 V</TD>
+<TD >2000 ps</TD>
+<TD >2000 ps</TD>
+</TR>
+</tbody></TABLE>
+
+<noscript>JavaScript must be enabled to view the report.</noscript>
+</BODY>
+</HTML>

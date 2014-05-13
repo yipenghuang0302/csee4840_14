@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML><HEAD>
+<TITLE>Clocks</TITLE>
+
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.layout-latest.css">
+<link rel="stylesheet" type="text/css" href="css/override.css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.layout-latest.js"></script>
+
+
+</HEAD>
+
+<BODY>
+<TABLE>
+<thead><TR  bgcolor="#BFBFBF">
+<TH>Clock Name</TH>
+<TH>Type</TH>
+<TH>Period</TH>
+<TH>Frequency</TH>
+<TH>Rise</TH>
+<TH>Fall</TH>
+<TH>Duty Cycle</TH>
+<TH>Divide by</TH>
+<TH>Multiply by</TH>
+<TH>Phase</TH>
+<TH>Offset</TH>
+<TH>Edge List</TH>
+<TH>Edge Shift</TH>
+<TH>Inverted</TH>
+<TH>Master</TH>
+<TH>Source</TH>
+<TH>Targets</TH>
+</TR>
+</thead><tbody><TR >
+<TD  style="color: #0000FF">altera_reserved_tck</TD>
+<TD >Base</TD>
+<TD >33.333</TD>
+<TD >30.0 MHz</TD>
+<TD >0.000</TD>
+<TD >16.666</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >{ altera_reserved_tck }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >Base</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >{ ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk</TD>
+<TD >Base</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >1.875</TD>
+<TD >3.125</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >{ ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_ck</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_ck }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_ck_n</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >1.250</TD>
+<TD >2.500</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >true</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_ck_n }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs[0]_IN</TD>
+<TD >Base</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >{ memory_mem_dqs[0] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs[0]_OUT</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_dqs[0] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs[1]_IN</TD>
+<TD >Base</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >{ memory_mem_dqs[1] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs[1]_OUT</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_dqs[1] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs[2]_IN</TD>
+<TD >Base</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >{ memory_mem_dqs[2] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs[2]_OUT</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_dqs[2] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs[3]_IN</TD>
+<TD >Base</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD  bgcolor="#999999" style="color: #000000">&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >{ memory_mem_dqs[3] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs[3]_OUT</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_dqs[3] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs_n[0]_OUT</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_dqs_n[0] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs_n[1]_OUT</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_dqs_n[1] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs_n[2]_OUT</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_dqs_n[2] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">memory_mem_dqs_n[3]_OUT</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ memory_mem_dqs_n[3] }</TD>
+</TR>
+</tbody><tbody><TR >
+<TD  style="color: #0000FF">u0|hps_0|hps_io|border|hps_sdram_inst|hps_sdram_p0_sampling_clock</TD>
+<TD >Generated</TD>
+<TD >2.500</TD>
+<TD >400.0 MHz</TD>
+<TD >0.000</TD>
+<TD >1.250</TD>
+<TD >&nbsp;</TD>
+<TD >1</TD>
+<TD >1</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >&nbsp;</TD>
+<TD >false</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk</TD>
+<TD >ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk</TD>
+<TD >{ ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_p0:p0|hps_sdram_p0_acv_hard_memphy:umemphy|hps_sdram_p0_acv_hard_io_pads:uio_pads|hps_sdram_p0_altdqdqs:dq_ddio[3].ubidir_dq_dqs|altdq_dqs2_acv_connect_to_hard_phy_cyclonev:altdq_dqs2_inst|dqs_enable_ctrl~DQSENABLEOUT_DFF ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_p0:p0|hps_sdram_p0_acv_hard_memphy:umemphy|hps_sdram_p0_acv_hard_io_pads:uio_pads|hps_sdram_p0_altdqdqs:dq_ddio[1].ubidir_dq_dqs|altdq_dqs2_acv_connect_to_hard_phy_cyclonev:altdq_dqs2_inst|dqs_enable_ctrl~DQSENABLEOUT_DFF ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_p0:p0|hps_sdram_p0_acv_hard_memphy:umemphy|hps_sdram_p0_acv_hard_io_pads:uio_pads|hps_sdram_p0_altdqdqs:dq_ddio[0].ubidir_dq_dqs|altdq_dqs2_acv_connect_to_hard_phy_cyclonev:altdq_dqs2_inst|dqs_enable_ctrl~DQSENABLEOUT_DFF ik_swift_hps:u0|ik_swift_hps_hps_0:hps_0|ik_swift_hps_hps_0_hps_io:hps_io|ik_swift_hps_hps_0_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_p0:p0|hps_sdram_p0_acv_hard_memphy:umemphy|hps_sdram_p0_acv_hard_io_pads:uio_pads|hps_sdram_p0_altdqdqs:dq_ddio[2].ubidir_dq_dqs|altdq_dqs2_acv_connect_to_hard_phy_cyclonev:altdq_dqs2_inst|dqs_enable_ctrl~DQSENABLEOUT_DFF }</TD>
+</TR>
+</tbody></TABLE>
+
+<noscript>JavaScript must be enabled to view the report.</noscript>
+</BODY>
+</HTML>
