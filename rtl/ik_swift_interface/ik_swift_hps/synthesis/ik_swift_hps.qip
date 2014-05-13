@@ -2,7 +2,7 @@ set_global_assignment -entity "ik_swift_hps" -library "ik_swift_hps" -name IP_TO
 set_global_assignment -entity "ik_swift_hps" -library "ik_swift_hps" -name IP_TOOL_VERSION "13.1.1"
 set_global_assignment -entity "ik_swift_hps" -library "ik_swift_hps" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "ik_swift_hps" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../ik_swift_hps.sopcinfo"]
-set_global_assignment -entity "ik_swift_hps" -library "ik_swift_hps" -name SLD_INFO "QSYS_NAME ik_swift_hps HAS_SOPCINFO 1 GENERATION_ID 1399933250"
+set_global_assignment -entity "ik_swift_hps" -library "ik_swift_hps" -name SLD_INFO "QSYS_NAME ik_swift_hps HAS_SOPCINFO 1 GENERATION_ID 1399946174"
 set_global_assignment -library "ik_swift_hps" -name MISC_FILE [file join $::quartus(qip_path) "../../ik_swift_hps.cmp"]
 set_global_assignment -library "ik_swift_hps" -name SLD_FILE [file join $::quartus(qip_path) "ik_swift_hps.regmap"]
 set_global_assignment -library "ik_swift_hps" -name MISC_FILE [file join $::quartus(qip_path) "ik_swift_hps_hps_0_hps.svd"]

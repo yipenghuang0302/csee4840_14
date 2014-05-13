@@ -77,7 +77,7 @@ module ik_swift_interface (
 	// INPUTS
 	assign ifc_ik_swift.rst = reset;
 	// base joint's axis of rotation/translation
-	assign ifc_ik_swift.z = { 18'd0, 18'd0, 18'd65536 }; // unit vector in z direction
+	assign ifc_ik_swift.z = { 18'd65536, 18'd0, 18'd0 }; // unit vector in z direction
 	// bit vector describing type of each joint
 	assign ifc_ik_swift.joint_type = 6'b111111;
 	// target coordinates
