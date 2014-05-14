@@ -1,23 +1,6 @@
-\section{Source Listings}
-Complete listings of every file you wrote for the project. Include C source, SystemVerilog source, and things such as .mhs files. Don't include any file that was generated automatically.
-
-\subsection{Hardware}
-\begin{verbatim}
-SoCKit_top : top-level file
-ik_interface
-ik_swift_36
-full_jacobian
-full_mat
-t_block
-inverse
-cholesky
-lt_inverse
-mat_mult
-array_mult
-\end{verbatim}
+\section{Appendix: Source Listings}
 
 \subsection{Software}
-
 
 \lstset{ %
 	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
@@ -33,7 +16,7 @@ array_mult
 		frame=single,                    % adds a frame around the code
 		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
 		keywordstyle=\color{blue},       % keyword style
-		language={[Objective]Caml},      % the language of the code
+		language={[Objective]C},         % the language of the code
 		morekeywords={*,...},            % if you want to add more keywords to the set
 		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
 		numbersep=5pt,                   % how far the line-numbers are from the code
@@ -48,22 +31,111 @@ array_mult
 		title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
+\subsubsection{User Space Software}
 
-
-
-
+\lstinputlisting{../../software/Makefile}
+\lstinputlisting{../../software/robots/robot.xml}
 \lstinputlisting{../../software/CConfigLoader.h}
 \lstinputlisting{../../software/CConfigLoader.cpp}
-\lstinputlisting{../../software/Makefile}
-\lstinputlisting{../../software/lexer.cpp}
-\lstinputlisting{../../software/lexer.h}
-\lstinputlisting{../../software/hps.h}
-\lstinputlisting{\detokenize{../../software/hps_0.h}}
 \lstinputlisting{../../software/SharedTypes.h}
 \lstinputlisting{\detokenize{../../software/robot_arm.cpp}}
-\lstinputlisting{\detokenize{../../software/xml_help/pugiconfig.hpp}}
-\lstinputlisting{\detokenize{../../software/xml_help/pugixml.cpp}}
-\lstinputlisting{\detokenize{../../software/xml_help/pugixml.hpp}}
-\lstinputlisting{\detokenize{../../software/ik_driver.c}}
+% \lstinputlisting{../../software/lexer.cpp}
+% \lstinputlisting{../../software/lexer.h}
+% \lstinputlisting{\detokenize{../../software/xml_help/pugiconfig.hpp}}
+% \lstinputlisting{\detokenize{../../software/xml_help/pugixml.cpp}}
+% \lstinputlisting{\detokenize{../../software/xml_help/pugixml.hpp}}
+
+\subsubsection{Kernel Space Software}
 \lstinputlisting{\detokenize{../../software/ik_driver.h}}
-\lstinputlisting{../../software/robots/robot.xml}
+\lstinputlisting{\detokenize{../../software/ik_driver.c}}
+\lstinputlisting{\detokenize{../../software/hps_0.h}}
+
+\subsection{Hardware}
+
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	%basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+	basicstyle=\scriptsize\ttfamily,         % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=single,                    % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language={Verilog},              % the language of the code
+	morekeywords={*,...},            % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{red},           % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=5,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2,                       % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\subsubsection{Top Level and Memory Map}
+
+\lstinputlisting{../../rtl/ik_swift_interface/ik_swift_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/ik_swift_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/ik_swift.sv}
+
+\subsubsection{Top Level Randomized Validation Harness}
+
+\lstinputlisting{../../rtl/ik_swift_32/bench.sv}
+\lstinputlisting{../../rtl/ik_swift_32/ik_swift_test.sv}
+
+\subsubsection{Jacobian Finder Hardware}
+
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_jacobian_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_jacobian.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/jacobian/jacobian_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/jacobian/jacobian.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/full_mat_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/full_mat.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/t_block_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/t_block.sv}
+
+\subsubsection{Matrix Inverter Hardware}
+
+\lstinputlisting{../../rtl/ik_swift_32/inverse/inverse_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/inverse/inverse.sv}
+\lstinputlisting{../../rtl/ik_swift_32/inverse/cholesky_block/cholesky_block_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/inverse/cholesky_block/cholesky_block.sv}
+\lstinputlisting{../../rtl/ik_swift_32/inverse/lt_block/lt_block_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/inverse/lt_block/lt_block.sv}
+
+\subsubsection{Sine Cosine Functional Units}
+
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/sincos/sincos_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/sincos/sincos.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/sincos/sin.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/sincos/cos.sv}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/sincos/mult_21_coeff_26561/mult_21_coeff_26561.v}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/sincos/mult_21_coeff_83443/mult_21_coeff_83443.v}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/sincos/mult_21_coeff_14746/mult_21_coeff_14746.v}
+\lstinputlisting{../../rtl/ik_swift_32/full_jacobian/full_mat/t_block/sincos/mult_21/mult_21.v}
+
+\subsubsection{Arithmetic Functional Units}
+
+\lstinputlisting{../../rtl/ik_swift_32/mat_mult/mat_mult_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/mat_mult/mat_mult.sv}
+\lstinputlisting{../../rtl/ik_swift_32/mat_mult/mult_array.sv}
+
+\lstinputlisting{../../rtl/ik_swift_32/array_mult/array_mult_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/array_mult/array_mult.sv}
+\lstinputlisting{../../rtl/ik_swift_32/mult_27/mult_27.v}
+
+\lstinputlisting{../../rtl/ik_swift_32/inverse/cholesky_block/sqrt_43/sqrt_43_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/inverse/cholesky_block/sqrt_43/sqrt_43.v}
+
+\lstinputlisting{../../rtl/ik_swift_32/inverse/array_div/array_div_interface.sv}
+\lstinputlisting{../../rtl/ik_swift_32/inverse/array_div/array_div.sv}
+\lstinputlisting{../../rtl/ik_swift_32/inverse/array_div/div_43/div_43.v}

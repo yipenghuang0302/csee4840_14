@@ -63,12 +63,6 @@ program ik_swift_tb (ifc_ik_swift.ik_swift_tb ds);
 
 			// RANDOMIZE TARGET COORDINATE VECTOR
 			// <Robot name="KUKA robot KR5" targetx="3" targety="-1.28" targetz="3.2">
-			// trans.target_data[0] = 3;
-			// trans.target_data[1] = -1.28; 
-			// trans.target_data[2] = 3.2;
-			// trans.target_data[3] = 0.0;
-			// trans.target_data[4] = 0.0;
-			// trans.target_data[5] = 0.0;
 			for ( int index=0 ; index<6 ; index++ ) begin // index
 				trans.target_fraction[index] = real'(trans.target_increment[index]) / 2147483648.0;
 				trans.target_data[index] = -3.0 + trans.target_fraction[index] * 2 * 3.0;

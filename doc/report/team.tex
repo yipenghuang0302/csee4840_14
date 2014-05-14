@@ -1,21 +1,22 @@
 \subsection{Team Member Roles}
-A section listing who did what
 
-Lianne created the skeleton of the C implemenation of our algorithm used 
+\paragraph{Yipeng} served the role of system integrator for the hardware. He created the sine and cosine hardware, along with the hardware for finding the forward kinematics matrix. He validated the hardware as a whole and its subcomponents individually against software models. Yipeng tuned the hardware timing and precision, in order to guarantee the solution converges while meeting FPGA area requirements.
+
+\paragraph{Lianne} created the skeleton of the C implementation of our algorithm used 
 for understanding the algorithm and how components would fit together. She 
-produced the template openGL file which was used to demonstrate that the 
-IK Swift accelorator was working. Lianne also looked into matrix inverse 
+produced the template OpenGL file which was used to demonstrate that the 
+IKSwift accelerator was working. Lianne also looked into matrix inverse 
 algorithms and determined the best method for inverting matrices in our 
 program. She implemented the two step process of inverting matrices in 
-system verilog so that it could be interfaced with the rest of the 
-hardware files. After our hardware was built she worked with qsys to 
-develop the files required to interface the IK Swift accelorator with 
-the device driver runing on the ARM processor. 
+SystemVerilog so that it could be interfaced with the rest of the 
+hardware files. After our hardware was built she worked with Qsys to 
+develop the files required to interface the IKSwift accelerator with 
+the device driver running on the ARM processor. 
 
-Richard designed the skeleton for the system verilog module that calculates the Jacobian
+\paragraph{Richard} designed the skeleton for the SystemVerilog module that calculates the Jacobian
 for a given configuration. Other than that, all of Richard's tangible contributions are on the
-softare end of the project. He designed the device driver to communicate with the hardware and
+software end of the project. He designed the device driver to communicate with the hardware and
 modified Lianne's openGL template to display an actual robot arm and interact with the device
 driver. In terms of deliverables, Richard was in charge of maintaining accurate milestones over the
 course of the semester and developed the pseudocode to describe the Jacobian and
-Damped Least-Squares algorithms.
+damped least-squares algorithms.

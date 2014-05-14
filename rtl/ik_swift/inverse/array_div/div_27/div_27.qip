@@ -1,9 +1,0 @@
-set_global_assignment -name IP_TOOL_NAME "LPM_DIVIDE"
-set_global_assignment -name IP_TOOL_VERSION "13.1"
-set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "div_27.v"]
-set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "div_27.bsf"]
-set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "div_27_inst.v"]
-set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "div_27_bb.v"]
-set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "div_27.inc"]
-set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "div_27.cmp"]
-set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "div_27_syn.v"]
