@@ -16,26 +16,24 @@ credibility; it would be easy to implement the algorithm incorrectly in
 software and then in hardware and not realize the original software was 
 wrong. 
 
-Along with using this open source project we are implementing a smaller 
-prototype that will reflect the structures in our hardware and will only 
-use the one algorithm we plan to use. By creating this second software 
-project we will be able to play around with structures we might need to 
-change. For example, it would be easier to edit a project created by 
-ourselves if we wanted to try and see how fixed point or integer math 
-would work instead of floating point. Another example of ways we might use 
-the self implemented project in testing is by testing different 
-computational methods for sin and cos. It is important to test how the 
-accuracy of our algorithm changes if we change computational methods like 
-the ones mentioned above. Editing will be a lot easier to do in software 
-than hardware and less time consuming. It would be pointless wasting time 
-designing hardware that doesn't compute the algorithm accurately enough. 
+Along with using this open source project we implemented a smaller 
+prototype that reflects the structures in our hardware and only 
+uses the one algorithm we are using. By creating this second software 
+project we were able to play around with structures to determine what
+would work best. For example, we were able to modify the code
+and see how fixed point or integer math 
+worked instead of floating point. We also used this project to test different 
+computational methods for sin and cos. It was important to test how the 
+accuracy of our algorithm changed if we changed computational methods like 
+the ones mentioned above. Editing was much easier to do in software 
+and less time consuming.
 
 Since parsing XML documents in software isn't really an important part of 
-learning how to write embedded systems we have decided to use part of the 
+learning how to write embedded systems we decided to use part of the 
 open source C++ project to parse the XML robot configuration files to 
 retrieve the original joint positions and the joint types. The software 
-from the cpp-inverse-kinematics-library will parse a given XML file then 
-give the resulting joint information to sofware we have created. Our 
-software will then obtain a target position from the user and with the 
-target information and the joint configurations it will start computing the 
-next angle positions using the FPGA hardware component we will build. 
+from the cpp-inverse-kinematics-library parses a given XML file and 
+gives the resulting joint information to software we have created. Our 
+software then obtains a target position from the user and, given the 
+target information and the joint configurations, it computes the 
+next angle positions using our FPGA hardware component. 

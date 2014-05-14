@@ -1,13 +1,16 @@
 \section{Architecture}
-
-For our project we will be using the FPGA as an accelerator for
+For our project we use the FPGA as an accelerator for
 inverse kinematics computations. Software running on the ARM processor 
-on the SoCKit board will be driving the FPGA and will display its outputs on 
-a monitor. The user should be allowed to specify a robot design via an XML file, which contains the Denavit-Hartenberg parameters for the robot. The software will supply target Cartesian coordinates 
-to the accelerator, which will return updated joint configurations to 
-move towards the given target coordinates. The software will use the 
+on the SoCKit board drives the FPGA and displays the incremental joint 
+positions on a robot arm displayed with an openGL program.
+The user is allowed to specify a robot design via an XML file, 
+which contains the Denavit-Hartenberg parameters for the robot. 
+The software supplies target Cartesian coordinates 
+to the accelerator, which returns updated joint configurations that
+move the robot arm's end effector towards the given target coordinates. 
+The software uses the 
 joint configuration to update an image on the monitor. The resulting 
-image should result in an animation of a appendage moving towards a target 
+image results in an animation of an appendage moving towards a target 
 position.
 
 % Figure

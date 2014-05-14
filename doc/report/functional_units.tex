@@ -12,7 +12,7 @@ The full transformation matrix pipeline needs to multiply D-H transformation blo
 When using the 6x6 matrix multiplier for multiplying 4x4 matrices, the additional pair of rows and columns that pad the 4x4 matrices will be zero.
 
 \subsubsection{6x6 Matrix-Matrix Multiplication}
-Matrix-matrix multiplication is highly parallel---multiplying 6x6 matrices requires $6^3$ multiplications that may occur in parallel. We cannot instantiate 216 multipliers on the FPGA, so instead we will do 36 multiplies at once and accumulate the products for the result. These multipliers are pipelined so a new multiplication is always in flight.
+Matrix-matrix multiplication is highly parallel---multiplying 6x6 matrices requires $6^3$ multiplications that may occur in parallel. We cannot instantiate 216 multipliers on the FPGA, so instead we do 36 multiplies at once and accumulate the products for the result. These multipliers are pipelined so a new multiplication is always in flight.
 
 \subsubsection{27-Bit Fixed Point Multipliers}
 In all, we instantiated 59 multipliers in the design. Eight of them go to finding the second and fourth power of $theta$ and $alpha$ joint angles for both the sine and cosine pipelines. 36 of them are arranged for matrix multiplication, which can also be repurposed as parallel multipliers, useful for array-matrix multiplication and cross products. 15 of the multipliers are for low-latency parallel multiplications needed in matrix inversion.
